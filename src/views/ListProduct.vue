@@ -1,6 +1,13 @@
 <template>
     <div>
-        <h2>List Product</h2>
+        <div class="row">
+          <div class="col-3">
+            <h2>List Product</h2>
+          </div>
+          <div class="col-4">
+            <button @click="toAddPage" type="button" class="btn btn-outline-primary btn-sm">Add Product</button>
+          </div>
+        </div>
         <div class="row">
             <Card v-for="product in products" :key="product.id" :product="product"/>
         </div>
@@ -15,6 +22,17 @@ export default {
   props: ['products'],
   components: {
     Card
+  },
+  methods: {
+    toAddPage () {
+      this.$router.push('/products/create')
+    }
   }
 }
 </script>
+
+<style scoped>
+  button.btn.btn-outline-primary.btn-sm {
+    margin-top: 6px ;
+  }
+</style>

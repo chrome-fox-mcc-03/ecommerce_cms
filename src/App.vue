@@ -33,9 +33,8 @@ export default {
     Sidebar
   },
   methods: {
-    isLogin() {
+    isLogin () {
       this.loginStatus = !this.loginStatus
-
     },
     getProducts () {
       axios({
@@ -46,12 +45,13 @@ export default {
         }
       })
         .then(({ data }) => {
+          this.products = []
           this.products.push(...data.data)
         })
         .catch((err) => {
           console.log(err)
         })
-}
+    }
   },
   created () {
     const token = localStorage.getItem('access_token')
@@ -59,7 +59,6 @@ export default {
       this.$router.push('/login')
       this.loginStatus = false
     } else {
-      this.$router.push('/dashboard')
       this.loginStatus = true
       this.getProducts()
     }
