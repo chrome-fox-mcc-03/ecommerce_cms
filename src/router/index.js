@@ -4,6 +4,7 @@ import AllLanding from '../views/AllLanding.vue'
 import ProductDashboard from '../views/ProductDashboard.vue'
 import ProductList from '../views/ProductList.vue'
 import ProductAdd from '../components/ProductAdd.vue'
+import ProductEdit from '../components/ProductEdit.vue'
 
 Vue.use(VueRouter)
 
@@ -15,11 +16,11 @@ const routes = [
   },
   {
     path: '/products',
-    name: 'ProductsParent',
+    name: 'ProductDashboard',
     component: ProductDashboard,
     children: [
       {
-        path: 'add',
+        path: '',
         component: ProductList,
         name: 'ProductList'
       },
@@ -27,6 +28,11 @@ const routes = [
         path: 'add',
         component: ProductAdd,
         name: 'ProductAdd'
+      },
+      {
+        path: 'edit/:id',
+        component: ProductEdit,
+        name: 'ProductEdit'
       }
     ]
   }

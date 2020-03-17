@@ -2,9 +2,7 @@
   <div class="add-product-form">
     <form id="add-product">
       <fieldset class="uk-fieldset">
-
         <legend class="uk-legend">Add Product</legend>
-
         <div class="uk-margin">
           <div class="uk-margin">
             <input class="uk-input uk-form-width-large" type="text" placeholder="Product Name">
@@ -22,7 +20,7 @@
             <input class="uk-input uk-form-width-large" type="text" placeholder="Product Image">
           </div>
           <div class="uk-margin">
-            <button class="uk-button uk-button-primary">Submit</button>
+            <button @click.prevent class="uk-button uk-button-primary">Submit</button>
           </div>
         </div>
       </fieldset>

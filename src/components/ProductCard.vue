@@ -1,18 +1,35 @@
 <template>
-  <div class="uk-card uk-card-default">
-    <div class="uk-card-media-top">
-        <img src="https://reactnativecode.com/wp-content/uploads/2018/02/Default_Image_Thumbnail.png" alt="">
-    </div>
-  <div class="uk-card-body"></div>
-</div>
+  <tr>
+    <td><img class="uk-preserve-width uk-border-circle"
+        :src="product.url" width="45" alt=""></td>
+    <td class="uk-text-nowrap">{{ product.name }}</td>
+    <td class="uk-text-truncate">{{  product.url }}</td>
+    <td>5</td>
+    <td>
+      <div class="uk-button-group">
+        <router-link class="uk-button uk-button-primary" :to="`/products/edit/${index}`">Edit</router-link>
+        <button @click.prevent class="uk-button uk-button-danger">Delete</button>
+      </div>
+    </td>
+  </tr>
 </template>
 
 <script>
 export default {
+  data () {
+    return {
+    }
+  },
+  props: ['product', 'index'],
+  methods: {
+  }
 
 }
+
 </script>
 
-<style>
-
+<style scoped>
+  .uk-table-hover tbody tr:hover {
+    background-color: #bbe1fa;
+  }
 </style>

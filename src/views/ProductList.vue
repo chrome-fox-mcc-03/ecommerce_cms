@@ -1,74 +1,58 @@
 <template>
-  <div class='product-list'>
-    <div class="admin-panel">
-      <div class="admin-navigation">
-          <router-link :to="'/products'" class="uk-button uk-button-primary admin-button">All Products</router-link>
-          <router-link :to="'/products/add'" class="uk-button uk-button-primary admin-button"> Add Product</router-link>
-      </div>
-      <div class="admin-display">
-        <router-view></router-view>
-      </div>
-    </div>
+  <div class="product-list">
+    <div class="card-container">
+    <table class="uk-table uk-table-hover uk-table-middle uk-table-divider">
+      <thead>
+        <tr>
+          <th class="uk-table-shrink">Image</th>
+          <th class="uk-table-shrink">Title</th>
+          <th class="">Description</th>
+          <th class="">Stock</th>
+          <th class=" ">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <product-card v-for="(product, index) in products" :key="index" :product="product" :index="index"></product-card>
+      </tbody>
+    </table>
+  </div>
   </div>
 </template>
 
 <script>
+import ProductCard from '../components/ProductCard.vue'
+import axios from 'axios'
 export default {
-  name: 'UserProducts'
+  name: 'UserProducts',
+  data () {
+    return {
+      products: []
+    }
+  },
+  components: {
+    ProductCard
+  },
+  methods: {
+    fetchProducts () {
+      axios({
+        method: 'GET',
+        url: 'http://pokeapi.salestock.net/api/v2/pokemon/?limit=3&offset=0'
+      })
+        .then(response => {
+          response.data.results.forEach(element => {
+            this.products.push(element)
+          })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  },
+  created () {
+    this.fetchProducts()
+  }
 }
 </script>
 
 <style scoped>
-.product-list{
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - 40px);
-  width: 100vw;
-}
-
-.admin-navigation{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-width: 15%;
-  max-width: 15%;
-  border: #3282b8 1px solid;
-  padding: 5px;
-  border-radius: 15px;
-}
-
-.admin-navigation .admin-button{
-  margin-bottom: 25px;
-  margin-top: 25px;
-  border-radius: 15px;
-}
-
-.admin-display{
-  border-radius: 15px;
-  border: #3282b8 1px solid;
-  min-width: 85%;
-  margin-left: 0.5%;
-  border: gray 1px solid;
-  min-height: 85%;
-  overflow: hidden;
-}
-
-.admin-display .product-card{
-  margin: 25px;
-}
-
-.admin-panel{
-  display: flex;
-  justify-content: space-between;
-  margin: 3rem;
-  max-height: 85%;
-  height: 85%;
-}
-
-  .router-link-exact-active.router-link-active{
-    color: #1b262c;
-    background-color: #bbe1fa;
-    font-weight: bold;
-  }
-
 </style>
