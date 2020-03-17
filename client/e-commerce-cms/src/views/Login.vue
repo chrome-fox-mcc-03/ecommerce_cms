@@ -1,16 +1,32 @@
 <template>
   <div id="container-login">
     <h1>Login</h1>
-    <form id="loginForm">
-      <input class="form-login" type="text" placeholder="Email" />
-      <input class="form-login" type="text" placeholder="Password" />
+    <form id="loginForm" @submit.prevent="login">
+      <input v-model="email" class="form-login" type="text" placeholder="Email" />
+      <input v-model="password" class="form-login" type="text" placeholder="Password" />
       <input type="submit" value="submit" />
     </form>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  data: function () {
+    return {
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    login: function () {
+      const loginData = {
+        email: this.email,
+        password: this.password
+      }
+      this.$emit('login', loginData)
+    }
+  }
+}
 </script>
 
 <style>

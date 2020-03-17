@@ -3,13 +3,23 @@
     <div id="nav">
           <navbar @logout="logout" />
     </div>
-    <router-view/>
+    <router-view @login="login" />
   </div>
 </template>
 
 <script>
 import Navbar from './components/Navbar.vue'
 export default {
+  data: function () {
+    return {
+      dummyUser: {
+        name: 'naufal',
+        email: 'naufalyunan45@gmail.com',
+        password: '12345',
+        role: 'admin'
+      }
+    }
+  },
   components: {
     Navbar
   },
@@ -19,6 +29,21 @@ export default {
       console.log('afasdfasdf')
       console.log(this)
       this.$router.push({ path: 'login' })
+    },
+    login: function (loginData) {
+      const emailInput = loginData.email
+      const passwordInput = loginData.password
+      if (emailInput === this.dummyUser.email) {
+        if (passwordInput === this.dummyUser.password) {
+          const token = 'selamat-anda-sudah-login'
+          localStorage.setItem('token', token)
+          this.$router.push({ path: 'products' })
+        } else {
+          this.$router.push({ path: 'login' })
+        }
+      } else {
+        this.$router.push({ path: 'login' })
+      }
     }
   }
 }

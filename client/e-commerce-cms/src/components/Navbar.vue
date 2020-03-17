@@ -13,7 +13,7 @@
         <router-link class="nav-link" to="/products">Products</router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link" v-on:click="logout" to="">Logout</a>
+        <a id="logout-btn" class="nav-link" v-on:click="logout" to="">Logout</a>
       </li>
     </ul>
   </div>
@@ -31,5 +31,7 @@ export default {
 </script>
 
 <style>
-
+#logout-btn:hover{
+  cursor:pointer;
+}
 </style>
