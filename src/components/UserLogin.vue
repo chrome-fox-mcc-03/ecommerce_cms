@@ -5,15 +5,15 @@
       <button class="uk-offcanvas-close" type="button" uk-close></button>
 
       <fieldset class="uk-fieldset">
-        <form action="" id="login-form">
+        <form action='' id="login-form">
           <div class="uk-margin">
-            <input class="uk-input" type="text" placeholder="Email">
+            <input v-model="loginEmail" class="uk-input" type="text" placeholder="Email">
           </div>
           <div class="uk-margin">
-            <input class="uk-input" type="password" placeholder="Password">
+            <input v-model="loginPassword" class="uk-input" type="password" placeholder="Password">
           </div>
           <div class="uk-margin">
-            <button class="uk-button-text uk-button">Login</button>
+            <button @click.prevent="login()" class="uk-button-text uk-button">Login</button>
           </div>
         </form>
       </fieldset>
@@ -25,11 +25,29 @@
 import axios from 'axios'
 export default {
   name: 'UserLogin',
+  data () {
+    return {
+      loginEmail: '',
+      loginPassword: ''
+    }
+  },
   methods: {
     login () {
       axios({
-        method: 'POST'
+        method: 'POST',
+        url: 'http://localhost:3000/login',
+        data: {
+          email: this.loginEmail,
+          password: this.loginPassword
+        }
       })
+        .then(response => {
+          const token = response.data.token
+          localStorage.setItem('token', token)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 }

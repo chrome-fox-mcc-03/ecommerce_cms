@@ -1,12 +1,18 @@
 <template>
   <section class="navbar">
-    <button uk-toggle="target: #login-canvas" class="uk-button uk-button-default">Login</button>
+    <button  uk-toggle="target: #login-canvas" class="uk-button uk-button-default">Login</button>
+    <button  @click.prevent class="uk-button uk-button-default">Logout</button>
   </section>
 </template>
 
 <script>
 export default {
-  name: 'Navbar'
+  name: 'Navbar',
+  data () {
+    return {
+      token: localStorage.getItem('token')
+    }
+  }
 }
 
 </script>
@@ -25,5 +31,10 @@ export default {
   .uk-button:hover{
     background-color: white;
     color: #1b262c;
+  }
+  .router-link-exact-active.router-link-active{
+    color: white;
+    background-color: #1b262c;
+    font-weight: bold;
   }
 </style>
