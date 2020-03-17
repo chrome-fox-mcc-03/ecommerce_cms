@@ -1,7 +1,6 @@
 <template>
   <div>
-    <Navbar />
-    <h2>Dashboard!!!</h2>
+    <Navbar/>
     <router-view/>
   </div>
 </template>
@@ -12,9 +11,12 @@ export default {
   name: 'DashboardPage',
   components: {
     Navbar
+  },
+  created () {
+    console.log('VUEVUEVUE')
   }
 }
 </script>
 
-<style>
+<style scoped>
 </style>

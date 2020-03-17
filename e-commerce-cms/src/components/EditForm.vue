@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
-    <form class="mt-5 form-space">
-    <h2 class="mb-5">Add New Product</h2>
+  <div class="container form-space">
+    <form class="mt-5">
+    <h2 class="mb-5">Edit Product</h2>
     <div class="form-group">
       <label for="product-name">Name</label>
       <input type="email" class="form-control" id="product-name" aria-describedby="emailHelp">
@@ -18,22 +18,17 @@
       <label for="product-image">Image</label>
       <input type="password" class="form-control" id="product-image">
     </div>
-    <router-link to="/dashboard" type="submit" class="btn btn-primary">Add</router-link>
+    <router-link to="/dashboard" type="submit" class="btn btn-primary">Save Changes</router-link>
   </form>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'AddForm'
+  name: 'EditForm'
 }
 </script>
 
 <style>
-.form-space {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-}
+
 </style>

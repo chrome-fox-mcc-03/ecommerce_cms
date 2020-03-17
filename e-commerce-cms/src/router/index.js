@@ -4,22 +4,26 @@ import SigninPage from '../views/SigninPage.vue'
 import DashboardPage from '../views/DashboardPage.vue'
 import AllProduct from '../components/AllProduct.vue'
 import AddForm from '../components/AddForm.vue'
+import EditForm from '../components/EditForm.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/signin/admin',
+    path: '/',
     name: 'SigninPage',
     component: SigninPage
   },
   {
-    path: '/',
+    path: '/dashboard',
     name: 'DashboardPage',
     component: DashboardPage,
+    redirect: {
+      name: 'AllProduct'
+    },
     children: [
       {
-        path: 'all',
+        path: '',
         component: AllProduct,
         name: 'AllProduct'
       },
@@ -27,6 +31,11 @@ const routes = [
         path: 'add',
         component: AddForm,
         name: 'AddForm'
+      },
+      {
+        path: 'edit/:id',
+        component: EditForm,
+        name: 'EditForm'
       }
     ]
   }
