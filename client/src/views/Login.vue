@@ -1,6 +1,6 @@
 <template>
     <div class="login-form">
-        <form class="container border border-dark mt-3 rounded pb-4 pt-2 px-4 w-25 shadow">
+        <form @submit.prevent="onSubmit" class="container border border-dark mt-3 rounded pb-4 pt-2 px-4 w-25 shadow">
             <div class="container form-group d-flex flex-column">
                 <h1>Login</h1>
                 <p>Please fill in this form to login.</p>
@@ -23,7 +23,29 @@
 
 <script>
 export default {
-
+  name: 'Login',
+  data () {
+    return {
+      form: {
+        email: '',
+        name: ''
+      }
+    }
+  },
+  methods: {
+    onSubmit () {
+      console.log('Masooookkkkkkk')
+      localStorage.setItem('access_token', 'tokenbuatanbukansembarangtoken')
+      this.$router.push('/admin/dashboard')
+    },
+    beforeRouterEnter (to, from, next) {
+      if (localStorage.getItem('access_token')) {
+        next('/admin/dashboard')
+      } else {
+        next()
+      }
+    }
+  }
 }
 </script>
 

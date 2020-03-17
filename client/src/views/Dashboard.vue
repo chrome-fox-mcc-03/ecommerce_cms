@@ -1,12 +1,21 @@
 <template>
-  <div>
-      <h2>this is dashboard confenssional</h2>
+  <div class="d-flex flex-row justify-content-around align-items-start">
+      <div class="sidebar">
+          <Sidebar />
+      </div>
+      <div class="content">
+          <h2>this is dashboard content</h2>
+      </div>
   </div>
 </template>
 
 <script>
-export default {
+import Sidebar from '../components/Sidebar'
 
+export default {
+  components: {
+    Sidebar
+  }
 }
 </script>
 

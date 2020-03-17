@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Dashboard from '../views/Dashboard.vue'
+import ProductList from '../components/ProductList'
 
 Vue.use(VueRouter)
 
@@ -26,7 +27,14 @@ const routes = [
   {
     path: '/admin/dashboard',
     name: 'Dashboard',
-    component: Dashboard
+    component: Dashboard,
+    children: [
+      {
+        path: 'products',
+        name: 'products',
+        component: ProductList
+      }
+    ]
   },
   {
     path: '/about',
