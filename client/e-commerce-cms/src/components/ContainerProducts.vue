@@ -1,36 +1,9 @@
 <template>
   <div id="cont3">
     <h1>Product List</h1>
-    <div id="product">
+    <div id="product" v-for="(el, index) in dummyData" :key="index">
       <div id="product-content">
-        Image
-      </div>
-      <div id="product-option">
-        <a href="">delete</a>
-        <a href="">edit</a>
-      </div>
-    </div>
-    <div id="product">
-      <div id="product-content">
-        Image
-      </div>
-      <div id="product-option">
-        <a href="">delete</a>
-        <a href="">edit</a>
-      </div>
-    </div>
-    <div id="product">
-      <div id="product-content">
-        Image
-      </div>
-      <div id="product-option">
-        <a href="">delete</a>
-        <a href="">edit</a>
-      </div>
-    </div>
-    <div id="product">
-      <div id="product-content">
-        Image
+        {{ el.name }}
       </div>
       <div id="product-option">
         <a href="">delete</a>
@@ -42,7 +15,42 @@
 
 <script>
 export default {
-
+  data: function () {
+    return {
+      dummyData: [
+        {
+          name: 'pizza',
+          image_url: 'https://google.com',
+          price: 120000,
+          stock: 3
+        },
+        {
+          name: 'spaghetti',
+          image_url: 'https://google.com',
+          price: 50000,
+          stock: 2
+        },
+        {
+          name: 'buku',
+          image_url: 'https://google.com',
+          price: 12000,
+          stock: 20
+        },
+        {
+          name: 'ayam',
+          image_url: 'https://google.com',
+          price: 13000,
+          stock: 21
+        },
+        {
+          name: 'pisang raja',
+          image_url: 'https://google.com',
+          price: 3000,
+          stock: 8
+        }
+      ]
+    }
+  }
 }
 </script>
 

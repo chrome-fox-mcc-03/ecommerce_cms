@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-          <navbar @logout="logout" />
+      <navbar @logout="logout" />
     </div>
     <router-view @login="login" />
   </div>
