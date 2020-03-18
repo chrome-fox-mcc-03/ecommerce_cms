@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 Vue.use(Vuex)
 
@@ -9,6 +10,13 @@ export default new Vuex.Store({
     isLogin: false,
     products: [],
     productUpdate: {
+      id: null,
+      name: '',
+      image_url: '',
+      price: null,
+      stock: null
+    },
+    productDetail: {
       id: null,
       name: '',
       image_url: '',
@@ -23,12 +31,19 @@ export default new Vuex.Store({
     SET_POKEMONS (state, value) {
       state.products = value
     },
-    SET_DETAIL (state, value) {
+    SET_PRODUCTUPDATE (state, value) {
       state.productUpdate.id = value.id
       state.productUpdate.name = value.name
       state.productUpdate.image_url = value.image_url
       state.productUpdate.price = value.price
       state.productUpdate.stock = value.stock
+    },
+    SET_PRODUCTDETAIL (state, value) {
+      state.productDetail.id = value.id
+      state.productDetail.name = value.name
+      state.productDetail.image_url = value.image_url
+      state.productDetail.price = value.price
+      state.productDetail.stock = value.stock
     }
   },
   actions: {
@@ -49,14 +64,6 @@ export default new Vuex.Store({
           email,
           password
         }
-      })
-    },
-    logout (context) {
-      localStorage.clear()
-      context.commit('SET_LOGIN', false)
-      return new Promise((resolve, reject) => {
-        resolve(('logout success'))
-        reject(new Error('logout fail'))
       })
     },
     getProducts (context) {
@@ -86,7 +93,7 @@ export default new Vuex.Store({
         data: payload
       })
     },
-    productDetail (context, payload) {
+    productUpdate (context, payload) {
       const id = payload
       const token = localStorage.getItem('token')
       axios({
@@ -99,7 +106,7 @@ export default new Vuex.Store({
         .then(result => {
           const value = result.data
           // console.log(this.state.productUpdate)
-          context.commit('SET_DETAIL', value)
+          context.commit('SET_PRODUCTUPDATE', value)
         })
         .catch(err => {
           console.log(err)
@@ -137,6 +144,43 @@ export default new Vuex.Store({
           token
         }
       })
+    },
+    detailProduct (context, payload) {
+      const id = payload.id
+      console.log(id)
+      const token = localStorage.getItem('token')
+      axios({
+        method: 'GET',
+        url: `http://localhost:3000/products/${id}`,
+        headers: {
+          token
+        }
+      })
+        .then(result => {
+          console.log('ini dari then')
+          context.commit('SET_PRODUCTDETAIL', result.data)
+        })
+        .catch(err => {
+          console.log(err.response.data)
+        })
+    },
+    notification (context, payload) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        onOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      Toast.fire({
+        icon: payload.icon,
+        title: payload.title
+      })
+      return ''
     }
   },
   getters: {}

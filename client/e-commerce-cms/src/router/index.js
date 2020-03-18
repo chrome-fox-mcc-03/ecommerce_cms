@@ -15,7 +15,8 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    redirect: { name: 'ContainerProducts' }
   },
   {
     path: '/register',
@@ -35,7 +36,7 @@ const routes = [
     meta: { requiresAuth: true },
     children: [
       {
-        path: '/',
+        path: '',
         name: 'ContainerProducts',
         component: ContainerProducts
       },
@@ -45,7 +46,7 @@ const routes = [
         component: AddProduct
       },
       {
-        path: 'update',
+        path: 'update/:id',
         name: 'UpdateProduct',
         component: Update
       }

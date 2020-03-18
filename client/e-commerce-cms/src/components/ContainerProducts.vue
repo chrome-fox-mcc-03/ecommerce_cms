@@ -5,9 +5,16 @@
       <div id="product-content">
         {{ product.name }}
       </div>
-      <div id="product-option">
-        <a class="option-button" @click="deleteProduct(product.id)" >delete</a>
-        <a class="option-button" @click="updateProduct(product.id)">edit</a>
+      <div id="options">
+        <div id="product-option">
+          <a class="option-button" @click="deleteProduct(product.id)" >delete</a>
+          <a class="option-button" @click="updateProduct(product.id)">edit</a>
+        </div>
+        <div id="detail-button">
+          <a @click="detailProduct(product)" type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
+            Detail
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -27,7 +34,8 @@ export default {
   methods: {
     updateProduct (id) {
       console.log('<<<<<<>>>>>> MADSSOOOK')
-      this.$store.dispatch('productDetail', id)
+      this.$store.dispatch('productUpdate', id)
+      this.$route.params.id = id
       this.$router.push({ name: 'UpdateProduct' })
     },
     deleteProduct (id) {
@@ -35,12 +43,21 @@ export default {
         .then(result => {
           console.log('---DELETED---')
           console.log(result.data)
+          const condition = {
+            icon: 'success',
+            title: `Succesfully Delete ${result.data.name}`
+          }
+          this.$store.dispatch('notification', condition)
           this.$store.dispatch('getProducts')
           this.$router.push({ name: 'Dashboard' })
         })
         .catch(err => {
           console.log(err)
         })
+    },
+    detailProduct (product) {
+      console.log(product)
+      this.$store.dispatch('detailProduct', product)
     }
   },
   created: function () {
@@ -59,6 +76,20 @@ export default {
   justify-content: center;
   overflow: scroll;
 }
+#options{
+  width: 20%;
+  height: 100%;
+  border-left: 1px solid black;
+  display: flex;
+  flex-direction: row;
+}
+#detail-button{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 #product{
   width: 80%;
   height: 20%;
@@ -70,12 +101,11 @@ export default {
   margin: 20px;
 }
 #product-option{
-  width: 20%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-left: 1px solid black
 }
 #product-content{
   width: 80%;

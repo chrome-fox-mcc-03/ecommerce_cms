@@ -13,6 +13,9 @@
 
 <script>
 export default {
+  created () {
+    this.$route.params.id = this.productDetail.id
+  },
   data: function () {
     return {
     }
@@ -35,9 +38,19 @@ export default {
       console.log('>>>>>>')
       this.$store.dispatch('updateProduct', data)
         .then(result => {
+          const condition = {
+            icon: 'success',
+            title: `Succesfull Update ${result.data.name}`
+          }
+          this.$store.dispatch('notification', condition)
           this.$router.push({ name: 'Dashboard' })
         })
         .catch(err => {
+          const condition = {
+            icon: 'error',
+            title: err.response.data.message
+          }
+          this.$store.dispatch('notification', condition)
           console.log(err)
         })
     }

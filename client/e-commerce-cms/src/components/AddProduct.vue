@@ -28,9 +28,19 @@ export default {
       const product = this.product
       this.$store.dispatch('addProduct', product)
         .then(result => {
+          const condition = {
+            icon: 'success',
+            title: `Succesfull Add ${result.data.name}`
+          }
+          this.$store.dispatch('notification', condition)
           this.$router.push({ name: 'Dashboard' })
         })
         .catch(err => {
+          const condition = {
+            icon: 'error',
+            title: err.response.data.message
+          }
+          this.$store.dispatch('notification', condition)
           console.log(err.response.data)
         })
     }

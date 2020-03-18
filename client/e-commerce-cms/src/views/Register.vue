@@ -26,9 +26,19 @@ export default {
     register: function () {
       this.$store.dispatch('register', this.userReg)
         .then(result => {
+          const condition = {
+            icon: 'success',
+            title: 'Register Succesfull'
+          }
+          this.$store.dispatch('notification', condition)
           this.$router.push({ name: 'Login' })
         })
         .catch(err => {
+          const condition = {
+            icon: 'error',
+            title: err.response.data.message
+          }
+          this.$store.dispatch('notification', condition)
           console.log(err)
         })
     }

@@ -6,13 +6,13 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item active">
-        <router-link class="nav-link" to="/login">Login</router-link>
-      </li>
       <li class="nav-item">
         <router-link class="nav-link" to="/products">Products</router-link>
       </li>
-      <li class="nav-item">
+      <li v-if="!isLogin" class="nav-item active">
+        <router-link class="nav-link" to="/login">Login</router-link>
+      </li>
+      <li v-else class="nav-item">
         <a id="logout-btn" class="nav-link" v-on:click="logout">Logout</a>
       </li>
     </ul>
@@ -24,14 +24,20 @@
 export default {
   methods: {
     logout: function () {
-      this.$store.dispatch('logout')
-        .then(result => {
-          console.log(result)
-          this.$router.push({ path: 'login' })
-        })
-        .catch(err => {
-          console.log(err)
-        })
+      localStorage.clear()
+      this.$store.commit('SET_LOGIN', false)
+      this.$router.push({ path: 'login' })
+      console.log('LOGOUT SUCCESS')
+      const condition = {
+        icon: 'success',
+        title: 'Logout Succesfull'
+      }
+      this.$store.dispatch('notification', condition)
+    }
+  },
+  computed: {
+    isLogin () {
+      return this.$store.state.isLogin
     }
   }
 }

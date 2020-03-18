@@ -26,19 +26,29 @@ export default {
       }
       this.$store.dispatch('login', loginData)
         .then(result => {
-          console.log(result)
+          const condition = {
+            icon: 'success',
+            title: 'Login Succesfull'
+          }
+          this.$store.dispatch('notification', condition)
           const token = result.data.token
           localStorage.setItem('token', token)
           this.$store.commit('SET_LOGIN', true)
           this.$router.push({ path: 'products' })
         })
         .catch(err => {
-          console.log(err)
+          const condition = {
+            icon: 'error',
+            title: err.response.data.message
+          }
+          this.$store.dispatch('notification', condition)
+          console.log(err.response.data)
           this.$router.push({ path: 'login' })
         })
     }
   }
 }
+
 </script>
 
 <style>
