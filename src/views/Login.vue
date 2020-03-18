@@ -10,17 +10,17 @@
         <label>Password</label>
         <input v-model="password" type="password" class="form-control" placeholder="Password" />
       </div>
-      <button type="submit" class="btn btn-primary">Login</button>
+      <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   name: 'Login',
   data () {
     return {
+      name: '',
       email: '',
       password: ''
     }
@@ -28,13 +28,17 @@ export default {
   methods: {
     submitLogin () {
       const data = {
-        name: this.name,
         email: this.email,
         password: this.password
       }
-      axios.post('http://localhost:3000/login', data).then(response => {
-        console.log(response)
-      })
+
+      this.$store.dispatch('login', data)
+        .then(result => {
+          this.$router.push(result)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 }
