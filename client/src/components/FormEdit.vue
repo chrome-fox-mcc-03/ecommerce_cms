@@ -9,17 +9,17 @@
         <p>Add Product</p>
         <form @submit.prevent="editProduct">
             <label for="name">Name</label>
-            <input type="text" class="form-control" v-model="product.name">
+            <input type="text" class="form-control" v-model="edit_product.name">
             <label for="image-url">Image URL</label>
-            <input type="text" class="form-control" v-model="product.image_url" placeholder="paste image address from internet in here">
+            <input type="text" class="form-control" v-model="edit_product.image_url" placeholder="paste image address from internet in here">
             <label for="description">Description</label>
-            <input type="text" class="form-control" v-model="product.description">
+            <input type="text" class="form-control" v-model="edit_product.description">
             <label for="category">Category ID</label>
-            <input type="number" class="form-control" v-model="product.CategoryId">
+            <input type="number" class="form-control" v-model="edit_product.CategoryId">
             <label for="price">Price</label>
-            <input type="number" class="form-control" v-model="product.price">
+            <input type="number" class="form-control" v-model="edit_product.price">
             <label for="stock">Stock</label>
-            <input type="number" class="form-control" v-model="product.stock">
+            <input type="number" class="form-control" v-model="edit_product.stock">
             <br>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
@@ -62,17 +62,30 @@ export default {
   name: 'FormEdit',
   data () {
     return {
-      // name: '',
-      // image_url: '',
-      // description: '',
-      // CategoryId: null,
-      // price: null,
-      // stock: null
+      edit_product: {
+        name: '',
+        image_url: '',
+        description: '',
+        CategoryId: null,
+        price: null,
+        stock: null
+      }
     }
   },
   computed: {
-    product() {
+    product () {
       return this.$store.state.product
+    }
+  },
+  created () {
+    this.edit_product = {
+      ...this.product
+    }
+    this.$store.dispatch('fetchOneProduct', this.$route.params.id)
+  },
+  watch: {
+    product (val) {
+      this.edit_product = { ...this.product }
     }
   },
   methods: {

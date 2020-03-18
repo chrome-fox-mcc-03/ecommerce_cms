@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Product from '../components/Products.vue'
 import FormAdd from '../components/FormAdd.vue'
+import FormEdit from '../components/FormEdit.vue'
 
 Vue.use(VueRouter)
 
@@ -26,6 +27,11 @@ const routes = [
         path: 'addproduct',
         name: 'AddProduct',
         component: FormAdd
+      },
+      {
+        path: 'editproduct/:id',
+        name: 'EditProduct',
+        component: FormEdit
       }
     ]
   }

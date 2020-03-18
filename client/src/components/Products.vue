@@ -54,7 +54,8 @@ export default {
   },
   methods: {
     showFormEditProduct (productId) {
-      this.$store.dispatch('fetchOneProduct', productId)
+      this.$router.push(`/dashboard/editproduct/${productId}`)
+      //
     }
   }
 }

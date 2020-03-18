@@ -57,16 +57,18 @@ export default new Vuex.Store({
     },
     fetchOneProduct (context, productId) {
       axios({
-        url: 'http://localhost:3000/product/' + productId,
+        url: 'http://localhost:3000/products/' + productId,
         method: 'GET',
         headers: {
           access_token: localStorage.access_token
         }
       })
         .then(({ data }) => {
+          console.log(data)
           context.commit('SET_PRODUCT', data)
         })
         .catch(err => {
+          console.log(err)
           context.commit('SET_ERROR_MESSAGE', err.response)
         })
     }
