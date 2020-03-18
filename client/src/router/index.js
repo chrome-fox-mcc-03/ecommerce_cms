@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Dashboard from '../views/Dashboard.vue'
+import store from '../store/index.js'
 
 Vue.use(VueRouter)
 
@@ -48,18 +49,24 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    const token = localStorage.getItem('token')
+  store.dispatch('checkLoginState')
 
-    if (token) {
+  if (to.path === '/login' || to.path === '/register') {
+    if (store.state.isLogin) {
+      next({
+        path: '/dashboard'
+      })
+    } else {
+      next()
+    }
+  } else {
+    if (store.state.isLogin) {
       next()
     } else {
       next({
         path: '/login'
       })
     }
-  } else {
-    next()
   }
 })
 

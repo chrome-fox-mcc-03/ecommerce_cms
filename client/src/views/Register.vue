@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container v-if="show">
+    <b-container>
       <b-row align-h="center">
         <b-col cols="12" md="8" lg="6" xl="4">
           <b-img thumbnail src="https://i2.wp.com/d3g5ywftkpzr0e.cloudfront.net/wp-content/uploads/2020/01/16161919/hacktiv8.png" alt="Hacktiv 8" width="150" height="150"></b-img>
@@ -44,7 +44,7 @@
               </b-col>
             </b-row>
             <b-row>
-              have account already? click <router-link to="/login">here</router-link> to login!
+              <b-col>have account already? click <router-link to="/login">here</router-link> to login!</b-col>
             </b-row>
           </b-form>
         </b-col>
@@ -54,7 +54,6 @@
 </template>
 
 <script>
-import Axios from 'axios'
 export default {
   data () {
     return {
@@ -62,48 +61,12 @@ export default {
         email: '',
         name: '',
         password: ''
-      },
-      show: true,
-      isLoading: false
+      }
     }
   },
   methods: {
     onSubmit () {
-      this.isLoading = true
-      Axios({
-        method: 'POST',
-        url: 'http://localhost:3000/admin/register',
-        data: {
-          name: this.form.name,
-          email: this.form.email,
-          password: this.form.password
-        }
-      })
-        .then(response => {
-          const { token, name } = response.data
-
-          localStorage.setItem('token', token)
-          localStorage.setItem('name', name)
-
-          this.$notify({
-            type: 'primary',
-            text: 'You successfully logged in'
-          })
-        })
-        .catch(err => {
-          const { errors } = err.response.data
-
-          errors.forEach(err => {
-            this.$notify({
-              title: 'Input Error!',
-              type: 'warn',
-              text: err
-            })
-          })
-        })
-        .finally(() => {
-          this.isLoading = false
-        })
+      this.$store.dispatch('register', this.form)
     },
     onReset () {
       // Reset our form values

@@ -8,12 +8,12 @@
         <label for="inputEmail" class="sr-only">Email address</label>
 
         <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus
-          v-model="email">
+          v-model="loginData.email">
 
         <label for="inputPassword" class="sr-only">Password</label>
 
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required
-          v-model="password">
+          v-model="loginData.password">
         <!-- <div class="checkbox mb-3">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
@@ -28,53 +28,21 @@
 </template>
 
 <script>
-import axios from 'axios'
 import moment from 'moment'
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
-      email: '',
-      password: '',
+      loginData: {
+        email: '',
+        password: ''
+      },
       isLoading: false
     }
   },
   methods: {
     login () {
-      this.isLoading = true
-      axios({
-        method: 'POST',
-        url: 'http://localhost:3000/admin/login',
-        data: {
-          email: this.email,
-          password: this.password
-        }
-      })
-        .then(response => {
-          const { token, name } = response.data
-
-          localStorage.setItem('token', token)
-          localStorage.setItem('name', name)
-
-          this.$router.push('/dashboard')
-          this.$notify({
-            type: 'primary',
-            text: 'You successfully logged in'
-          })
-        })
-        .catch(err => {
-          const { errors } = err.response.data
-
-          errors.forEach(err => {
-            this.$notify({
-              title: 'Input Error!',
-              type: 'warn',
-              text: err
-            })
-          })
-        })
-        .finally(() => {
-          this.isLoading = false
-        })
+      this.$store.dispatch('login', this.loginData)
     }
   },
   computed: {
@@ -85,12 +53,18 @@ export default {
       } else {
         return `2020 - ${currentYear}`
       }
+    },
+    ...mapState(['isLogin'])
+  },
+  watch: {
+    isLogin: function () {
+      if (this.isLogin) this.$router.push('/dashboard')
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
   #app {
     /* font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
