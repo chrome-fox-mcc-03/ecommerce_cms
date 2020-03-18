@@ -6,11 +6,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    products: []
+    products: [],
+    isLoading: false
   },
   mutations: {
     SET_PRODUCTS (state, payload) {
       state.products = payload
+    },
+    SET_ISLOADING (state, payload) {
+      state.isLoading = payload
     }
   },
   actions: {
@@ -25,6 +29,7 @@ export default new Vuex.Store({
       })
     },
     fetchProducts (context, payload) {
+      context.commit('SET_ISLOADING', true)
       axios({
         method: 'get',
         url: 'http://localhost:3000/products',
@@ -39,9 +44,12 @@ export default new Vuex.Store({
         .catch(err => {
           console.log(err)
         })
+        .finally(_ => {
+          context.commit('SET_ISLOADING', false)
+        })
     },
     addProduct (context, payload) {
-      console.log('add depannnn')
+      context.commit('SET_ISLOADING', true)
       axios({
         method: 'post',
         url: 'http://localhost:3000/products',
@@ -61,9 +69,12 @@ export default new Vuex.Store({
         .catch(err => {
           console.log(err)
         })
+        .finally(_ => {
+          context.commit('SET_ISLOADING', false)
+        })
     },
     getProductById (context, id) {
-      console.log('vue gettt by ID ==== ', id)
+      context.commit('SET_ISLOADING', true)
       return axios({
         method: 'get',
         url: `http://localhost:3000/products/${id}`,
@@ -73,7 +84,7 @@ export default new Vuex.Store({
       })
     },
     updateProduct (context, payload) {
-      console.log('update ----', payload)
+      context.commit('SET_ISLOADING', true)
       return axios({
         method: 'put',
         url: `http://localhost:3000/products/${payload.id}`,

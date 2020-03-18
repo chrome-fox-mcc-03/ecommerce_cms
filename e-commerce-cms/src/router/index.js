@@ -21,9 +21,6 @@ const routes = [
     meta: {
       requiresAuth: true
     },
-    redirect: {
-      name: 'AllProduct'
-    },
     children: [
       {
         path: '',

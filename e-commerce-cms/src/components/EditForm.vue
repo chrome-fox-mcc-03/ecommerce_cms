@@ -1,5 +1,6 @@
 <template>
   <div class="container form-space">
+    <Loading v-if="isLoading" />
     <form @submit.prevent="updateProduct" class="mt-5">
     <h2 class="mb-5">Edit Product</h2>
     <div class="form-group">
@@ -24,8 +25,12 @@
 </template>
 
 <script>
+import Loading from './Loading'
 export default {
   name: 'EditForm',
+  components: {
+    Loading
+  },
   data: function () {
     return {
       name: '',
@@ -50,6 +55,9 @@ export default {
         .catch(err => {
           console.log(err)
         })
+        .finally(_ => {
+          this.$store.commit('SET_ISLOADING', false)
+        })
     }
   },
   created () {
@@ -63,6 +71,14 @@ export default {
       .catch(err => {
         console.log(err)
       })
+      .finally(_ => {
+        this.$store.commit('SET_ISLOADING', false)
+      })
+  },
+  computed: {
+    isLoading: function () {
+      return this.$store.state.isLoading
+    }
   }
 }
 </script>

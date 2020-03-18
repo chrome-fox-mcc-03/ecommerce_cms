@@ -1,5 +1,6 @@
 <template>
   <div class="signin-page">
+    <Loading v-if="isLoading" />
     <form @submit.prevent="signIn">
     <h2>Sign In As Admin</h2>
     <div class="form-group mt-5">
@@ -16,8 +17,12 @@
 </template>
 
 <script>
+import Loading from '../components/Loading'
 export default {
   name: 'SigninPage',
+  components: {
+    Loading
+  },
   data: function () {
     return {
       email: '',
@@ -36,10 +41,11 @@ export default {
         .catch(err => {
           console.log(err)
         })
-    },
-    checkVuex: function () {
-      console.log('masuk ngga')
-      this.$store.dispatch('checkVuex')
+    }
+  },
+  computed: {
+    isLoading: function () {
+      return this.$store.state.isLoading
     }
   }
 }
