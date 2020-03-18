@@ -10,15 +10,13 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background-color: cadetblue;
 }
 
-.container {
+.container-form {
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* background-color: cadetblue; */
 }
 .card-logreg {
   height: 50vh;
@@ -34,6 +32,41 @@
   margin: 10px;
 }
 
+.list-products{
+  width: 100vw;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.card-addProduct {
+  height: 40vh;
+  width: 20vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-product{
+  margin: 10px;
+  height: auto;
+  width: 15vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: flex-start;
+  /* text-align: start; */
+}
+
+.card-image{
+  height: 100%;
+}
+
+.content{
+  height: 40%;
+}
+
 .navbar-dashboard{
   padding: 10px 15px;
     background-color:cadetblue;
@@ -41,7 +74,6 @@
 
 .body-dashboard{
   height: 100vh;
-  background-color: cornsilk;
 }
 
 @media screen and (max-width: 768px) {

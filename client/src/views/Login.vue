@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-form">
     <div class="card card-logreg">
       <h3>Login Admin Page</h3>
       <form v-on:submit.prevent="loginCheck()">
@@ -58,6 +58,7 @@ export default {
           console.log(response.data)
           const token = response.data.token
           localStorage.setItem('token', token)
+          this.$toasted.success('Success Login')
           this.$router.push('/dashboard')
         })
         .catch(error => {
