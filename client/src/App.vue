@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <font-awesome-icon icon="envelope" />
     <router-view />
   </div>
 </template>

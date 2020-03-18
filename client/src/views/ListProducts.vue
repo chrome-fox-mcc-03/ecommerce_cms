@@ -13,6 +13,12 @@ import Navbar from '../components/Navbar'
 export default {
   components: {
     Navbar
+  },
+  computed: {
+  },
+  created () {
+    // this.$store.dispatch('getProducts')
+    console.log(this.$store.state, 'di list products')
   }
 }
 </script>

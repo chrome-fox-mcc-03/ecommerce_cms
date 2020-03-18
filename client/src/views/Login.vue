@@ -35,7 +35,7 @@
 </template>
 
 <script>
-// import axios from "axios";
+import axios from 'axios'
 export default {
   name: 'Login',
   data () {
@@ -46,10 +46,24 @@ export default {
   },
   methods: {
     loginCheck () {
-      localStorage.setItem('token', this.password)
-      console.log(this.email)
-      console.log(this.password)
-      this.$router.push('/dashboard')
+      axios({
+        method: 'post',
+        url: 'http://localhost:3000/users/login',
+        data: {
+          email: this.email,
+          password: this.password
+        }
+      })
+        .then(response => {
+          console.log(response.data)
+          const token = response.data.token
+          localStorage.setItem('token', token)
+          this.$router.push('/dashboard')
+        })
+        .catch(error => {
+          this.$toasted.error(error.response.data.message)
+          console.log(error.response.data)
+        })
     }
   },
   created () {
