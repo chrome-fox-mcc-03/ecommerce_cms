@@ -53,12 +53,12 @@ body {
   font-size: 0.875rem;
 }
 [role="main"] {
-  padding-top: 133px; /* Space for fixed navbar */
+  padding-top: 133px!important; /* Space for fixed navbar */
 }
 
 @media (min-width: 768px) {
   [role="main"] {
-    padding-top: 48px; /* Space for fixed navbar */
+    padding-top: 48px!important; /* Space for fixed navbar */
   }
 }
 </style>
