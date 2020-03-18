@@ -23,12 +23,14 @@ export default new Vuex.Store({
         }
       })
         .then(response => {
-          console.log(response.data)
-          const { data } = response
-          commit('SET_PRODUCTS', [...data.results])
+          const {
+            data
+          } = response
+          console.log(data)
+          commit('SET_PRODUCTS', [...data])
         })
         .catch(error => {
-          console.log(error.response.data)
+          console.log(error)
         })
     }
   },
