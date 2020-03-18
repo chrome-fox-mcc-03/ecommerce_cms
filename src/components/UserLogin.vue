@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import UIkit from 'uikit'
 export default {
   name: 'UserLogin',
   data () {
@@ -33,21 +33,11 @@ export default {
   },
   methods: {
     login () {
-      axios({
-        method: 'POST',
-        url: 'http://localhost:3000/login',
-        data: {
-          email: this.loginEmail,
-          password: this.loginPassword
-        }
-      })
-        .then(response => {
-          const token = response.data.token
-          localStorage.setItem('token', token)
-        })
-        .catch(err => {
-          console.log(err)
-        })
+      const data = {
+        email: this.loginEmail,
+        password: this.loginPassword
+      }
+      this.$emit('login', data)
     }
   }
 }

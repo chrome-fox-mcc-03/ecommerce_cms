@@ -16,8 +16,10 @@ const routes = [
   },
   {
     path: '/products',
-    name: 'ProductDashboard',
     component: ProductDashboard,
+    meta: {
+      authentication: true
+    },
     children: [
       {
         path: '',
@@ -42,6 +44,20 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.authentication)) {
+    const token = localStorage.getItem('token')
+    if (token) next()
+    else {
+      next({
+        path: '/'
+      })
+    }
+  } else {
+    next()
+  }
 })
 
 export default router

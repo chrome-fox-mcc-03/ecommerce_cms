@@ -1,7 +1,7 @@
 <template>
   <section class="navbar">
-    <button  uk-toggle="target: #login-canvas" class="uk-button uk-button-default">Login</button>
-    <button  @click.prevent class="uk-button uk-button-default">Logout</button>
+    <button v-if="!isLogin" uk-toggle="target: #login-canvas" class="uk-button uk-button-default">Login</button>
+    <button v-if="isLogin" @click.prevent="logout()" class="uk-button uk-button-default">Logout</button>
   </section>
 </template>
 
@@ -12,6 +12,15 @@ export default {
     return {
       token: localStorage.getItem('token')
     }
+  },
+  methods: {
+    logout () {
+      localStorage.removeItem('token')
+      this.$router.push({ path: '/' })
+    }
+  },
+  props: ['isLogin'],
+  created () {
   }
 }
 
