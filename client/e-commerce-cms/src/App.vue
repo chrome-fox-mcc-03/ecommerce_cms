@@ -4,6 +4,7 @@
       <navbar/>
     </div>
     <router-view id="router-item"/>
+    <loading v-if="isLoading"/>
     <product-detail/>
   </div>
 </template>
@@ -11,6 +12,7 @@
 <script>
 import Navbar from './components/Navbar.vue'
 import ProductDetail from './components/ProductDetail.vue'
+import Loading from './views/Loading'
 export default {
   data: function () {
     return {
@@ -18,9 +20,13 @@ export default {
   },
   components: {
     Navbar,
-    ProductDetail
+    ProductDetail,
+    Loading
   },
-  methods: {
+  computed: {
+    isLoading () {
+      return this.$store.state.isLoading
+    }
   },
   created: function () {
     const isToken = localStorage.getItem('token')

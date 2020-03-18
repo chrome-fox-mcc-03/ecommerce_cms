@@ -54,6 +54,9 @@ export default {
         .catch(err => {
           console.log(err)
         })
+        .finally(_ => {
+          this.$store.commit('SET_ISLOADING', false)
+        })
     },
     detailProduct (product) {
       console.log(product)

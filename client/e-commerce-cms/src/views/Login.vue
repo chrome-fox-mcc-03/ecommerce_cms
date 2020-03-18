@@ -45,6 +45,9 @@ export default {
           console.log(err.response.data)
           this.$router.push({ path: 'login' })
         })
+        .finally(_ => {
+          this.$store.commit('SET_ISLOADING', false)
+        })
     }
   }
 }

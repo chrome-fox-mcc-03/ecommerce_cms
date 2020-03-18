@@ -53,6 +53,9 @@ export default {
           this.$store.dispatch('notification', condition)
           console.log(err)
         })
+        .finally(_ => {
+          this.$store.commit('SET_ISLOADING', false)
+        })
     }
   }
 }
