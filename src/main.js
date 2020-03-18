@@ -10,7 +10,7 @@ Vue.config.productionTip = false
 
 Vue.use(VueCurrencyFilter,
   {
-    symbol : 'Rp',
+    symbol: 'Rp',
     thousandsSeparator: '.',
     fractionCount: 0,
     fractionSeparator: ',',

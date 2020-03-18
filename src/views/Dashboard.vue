@@ -7,9 +7,9 @@
                     <h3>Total Users</h3>
                     <h4>
                       <animated-number
-                            :value='getUsersLength'
-                            :round='1'
-                            :duration='1000'
+                          :value='getUsersLength'
+                          :round='1'
+                          :duration='1000'
                         />
                     </h4>
                 </div>
@@ -17,9 +17,9 @@
                     <h3>Total Products</h3>
                     <h4>
                       <animated-number
-                            :value='getProductsLength'
-                            :round='1'
-                            :duration='1000'
+                          :value='getProductsLength'
+                          :round='1'
+                          :duration='1000'
                         />
                     </h4>
                 </div>
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import AnimatedNumber from "animated-number-vue"
+import AnimatedNumber from 'animated-number-vue'
 
 export default {
   components: {
@@ -46,6 +46,10 @@ export default {
       const usersLength = users.length
       return usersLength
     }
+  },
+  mounted () {
+    this.$store.commit('SET_ERROR', false)
+    this.$store.commit('SET_ERRORS', [])
   }
 }
 </script>

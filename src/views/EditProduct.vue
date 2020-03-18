@@ -23,12 +23,6 @@ export default {
   props: ['product'],
   data () {
     return {
-    //   product: {
-    //     name: this.product.name,
-    //     image_url: this.product.image_url,
-    //     price: this.product.price,
-    //     stock: this.product.stock
-    //   }
     }
   },
   methods: {
@@ -53,7 +47,8 @@ export default {
           this.$router.push(`/products/${id}`)
         })
         .catch((err) => {
-          console.log(err)
+          this.$store.commit('SET_ERROR', true)
+          this.$store.commit('SET_ERRORS', [...err.response.data.errors])
         })
     }
   }

@@ -28,7 +28,15 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    beforeEnter: (to, from, next) => {
+      const token = localStorage.getItem('access_token')
+      if (!token) {
+        next()
+      } else {
+        router.push({ path: '/' })
+      }
+    }
   },
   {
     path: '/users',

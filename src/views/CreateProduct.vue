@@ -46,11 +46,14 @@ export default {
         }
       })
         .then(({ data }) => {
+          this.$store.commit('SET_ERROR', false)
+          this.$store.commit('SET_ERRORS', [])
           this.$store.dispatch('getProducts')
           this.$router.push('/products')
         })
         .catch((err) => {
-          console.log(err)
+          this.$store.commit('SET_ERROR', true)
+          this.$store.commit('SET_ERRORS', [...err.response.data.errors])
         })
         .finally((_) => {
           this.$store.commit('SET_LOADING', false)

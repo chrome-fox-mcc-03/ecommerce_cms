@@ -10,7 +10,9 @@ export default new Vuex.Store({
     isLogin: false,
     isLoading: false,
     products: [],
-    users: []
+    users: [],
+    isError: false,
+    errors: []
   },
   mutations: {
     SET_LOGIN (state, payload) {
@@ -24,6 +26,12 @@ export default new Vuex.Store({
     },
     SET_USERS (state, payload) {
       state.users = payload
+    },
+    SET_ERROR (state, payload) {
+      state.isError = payload
+    },
+    SET_ERRORS (state, payload) {
+      state.errors = payload
     }
   },
   actions: {
@@ -40,7 +48,8 @@ export default new Vuex.Store({
           commit('SET_PRODUCTS', [...data.data])
         })
         .catch((err) => {
-          console.log(err)
+          commit('SET_ERROR', true)
+          commit('SET_ERRORS', [...err.response.data.errors])
         })
         .finally((_) => {
           commit('SET_LOADING', false)
@@ -59,7 +68,8 @@ export default new Vuex.Store({
           commit('SET_USERS', [...data.data])
         })
         .catch((err) => {
-          console.log(err)
+          commit('SET_ERROR', true)
+          commit('SET_ERRORS', [...err.response.data.errors])
         })
         .finally((_) => {
           commit('SET_LOADING', false)
@@ -73,7 +83,8 @@ export default new Vuex.Store({
         data: payload
       })
         .then(({ data }) => {
-          console.log('sukses')
+          commit('SET_ERROR', false)
+          commit('SET_ERRORS', [])
           const access_token = data.access_token
           localStorage.setItem('access_token', access_token)
           router.push('/dashboard')
@@ -82,7 +93,8 @@ export default new Vuex.Store({
           dispatch('getUsers')
         })
         .catch((err) => {
-          console.log(err)
+          commit('SET_ERROR', true)
+          commit('SET_ERRORS', [...err.response.data.errors])
         })
         .finally((_) => {
           commit('SET_LOADING', false)

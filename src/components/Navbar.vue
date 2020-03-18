@@ -1,6 +1,8 @@
 <template>
     <nav class="navbar navbar-dark bg-dark flex-md-nowrap p-0 shadow">
-      <router-link class="navbar-brand col-sm-3 col-md-2 mr-0" to="/">Logo</router-link>
+      <router-link class="navbar-brand col-sm-3 col-md-2 mr-0" to="/">
+        <img src="../assets/logo.png" alt="">
+      </router-link>
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             <button v-if="isLogin" @click="logout" type="button" class="btn btn-dark">Logout</button>
@@ -27,6 +29,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+  nav.navbar.navbar-dark.bg-dark.flex-md-nowrap.p-0.shadow {
+    margin-bottom: 10px;
+  }
 
 </style>

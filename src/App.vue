@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <Navbar/>
+    <MessageError v-if="isError" />
     <div class="container">
       <div class="row">
         <div class="col-3">
@@ -19,6 +20,7 @@
 import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
 import Loading from './components/Loading'
+import MessageError from './components/MessageError'
 
 export default {
   name: 'EcommerceCMS',
@@ -29,7 +31,8 @@ export default {
   components: {
     Navbar,
     Sidebar,
-    Loading
+    Loading,
+    MessageError
   },
   computed: {
     isLogin () {
@@ -37,6 +40,9 @@ export default {
     },
     isLoading () {
       return this.$store.state.isLoading
+    },
+    isError () {
+      return this.$store.state.isError
     }
   },
   created () {
@@ -47,6 +53,7 @@ export default {
     } else {
       this.$store.commit('SET_LOGIN', true)
       this.$store.dispatch('getProducts')
+      this.$store.dispatch('getUsers')
     }
   }
 }

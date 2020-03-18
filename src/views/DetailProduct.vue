@@ -4,7 +4,7 @@
       <div class="container">
         <div class="row">
           <div class="col-6">
-            <img class="card-img-top" :src="product.image_url" :alt="product.name">
+            <img class="card-img-top" :src="getImage" :alt="product.name">
           </div>
           <div class="col-3">
             <h5>Name : {{ product.name }}</h5>
@@ -44,7 +44,8 @@ export default {
           this.product = data.data
         })
         .catch((err) => {
-          console.log(err)
+          this.$store.commit('SET_ERROR', true)
+          this.$store.commit('SET_ERRORS', [...err.response.data.errors])
         })
     },
     deleteProduct (id) {
@@ -60,8 +61,18 @@ export default {
           this.$router.push('/products')
         })
         .catch((err) => {
-          console.log(err)
+          this.$store.commit('SET_ERROR', true)
+          this.$store.commit('SET_ERRORS', [...err.response.data.errors])
         })
+    }
+  },
+  computed: {
+    getImage () {
+      if (!this.product.image_url){
+        return require('../assets/empty.svg')
+      } else {
+        return this.product.image_url
+      }
     }
   },
   created () {

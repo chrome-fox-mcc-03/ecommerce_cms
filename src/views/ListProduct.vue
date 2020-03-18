@@ -2,7 +2,7 @@
     <div>
         <div class="row">
           <div class="col-3">
-            <h2>List Product</h2>
+            <h2>Product List</h2>
           </div>
           <div class="col-4">
             <button @click="toAddPage" type="button" class="btn btn-outline-primary btn-sm">Add Product</button>
@@ -31,6 +31,10 @@ export default {
     products () {
       return this.$store.state.products
     }
+  },
+  mounted () {
+    this.$store.commit('SET_ERROR', false)
+    this.$store.commit('SET_ERRORS', [])
   }
 }
 </script>
