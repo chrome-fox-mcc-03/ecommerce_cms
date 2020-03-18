@@ -38,6 +38,13 @@ export default {
       const { email, password } = this
       this.onLogin({ email, password })
     }
+  },
+  beforeRouteEnter (to, from, next) {
+    if (localStorage.getItem('access_token')) {
+      next('/dashboard')
+    } else {
+      next()
+    }
   }
 }
 </script>

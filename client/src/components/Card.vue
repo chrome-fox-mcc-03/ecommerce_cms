@@ -1,6 +1,6 @@
 <template>
-    <div class="card">
-        <h2>this is product card</h2>
+    <div class="card ml-4 mr-2 mt-2 mb-2 shadow">
+        <h4>product card</h4>
     </div>
 </template>
 

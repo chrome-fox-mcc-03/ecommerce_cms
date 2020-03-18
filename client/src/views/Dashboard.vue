@@ -1,11 +1,9 @@
 <template>
   <div class="d-flex flex-row justify-content-around align-items-start">
-      <div class="sidebar">
+      <div class="sidebar bg-dark navbar-dark">
           <Sidebar />
       </div>
-      <div class="content">
-          <router-view />
-      </div>
+      <router-view />
   </div>
 </template>
 
@@ -20,6 +18,12 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+.sidebar {
+  align-self: stretch;
+  height: 90vh;
+  width: 15vw;
+}
 
 </style>
