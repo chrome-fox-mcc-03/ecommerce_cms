@@ -1,5 +1,5 @@
 <template>
-    <div>
+  <div>
     <nav class="level">
       <!-- Left side -->
       <div class="level-left">
@@ -15,7 +15,7 @@
       <!-- Right side -->
       <div class="level-right">
         <p class="level-item">
-                        <router-link to="/products">Products</router-link>
+          <router-link to="/products">Products</router-link>
         </p>
         <p class="level-item">
             <router-link to="/products/add">Add Product</router-link>

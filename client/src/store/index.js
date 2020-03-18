@@ -14,7 +14,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    getProducts ({ commit }, payload) {
+    getProducts ({ commit, state, dispatch }, payload) {
       axios({
         method: 'get',
         url: 'http://localhost:3000/products',
