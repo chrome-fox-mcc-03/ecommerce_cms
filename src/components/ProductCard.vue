@@ -9,7 +9,7 @@
     <td>
       <div class="uk-button-group">
         <router-link class="uk-button uk-button-primary" :to="`/products/edit/${id}`">Edit</router-link>
-        <button @click.prevent class="uk-button uk-button-danger">Delete</button>
+        <button @click.prevent="deleteProduct" class="uk-button uk-button-danger">Delete</button>
       </div>
     </td>
     <img :src="product.url" alt="" srcset="">
@@ -23,6 +23,15 @@ export default {
     }
   },
   methods: {
+    deleteProduct () {
+      this.$store.dispatch('deleteProduct', this.id)
+        .then(response => {
+          this.$store.dispatch('getProducts')
+        })
+        .catch(err => {
+          console.log(err.response, 'error dari index delete')
+        })
+    }
   },
   props: ['product', 'id'],
   computed: {
