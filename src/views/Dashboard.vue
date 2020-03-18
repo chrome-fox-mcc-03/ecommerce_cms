@@ -5,6 +5,13 @@
             <div class="row">
                 <div class="col-4 border border-dark rounded mr-md-3 p-3">
                     <h3>Total Users</h3>
+                    <h4>
+                      <animated-number
+                            :value='getUsersLength'
+                            :round='1'
+                            :duration='1000'
+                        />
+                    </h4>
                 </div>
                 <div class="col-4 border border-dark rounded mr-md-3 p-3">
                     <h3>Total Products</h3>
@@ -33,6 +40,11 @@ export default {
       const products = this.$store.state.products
       const productsLength = products.length
       return productsLength
+    },
+    getUsersLength () {
+      const users = this.$store.state.users
+      const usersLength = users.length
+      return usersLength
     }
   }
 }

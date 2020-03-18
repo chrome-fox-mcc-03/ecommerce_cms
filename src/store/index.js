@@ -9,7 +9,8 @@ export default new Vuex.Store({
   state: {
     isLogin: false,
     isLoading: false,
-    products: []
+    products: [],
+    users: []
   },
   mutations: {
     SET_LOGIN (state, payload) {
@@ -20,6 +21,9 @@ export default new Vuex.Store({
     },
     SET_PRODUCTS (state, payload) {
       state.products = payload
+    },
+    SET_USERS (state, payload) {
+      state.users = payload
     }
   },
   actions: {
@@ -42,6 +46,25 @@ export default new Vuex.Store({
           commit('SET_LOADING', false)
         })
     },
+    getUsers ({ commit }, payload) {
+      commit('SET_LOADING', true)
+      axios({
+        method: 'get',
+        url: 'http://localhost:3000/admin/users',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(({ data }) => {
+          commit('SET_USERS', [...data.data])
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+        .finally((_) => {
+          commit('SET_LOADING', false)
+        })
+    },
     login ({ dispatch, commit }, payload) {
       commit('SET_LOADING', true)
       axios({
@@ -56,6 +79,7 @@ export default new Vuex.Store({
           router.push('/dashboard')
           commit('SET_LOGIN', true)
           dispatch('getProducts')
+          dispatch('getUsers')
         })
         .catch((err) => {
           console.log(err)
