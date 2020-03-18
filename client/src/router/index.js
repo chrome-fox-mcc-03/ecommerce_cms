@@ -11,7 +11,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/login',
+    path: '/',
     name: 'loginPage',
     component: LoginPage
   },
@@ -64,7 +64,7 @@ router.beforeEach((to, from, next) => {
       next()
     } else {
       next({
-        path: '/login'
+        path: '/'
       })
     }
   } else {

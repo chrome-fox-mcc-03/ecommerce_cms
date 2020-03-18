@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   data () {
     return {
@@ -28,13 +27,7 @@ export default {
   props: ['data'],
   methods: {
     deleteProduct (id) {
-      axios({
-        method: 'DELETE',
-        url: `http://localhost:3000/product/${id}`,
-        headers: {
-          token: this.token
-        }
-      })
+      this.$store.dispatch('deleteProduct', id)
         .then((result) => {
           // this.$emit('getItem')
           this.$store.dispatch('getProduct')

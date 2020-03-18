@@ -77,6 +77,15 @@ export default new Vuex.Store({
           token: localStorage.getItem('token')
         }
       })
+    },
+    deleteProduct ({ commit }, payload) {
+      return axios({
+        method: 'DELETE',
+        url: `http://localhost:3000/product/${payload}`,
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      })
     }
   },
   getters: {}
