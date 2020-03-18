@@ -4,7 +4,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Dashboard from '../views/Dashboard.vue'
-import ProductList from '../components/ProductList'
+import ProductList from '../views/ProductList'
 
 Vue.use(VueRouter)
 
@@ -25,9 +25,10 @@ const routes = [
     component: Register
   },
   {
-    path: '/admin/dashboard',
+    path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard,
+    redirect: '/dashboard/products',
     children: [
       {
         path: 'products',

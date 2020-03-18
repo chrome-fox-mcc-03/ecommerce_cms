@@ -34,13 +34,12 @@ export default {
   },
   methods: {
     onSubmit () {
-      console.log('Masooookkkkkkk')
       localStorage.setItem('access_token', 'tokenbuatanbukansembarangtoken')
-      this.$router.push('/admin/dashboard')
+      this.$router.push('/dashboard')
     },
     beforeRouterEnter (to, from, next) {
       if (localStorage.getItem('access_token')) {
-        next('/admin/dashboard')
+        next('/dashboard')
       } else {
         next()
       }

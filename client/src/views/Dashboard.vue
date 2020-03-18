@@ -5,6 +5,7 @@
       </div>
       <div class="content">
           <h2>this is dashboard content</h2>
+          <router-view />
       </div>
   </div>
 </template>
@@ -13,6 +14,7 @@
 import Sidebar from '../components/Sidebar'
 
 export default {
+  name: 'Dashboard',
   components: {
     Sidebar
   }

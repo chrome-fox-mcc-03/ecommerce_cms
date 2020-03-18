@@ -1,7 +1,7 @@
 <template>
   <div class="navbar navbar-expand bg-dark navbar-dark">
       <div class="container d-flex justify-content-between">
-          <a href="/" class="navbar-brand">Logo</a>
+          <router-link to="/" class="navbar-brand">Logo</router-link>
           <ul class="navbar-nav">
               <li class="nav-item">
                   <router-link to="/register" class="nav-link">Register</router-link>
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-
+  name: 'Navbar'
 }
 </script>
 
