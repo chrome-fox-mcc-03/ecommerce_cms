@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <h2>this is card</h2>
+        <h2>this is product card</h2>
     </div>
 </template>
 

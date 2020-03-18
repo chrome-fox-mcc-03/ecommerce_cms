@@ -4,6 +4,12 @@
           <router-link to="/" class="navbar-brand">Logo</router-link>
           <ul class="navbar-nav">
               <li class="nav-item">
+                  <router-link to="/" class="nav-link">Home</router-link>
+              </li>
+              <li class="nav-item">
+                  <router-link to="/about" class="nav-link">About</router-link>
+              </li>
+              <li class="nav-item">
                   <router-link to="/register" class="nav-link">Register</router-link>
               </li>
               <li class="nav-item">

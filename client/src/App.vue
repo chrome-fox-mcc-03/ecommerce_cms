@@ -1,11 +1,9 @@
 <template>
   <div id="app">
     <Navbar />
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div class="pt-5">
+      <router-view />
     </div>
-    <router-view />
     <Footer />
   </div>
 </template>

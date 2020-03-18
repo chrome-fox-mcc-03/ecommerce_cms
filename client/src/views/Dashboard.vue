@@ -4,7 +4,6 @@
           <Sidebar />
       </div>
       <div class="content">
-          <h2>this is dashboard content</h2>
           <router-view />
       </div>
   </div>
