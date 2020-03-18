@@ -62,8 +62,15 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
-    checkVuex () {
-      console.log('vue xxxxxxxxxxxxxxxx')
+    getProductById (context, id) {
+      console.log('vue gettt by ID ==== ', id)
+      return axios({
+        method: 'get',
+        url: `http://localhost:3000/products/${id}`,
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      })
     }
   }
 })

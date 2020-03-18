@@ -13,7 +13,7 @@
           <div class="d-flex">
             <p class="card-text mr-auto">Stock: {{ product.stock }}</p>
             <div>
-              <router-link :to="`/dashboard/edit/${product.id}`"><i class="mr-3 fas fa-pen-square fa-2x"></i></router-link>
+              <i class="mr-3 fas fa-pen-square fa-2x" @click="redirToEditPage(product.id)"></i>
               <i class="fas fa-trash fa-2x"></i>
             </div>
           </div>
@@ -28,6 +28,11 @@
 <script>
 export default {
   name: 'AllProduct',
+  methods: {
+    redirToEditPage: function (id) {
+      this.$router.push(`/dashboard/edit/${id}`)
+    }
+  },
   computed: {
     products: function () {
       return this.$store.state.products
