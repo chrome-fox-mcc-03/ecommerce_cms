@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapMutations } from 'vuex'
 export default {
   data () {
     return {
@@ -43,26 +43,39 @@ export default {
       this.hasToken = false
       this.appLogout()
     },
+    ...mapMutations({
+      userLogin: 'userLogin',
+      stopLoading: 'stopLoading',
+      startLoading: 'startLoading'
+    }),
     ...mapActions({
       appLogout: 'logout',
       loginToken: 'loginToken'
     })
   },
-  created () {
+  mounted () {
     const storage = JSON.parse(localStorage.getItem(this.appName))
     // console.log(this.appName, storage, 'navbar')
     if (storage) {
       const { token } = storage
-      console.log('tokennya ada')
-      this.render = false
-      this.loginToken(token)
-        .then(_ => {
-          console.log(this.$store.state._isLogin)
-          this.hasToken = true
-          this.render = true
-        })
+      if (token) {
+        console.log('tokennya ada')
+        this.render = false
+        this.loginToken({ token })
+          .then(result => {
+            this.userLogin({ payload: { id: result.data.id, email: result.data.email, token: result.data.access_token } })
+            this.hasToken = true
+          })
+          .catch(err => {
+            console.log(err.response.data)
+          })
+          .finally(_ => {
+            this.stopLoading()
+            this.render = true
+          })
+      }
     }
-    console.log('navbar created')
+    // console.log('navbar created')
   }
 }
 </script>

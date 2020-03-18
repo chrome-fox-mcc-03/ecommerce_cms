@@ -71,7 +71,7 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     console.log('logout/dashboard : ngecek credential')
     const storage = JSON.parse(localStorage.getItem('cms_client'))
-    console.log(storage)
+    // console.log(storage)
     if (storage) {
       const { token } = storage
       if (token) {

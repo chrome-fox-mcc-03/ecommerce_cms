@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 import router from '@/router/'
 
 Vue.use(Vuex)
@@ -12,8 +13,9 @@ const store = new Vuex.Store({
     },
     testVuex: 'Vuex Store Online',
     appName: 'cms_client',
+    serverURL: 'http://localhost:3000',
     _isLogin: false,
-    _pageLoading: false,
+    _pageLoading: true,
     inputCred: {
       email: 'test01@mail.com',
       password: 'leleyeye'
@@ -37,8 +39,6 @@ const store = new Vuex.Store({
       state.dbCred.email = payload.email
       state.dbCred.token = payload.token
       state._isLogin = true
-      state.inputCred.email = ''
-      state.inputCred.password = ''
       localStorage.setItem(state.appName, JSON.stringify({ token: payload.token }))
       router.push({ name: 'Dashboard' })
     },
@@ -66,21 +66,37 @@ const store = new Vuex.Store({
   actions: {
     login (context, payload) {
       // console.log(payload)
-      console.log(payload, 'login')
-      if (payload.email === 'test01@mail.com' && payload.password === 'leleyeye') {
-        console.log('cred success')
-        context.commit({
-          type: 'userLogin',
-          payload: { id: 999, email: payload.email, token: 'token' }
+      // console.log(payload, 'login')
+      context.commit('startLoading')
+      axios({
+        url: `${context.state.serverURL}/login`,
+        method: 'POST',
+        data: payload
+      })
+        .then(result => {
+          // console.log(result.data)
+          context.commit({
+            type: 'userLogin',
+            payload: { id: result.data.id, email: result.data.email, token: result.data.access_token }
+          })
         })
-      }
+        .catch(err => {
+          console.log(err.response.data)
+        })
+        .finally(_ => {
+          setTimeout(() => {
+            context.commit('stopLoading')
+          }, 500)
+        })
     },
     loginToken (context, payload) {
-      console.log(payload, 'loginToken')
-      return new Promise(function (resolve, reject) {
-        setTimeout(() => {
-          resolve(true)
-        }, 1)
+      // console.log(payload, 'loginToken')
+      // get id and email from token here
+      context.commit('startLoading')
+      return axios({
+        url: `${context.state.serverURL}/userPayload`,
+        method: 'GET',
+        headers: payload
       })
     },
     logout (context, payload) {
@@ -90,37 +106,61 @@ const store = new Vuex.Store({
     },
     register (context, payload) {
       console.log(payload, 'register')
-      console.log(context.state.inputCred)
-      const { email } = payload
-      context.commit({
-        type: 'userLogin',
-        payload: { id: 999, email, token: 'token' }
+      context.commit('startLoading')
+      axios({
+        url: `${context.state.serverURL}/register`,
+        method: 'POST',
+        data: payload
       })
+        .then(result => {
+          console.log(result.data)
+          context.commit({
+            type: 'userLogin',
+            payload: { id: result.data.id, email: result.data.email, token: result.data.access_token }
+          })
+        })
+        .catch(err => {
+          console.log(err.response.data)
+        })
+        .finally(_ => {
+          setTimeout(() => {
+            context.commit('stopLoading')
+          }, 500)
+        })
     },
     fetchProduct (context, payload) {
-      const items = [
-        { id: 1, name: 'product01', price: '0', stock: '0', UserId: 1 },
-        { id: 2, name: 'product02', price: '0', stock: '0', UserId: 1 },
-        { id: 3, name: 'product03', price: '0', stock: '0', UserId: 1 }
-      ]
       context.commit('startLoading')
-      items.forEach(item => {
-        context.commit('appendProduct', item)
+      console.log(context.state.dbCred, 'fetchProduct')
+      return axios({
+        url: `${context.state.serverURL}/product`,
+        method: 'GET',
+        headers: {
+          access_token: context.state.dbCred.token
+        }
       })
-      setTimeout(() => {
-        context.commit('stopLoading')
-      }, 1000)
     },
     createNew (context, payload) {
-      console.log(payload)
+      console.log(payload, 'createNew')
       context.commit('startLoading')
-      payload.UserId = 1
-      setTimeout(() => {
-        context.commit('stopLoading')
-        context.commit('emptyProducts', payload)
-        context.commit('appendProduct', payload)
-        router.push({ name: 'ProductContainer' })
+      axios({
+        url: `${context.state.serverURL}/product`,
+        method: 'POST',
+        headers: {
+          access_token: context.state.dbCred.token
+        },
+        data: payload
       })
+        .then(result => {
+          console.log(result.data, 'created item')
+          context.commit('appendProduct', result.data)
+          router.push({ name: 'ProductContainer' })
+        })
+        .catch(err => {
+          console.log(err.response.data)
+        })
+        .finally(_ => {
+          context.commit('stopLoading')
+        })
     }
   }
 })
