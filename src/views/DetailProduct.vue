@@ -7,9 +7,9 @@
             <img class="card-img-top" :src="product.image_url" :alt="product.name">
           </div>
           <div class="col-3">
-            <p>Name : {{ product.name }}</p>
-            <p>Price : {{ product.price }}</p>
-            <p>Stock : {{ product.stock }}</p>
+            <h5>Name : {{ product.name }}</h5>
+            <h5>Price : {{ product.price | currency }}</h5>
+            <h5>Stock : {{ product.stock }}</h5>
           </div>
           <div class="col-3">
             <router-link :to="`/products/${product.id}/edit`" class="btn btn-info">Edit</router-link><br>

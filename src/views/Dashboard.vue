@@ -10,9 +10,9 @@
                     <h3>Total Products</h3>
                     <h4>
                       <animated-number
-                            :value="getProductsLength"
-                            :round="1"
-                            :duration="1000"
+                            :value='getProductsLength'
+                            :round='1'
+                            :duration='1000'
                         />
                     </h4>
                 </div>
