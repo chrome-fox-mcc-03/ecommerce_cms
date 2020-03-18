@@ -1,13 +1,14 @@
 <template>
   <div id="app">
-    <Navbar :loginStatus="loginStatus" @isLogin="isLogin" />
+    <Navbar/>
     <div class="container">
       <div class="row">
         <div class="col-3">
-          <Sidebar v-if="loginStatus" />
+          <Sidebar v-if="isLogin" />
         </div>
         <div class="col-9">
-          <router-view @isLogin="isLogin" @getProducts="getProducts" :products="this.products"/>
+          <router-view/>
+          <Loading v-if="isLoading" />
         </div>
       </div>
     </div>
@@ -15,52 +16,37 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
+import Loading from './components/Loading'
 
 export default {
   name: 'EcommerceCMS',
   data () {
     return {
-      loginStatus: false,
-      products: []
     }
   },
   components: {
     Navbar,
-    Sidebar
+    Sidebar,
+    Loading
   },
-  methods: {
+  computed: {
     isLogin () {
-      this.loginStatus = !this.loginStatus
+      return this.$store.state.isLogin
     },
-    getProducts () {
-      axios({
-        method: 'get',
-        url: 'http://localhost:3000/products',
-        headers: {
-          access_token: localStorage.getItem('access_token')
-        }
-      })
-        .then(({ data }) => {
-          this.products = []
-          this.products.push(...data.data)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+    isLoading () {
+      return this.$store.state.isLoading
     }
   },
   created () {
     const token = localStorage.getItem('access_token')
     if (!token) {
       this.$router.push('/login')
-      this.loginStatus = false
+      this.$store.commit('SET_LOGIN', false)
     } else {
-      this.loginStatus = true
-      this.getProducts()
+      this.$store.commit('SET_LOGIN', true)
+      this.$store.dispatch('getProducts')
     }
   }
 }

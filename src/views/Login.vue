@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
   name: 'Login',
@@ -31,24 +30,11 @@ export default {
   },
   methods: {
     login () {
-      axios({
-        method: 'post',
-        url: 'http://localhost:3000/admin/login',
-        data: {
-          email: this.userData.email,
-          password: this.userData.password
-        }
-      })
-        .then(({ data }) => {
-          const access_token = data.access_token
-          localStorage.setItem('access_token', access_token)
-          this.$router.push('/dashboard')
-          this.$emit('isLogin')
-          this.$emit('getProducts')
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+      const payload = {
+        email: this.userData.email,
+        password: this.userData.password
+      }
+      this.$store.dispatch('login', payload)
     }
   }
 }

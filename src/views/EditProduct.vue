@@ -49,6 +49,7 @@ export default {
         }
       })
         .then(({ data }) => {
+          this.$store.dispatch('getProducts')
           this.$router.push(`/products/${id}`)
         })
         .catch((err) => {

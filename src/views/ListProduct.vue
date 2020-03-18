@@ -19,13 +19,17 @@ import Card from '../components/Card'
 
 export default {
   name: 'ListProducts',
-  props: ['products'],
   components: {
     Card
   },
   methods: {
     toAddPage () {
       this.$router.push('/products/create')
+    }
+  },
+  computed: {
+    products () {
+      return this.$store.state.products
     }
   }
 }

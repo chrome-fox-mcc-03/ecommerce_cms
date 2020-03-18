@@ -56,7 +56,7 @@ export default {
         }
       })
         .then(({ data }) => {
-          this.$emit('getProducts')
+          this.$store.dispatch('getProducts')
           this.$router.push('/products')
         })
         .catch((err) => {

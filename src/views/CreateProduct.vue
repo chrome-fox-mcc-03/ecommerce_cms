@@ -31,6 +31,7 @@ export default {
   },
   methods: {
     createProduct () {
+      this.$store.commit('SET_LOADING', true)
       axios({
         method: 'post',
         url: 'http://localhost:3000/products',
@@ -45,11 +46,14 @@ export default {
         }
       })
         .then(({ data }) => {
-          this.$emit('getProducts')
+          this.$store.dispatch('getProducts')
           this.$router.push('/products')
         })
         .catch((err) => {
           console.log(err)
+        })
+        .finally((_) => {
+          this.$store.commit('SET_LOADING', false)
         })
     }
   }
