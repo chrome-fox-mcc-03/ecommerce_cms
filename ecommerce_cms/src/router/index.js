@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import LandingPage from '../views/LandingPage.vue'
+import ListProduct from '../views/ListProduct.vue'
 
 Vue.use(VueRouter)
 
@@ -21,10 +23,18 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/LandingPage.vue')
+    component: LandingPage,
+    meta: {
+      requiresLogout: true
+    }
+  },
+  {
+    path: '/product',
+    name: 'ListProduct',
+    component: ListProduct,
+    meta: {
+      requiresAuth: true
+    }
   }
 ]
 
@@ -32,6 +42,32 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    if (localStorage.getItem('token')) {
+      next()
+    } else {
+      next({
+        path: '/login'
+      })
+    }
+  } else if (to.matched.some(record => record.meta.requiresLogout)) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    if (!localStorage.getItem('token')) {
+      next()
+    } else {
+      next({
+        path: '/product'
+      })
+    }
+  } else {
+    next() // make sure to always call next()!
+  }
 })
 
 export default router
