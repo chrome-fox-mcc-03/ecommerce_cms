@@ -30,7 +30,7 @@ export default {
         .then(({ data }) => {
           console.log('hore masuk', data)
           localStorage.setItem('token', data.token)
-          this.$store.commit('SET_SIGNEDIN', true)
+          // this.$store.commit('SET_SIGNEDIN', true)
           this.$router.push('/dashboard')
         })
         .catch(err => {

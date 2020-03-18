@@ -6,11 +6,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    signedIn: false
+    products: []
   },
   mutations: {
-    SET_SIGNEDIN (state, payload) {
-      state.signedIn = payload
+    SET_PRODUCTS (state, payload) {
+      state.products = payload
     }
   },
   actions: {
@@ -24,8 +24,43 @@ export default new Vuex.Store({
         }
       })
     },
-    signOut (context) {
-      context.commit('SET_SIGNEDIN', false)
+    fetchProducts (context, payload) {
+      axios({
+        method: 'get',
+        url: 'http://localhost:3000/products',
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      })
+        .then(({ data }) => {
+          console.log('Fetched!', data)
+          context.commit('SET_PRODUCTS', data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    addProduct (context, payload) {
+      console.log('add depannnn')
+      axios({
+        method: 'post',
+        url: 'http://localhost:3000/products',
+        headers: {
+          token: localStorage.getItem('token')
+        },
+        data: {
+          name: payload.name,
+          image_url: payload.image_url,
+          price: payload.price,
+          stock: payload.stock
+        }
+      })
+        .then(({ data }) => {
+          console.log(data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     },
     checkVuex () {
       console.log('vue xxxxxxxxxxxxxxxx')

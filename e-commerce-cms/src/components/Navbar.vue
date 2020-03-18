@@ -7,7 +7,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
             <router-link class="nav-item nav-link" to="/dashboard/add">Add New Product<span class="sr-only">(current)</span></router-link>
-            <router-link class="nav-item nav-link" to="/">Logout<span class="sr-only">(current)</span></router-link>
+            <a class="nav-item nav-link" @click="signOut">Logout<span class="sr-only">(current)</span></a>
             </div>
         </div>
     </nav>
@@ -15,10 +15,18 @@
 
 <script>
 export default {
-  name: 'Navbar'
+  name: 'Navbar',
+  methods: {
+    signOut: function () {
+      localStorage.clear()
+      this.$router.push('/')
+    }
+  }
 }
 </script>
 
 <style>
-
+a {
+  cursor: pointer;
+}
 </style>

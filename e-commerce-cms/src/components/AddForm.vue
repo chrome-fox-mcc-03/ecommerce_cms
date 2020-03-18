@@ -1,31 +1,51 @@
 <template>
   <div class="container form-space">
-    <form class="mt-5">
+    <form @submit.prevent="addProduct" class="mt-5">
     <h2 class="mb-5">Add New Product</h2>
     <div class="form-group">
       <label for="product-name">Name</label>
-      <input type="email" class="form-control" id="product-name" aria-describedby="emailHelp">
+      <input v-model="name" type="text" class="form-control" id="product-name" aria-describedby="emailHelp">
     </div>
     <div class="form-group">
       <label for="product-price">Price</label>
-      <input type="password" class="form-control" id="product-price">
+      <input v-model="price" type="text" class="form-control" id="product-price">
     </div>
     <div class="form-group">
       <label for="product-stock">Stock</label>
-      <input type="password" class="form-control" id="product-stock">
+      <input v-model="stock" type="text" class="form-control" id="product-stock">
     </div>
     <div class="form-group">
       <label for="product-image">Image</label>
-      <input type="password" class="form-control" id="product-image">
+      <input v-model="image_url" type="text" class="form-control" id="product-image">
     </div>
-    <router-link to="/dashboard" type="submit" class="btn btn-primary">Add</router-link>
+    <button type="submit" class="btn btn-primary">Add</button>
   </form>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'AddForm'
+  name: 'AddForm',
+  data: function () {
+    return {
+      name: '',
+      price: '',
+      stock: '',
+      image_url: ''
+    }
+  },
+  methods: {
+    addProduct: function () {
+      console.log('addddd!!!')
+      this.$store.dispatch('addProduct', {
+        name: this.name,
+        price: this.price,
+        stock: this.stock,
+        image_url: this.image_url
+      })
+      this.$router.push('/dashboard')
+    }
+  }
 }
 </script>
 
