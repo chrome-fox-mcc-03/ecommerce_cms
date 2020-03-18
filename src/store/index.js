@@ -6,16 +6,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    isLogin: false,
     products: [],
+    isLogin: false,
     isLoading: false
   },
   mutations: {
-    SET_ISLOGIN (state, payload) {
-      state.isLogin = payload
-    },
     SET_ISLOADING (state, payload) {
       state.isLoading = payload
+    },
+    SET_ISLOGIN (state, payload) {
+      state.isLogin = payload
     },
     SET_PRODUCTS (state, payload) {
       state.products = payload

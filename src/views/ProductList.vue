@@ -7,6 +7,7 @@
           <th class="uk-table-shrink">Image</th>
           <th class="uk-table-shrink">Title</th>
           <th class="">Description</th>
+          <th class="">Price</th>
           <th class="">Stock</th>
           <th class=" ">Action</th>
         </tr>
@@ -34,7 +35,6 @@ export default {
   },
   computed: {
     products () {
-      console.log(this.$store.state.products)
       return this.$store.state.products
     }
   },

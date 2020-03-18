@@ -10,13 +10,10 @@ export default {
   name: 'Navbar',
   data () {
     return {
-      token: localStorage.getItem('token')
     }
   },
   methods: {
     logout () {
-      localStorage.clear()
-      this.$router.push({ path: '/' })
       this.$emit('logout')
     }
   },

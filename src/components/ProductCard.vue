@@ -4,6 +4,7 @@
         :src="product.url" width="45" alt=""></td>
     <td class="uk-text-nowrap">{{ product.name }}</td>
     <td class="uk-text-truncate">{{  product.description }}</td>
+    <td class="uk-text-truncate">{{  product.price }}</td>
     <td class="uk-text-nowrap">{{ product.stock }}</td>
     <td>
       <div class="uk-button-group">

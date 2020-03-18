@@ -49,7 +49,6 @@ export default {
   created () {
     this.$store.dispatch('getProductData', this.$route.params.id)
       .then(({ data: { response } }) => {
-        console.log(response)
         this.product.stock = response.stock
         this.product.name = response.name
         this.product.description = response.description
