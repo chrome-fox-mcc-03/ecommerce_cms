@@ -5,6 +5,7 @@ import store from './store/index'
 import 'uikit'
 import 'uikit/dist/css/uikit.min.css'
 import 'uikit/dist/js/uikit-icons'
+import '@intera/vue-zoom-on-hover'
 
 Vue.config.productionTip = false
 

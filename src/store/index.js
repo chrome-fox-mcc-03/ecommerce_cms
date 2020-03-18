@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-import UIkit from 'uikit'
+// import UIkit from 'uikit'
 
 Vue.use(Vuex)
 
@@ -59,8 +59,8 @@ export default new Vuex.Store({
         data: payload
       })
     },
-    addProduct (context, payload) {
-      axios({
+    addProduct (_, payload) {
+      return axios({
         method: 'POST',
         url: 'http://localhost:3000/products',
         headers: {
@@ -68,21 +68,16 @@ export default new Vuex.Store({
         },
         data: payload
       })
-        .then(response => {
-          this.$route.push({ path: '/products' })
-          console.log(response)
-        })
-        .catch(err => {
-          const errors = err.response.data.message
-          errors.forEach(element => {
-            UIkit.notification({
-              message: `${element}`,
-              status: 'danger',
-              pos: 'top-right',
-              timeout: 5000
-            })
-          })
-        })
+    },
+    editProduct (_, payload) {
+      return axios({
+        method: 'PUT',
+        url: `http://localhost:3000/products/${payload.id}`,
+        headers: {
+          token: localStorage.getItem('token')
+        },
+        data: payload
+      })
     }
   }
 })

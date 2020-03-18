@@ -1,14 +1,14 @@
 <template>
   <tr>
     <td><img class="uk-preserve-width uk-border-circle"
-        :src="product.url" width="45" alt=""></td>
+        :src="product.image_url" width="45"></td>
     <td class="uk-text-nowrap">{{ product.name }}</td>
     <td class="uk-text-truncate">{{  product.description }}</td>
     <td class="uk-text-truncate">{{  product.price }}</td>
     <td class="uk-text-nowrap">{{ product.stock }}</td>
     <td>
       <div class="uk-button-group">
-        <router-link class="uk-button uk-button-primary" :to="`/products/edit/${index+1}`">Edit</router-link>
+        <router-link class="uk-button uk-button-primary" :to="`/products/edit/${id}`">Edit</router-link>
         <button @click.prevent class="uk-button uk-button-danger">Delete</button>
       </div>
     </td>
@@ -24,7 +24,7 @@ export default {
   },
   methods: {
   },
-  props: ['product', 'index'],
+  props: ['product', 'id'],
   computed: {
   }
 }

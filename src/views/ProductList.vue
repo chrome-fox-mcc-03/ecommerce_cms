@@ -13,7 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        <product-card v-for="(product, index) in products" :key="index" :product="product" :index="index"></product-card>
+        <product-card v-for="(product, index) in products" :key="index" :product="product" :id="product.id"></product-card>
       </tbody>
     </table>
   </div>

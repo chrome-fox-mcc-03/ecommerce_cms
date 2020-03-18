@@ -24,7 +24,6 @@ export default {
       }
       this.$store.dispatch('login', payload)
         .then(response => {
-          console.log(response)
           localStorage.setItem('token', response.data.token)
           this.$router.push({ path: 'products' })
           this.$store.commit('SET_ISLOGIN', true)
@@ -53,5 +52,7 @@ export default {
 </script>
 
 <style>
-
+.uk-notification-message{
+  border-radius: 15px;
+}
 </style>

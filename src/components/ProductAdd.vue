@@ -5,19 +5,23 @@
         <legend class="uk-legend">Add Product</legend>
         <div class="uk-margin">
           <div class="uk-margin">
-            <input v-model="productName" class="uk-input uk-form-width-large" type="text" placeholder="Product Name">
+            <input v-if="productName" v-model="productName" class="uk-input uk-form-width-large" type="text" placeholder="Product Name">
+            <input v-else v-model="productName" class="uk-input uk-form-danger uk-form-width-large" type="text" placeholder="Product Name">
           </div>
           <div class="uk-margin">
-            <textarea v-model="productDescription" class="uk-input uk-form-width-large" type="text" rows="5" placeholder="Product Description" style="margin-bottom: 0;"></textarea>
+            <textarea v-if="productDescription" v-model="productDescription" class="uk-input uk-form-width-large" type="text" rows="5" placeholder="Product Description" style="margin-bottom: 0;"></textarea>
+            <textarea v-else v-model="productDescription" class="uk-input uk-form-danger uk-form-width-large" type="text" rows="5" placeholder="Product Description" style="margin-bottom: 0;"></textarea>
             <br>
             <small v-if="productDescription.length <= 200">{{ charLeft }}</small>
-            <small class="charExcedeed" v-else>{{ charLeft }}</small>
+            <small v-else class="charExcedeed" >{{ charLeft }}</small>
           </div>
           <div class="uk-margin">
-            <input v-model="productStock" class="uk-input uk-form-width-large" type="text" placeholder="Product Stock">
+            <input v-if="isFinite(productStock)" v-model="productStock" class="uk-input uk-form-width-large" type="text" placeholder="Product Stock">
+            <input v-else v-model="productStock" class="uk-input uk-form-danger uk-form-width-large" type="text" placeholder="Product Stock">
           </div>
           <div class="uk-margin">
-            <input v-model="productPrice" class="uk-input uk-form-width-large" type="text" placeholder="Product Price">
+            <input v-if="isFinite(productPrice)" v-model="productPrice" class="uk-input uk-form-width-large" type="text" placeholder="Product Price">
+            <input v-else v-model="productPrice" class="uk-input uk-form-danger uk-form-width-large" type="text" placeholder="Product Price">
           </div>
           <div class="uk-margin">
             <input v-model="productImage" class="uk-input uk-form-width-large" type="text" placeholder="Product Image">
@@ -32,6 +36,7 @@
 </template>
 
 <script>
+import UIkit from 'uikit'
 export default {
   data () {
     return {
@@ -57,6 +62,26 @@ export default {
         image_url: this.productImage
       }
       this.$store.dispatch('addProduct', payload)
+        .then(response => {
+          this.$router.replace({ path: '/products' })
+          UIkit.notification({
+            message: `Added ${response.data.name} to Store`,
+            status: 'primary',
+            pos: 'top-right',
+            timeout: 1500
+          })
+        })
+        .catch(err => {
+          const errors = err.response.data.message
+          errors.forEach(element => {
+            UIkit.notification({
+              message: `${element}`,
+              status: 'danger',
+              pos: 'top-right',
+              timeout: 1500
+            })
+          })
+        })
     }
   }
 }
@@ -70,6 +95,10 @@ export default {
 
 .uk-input{
   margin-bottom: 1rem;
+}
+
+.uk-button-primary{
+  border-radius: 15px;
 }
 
 small{
