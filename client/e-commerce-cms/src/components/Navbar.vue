@@ -13,7 +13,7 @@
         <router-link class="nav-link" to="/products">Products</router-link>
       </li>
       <li class="nav-item">
-        <a id="logout-btn" class="nav-link" v-on:click="logout" to="">Logout</a>
+        <a id="logout-btn" class="nav-link" v-on:click="logout">Logout</a>
       </li>
     </ul>
   </div>
@@ -24,7 +24,14 @@
 export default {
   methods: {
     logout: function () {
-      this.$emit('logout')
+      this.$store.dispatch('logout')
+        .then(result => {
+          console.log(result)
+          this.$router.push({ path: 'login' })
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 }
@@ -33,5 +40,8 @@ export default {
 <style>
 #logout-btn:hover{
   cursor:pointer;
+}
+.navbar{
+  height: 10vh;
 }
 </style>

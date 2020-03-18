@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <div id="nav">
-      <navbar @logout="logout" />
+      <navbar/>
     </div>
-    <router-view @login="login" />
+    <router-view id="router-item"/>
   </div>
 </template>
 
@@ -12,38 +12,18 @@ import Navbar from './components/Navbar.vue'
 export default {
   data: function () {
     return {
-      dummyUser: {
-        name: 'naufal',
-        email: 'naufalyunan45@gmail.com',
-        password: '12345',
-        role: 'admin'
-      }
     }
   },
   components: {
     Navbar
   },
   methods: {
-    logout: function () {
-      localStorage.clear()
-      console.log('afasdfasdf')
-      console.log(this)
-      this.$router.push({ path: 'login' })
-    },
-    login: function (loginData) {
-      const emailInput = loginData.email
-      const passwordInput = loginData.password
-      if (emailInput === this.dummyUser.email) {
-        if (passwordInput === this.dummyUser.password) {
-          const token = 'selamat-anda-sudah-login'
-          localStorage.setItem('token', token)
-          this.$router.push({ path: 'products' })
-        } else {
-          this.$router.push({ path: 'login' })
-        }
-      } else {
-        this.$router.push({ path: 'login' })
-      }
+  },
+  created: function () {
+    const isToken = localStorage.getItem('token')
+    if (isToken) {
+      this.$store.commit('SET_LOGIN', true)
+      this.$router.push({ path: 'products' })
     }
   }
 }
@@ -55,6 +35,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  height: 100vh;
+  width: 100vw;
+}
+
+#router-item{
+  height: 90vh;
+  width: 100vw;
 }
 
 #nav a {

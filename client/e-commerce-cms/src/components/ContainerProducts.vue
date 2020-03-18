@@ -1,13 +1,13 @@
 <template>
   <div id="cont3">
     <h1>Product List</h1>
-    <div id="product" v-for="(el, index) in dummyData" :key="index">
+    <div id="product" v-for="product in products" :key="product.id">
       <div id="product-content">
-        {{ el.name }}
+        {{ product.name }}
       </div>
       <div id="product-option">
-        <a href="">delete</a>
-        <a href="">edit</a>
+        <a class="option-button" @click="deleteProduct(product.id)" >delete</a>
+        <a class="option-button" @click="updateProduct(product.id)">edit</a>
       </div>
     </div>
   </div>
@@ -17,39 +17,34 @@
 export default {
   data: function () {
     return {
-      dummyData: [
-        {
-          name: 'pizza',
-          image_url: 'https://google.com',
-          price: 120000,
-          stock: 3
-        },
-        {
-          name: 'spaghetti',
-          image_url: 'https://google.com',
-          price: 50000,
-          stock: 2
-        },
-        {
-          name: 'buku',
-          image_url: 'https://google.com',
-          price: 12000,
-          stock: 20
-        },
-        {
-          name: 'ayam',
-          image_url: 'https://google.com',
-          price: 13000,
-          stock: 21
-        },
-        {
-          name: 'pisang raja',
-          image_url: 'https://google.com',
-          price: 3000,
-          stock: 8
-        }
-      ]
     }
+  },
+  computed: {
+    products () {
+      return this.$store.state.products
+    }
+  },
+  methods: {
+    updateProduct (id) {
+      console.log('<<<<<<>>>>>> MADSSOOOK')
+      this.$store.dispatch('productDetail', id)
+      this.$router.push({ name: 'UpdateProduct' })
+    },
+    deleteProduct (id) {
+      this.$store.dispatch('deleteProduct', id)
+        .then(result => {
+          console.log('---DELETED---')
+          console.log(result.data)
+          this.$store.dispatch('getProducts')
+          this.$router.push({ name: 'Dashboard' })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  },
+  created: function () {
+    this.$store.dispatch('getProducts')
   }
 }
 </script>
@@ -57,10 +52,12 @@ export default {
 <style>
 #cont3{
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: scroll;
 }
 #product{
   width: 80%;
@@ -82,5 +79,8 @@ export default {
 }
 #product-content{
   width: 80%;
+}
+.option-button:hover{
+  cursor: pointer;
 }
 </style>

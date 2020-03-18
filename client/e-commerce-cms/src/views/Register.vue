@@ -1,0 +1,57 @@
+<template>
+  <div id="containerRegister">
+    <h1>Register</h1>
+    <form @submit.prevent="register" id="registerForm">
+      <input v-model="userReg.name" placeholder="name" type="text" class="form-input">
+      <input v-model="userReg.email" placeholder="email" type="text" class="form-input">
+      <input v-model="userReg.password" placeholder="password" type="text" class="form-input">
+      <input type="submit" class="form-input">
+    </form>
+  </div>
+</template>
+
+<script>
+export default {
+  data: function () {
+    return {
+      userReg: {
+        name: '',
+        email: '',
+        password: '',
+        role: 'admin'
+      }
+    }
+  },
+  methods: {
+    register: function () {
+      this.$store.dispatch('register', this.userReg)
+        .then(result => {
+          this.$router.push({ name: 'Login' })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  }
+}
+</script>
+
+<style>
+#containerRegister{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#registerForm{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.form-input{
+  margin: 5px
+}
+</style>

@@ -19,6 +19,7 @@ export default {
 <style>
 #cont1{
   width: 40%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,9 +27,11 @@ export default {
 }
 #cont2{
   width: 60%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: scroll;
 }
 .button{
   margin: 20px;

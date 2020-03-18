@@ -6,6 +6,7 @@
       <input v-model="password" class="form-login" type="text" placeholder="Password" />
       <input type="submit" value="submit" />
     </form>
+    <router-link to="/register">Doesn't have an account? Register Here</router-link>
   </div>
 </template>
 
@@ -23,7 +24,18 @@ export default {
         email: this.email,
         password: this.password
       }
-      this.$emit('login', loginData)
+      this.$store.dispatch('login', loginData)
+        .then(result => {
+          console.log(result)
+          const token = result.data.token
+          localStorage.setItem('token', token)
+          this.$store.commit('SET_LOGIN', true)
+          this.$router.push({ path: 'products' })
+        })
+        .catch(err => {
+          console.log(err)
+          this.$router.push({ path: 'login' })
+        })
     }
   }
 }

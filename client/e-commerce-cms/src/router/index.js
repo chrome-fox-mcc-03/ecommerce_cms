@@ -5,6 +5,9 @@ import Login from './../views/Login.vue'
 import Dashboard from './../views/Dashboard.vue'
 import ContainerProducts from './../components/ContainerProducts.vue'
 import AddProduct from './../components/AddProduct'
+import Update from './../views/Update.vue'
+import Register from './../views/Register.vue'
+import Store from './../store/index'
 
 Vue.use(VueRouter)
 
@@ -15,12 +18,18 @@ const routes = [
     component: Home
   },
   {
+    path: '/register',
+    name: 'Register',
+    component: Register
+  },
+  {
     path: '/login',
     name: 'Login',
     component: Login
   },
   {
     path: '/products',
+    redirect: { name: 'ContainerProducts' },
     name: 'Dashboard',
     component: Dashboard,
     meta: { requiresAuth: true },
@@ -34,6 +43,11 @@ const routes = [
         path: 'add',
         name: 'AddProduct',
         component: AddProduct
+      },
+      {
+        path: 'update',
+        name: 'UpdateProduct',
+        component: Update
       }
     ]
   },
@@ -54,9 +68,9 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  console.log(Store)
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    const token = localStorage.getItem('token')
-    if (token) {
+    if (Store.state.isLogin) {
       next()
     } else {
       next({
