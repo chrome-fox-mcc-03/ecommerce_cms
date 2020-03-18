@@ -21,35 +21,25 @@
 
 <script>
 import ProductCard from '../components/ProductCard.vue'
-import axios from 'axios'
 export default {
   name: 'UserProducts',
   data () {
     return {
-      products: []
     }
   },
   components: {
     ProductCard
   },
   methods: {
-    fetchProducts () {
-      axios({
-        method: 'GET',
-        url: 'http://pokeapi.salestock.net/api/v2/pokemon/?limit=3&offset=0'
-      })
-        .then(response => {
-          response.data.results.forEach(element => {
-            this.products.push(element)
-          })
-        })
-        .catch(err => {
-          console.log(err)
-        })
+  },
+  computed: {
+    products () {
+      console.log(this.$store.state.products)
+      return this.$store.state.products
     }
   },
   created () {
-    this.fetchProducts()
+    this.$store.dispatch('getProducts')
   }
 }
 </script>

@@ -3,7 +3,7 @@
     <td><img class="uk-preserve-width uk-border-circle"
         :src="product.url" width="45" alt=""></td>
     <td class="uk-text-nowrap">{{ product.name }}</td>
-    <td class="uk-text-truncate">{{  product.url }}</td>
+    <td class="uk-text-truncate">{{  product.description }}</td>
     <td>5</td>
     <td>
       <div class="uk-button-group">
@@ -20,10 +20,11 @@ export default {
     return {
     }
   },
-  props: ['product', 'index'],
   methods: {
+  },
+  props: ['product', 'index'],
+  computed: {
   }
-
 }
 
 </script>

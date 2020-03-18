@@ -1,6 +1,6 @@
 <template>
   <div id="#app">
-    <navbar :isLogin='isLogin'></navbar>
+    <navbar :isLogin='isLogin' @logout="logout"></navbar>
     <user-login @login="login"></user-login>
     <router-view/>
   </div>
@@ -14,7 +14,6 @@ import UserLogin from './components/UserLogin'
 export default {
   data () {
     return {
-      isLogin: false
     }
   },
   methods: {
@@ -33,16 +32,24 @@ export default {
           localStorage.setItem('token', token)
           this.$router.push({ path: 'products' })
           UIkit.offcanvas('#login-canvas').hide()
-          this.isLogin = true
+          this.$store.commit('SET_ISLOGIN', true)
         })
         .catch(err => {
           console.log(err)
         })
+    },
+    logout () {
+      this.$store.commit('SET_ISLOGIN', false)
     }
   },
   components: {
     Navbar,
     UserLogin
+  },
+  computed: {
+    isLogin () {
+      return this.$store.state.isLogin
+    }
   }
 }
 </script>

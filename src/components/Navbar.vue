@@ -15,11 +15,16 @@ export default {
   },
   methods: {
     logout () {
-      localStorage.removeItem('token')
+      localStorage.clear()
       this.$router.push({ path: '/' })
+      this.$emit('logout')
     }
   },
-  props: ['isLogin'],
+  computed: {
+    isLogin () {
+      return this.$store.state.isLogin
+    }
+  },
   created () {
   }
 }
@@ -37,6 +42,17 @@ export default {
     color: white;
     height: 40px
   }
+
+  button.uk-button.uk-button-default:focus{
+    color: white;
+    background-color: #1b262c;
+  }
+
+  button.uk-button.uk-button-default:focus:hover{
+    background-color: white;
+    color: #1b262c;
+  }
+
   .uk-button:hover{
     background-color: white;
     color: #1b262c;

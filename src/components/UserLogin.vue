@@ -22,7 +22,6 @@
 </template>
 
 <script>
-// import UIkit from 'uikit'
 export default {
   name: 'UserLogin',
   data () {
@@ -38,6 +37,8 @@ export default {
         password: this.loginPassword
       }
       this.$emit('login', data)
+      this.loginEmail = ''
+      this.loginPassword = ''
     }
   }
 }

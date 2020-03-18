@@ -31,32 +31,22 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 export default {
   data () {
     return {
-      product: {},
+      product: {
+        stock: 0,
+        name: '',
+        description: '',
+        price: 0
+      },
       id: this.$route.params.id
     }
   },
   methods: {
-    getProductData () {
-      axios({
-        method: 'GET',
-        url: `https://pokeapi.co/api/v2/pokemon/${this.id}`
-      })
-        .then(response => {
-          this.product.id = response.data.id
-          this.product.name = response.data.name
-        })
-        .catch(err => [
-          console.log(err)
-        ])
-    }
   },
   created () {
-    this.getProductData()
-    console.log(this.product)
   }
 }
 </script>
