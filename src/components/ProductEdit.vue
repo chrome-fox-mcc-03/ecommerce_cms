@@ -7,19 +7,19 @@
 
         <div class="uk-margin">
           <div class="uk-margin">
-            <input class="uk-input uk-form-width-large" type="text" :value="this.product.name">
+            <input class="uk-input uk-form-width-large" type="text" v-model="product.name" placeholder="Product Name">
           </div>
           <div class="uk-margin">
-            <textarea class="uk-input uk-form-width-large" type="text" rows="5" :value="this.product.id"></textarea>
+            <textarea class="uk-input uk-form-width-large" type="text" rows="5" v-model="product.description" placeholder="Product Description"></textarea>
           </div>
           <div class="uk-margin">
-            <input class="uk-input uk-form-width-large" type="text" placeholder="Product Stock">
+            <input class="uk-input uk-form-width-large" type="text" v-model="product.stock" placeholder="Product Stock">
           </div>
           <div class="uk-margin">
-            <input class="uk-input uk-form-width-large" type="text" placeholder="Product Price">
+            <input class="uk-input uk-form-width-large" type="text" v-model="product.price" placeholder="Product Price">
           </div>
           <div class="uk-margin">
-            <input class="uk-input uk-form-width-large" type="text" placeholder="Product Image">
+            <input class="uk-input uk-form-width-large" type="text" v-model="product.image_url" placeholder="Product Image">
           </div>
           <div class="uk-margin">
             <button class="uk-button uk-button-primary">Submit</button>
@@ -39,14 +39,26 @@ export default {
         stock: 0,
         name: '',
         description: '',
-        price: 0
-      },
-      id: this.$route.params.id
+        price: 0,
+        iamge_url: ''
+      }
     }
   },
   methods: {
   },
   created () {
+    this.$store.dispatch('getProductData', this.$route.params.id)
+      .then(({ data: { response } }) => {
+        console.log(response)
+        this.product.stock = response.stock
+        this.product.name = response.name
+        this.product.description = response.description
+        this.product.price = response.price
+        this.product.image_url = response.image_url
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 }
 </script>

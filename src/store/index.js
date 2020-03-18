@@ -23,7 +23,7 @@ export default new Vuex.Store({
   },
   getters: {},
   actions: {
-    getProducts (context, payload) {
+    getProducts (context) {
       context.commit('SET_ISLOADING', true)
       axios({
         method: 'GET',
@@ -42,20 +42,14 @@ export default new Vuex.Store({
           context.commit('SET_ISLOADING', false)
         })
     },
-    getProductData (id) {
-      axios({
+    getProductData (_, id) {
+      return axios({
         method: 'GET',
         url: `http://localhost:3000/products/${id}`,
         headers: {
           token: localStorage.getItem('token')
         }
       })
-        .then(response => {
-          console.log(response);
-        })
-        .catch(err => [
-          console.log(err.response)
-        ])
     }
   }
 })

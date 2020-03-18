@@ -4,10 +4,10 @@
         :src="product.url" width="45" alt=""></td>
     <td class="uk-text-nowrap">{{ product.name }}</td>
     <td class="uk-text-truncate">{{  product.description }}</td>
-    <td>5</td>
+    <td class="uk-text-nowrap">{{ product.stock }}</td>
     <td>
       <div class="uk-button-group">
-        <router-link class="uk-button uk-button-primary" :to="`/products/edit/${index}`">Edit</router-link>
+        <router-link class="uk-button uk-button-primary" :to="`/products/edit/${index+1}`">Edit</router-link>
         <button @click.prevent class="uk-button uk-button-danger">Delete</button>
       </div>
     </td>
