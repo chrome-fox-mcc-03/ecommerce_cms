@@ -3,34 +3,32 @@
     <form class="mt-5">
     <div class="form-group">
       Email
-      <input v-model="logEmail" type="email" class="form-control" placeholder="Enter email">
+      <input v-model="email" type="email" class="form-control" placeholder="Enter email">
     </div>
     <div class="form-group">
       Password
-      <input v-model="logPass" type="password" class="form-control" placeholder="Enter password">
+      <input v-model="password" type="password" class="form-control" placeholder="Enter password">
     </div>
-    <input @click.prevent="login" type="submit" class="btn btn-success" value="Login">
+    <input @click.prevent="$store.dispatch('login', {email, password})" type="submit" class="btn btn-success" value="Login">
     <small class="form-text text-danger">Error here</small>
     </form>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
-  methods: {
-    login () {
-      console.log(this.logEmail, 'login', this.logPass)
-      console.log(this.$parent.appName)
-      // if success
-      localStorage.setItem(this.$parent.appName, JSON.stringify({ token: 'token' }))
-      this.$router.push({ name: 'Dashboard' })
-    }
-  },
   data () {
     return {
-      logEmail: '',
-      logPass: ''
+      email: '',
+      password: ''
     }
+  },
+  methods: {
+    ...mapActions({
+      login: 'login'
+    })
   }
 }
 </script>

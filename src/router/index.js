@@ -52,14 +52,6 @@ const routes = [
     }
   },
   {
-    path: '/logout',
-    name: 'Logout',
-    component: () => import(/* webpackChunkName: "login" */ '../views/Logout.vue'),
-    meta: {
-      requiresAuth: true
-    }
-  },
-  {
     path: '/about',
     name: 'About',
     // route level code-splitting
@@ -78,8 +70,10 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     console.log('logout/dashboard : ngecek credential')
-    if (localStorage.getItem('cms_client')) {
-      const { token } = JSON.parse(localStorage.getItem('cms_client'))
+    const storage = JSON.parse(localStorage.getItem('cms_client'))
+    console.log(storage)
+    if (storage) {
+      const { token } = storage
       if (token) {
         next()
       } else {

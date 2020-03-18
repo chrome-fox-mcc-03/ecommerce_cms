@@ -21,13 +21,29 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
+  name: 'CreateProductItemForm',
   data () {
     return {
       newProdName: '',
       newProdPrice: '',
       newProdStock: ''
     }
+  },
+  methods: {
+    create () {
+      console.log('massoooook')
+      const payload = {
+        name: this.newProdName,
+        price: this.newProdPrice,
+        stock: this.newProdStock
+      }
+      this.createNew(payload)
+    },
+    ...mapActions({
+      createNew: 'createNew'
+    })
   }
 }
 </script>

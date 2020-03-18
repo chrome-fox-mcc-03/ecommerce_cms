@@ -14,34 +14,14 @@
     </div>
     <div class="col-md-9">
       <div class="container m-1 bg-light">
-        <router-view :products="products"></router-view>
+        <router-view></router-view>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+
 export default {
-  data () {
-    return {
-      products: []
-    }
-  },
-  methods: {
-    fetchProducts () {
-      // from db then get items
-      const items = [
-        { id: 1, name: 'product01', price: '0', stock: '0', UserId: 1 },
-        { id: 2, name: 'product02', price: '0', stock: '0', UserId: 1 },
-        { id: 3, name: 'product03', price: '0', stock: '0', UserId: 1 }
-      ]
-      items.forEach(item => {
-        this.products.push(item)
-      })
-    }
-  },
-  created () {
-    this.fetchProducts()
-  }
 }
 </script>
