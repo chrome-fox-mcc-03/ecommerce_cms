@@ -6,11 +6,19 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    isLogin: false
+    isLogin: false,
+    product: {},
+    errorMessage: ''
   },
   mutations: {
-    SET_IS_LOGIN  (state, payload) {
+    SET_IS_LOGIN (state, payload) {
       state.isLogin = payload
+    },
+    SET_PRODUCT (state, payload) {
+      state.product = payload
+    },
+    SET_ERROR_MESSAGE (state, payload) {
+      state.errorMessage = payload
     }
   },
   actions: {
@@ -36,6 +44,31 @@ export default new Vuex.Store({
           access_token: localStorage.access_token
         }
       })
+    },
+    addProduct (context, payload) {
+      return axios({
+        url: 'http://localhost:3000/products',
+        method: 'POST',
+        data: payload,
+        headers: {
+          access_token: localStorage.access_token
+        }
+      })
+    },
+    fetchOneProduct (context, productId) {
+      axios({
+        url: 'http://localhost:3000/product/' + productId,
+        method: 'GET',
+        headers: {
+          access_token: localStorage.access_token
+        }
+      })
+        .then(({ data }) => {
+          context.commit('SET_PRODUCT', data)
+        })
+        .catch(err => {
+          context.commit('SET_ERROR_MESSAGE', err.response)
+        })
     }
   },
   modules: {

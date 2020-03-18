@@ -1,25 +1,25 @@
 <template>
   <div class="board-addproduct">
     <div class="up">
-      <h2>Add Product</h2>
+      <h2>Edit Product</h2>
     </div>
     <div class="down">
       <div class="form-add">
         <a class="title">Sweat<span>Al</span>er<span>t</span>.Inc</a>
         <p>Add Product</p>
-        <form @submit.prevent="addProduct">
+        <form @submit.prevent="editProduct">
             <label for="name">Name</label>
-            <input type="text" class="form-control" v-model="name">
+            <input type="text" class="form-control" v-model="product.name">
             <label for="image-url">Image URL</label>
-            <input type="text" class="form-control" v-model="image_url" placeholder="paste image address from internet in here">
+            <input type="text" class="form-control" v-model="product.image_url" placeholder="paste image address from internet in here">
             <label for="description">Description</label>
-            <input type="text" class="form-control" v-model="description">
+            <input type="text" class="form-control" v-model="product.description">
             <label for="category">Category ID</label>
-            <input type="number" class="form-control" v-model="CategoryId">
+            <input type="number" class="form-control" v-model="product.CategoryId">
             <label for="price">Price</label>
-            <input type="number" class="form-control" v-model="price">
+            <input type="number" class="form-control" v-model="product.price">
             <label for="stock">Stock</label>
-            <input type="number" class="form-control" v-model="stock">
+            <input type="number" class="form-control" v-model="product.stock">
             <br>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
@@ -27,28 +27,28 @@
       <div class="mirror-new-product">
         <div class="card">
           <div class="product-image">
-            <img :src="image_url">
+            <img :src="product.image_url">
           </div>
           <div class="details">
             <div class="attribute">
               <h5>Name</h5>
-              <p>{{name}}</p>
+              <p>{{product.name}}</p>
             </div>
             <div class="attribute">
               <h5>Description</h5>
-              <p>{{description}}</p>
+              <p>{{product.description}}</p>
             </div>
             <div class="attribute">
               <h5>Category</h5>
-              <p>{{CategoryId}}</p>
+              <p>{{product.CategoryId}}</p>
             </div>
             <div class="attribute">
               <h5>Price</h5>
-              <p>Rp. {{price}}</p>
+              <p>Rp. {{product.price}}</p>
             </div>
             <div class="attribute">
               <h5>Stock</h5>
-              <p>{{stock}}</p>
+              <p>{{product.stock}}</p>
             </div>
           </div>
         </div>
@@ -59,19 +59,24 @@
 
 <script>
 export default {
-  name: 'FormAdd',
+  name: 'FormEdit',
   data () {
     return {
-      name: '',
-      image_url: '',
-      description: '',
-      CategoryId: null,
-      price: null,
-      stock: null
+      // name: '',
+      // image_url: '',
+      // description: '',
+      // CategoryId: null,
+      // price: null,
+      // stock: null
+    }
+  },
+  computed: {
+    product() {
+      return this.$store.state.product
     }
   },
   methods: {
-    addProduct () {
+    editProduct () {
       const payload = {
         name: this.name,
         image_url: this.image_url,

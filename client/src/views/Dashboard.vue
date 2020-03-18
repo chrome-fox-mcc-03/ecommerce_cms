@@ -13,8 +13,8 @@
         <div class="navigation-chart">
           <h5>Chart</h5>
           <ul>
-            <li @click="moveCartPrice">Price</li>
-            <li @click="moveCartStock">Stock</li>
+            <li>Price</li>
+            <li>Stock</li>
           </ul>
         </div>
       </div>
@@ -64,6 +64,8 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    /* align-items: center; */
+    padding: 0;
   }
 
   h5 {

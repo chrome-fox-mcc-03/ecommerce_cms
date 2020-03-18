@@ -27,7 +27,7 @@
           <th class="text-right">{{ product.price }}</th>
           <th class="text-right">{{ product.stock }}</th>
           <th class="text-center">
-            <a class="edit"><i class="far fa-edit"></i></a>  |  <a class="delete"><i class="far fa-trash-alt"></i></a>
+            <a class="edit" @click="showFormEditProduct(product.id)"><i class="far fa-edit"></i></a>  |  <a class="delete"><i class="far fa-trash-alt"></i></a>
           </th>
         </tr>
       </tbody>
@@ -51,6 +51,11 @@ export default {
       .catch(err => {
         console.log(err.response)
       })
+  },
+  methods: {
+    showFormEditProduct (productId) {
+      this.$store.dispatch('fetchOneProduct', productId)
+    }
   }
 }
 </script>
