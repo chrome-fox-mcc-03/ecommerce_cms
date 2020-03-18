@@ -8,38 +8,18 @@
 
 <script>
 import ProductItem from '../components/ProductItem'
-import axios from 'axios'
 export default {
   name: 'ProductGetPage',
-  data () {
-    return {
-      items: [],
-      token: localStorage.getItem('token')
-    }
-  },
   components: {
     ProductItem
   },
-  methods: {
-    getItem () {
-      axios({
-        method: 'GET',
-        url: 'http://localhost:3000/product',
-        headers: {
-          token: this.token
-        }
-      })
-        .then((result) => {
-          console.log(result.data.result)
-          this.items = result.data.result
-        }).catch((err) => {
-          console.log(err)
-        })
+  computed: {
+    items () {
+      return this.$store.state.items
     }
   },
   created () {
-    this.token = localStorage.getItem('token')
-    this.getItem()
+    this.$store.dispatch('getProduct')
   }
 }
 </script>

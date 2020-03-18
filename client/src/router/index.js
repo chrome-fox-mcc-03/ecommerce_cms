@@ -30,7 +30,6 @@ const routes = [
   },
   {
     path: '/product',
-    name: 'ProductPage',
     component: ProductPage,
     children: [
       {
@@ -44,7 +43,7 @@ const routes = [
         component: ProductAddPage
       },
       {
-        path: 'edit',
+        path: 'edit/:id',
         name: 'ProductEditPage',
         component: ProductEditPage
       }

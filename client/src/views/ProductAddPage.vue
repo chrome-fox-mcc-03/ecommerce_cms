@@ -27,15 +27,13 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   data () {
     return {
       name: '',
       image: '',
       price: '',
-      stock: '',
-      token: localStorage.getItem('token')
+      stock: ''
     }
   },
   methods: {
@@ -44,18 +42,11 @@ export default {
       const image = this.image
       const price = this.price
       const stock = this.stock
-      axios({
-        method: 'POST',
-        url: 'http://localhost:3000/product',
-        data: {
-          name,
-          image_url: image,
-          price,
-          stock
-        },
-        headers: {
-          token: this.token
-        }
+      this.$store.dispatch('addProduct', {
+        name,
+        image,
+        price,
+        stock
       })
         .then((result) => {
           this.$router.push('/product')

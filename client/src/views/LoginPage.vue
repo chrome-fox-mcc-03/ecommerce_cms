@@ -20,12 +20,12 @@
       </div>
     </div>
   </div>
+  {{getCountFromState}}
 </div>
 </template>
 
 <script>
 import Navbar from '../components/Navbar'
-import axios from 'axios'
 export default {
   data () {
     return {
@@ -40,22 +40,21 @@ export default {
     login () {
       const email = this.email
       const password = this.password
-      axios({
-        method: 'POST',
-        url: 'http://localhost:3000/login',
-        data: {
-          email,
-          password
-        }
+      this.$store.dispatch('login', {
+        email,
+        password
       })
         .then((result) => {
-          const { token } = result.data
-          localStorage.setItem('token', token)
+          localStorage.setItem('token', result.data.token)
           this.$router.push('/dashboard')
-        })
-        .catch((err) => {
+        }).catch((err) => {
           console.log(err)
         })
+    }
+  },
+  computed: {
+    getCountFromState () {
+      return this.$store.state.count
     }
   }
 }
