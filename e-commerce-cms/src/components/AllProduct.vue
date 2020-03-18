@@ -1,7 +1,7 @@
 <template>
 <div class="container">
 <div class="row mt-5">
-  <router-link v-for="product in products" :key="product.id" :to="`/dashboard/edit/${product.id}`" class="card col-12 col-lg-6 mb-3 mr-auto shadow-sm" style="max-width: 540px;">
+  <div v-for="product in products" :key="product.id" class="card col-12 col-lg-6 mb-3 mr-auto shadow-sm" style="max-width: 540px;">
     <div class="row no-gutters">
       <div class="col-md-4">
         <img src="https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081" class="card-img" alt="image">
@@ -10,11 +10,17 @@
         <div class="card-body">
           <h5 class="card-title">{{ product.name }}</h5>
           <p class="card-text">Price: {{ product.price }}</p>
-          <p class="card-text">Stock: {{ product.stock }}</p>
+          <div class="d-flex">
+            <p class="card-text mr-auto">Stock: {{ product.stock }}</p>
+            <div>
+              <router-link :to="`/dashboard/edit/${product.id}`"><i class="mr-3 fas fa-pen-square fa-2x"></i></router-link>
+              <i class="fas fa-trash fa-2x"></i>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </router-link>
+  </div>
 </div>
 </div>
 </template>
@@ -39,5 +45,8 @@ export default {
 <style>
 .clickable-div {
   text-decoration: none;
+}
+.fa-trash {
+  color: rgb(195, 28, 28);
 }
 </style>

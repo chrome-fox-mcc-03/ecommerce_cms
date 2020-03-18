@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <form class="mt-5 form-space">
+  <div class="container form-space">
+    <form class="mt-5">
     <h2 class="mb-5">Add New Product</h2>
     <div class="form-group">
       <label for="product-name">Name</label>

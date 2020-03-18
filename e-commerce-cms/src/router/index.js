@@ -18,6 +18,9 @@ const routes = [
     path: '/dashboard',
     name: 'DashboardPage',
     component: DashboardPage,
+    meta: {
+      requiresAuth: true
+    },
     redirect: {
       name: 'AllProduct'
     },
@@ -45,6 +48,21 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    const token = localStorage.getItem('token')
+    if (token) {
+      next()
+    } else {
+      next({
+        path: '/'
+      })
+    }
+  } else {
+    next()
+  }
 })
 
 export default router
