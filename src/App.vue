@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import UIkit from 'uikit'
 import Navbar from './components/Navbar'
 import UserLogin from './components/UserLogin'
@@ -19,20 +18,16 @@ export default {
   },
   methods: {
     login (data) {
-      const { email, password } = data
-      axios({
-        method: 'POST',
-        url: 'http://localhost:3000/login',
-        data: {
-          email,
-          password
-        }
-      })
+      const payload = {
+        email: data.email,
+        password: data.password
+      }
+      this.$store.dispatch('login', payload)
         .then(response => {
-          const token = response.data.token
-          this.$store.commit('SET_ISLOGIN', true)
-          localStorage.setItem('token', token)
+          console.log(response)
+          localStorage.setItem('token', response.data.token)
           this.$router.push({ path: 'products' })
+          this.$store.commit('SET_ISLOGIN', true)
           UIkit.offcanvas('#login-canvas').hide()
         })
         .catch(err => {

@@ -12,6 +12,7 @@
         <button @click.prevent class="uk-button uk-button-danger">Delete</button>
       </div>
     </td>
+    <img :src="product.url" alt="" srcset="">
   </tr>
 </template>
 
