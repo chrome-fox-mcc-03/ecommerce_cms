@@ -29,10 +29,23 @@ export default {
     deleteProduct (id) {
       this.$store.dispatch('deleteProduct', id)
         .then((result) => {
-          // this.$emit('getItem')
+          this.$notify({
+            group: 'foo',
+            title: 'Hello',
+            text: 'Success Delete'
+          })
           this.$store.dispatch('getProduct')
         }).catch((err) => {
           console.log(err)
+          this.$notify({
+            group: 'foo',
+            title: 'Hello',
+            text: err.response.data.message,
+            type: 'error'
+          })
+        })
+        .finally(() => {
+          this.$store.commit('SET_ISLOADING', false)
         })
     },
     gotoEditPage () {

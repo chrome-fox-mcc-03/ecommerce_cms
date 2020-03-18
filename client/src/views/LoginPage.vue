@@ -45,10 +45,20 @@ export default {
         password
       })
         .then((result) => {
+          this.$notify({
+            group: 'foo',
+            title: 'Hello',
+            text: 'Login Success!'
+          })
           localStorage.setItem('token', result.data.token)
           this.$router.push('/dashboard')
         }).catch((err) => {
-          console.log(err)
+          this.$notify({
+            group: 'foo',
+            title: 'Hello',
+            text: err.response.data.message,
+            type: 'error'
+          })
         })
     }
   },

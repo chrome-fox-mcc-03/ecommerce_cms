@@ -49,9 +49,22 @@ export default {
         stock
       })
         .then((result) => {
+          this.$notify({
+            group: 'foo',
+            title: 'Hello',
+            text: 'Success Add Product'
+          })
           this.$router.push('/product')
         }).catch((err) => {
-          console.log(err)
+          this.$notify({
+            group: 'foo',
+            title: 'Hello',
+            text: err.response.data.message,
+            type: 'error'
+          })
+        })
+        .finally(() => {
+          this.$store.commit('SET_ISLOADING', false)
         })
     }
   }

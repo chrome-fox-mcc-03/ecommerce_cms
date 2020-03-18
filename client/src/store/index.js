@@ -5,11 +5,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    items: []
+    items: [],
+    isLoading: false
   },
   mutations: {
     SET_ITEMS (state, payload) {
       state.items = payload
+    },
+    SET_ISLOADING (state, payload) {
+      state.isLoading = payload
     }
   },
   actions: {
@@ -25,6 +29,7 @@ export default new Vuex.Store({
       })
     },
     getProduct ({ commit }, payload) {
+      commit('SET_ISLOADING', true)
       const token = localStorage.getItem('token')
       axios({
         method: 'GET',
@@ -35,11 +40,16 @@ export default new Vuex.Store({
       })
         .then((result) => {
           commit('SET_ITEMS', result.data.result)
-        }).catch((err) => {
+        })
+        .catch((err) => {
           console.log(err)
+        })
+        .finally(() => {
+          commit('SET_ISLOADING', false)
         })
     },
     addProduct ({ commit }, payload) {
+      commit('SET_ISLOADING', true)
       const { name, image, price, stock } = payload
       return axios({
         method: 'POST',
@@ -56,12 +66,14 @@ export default new Vuex.Store({
       })
     },
     getProductEdit ({ state, commit, dispatch }, payload) {
+      commit('SET_ISLOADING', true)
       return axios({
         method: 'GET',
         url: `http://localhost:3000/product/${payload}`
       })
     },
     editProduct ({ commit }, payload) {
+      commit('SET_ISLOADING', true)
       const { id, name, image, price, stock } = payload
       console.log(id)
       return axios({
@@ -79,6 +91,7 @@ export default new Vuex.Store({
       })
     },
     deleteProduct ({ commit }, payload) {
+      commit('SET_ISLOADING', true)
       return axios({
         method: 'DELETE',
         url: `http://localhost:3000/product/${payload}`,

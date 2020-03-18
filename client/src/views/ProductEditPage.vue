@@ -51,9 +51,22 @@ export default {
         stock
       })
         .then((result) => {
+          this.$notify({
+            group: 'foo',
+            title: 'Hello',
+            text: 'Success Edit Product'
+          })
           this.$router.push('/product')
         }).catch((err) => {
-          console.log(err)
+          this.$notify({
+            group: 'foo',
+            title: 'Hello',
+            text: err.response.data.message,
+            type: 'error'
+          })
+        })
+        .finally(() => {
+          this.$store.commit('SET_ISLOADING', false)
         })
     }
   },
@@ -68,6 +81,13 @@ export default {
         this.stock = stock
       }).catch((err) => {
         console.log(err)
+      })
+      .finally(() => {
+        this.$notify({
+          group: 'foo',
+          clean: true
+        })
+        this.$store.commit('SET_ISLOADING', false)
       })
   }
 }
