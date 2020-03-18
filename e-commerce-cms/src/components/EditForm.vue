@@ -1,6 +1,6 @@
 <template>
   <div class="container form-space">
-    <form class="mt-5">
+    <form @submit.prevent="updateProduct" class="mt-5">
     <h2 class="mb-5">Edit Product</h2>
     <div class="form-group">
       <label for="product-name">Name</label>
@@ -32,6 +32,24 @@ export default {
       price: '',
       stock: '',
       image_url: ''
+    }
+  },
+  methods: {
+    updateProduct: function () {
+      this.$store.dispatch('updateProduct', {
+        name: this.name,
+        price: this.price,
+        stock: this.stock,
+        image_url: this.image_url,
+        id: this.$route.params.id
+      })
+        .then(({ data }) => {
+          console.log('updated successfully', data)
+          this.$router.push('/dashboard')
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   },
   created () {

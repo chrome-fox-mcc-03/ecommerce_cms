@@ -12,9 +12,9 @@
           <p class="card-text">Price: {{ product.price }}</p>
           <div class="d-flex">
             <p class="card-text mr-auto">Stock: {{ product.stock }}</p>
-            <div>
-              <i class="mr-3 fas fa-pen-square fa-2x" @click="redirToEditPage(product.id)"></i>
-              <i class="fas fa-trash fa-2x"></i>
+            <div class="d-flex">
+              <div @click="redirToEditPage(product.id)"><i class="mr-3 fas fa-pen-square fa-2x clickable-div"></i></div>
+              <div @click="deleteProduct(product.id)"><i class="fas fa-trash fa-2x clickable-div"></i></div>
             </div>
           </div>
         </div>
@@ -31,6 +31,10 @@ export default {
   methods: {
     redirToEditPage: function (id) {
       this.$router.push(`/dashboard/edit/${id}`)
+    },
+    deleteProduct: function (id) {
+      this.$store.dispatch('deleteProduct', id)
+      this.$store.dispatch('fetchProducts')
     }
   },
   computed: {
@@ -47,6 +51,10 @@ export default {
 <style>
 .clickable-div {
   text-decoration: none;
+  cursor: pointer;
+}
+.clickable-div:hover {
+  color: teal;
 }
 .fa-trash {
   color: rgb(195, 28, 28);

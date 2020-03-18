@@ -4,19 +4,19 @@
     <h2 class="mb-5">Add New Product</h2>
     <div class="form-group">
       <label for="product-name">Name</label>
-      <input v-model="name" type="text" class="form-control" id="product-name" aria-describedby="emailHelp">
+      <input v-model="name" type="text" class="form-control" id="product-name" aria-describedby="emailHelp" placeholder="ex: Onitsuka Tiger Black">
     </div>
     <div class="form-group">
       <label for="product-price">Price</label>
-      <input v-model="price" type="text" class="form-control" id="product-price">
+      <input v-model="price" type="text" class="form-control" id="product-price" placeholder="ex: 650000">
     </div>
     <div class="form-group">
       <label for="product-stock">Stock</label>
-      <input v-model="stock" type="text" class="form-control" id="product-stock">
+      <input v-model="stock" type="text" class="form-control" id="product-stock" placeholder="ex: 50">
     </div>
     <div class="form-group">
       <label for="product-image">Image</label>
-      <input v-model="image_url" type="text" class="form-control" id="product-image">
+      <input v-model="image_url" type="text" class="form-control" id="product-image" placeholder="Place your image url here">
     </div>
     <button type="submit" class="btn btn-primary">Add</button>
   </form>

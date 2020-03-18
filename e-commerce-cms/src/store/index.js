@@ -71,6 +71,31 @@ export default new Vuex.Store({
           token: localStorage.getItem('token')
         }
       })
+    },
+    updateProduct (context, payload) {
+      console.log('update ----', payload)
+      return axios({
+        method: 'put',
+        url: `http://localhost:3000/products/${payload.id}`,
+        headers: {
+          token: localStorage.getItem('token')
+        },
+        data: {
+          name: payload.name,
+          image_url: payload.image_url,
+          price: payload.price,
+          stock: payload.stock
+        }
+      })
+    },
+    deleteProduct (context, id) {
+      return axios({
+        method: 'delete',
+        url: `http://localhost:3000/products/${id}`,
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      })
     }
   }
 })
