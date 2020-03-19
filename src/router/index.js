@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import store from '../store/index'
+import ProductList from '../views/ProductList'
+import AddProduct from '../views/AddProduct'
 
 Vue.use(VueRouter)
 function isAuthenticated (to, from, next) {
@@ -18,9 +20,28 @@ function isAuthenticated (to, from, next) {
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    redirect: '/dashboard'
+  },
+  {
+    path: '/dashboard',
     component: Home,
-    beforeEnter: isAuthenticated
+    beforeEnter: isAuthenticated,
+    children: [
+      {
+        path: '',
+        redirect: 'product'
+      },
+      {
+        path: 'product',
+        name: 'ProductList',
+        component: ProductList
+      },
+      {
+        path: 'addproduct',
+        name: 'AddProduct',
+        component: AddProduct
+      }
+    ]
   },
   {
     path: '/login',

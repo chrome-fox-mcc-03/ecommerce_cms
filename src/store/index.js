@@ -16,7 +16,8 @@ const store = new Vuex.Store({
       name: '',
       email: '',
       role: ''
-    }
+    },
+    products: []
   },
   mutations: {
     LOGIN (state, data) {
@@ -32,15 +33,19 @@ const store = new Vuex.Store({
         role: ''
       }
       localStorage.clear()
+    },
+    SET_PRODUCTS (state, data) {
+      state.products = data
     }
   },
   actions: {
     login ({ commit }, data) {
       return new Promise((resolve, reject) => {
         client.post('/login', data)
-          .then(response => {
-            localStorage.setItem('access_token', response.data.access_token)
-            commit('LOGIN', response.data)
+          .then(({ data }) => {
+            console.log(data)
+            localStorage.setItem('access_token', data.access_token)
+            commit('LOGIN', data)
             resolve('/')
           })
           .catch(err => {
@@ -53,6 +58,20 @@ const store = new Vuex.Store({
         commit('LOGOUT')
         resolve('/login')
       })
+    },
+    getProducts ({ commit, state }) {
+      client.get('/products', {
+        headers: {
+          access_token: state.access_token
+        }
+      })
+        .then(({ data }) => {
+          console.log(data)
+          commit('SET_PRODUCTS', data.products)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   },
   getters: {

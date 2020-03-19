@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Login to your account</h1>
+    <h1 class="display-4">Login to your account</h1>
     <form @submit.prevent="submitLogin">
       <div class="form-group">
         <label>Email address</label>
@@ -20,7 +20,6 @@ export default {
   name: 'Login',
   data () {
     return {
-      name: '',
       email: '',
       password: ''
     }
