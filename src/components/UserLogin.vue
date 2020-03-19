@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import UIkit from 'uikit'
 export default {
   name: 'UserLogin',
   data () {
@@ -32,13 +33,33 @@ export default {
   },
   methods: {
     login () {
-      const data = {
+      const payload = {
         email: this.loginEmail,
         password: this.loginPassword
       }
-      this.$emit('login', data)
-      this.loginEmail = ''
-      this.loginPassword = ''
+      this.$store.dispatch('login', payload)
+        .then(response => {
+          localStorage.setItem('token', response.data.token)
+          this.$router.push({ path: 'products' })
+          this.$store.commit('SET_ISLOGIN', true)
+          UIkit.offcanvas('#login-canvas').hide()
+          UIkit.notification({
+            message: `Welcome back ${response.data.fullname}`,
+            status: 'primary',
+            pos: 'top-right',
+            timeout: 1500
+          })
+          this.loginEmail = ''
+          this.loginPassword = ''
+        })
+        .catch(err => {
+          UIkit.notification({
+            message: `${err.response.data.message}`,
+            status: 'danger',
+            pos: 'top-right',
+            timeout: 1500
+          })
+        })
     }
   }
 }

@@ -24,6 +24,8 @@ export default {
   flex-direction: column;
   height: calc(100vh - 40px);
   width: 100vw;
+  /* overflow: scroll; */
+  /* overflow-x: hidden; */
 }
 
 .admin-navigation{
@@ -49,8 +51,8 @@ export default {
   min-width: 85%;
   margin-left: 0.5%;
   border: gray 1px solid;
-  min-height: 85%;
-  overflow: hidden;
+  /* min-height: 85%; */
+  overflow-x: hidden;
 }
 
 .admin-display .product-card{

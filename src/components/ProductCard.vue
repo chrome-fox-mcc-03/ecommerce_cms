@@ -4,7 +4,7 @@
         :src="product.image_url" width="45"></td>
     <td class="uk-text-nowrap">{{ product.name }}</td>
     <td class="uk-text-truncate">{{  product.description }}</td>
-    <td class="uk-text-truncate">{{  product.price }}</td>
+    <td class="uk-text-truncate"> {{ priceRupiah }} </td>
     <td class="uk-text-nowrap">{{ product.stock }}</td>
     <td>
       <div class="uk-button-group">
@@ -20,6 +20,7 @@
 export default {
   data () {
     return {
+      priceRupiah: ''
     }
   },
   methods: {
@@ -35,6 +36,15 @@ export default {
   },
   props: ['product', 'id'],
   computed: {
+    getRupiah () {
+      let rupiah = ''
+      const pricerev = this.product.price.toString().split('').reverse().join('')
+      for (let i = 0; i < pricerev.length; i++) if (i % 3 === 0) rupiah += pricerev.substr(i, 3) + '.'
+      return 'Rp. ' + rupiah.split('', rupiah.length - 1).reverse().join('')
+    }
+  },
+  created () {
+    this.priceRupiah = this.getRupiah
   }
 }
 
