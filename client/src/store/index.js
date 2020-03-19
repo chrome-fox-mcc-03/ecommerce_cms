@@ -64,13 +64,31 @@ export default new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          console.log(data)
           context.commit('SET_PRODUCT', data)
         })
         .catch(err => {
           console.log(err)
           context.commit('SET_ERROR_MESSAGE', err.response)
         })
+    },
+    editProduct (context, payload) {
+      return axios({
+        url: 'http://localhost:3000/products/' + payload.productId,
+        method: 'PUT',
+        data: payload.payload,
+        headers: {
+          access_token: localStorage.access_token
+        }
+      })
+    },
+    deleteProduct (context, productId) {
+      return axios({
+        url: 'http://localhost:3000/products/' + productId,
+        method: 'DELETE',
+        headers: {
+          access_token: localStorage.access_token
+        }
+      })
     }
   },
   modules: {

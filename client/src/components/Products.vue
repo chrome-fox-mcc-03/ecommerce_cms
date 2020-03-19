@@ -27,7 +27,7 @@
           <th class="text-right">{{ product.price }}</th>
           <th class="text-right">{{ product.stock }}</th>
           <th class="text-center">
-            <a class="edit" @click="showFormEditProduct(product.id)"><i class="far fa-edit"></i></a>  |  <a class="delete"><i class="far fa-trash-alt"></i></a>
+            <a class="edit" @click="showFormEditProduct(product.id)"><i class="far fa-edit"></i></a>  |  <a class="delete" @click="deleteProduct(product.id)"><i class="far fa-trash-alt"></i></a>
           </th>
         </tr>
       </tbody>
@@ -44,18 +44,29 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('fetchProducts')
-      .then(({ data }) => {
-        this.products = data
-      })
-      .catch(err => {
-        console.log(err.response)
-      })
+    this.fetchproducts()
   },
   methods: {
+    fetchproducts () {
+      this.$store.dispatch('fetchProducts')
+        .then(({ data }) => {
+          this.products = data
+        })
+        .catch(err => {
+          console.log(err.response)
+        })
+    },
     showFormEditProduct (productId) {
       this.$router.push(`/dashboard/editproduct/${productId}`)
-      //
+    },
+    deleteProduct (productId) {
+      this.$store.dispatch('deleteProduct', productId)
+        .then(({ data }) => {
+          this.fetchproducts()
+        })
+        .catch(err => {
+          console.log(err.response)
+        })
     }
   }
 }

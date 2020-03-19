@@ -6,8 +6,8 @@
     <div class="down">
       <div class="form-add">
         <a class="title">Sweat<span>Al</span>er<span>t</span>.Inc</a>
-        <p>Add Product</p>
-        <form @submit.prevent="editProduct">
+        <p>Edit Product</p>
+        <form @submit.prevent="updateProduct(product.id)">
             <label for="name">Name</label>
             <input type="text" class="form-control" v-model="edit_product.name">
             <label for="image-url">Image URL</label>
@@ -30,6 +30,10 @@
             <img :src="product.image_url">
           </div>
           <div class="details">
+            <div class="attribute">
+              <h5>Id</h5>
+              <p>{{product.id}}</p>
+            </div>
             <div class="attribute">
               <h5>Name</h5>
               <p>{{product.name}}</p>
@@ -89,16 +93,9 @@ export default {
     }
   },
   methods: {
-    editProduct () {
-      const payload = {
-        name: this.name,
-        image_url: this.image_url,
-        description: this.description,
-        CategoryId: this.CategoryId,
-        price: this.price,
-        stock: this.stock
-      }
-      this.$store.dispatch('addProduct', payload)
+    updateProduct (productId) {
+      const payload = this.edit_product
+      this.$store.dispatch('editProduct', { payload, productId })
         .then(({ data }) => {
           this.$router.push('/dashboard/products')
         })
