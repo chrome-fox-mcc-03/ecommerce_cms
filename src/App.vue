@@ -1,6 +1,8 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
+    <router-link to="/">Register</router-link>
+    <router-link to="/login">Login</router-link>
+    <!-- <v-app-bar app color="primary" dark>
       <v-btn href="https://github.com/vuetifyjs/vuetify/releases/latest" target="_blank" text>
         <span class="mr-2">Latest Release</span>
         <v-icon>mdi-open-in-new</v-icon>
@@ -10,21 +12,22 @@
 
     <v-content></v-content>
 
-    <Footer />
+    <Footer /> -->
+    <router-view />
   </v-app>
 </template>
 
 <script>
-import Navigation from './components/Navigation';
-import Footer from './components/Footer';
+// import Navigation from './components/Navigation';
+// import Footer from './components/Footer';
 
 export default {
   name: 'App',
 
-  components: {
-    Navigation,
-    Footer
-  },
+  // components: {
+  //   Navigation,
+  //   Footer
+  // },
 
   computed: {
     load() {

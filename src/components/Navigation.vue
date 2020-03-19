@@ -66,6 +66,7 @@
 
 <script>
 export default {
+  name: 'Navigation',
   data() {
     return {
       drawer: true,
