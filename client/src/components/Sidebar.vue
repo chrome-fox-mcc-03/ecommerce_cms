@@ -1,13 +1,13 @@
 <template>
   <div class="sidebar-sticky
-              w-100
-              pt-5
-              bg-dark
-              navbar-dark d-flex
-              flex-column
-              justify-content-start
-              align-items-center
-              shadow">
+          w-100
+          pt-5
+          bg-dark
+          navbar-dark d-flex
+          flex-column
+          justify-content-start
+          align-items-center
+          shadow">
     <ul class="navbar-nav">
       <li class="nav-item">
         <router-link to="/dashboard/products" class="nav-link pt-5">Show Product</router-link>
