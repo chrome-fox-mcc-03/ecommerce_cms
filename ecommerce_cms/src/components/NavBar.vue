@@ -7,13 +7,15 @@
           <router-link to="/product">All Product</router-link>
         </li>
         <li class="navbar-item">
-          <router-link to="/">Upload Product</router-link>
+          <router-link to="/product/add">Upload Product</router-link>
         </li>
       </ul>
-      <div>
-      <router-link to="/login">LOGIN</router-link>
-      <router-link to="#">LOGOUT</router-link>
-      </div>
+      <button @click.prevent="$store.dispatch('logout')">LOGOUT</button>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+}
+</script>

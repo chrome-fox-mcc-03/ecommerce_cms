@@ -1,8 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import LandingPage from '../views/LandingPage.vue'
+import Dashboard from '../views/Dashboard.vue'
+import RegisterPage from '../views/RegisterPage.vue'
+import LoginPage from '../views/LoginPage.vue'
 import ListProduct from '../views/ListProduct.vue'
+import UploadPage from '../views/UploadPage.vue'
+import UpdatePage from '../views/UpdatePage.vue'
 
 Vue.use(VueRouter)
 
@@ -21,21 +25,58 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
+    path: '/register',
+    name: 'Register',
+    component: RegisterPage,
+    meta: {
+      requiresLogout: true
+    }
+  },
+  {
     path: '/login',
     name: 'Login',
-    component: LandingPage,
+    component: LoginPage,
     meta: {
       requiresLogout: true
     }
   },
   {
     path: '/product',
-    name: 'ListProduct',
-    component: ListProduct,
+    name: 'dashboard',
+    component: Dashboard,
+    children: [
+      {
+        path: '',
+        name: 'productList',
+        component: ListProduct
+      },
+      {
+        path: 'add',
+        name: 'uploadPage',
+        component: UploadPage
+      },
+      {
+        path: 'edit',
+        name: 'updatePage',
+        component: UpdatePage
+      }
+    ],
     meta: {
       requiresAuth: true
     }
   }
+  // {
+  //   path: '/dogs',
+  //   name: 'dogs',
+  //   component: () => import(/* webpackChunkName: "about" */ '../views/DogList.vue'),
+  //   children: [
+  //     {
+  //       path: '',
+  //       name: 'Dog Profile',
+  //       component: () => import(/* webpackChunkName: "about" */ '../components/DogProfile.vue')
+  //     }
+  //   ] //children bakal di load didalam komponen DogList kalo ada router-view
+  // }
 ]
 
 const router = new VueRouter({
@@ -46,8 +87,6 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    // this route requires auth, check if logged in
-    // if not, redirect to login page.
     if (localStorage.getItem('token')) {
       next()
     } else {
@@ -56,8 +95,6 @@ router.beforeEach((to, from, next) => {
       })
     }
   } else if (to.matched.some(record => record.meta.requiresLogout)) {
-    // this route requires auth, check if logged in
-    // if not, redirect to login page.
     if (!localStorage.getItem('token')) {
       next()
     } else {
