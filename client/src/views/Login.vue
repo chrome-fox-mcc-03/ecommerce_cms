@@ -12,7 +12,7 @@
                 <input v-model="password" type="password" placeholder="Enter Password" name="psw" required>
 
                 <hr>
-                <button type="submit" class="loginbtn">login</button>
+                <button type="submit" class="btn btn-primary loginbtn">login</button>
             </div>
             <div class="container signin">
                 <p>Don't have an account? <router-link to="/register">Register</router-link>.</p>
@@ -22,7 +22,6 @@
 </template>
 
 <script>
-// import axios from 'axios'
 import { mapActions } from 'vuex'
 export default {
   name: 'Login',

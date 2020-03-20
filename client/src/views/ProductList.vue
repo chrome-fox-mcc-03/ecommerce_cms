@@ -30,7 +30,6 @@ export default {
   },
   created () {
     this.$store.dispatch('onFetchProduct')
-    // console.log(this.products, 'dari component')
   }
 }
 </script>

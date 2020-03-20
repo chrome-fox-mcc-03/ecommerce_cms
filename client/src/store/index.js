@@ -57,7 +57,6 @@ export default new Vuex.Store({
         }
       })
         .then((response) => {
-          // console.log(response)
           router.push('/')
         })
         .catch((err) => {
@@ -93,8 +92,6 @@ export default new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          // console.log(data.result, 'dari store')
-          // nanti disini manggil mutation dengan commit
           commit('SET_PRODUCTS', data.result)
         }).catch((err) => {
           console.log(err)
@@ -135,7 +132,6 @@ export default new Vuex.Store({
         })
     },
     onLogoutProcess ({ dispatch, commit }) {
-      // console.log('logout in action')
       localStorage.clear()
       commit('SET_LOGIN_STATUS')
       router.push('/')

@@ -2,7 +2,7 @@
   <div class="sidebar-sticky
           w-100
           pt-5
-          bg-dark
+          bg-secondary
           navbar-dark d-flex
           flex-column
           justify-content-start
@@ -10,10 +10,10 @@
           shadow">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <router-link to="/dashboard/products" class="nav-link pt-5">Show Product</router-link>
+        <router-link to="/dashboard/products" class="btn btn-primary text-white">Show Product</router-link>
       </li>
       <li class="nav-item">
-         <router-link to="/dashboard/addProduct" class="nav-link pt-5">Add Product</router-link>
+         <router-link to="/dashboard/addProduct" class="btn btn-primary text-white mt-3">Add Product</router-link>
       </li>
     </ul>
   </div>

@@ -13,7 +13,7 @@
                 <hr>
                 <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
 
-                <button type="submit" class="registerbtn">Register</button>
+                <button type="submit" class="btn btn-primary registerbtn">Register</button>
             </div>
             <div class="container signin">
                 <p>Already have an account? <router-link to="/login">Login</router-link>.</p>

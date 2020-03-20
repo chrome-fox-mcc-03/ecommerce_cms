@@ -23,8 +23,9 @@
             <label for="stock"><b>stock</b></label>
             <input v-model="stock" type="stock" placeholder="Enter stock" name="stock" required>
             <hr>
-
-            <button type="submit" class="productCreateBtn">Create</button>
+            <div class="d-flex flex-row align-items-center justify-content-center">
+               <button type="submit" class="btn btn-primary productCreateBtn">Create</button>
+            </div>
         </div>
       </form>
   </div>

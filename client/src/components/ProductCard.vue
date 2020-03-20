@@ -79,10 +79,25 @@ export default {
 .image {
   max-width: 50%;
   max-height: 50%;
+  transition: transform .2s;
+}
+
+.zoom {
+  padding: 50px;
+  background-color: green;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.image:hover {
+  -ms-transform: scale(1.5); /* IE 9 */
+  -webkit-transform: scale(1.5); /* Safari 3-8 */
+  transform: scale(1.5);
 }
 
 .card {
-  max-width: 30%;
+  max-width: 15vw;
 }
 
 </style>
