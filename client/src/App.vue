@@ -28,14 +28,14 @@ export default {
     ...mapState(['errorObj', 'successObj', 'isLogin'])
   },
   watch: {
-    successObj: function () {
+    successObj () {
       const { message } = this.successObj
       this.$notify({
         type: 'success',
         text: message
       })
     },
-    errorObj: function () {
+    errorObj () {
       const { message, errors } = this.errorObj
       errors.forEach(err => {
         this.$notify({

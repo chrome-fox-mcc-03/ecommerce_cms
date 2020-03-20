@@ -15,7 +15,8 @@ import Vuetify, {
   VBtn,
   VIcon,
   VTextarea,
-  VCheckbox
+  VCheckbox,
+  VApp
 } from 'vuetify/lib'
 
 Vue.use(Vuetify, {
@@ -35,7 +36,8 @@ Vue.use(Vuetify, {
     VBtn,
     VIcon,
     VTextarea,
-    VCheckbox
+    VCheckbox,
+    VApp
   }
 })
 

@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Dashboard from '../views/Dashboard.vue'
+import Product from '../views/Product.vue'
 import store from '../store/index.js'
 
 Vue.use(VueRouter)
@@ -36,6 +37,14 @@ const routes = [
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/products',
+    name: 'Product',
+    component: Product,
     meta: {
       requiresAuth: true
     }
