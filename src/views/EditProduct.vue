@@ -3,7 +3,7 @@
         <h2>Edit Product</h2>
         <form @submit.prevent="editProduct">
             <label for="name">Name:</label><br>
-            <input v-model="this.product.name" type="text" id="name" name="name"><br>
+            <input v-model="product.name" type="text" id="name" name="name"><br>
             <label for="image_url">Image:</label><br>
             <input v-model="product.image_url" type="url" id="image_url" name="image_url"><br>
             <label for="price">Price:</label><br>
@@ -16,8 +16,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   name: 'EditProduct',
   props: ['product'],
@@ -27,29 +25,14 @@ export default {
   },
   methods: {
     editProduct () {
-      const id = this.$route.params.id
-
-      axios({
-        method: 'put',
-        url: `http://localhost:3000/products/${id}`,
-        headers: {
-          access_token: localStorage.getItem('access_token')
-        },
-        data: {
-          name: this.product.name,
-          image_url: this.product.image_url,
-          price: this.product.price,
-          stock: this.product.stock
-        }
-      })
-        .then(({ data }) => {
-          this.$store.dispatch('getProducts')
-          this.$router.push(`/products/${id}`)
-        })
-        .catch((err) => {
-          this.$store.commit('SET_ERROR', true)
-          this.$store.commit('SET_ERRORS', [...err.response.data.errors])
-        })
+      const payload = {
+        id: this.$route.params.id,
+        name: this.product.name,
+        image_url: this.product.image_url,
+        price: this.product.price,
+        stock: this.product.stock
+      }
+      this.$store.dispatch('editProduct', payload)
     }
   }
 }

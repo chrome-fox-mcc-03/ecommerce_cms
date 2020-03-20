@@ -13,19 +13,19 @@ export default {
   name: 'Card',
   props: ['product'],
   computed: {
-      getImage () {
-          if (!this.product.image_url){
-            return require('../assets/empty.svg')
-          } else {
-            return this.product.image_url
-          }
+    getImage () {
+      if (!this.product.image_url) {
+        return require('../assets/empty.svg')
+      } else {
+        return this.product.image_url
       }
+    }
   }
 }
 </script>
 
 <style scoped>
     img.card-img-top {
-        height: 250px;
+      height: 250px;
     }
 </style>

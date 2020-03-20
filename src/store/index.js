@@ -10,6 +10,7 @@ export default new Vuex.Store({
     isLogin: false,
     isLoading: false,
     products: [],
+    product: {},
     users: [],
     isError: false,
     errors: []
@@ -23,6 +24,9 @@ export default new Vuex.Store({
     },
     SET_PRODUCTS (state, payload) {
       state.products = payload
+    },
+    SET_PRODUCT (state, payload) {
+      state.product = payload
     },
     SET_USERS (state, payload) {
       state.users = payload
@@ -91,6 +95,101 @@ export default new Vuex.Store({
           commit('SET_LOGIN', true)
           dispatch('getProducts')
           dispatch('getUsers')
+        })
+        .catch((err) => {
+          commit('SET_ERROR', true)
+          commit('SET_ERRORS', [...err.response.data.errors])
+        })
+        .finally((_) => {
+          commit('SET_LOADING', false)
+        })
+    },
+    createProduct ({ dispatch, commit }, payload) {
+      commit('SET_LOADING', true)
+      axios({
+        method: 'post',
+        url: 'http://localhost:3000/products',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: payload
+      })
+        .then(({ data }) => {
+          commit('SET_ERROR', false)
+          commit('SET_ERRORS', [])
+          dispatch('getProducts')
+          router.push('/products')
+        })
+        .catch((err) => {
+          commit('SET_ERROR', true)
+          commit('SET_ERRORS', [...err.response.data.errors])
+        })
+        .finally((_) => {
+          commit('SET_LOADING', false)
+        })
+    },
+    getDetailProduct ({ commit }, payload) {
+      commit('SET_LOADING', true)
+      const id = payload
+      axios({
+        method: 'get',
+        url: `http://localhost:3000/products/${id}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(({ data }) => {
+          commit('SET_PRODUCT', data.data)
+        })
+        .catch((err) => {
+          commit('SET_ERROR', true)
+          commit('SET_ERRORS', [...err.response.data.errors])
+        })
+        .finally((_) => {
+          commit('SET_LOADING', false)
+        })
+    },
+    editProduct ({ dispatch, commit }, payload) {
+      commit('SET_LOADING', true)
+      const id = payload.id
+      axios({
+        method: 'put',
+        url: `http://localhost:3000/products/${id}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: {
+          name: payload.name,
+          image_url: payload.image_url,
+          price: payload.price,
+          stock: payload.stock
+        }
+      })
+        .then(({ data }) => {
+          dispatch('getProducts')
+          router.push(`/products/${id}`)
+        })
+        .catch((err) => {
+          commit('SET_ERROR', true)
+          commit('SET_ERRORS', [...err.response.data.errors])
+        })
+        .finally((_) => {
+          commit('SET_LOADING', false)
+        })
+    },
+    deleteProduct ({ dispatch, commit }, payload) {
+      commit('SET_LOADING', true)
+      const id = payload
+      axios({
+        method: 'delete',
+        url: `http://localhost:3000/products/${id}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(({ data }) => {
+          dispatch('getProducts')
+          router.push('/products')
         })
         .catch((err) => {
           commit('SET_ERROR', true)

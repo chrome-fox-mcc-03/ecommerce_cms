@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   name: 'CreateProduct',
   data () {
@@ -31,33 +30,13 @@ export default {
   },
   methods: {
     createProduct () {
-      this.$store.commit('SET_LOADING', true)
-      axios({
-        method: 'post',
-        url: 'http://localhost:3000/products',
-        headers: {
-          access_token: localStorage.getItem('access_token')
-        },
-        data: {
-          name: this.product.name,
-          image_url: this.product.image_url,
-          price: this.product.price,
-          stock: this.product.stock
-        }
-      })
-        .then(({ data }) => {
-          this.$store.commit('SET_ERROR', false)
-          this.$store.commit('SET_ERRORS', [])
-          this.$store.dispatch('getProducts')
-          this.$router.push('/products')
-        })
-        .catch((err) => {
-          this.$store.commit('SET_ERROR', true)
-          this.$store.commit('SET_ERRORS', [...err.response.data.errors])
-        })
-        .finally((_) => {
-          this.$store.commit('SET_LOADING', false)
-        })
+      const payload = {
+        name: this.product.name,
+        image_url: this.product.image_url,
+        price: this.product.price,
+        stock: this.product.stock
+      }
+      this.$store.dispatch('createProduct', payload)
     }
   }
 }

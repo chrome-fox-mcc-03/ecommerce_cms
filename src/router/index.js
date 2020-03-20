@@ -21,7 +21,7 @@ const routes = [
       if (token) {
         next()
       } else {
-        this.$router.push('/login')
+        next({ path: '/login' })
       }
     }
   },
@@ -34,7 +34,7 @@ const routes = [
       if (!token) {
         next()
       } else {
-        router.push({ path: '/' })
+        next({ path: '/dashboard' })
       }
     }
   },
@@ -47,7 +47,7 @@ const routes = [
       if (token) {
         next()
       } else {
-        this.$router.push('/login')
+        next({ path: '/login' })
       }
     }
   },
@@ -60,7 +60,7 @@ const routes = [
       if (token) {
         next()
       } else {
-        this.$router.push('/login')
+        next({ path: '/login' })
       }
     }
   },
@@ -73,7 +73,7 @@ const routes = [
       if (token) {
         next()
       } else {
-        this.$router.push('/login')
+        next({ path: '/login' })
       }
     }
   },
@@ -86,7 +86,7 @@ const routes = [
       if (token) {
         next()
       } else {
-        this.$router.push('/login')
+        next({ path: '/login' })
       }
     }
   },
@@ -106,11 +106,10 @@ const routes = [
       if (token) {
         next()
       } else {
-        this.$router.push('/login')
+        next({ path: '/login' })
       }
     }
   }
-
 ]
 
 const router = new VueRouter({

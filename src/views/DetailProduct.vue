@@ -22,57 +22,31 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   name: 'DetailProduct',
   data () {
     return {
-      product: {}
     }
   },
   methods: {
     getDetailProduct () {
       const id = this.$route.params.id
-      axios({
-        method: 'get',
-        url: `http://localhost:3000/products/${id}`,
-        headers: {
-          access_token: localStorage.getItem('access_token')
-        }
-      })
-        .then(({ data }) => {
-          this.product = data.data
-        })
-        .catch((err) => {
-          this.$store.commit('SET_ERROR', true)
-          this.$store.commit('SET_ERRORS', [...err.response.data.errors])
-        })
+      this.$store.dispatch('getDetailProduct', id)
     },
     deleteProduct (id) {
-      axios({
-        method: 'delete',
-        url: `http://localhost:3000/products/${id}`,
-        headers: {
-          access_token: localStorage.getItem('access_token')
-        }
-      })
-        .then(({ data }) => {
-          this.$store.dispatch('getProducts')
-          this.$router.push('/products')
-        })
-        .catch((err) => {
-          this.$store.commit('SET_ERROR', true)
-          this.$store.commit('SET_ERRORS', [...err.response.data.errors])
-        })
+      this.$store.dispatch('deleteProduct', id)
     }
   },
   computed: {
     getImage () {
-      if (!this.product.image_url){
+      if (!this.product.image_url) {
         return require('../assets/empty.svg')
       } else {
         return this.product.image_url
       }
+    },
+    product () {
+      return this.$store.state.product
     }
   },
   created () {
