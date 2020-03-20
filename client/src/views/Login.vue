@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="d-flex justify-content-center">
-      <form class="form-signin col-12 col-md-8 col-lg-6 col-xl-4"
+      <form class="form-signin col-12 col-md-8 col-lg-6 col-xl-5 text-center"
         @submit.prevent="login">
         <img src="https://i2.wp.com/d3g5ywftkpzr0e.cloudfront.net/wp-content/uploads/2020/01/16161919/hacktiv8.png" alt="Hacktiv 8" width="150" height="150">
         <h1 class="h3 mb-3 font-weight-normal">Please log in</h1>

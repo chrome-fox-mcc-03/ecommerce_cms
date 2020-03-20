@@ -1,9 +1,9 @@
 <template>
   <div>
     <b-container>
-      <b-row align-h="center">
+      <b-row align-h="center" class="text-center">
         <b-col cols="12" md="8" lg="6" xl="4">
-          <b-img thumbnail src="https://i2.wp.com/d3g5ywftkpzr0e.cloudfront.net/wp-content/uploads/2020/01/16161919/hacktiv8.png" alt="Hacktiv 8" width="150" height="150"></b-img>
+          <img src="https://i2.wp.com/d3g5ywftkpzr0e.cloudfront.net/wp-content/uploads/2020/01/16161919/hacktiv8.png" alt="Hacktiv 8" width="150" height="150">
           <b-form @submit.prevent="onSubmit" @reset.prevent="onReset">
             <b-form-group id="input-group-3" label="Your Name:" label-for="input-3">
               <b-form-input

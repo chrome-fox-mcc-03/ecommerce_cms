@@ -1,10 +1,11 @@
 <template>
   <div id="app">
-    <top-navbar></top-navbar>
+    <top-navbar v-if="isLogin"></top-navbar>
     <side-navbar v-if="isLogin"></side-navbar>
     <div class="container-fluid">
-      <div class="row">
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <div class="row d-flex justify-content-center">
+        <main role="main" class="col-md-9 col-lg-10 px-4"
+          :class="{ 'ml-sm-auto': isLogin }">
           <router-view/>
         </main>
       </div>
