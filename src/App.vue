@@ -2,6 +2,7 @@
   <v-app>
     <router-link to="/login">Login</router-link>
     <router-link to="/dashboard">Dashboard</router-link>
+    <router-link to="/productcard">Product Card</router-link>
     <router-view />
 
     <Footer />
