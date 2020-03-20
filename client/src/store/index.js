@@ -84,9 +84,44 @@ export default new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          console.log(data.result, 'dari store')
+          // console.log(data.result, 'dari store')
           // nanti disini manggil mutation dengan commit
           commit('SET_PRODUCTS', data.result)
+        }).catch((err) => {
+          console.log(err)
+        })
+    },
+    onEditProduct ({ dispatch, commit }, { id, name, imageUrl, price, stock }) {
+      // console.log(id, name, imageUrl, price, stock)
+      axios({
+        method: 'PUT',
+        url: `http://localhost:3000/product/${id}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: {
+          name,
+          imageUrl,
+          price,
+          stock
+        }
+      })
+        .then((response) => {
+          dispatch('onFetchProduct')
+        }).catch((err) => {
+          console.log(err)
+        })
+    },
+    onDeleteProduct ({ dispatch, commit }, { id }) {
+      axios({
+        method: 'DELETE',
+        url: `http://localhost:3000/product/${id}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then((response) => {
+          dispatch('onFetchProduct')
         }).catch((err) => {
           console.log(err)
         })
