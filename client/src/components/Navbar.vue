@@ -9,17 +9,19 @@
               <li class="nav-item">
                   <router-link to="/about" class="nav-link">About</router-link>
               </li>
-              <li v-if="!isLogin" class="nav-item">
+              <li v-if="!loginStatus" class="nav-item">
                   <router-link to="/register" class="nav-link">Register</router-link>
               </li>
-              <li v-if="!isLogin" class="nav-item">
+              <li v-if="!loginStatus" class="nav-item">
                   <router-link to="/login" class="nav-link">Login</router-link>
               </li>
-              <li v-if="isLogin" class="nav-item">
-                  <router-link to="/" class="nav-link">Logout</router-link>
-              </li>
-              <li v-if="isLogin" class="nav-item">
+              <li v-if="loginStatus" class="nav-item">
                   <router-link to="/dashboard" class="nav-link">Dashboard</router-link>
+              </li>
+              <li v-if="loginStatus" class="nav-item">
+                  <router-link to="" class="nav-link">
+                  <span @click="logoutProcess">Logout</span>
+                  </router-link>
               </li>
           </ul>
       </div>
@@ -27,18 +29,17 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 export default {
   name: 'Navbar',
-  data () {
-    return {
-      isLogin: false
-    }
+  computed: {
+    ...mapState(['loginStatus'])
   },
-  created () {
-    if (localStorage.getItem('access_token')) {
-      this.isLogin = true
-    } else {
-      this.isLogin = false
+  methods: {
+    ...mapActions(['onLogoutProcess']),
+    logoutProcess () {
+    //   console.log('trying to logout')
+      this.onLogoutProcess()
     }
   }
 }

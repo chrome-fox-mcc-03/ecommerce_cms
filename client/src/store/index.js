@@ -12,11 +12,19 @@ Vue.use(Vuex)
 */
 export default new Vuex.Store({
   state: {
-    products: []
+    products: [],
+    loginStatus: false
   },
   mutations: {
     SET_PRODUCTS (state, payload) {
       state.products = payload
+    },
+    SET_LOGIN_STATUS (state) {
+      if (localStorage.getItem('access_token')) {
+        state.loginStatus = true
+      } else {
+        state.loginStatus = false
+      }
     }
   },
   actions: {
@@ -31,6 +39,7 @@ export default new Vuex.Store({
       })
         .then((response) => {
           localStorage.setItem('access_token', response.data.access_token)
+          commit('SET_LOGIN_STATUS')
           router.push('/dashboard')
         })
         .catch((err) => {
@@ -92,7 +101,6 @@ export default new Vuex.Store({
         })
     },
     onEditProduct ({ dispatch, commit }, { id, name, imageUrl, price, stock }) {
-      // console.log(id, name, imageUrl, price, stock)
       axios({
         method: 'PUT',
         url: `http://localhost:3000/product/${id}`,
@@ -125,6 +133,12 @@ export default new Vuex.Store({
         }).catch((err) => {
           console.log(err)
         })
+    },
+    onLogoutProcess ({ dispatch, commit }) {
+      // console.log('logout in action')
+      localStorage.clear()
+      commit('SET_LOGIN_STATUS')
+      router.push('/')
     }
   },
   getters: {}

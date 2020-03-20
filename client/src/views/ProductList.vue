@@ -22,24 +22,6 @@ import { mapState } from 'vuex'
 
 export default {
   name: 'ProductionList',
-  data () {
-    return {
-      // testing product card
-      dummyCards: [
-        { card1: 'Product 1' },
-        { card2: 'Product 2' },
-        { card1: 'Product 3' },
-        { card1: 'Product 4' },
-        { card1: 'Product 4' },
-        { card1: 'Product 4' },
-        { card1: 'Product 4' },
-        { card1: 'Product 4' },
-        { card1: 'Product 4' },
-        { card1: 'Product 4' },
-        { card1: 'Product 4' }
-      ]
-    }
-  },
   components: {
     ProductCard
   },
@@ -48,7 +30,7 @@ export default {
   },
   created () {
     this.$store.dispatch('onFetchProduct')
-    console.log(this.products, 'dari component')
+    // console.log(this.products, 'dari component')
   }
 }
 </script>
