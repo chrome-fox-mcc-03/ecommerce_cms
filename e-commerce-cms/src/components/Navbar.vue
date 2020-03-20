@@ -19,8 +19,16 @@ export default {
   name: 'Navbar',
   methods: {
     signOut: function () {
-      localStorage.clear()
-      this.$router.push('/')
+      this.$vToastify.prompt({
+        body: 'Are you sure you want to sign out?',
+        answers: { Yes: true, No: false }
+      })
+        .then(value => {
+          if (value) {
+            localStorage.clear()
+            this.$router.push('/')
+          }
+        })
     }
   }
 }

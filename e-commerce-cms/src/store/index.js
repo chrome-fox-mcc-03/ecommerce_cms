@@ -50,7 +50,7 @@ export default new Vuex.Store({
     },
     addProduct (context, payload) {
       context.commit('SET_ISLOADING', true)
-      axios({
+      return axios({
         method: 'post',
         url: 'http://localhost:3000/products',
         headers: {
@@ -64,15 +64,6 @@ export default new Vuex.Store({
           category: payload.category
         }
       })
-        .then(({ data }) => {
-          console.log(data)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-        .finally(_ => {
-          context.commit('SET_ISLOADING', false)
-        })
     },
     getProductById (context, id) {
       context.commit('SET_ISLOADING', true)

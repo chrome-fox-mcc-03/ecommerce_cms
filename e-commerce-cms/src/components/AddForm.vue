@@ -54,7 +54,20 @@ export default {
         image_url: this.image_url,
         category: this.category
       })
-      this.$router.push('/dashboard')
+        .then(({ data }) => {
+          console.log(data)
+          this.$vToastify.success(data.name, 'Successfully added')
+          this.$router.push('/dashboard')
+        })
+        .catch(err => {
+          console.log(err.response.data)
+          for (let i = 0; i < err.response.data.message.length; i++) {
+            this.$vToastify.error(err.response.data.message[i], 'Oops')
+          }
+        })
+        .finally(_ => {
+          this.$store.commit('SET_ISLOADING', false)
+        })
     }
   }
 }

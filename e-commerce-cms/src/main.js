@@ -4,6 +4,9 @@ import store from './store'
 import router from './router'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import VueToastify from 'vue-toastify'
+
+Vue.use(VueToastify)
 
 Vue.config.productionTip = false
 

@@ -32,7 +32,14 @@ export default {
     },
     deleteProduct: function (id) {
       this.$store.dispatch('deleteProduct', id)
-      this.$store.dispatch('fetchProducts')
+        .then(({ data }) => {
+          console.log(data)
+          this.$vToastify.success(`Successfully deleted ${data.name}`)
+          this.$store.dispatch('fetchProducts')
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 }

@@ -26,7 +26,10 @@
       <label for="product-image">Image</label>
       <input v-model="image_url" type="text" class="form-control" id="product-image">
     </div>
-    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <div class="d-flex justify-content-between">
+      <button type="submit" class="btn btn-primary">Save Changes</button>
+      <button @click="redirToDashboard" class="btn btn-danger">Cancel</button>
+    </div>
   </form>
   </div>
 </template>
@@ -59,14 +62,21 @@ export default {
       })
         .then(({ data }) => {
           console.log('updated successfully', data)
+          this.$vToastify.success(data.name, 'Successfully edited')
           this.$router.push('/dashboard')
         })
         .catch(err => {
           console.log(err)
+          for (let i = 0; i < err.response.data.message.length; i++) {
+            this.$vToastify.error(err.response.data.message[i], 'Oops')
+          }
         })
         .finally(_ => {
           this.$store.commit('SET_ISLOADING', false)
         })
+    },
+    redirToDashboard: function () {
+      this.$router.push('/dashboard')
     }
   },
   created () {

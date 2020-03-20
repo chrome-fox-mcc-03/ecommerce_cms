@@ -35,11 +35,11 @@ export default {
         .then(({ data }) => {
           console.log('hore masuk', data)
           localStorage.setItem('token', data.token)
-          // this.$store.commit('SET_SIGNEDIN', true)
           this.$router.push('/dashboard')
         })
         .catch(err => {
-          console.log('ERRROROROORRO', err.response.data)
+          console.log(err.response.data)
+          this.$vToastify.error(err.response.data.message, 'Login Error')
         })
     }
   },
