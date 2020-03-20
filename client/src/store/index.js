@@ -11,7 +11,8 @@ export default new Vuex.Store({
     products: [],
     message: {
       isMessage: false
-    }
+    },
+    active: 'List'
   },
   mutations: {
     SET_PRODUCTS (state, payload) {
@@ -25,6 +26,9 @@ export default new Vuex.Store({
     },
     SET_ISMESSAGE (state) {
       state.message.isMessage = false
+    },
+    SET_ACTIVE (state, payload) {
+      state.active = payload
     }
   },
   actions: {
@@ -69,6 +73,40 @@ export default new Vuex.Store({
             message
           })
           localStorage.setItem('token', token)
+          router.push({ path: '/admin' })
+        })
+        .catch(err => {
+          commit('SET_MESSAGE', {
+            isMessage: true,
+            title: 'ERROR!',
+            message: err.response.data.message
+          })
+        })
+        .finally(_ => {
+          commit('SET_LOADING')
+        })
+    },
+    createProduct ({ commit, dispatch }, payload) {
+      const { name, price, stock, TypeId } = payload
+      commit('SET_LOADING')
+      axios({
+        method: 'post',
+        url: 'http://localhost:3000/admin/product',
+        data: {
+          name, image_url: payload.image_url, price, stock, TypeId
+        },
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      })
+        .then(({ data }) => {
+          commit('SET_MESSAGE', {
+            isMessage: true,
+            title: 'SUCCESS!',
+            message: data.message
+          })
+          dispatch('fetchProducts')
+          commit('SET_ACTIVE', 'List')
           router.push({ path: '/admin' })
         })
         .catch(err => {

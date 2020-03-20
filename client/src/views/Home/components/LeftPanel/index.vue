@@ -21,16 +21,15 @@ export default {
   name: 'LeftPanel',
   data () {
     return {
-      items: ['List', 'Create'],
-      active: 'List'
+      items: ['List', 'Create']
     }
   },
   methods: {
     isActive (name) {
-      return this.active === name
+      return this.activeStore === name
     },
     select (name) {
-      this.active = name
+      this.$store.commit('SET_ACTIVE', name)
       this.change(name)
     },
     change (name) {
@@ -44,6 +43,11 @@ export default {
   },
   components: {
     Message
+  },
+  computed: {
+    activeStore () {
+      return this.$store.state.active
+    }
   }
 }
 </script>

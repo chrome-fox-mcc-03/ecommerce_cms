@@ -57,7 +57,15 @@ export default {
   },
   methods: {
     createProduct () {
-      console.log(this.name, this.image_url, this.price, this.stock, this.type, '<<<< masuk')
+      // console.log(this.name, this.image_url, this.price, this.stock, this.type, '<<<< masuk')
+      const payload = {
+        name: this.name,
+        image_url: this.image_url,
+        price: +this.price,
+        stock: +this.stock,
+        TypeId: +this.type
+      }
+      this.$store.dispatch('createProduct', payload)
     }
   }
 }
