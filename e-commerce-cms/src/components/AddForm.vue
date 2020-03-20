@@ -1,5 +1,5 @@
 <template>
-  <div class="container form-space">
+  <div class="container form-space pt-5">
     <form @submit.prevent="addProduct" class="mt-5">
     <h2 class="mb-5">Add New Product</h2>
     <div class="form-group">
@@ -15,8 +15,17 @@
       <input v-model="stock" type="text" class="form-control" id="product-stock" placeholder="ex: 50">
     </div>
     <div class="form-group">
+      <label for="product-category">Category</label>
+      <select v-model="category" class="form-control" id="product-category">
+        <option disabled value="">Category</option>
+        <option>Men</option>
+        <option>Women</option>
+      </select>
+    </div>
+    <div class="form-group">
       <label for="product-image">Image</label>
       <input v-model="image_url" type="text" class="form-control" id="product-image" placeholder="Place your image url here">
+      <small class="form-text text-muted">Square and centered images are recommended</small>
     </div>
     <button type="submit" class="btn btn-primary">Add</button>
   </form>
@@ -31,7 +40,8 @@ export default {
       name: '',
       price: '',
       stock: '',
-      image_url: ''
+      image_url: '',
+      category: ''
     }
   },
   methods: {
@@ -41,7 +51,8 @@ export default {
         name: this.name,
         price: this.price,
         stock: this.stock,
-        image_url: this.image_url
+        image_url: this.image_url,
+        category: this.category
       })
       this.$router.push('/dashboard')
     }

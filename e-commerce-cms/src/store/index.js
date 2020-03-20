@@ -21,7 +21,7 @@ export default new Vuex.Store({
     signIn (context, payload) {
       return axios({
         method: 'post',
-        url: 'http://localhost:3000/signin',
+        url: 'http://localhost:3000/signin/admin',
         data: {
           email: payload.email,
           password: payload.password
@@ -60,7 +60,8 @@ export default new Vuex.Store({
           name: payload.name,
           image_url: payload.image_url,
           price: payload.price,
-          stock: payload.stock
+          stock: payload.stock,
+          category: payload.category
         }
       })
         .then(({ data }) => {
@@ -95,7 +96,8 @@ export default new Vuex.Store({
           name: payload.name,
           image_url: payload.image_url,
           price: payload.price,
-          stock: payload.stock
+          stock: payload.stock,
+          category: payload.category
         }
       })
     },

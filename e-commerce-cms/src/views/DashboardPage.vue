@@ -13,10 +13,13 @@ export default {
     Navbar
   },
   created () {
-    console.log('VUEVUEVUE')
+    this.$store.dispatch('fetchProducts')
   }
 }
 </script>
 
-<style scoped>
+<style>
+.below-nav {
+  margin-top: 3rem;
+}
 </style>

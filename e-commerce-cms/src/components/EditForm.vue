@@ -1,5 +1,5 @@
 <template>
-  <div class="container form-space">
+  <div class="container form-space pt-5">
     <Loading v-if="isLoading" />
     <form @submit.prevent="updateProduct" class="mt-5">
     <h2 class="mb-5">Edit Product</h2>
@@ -14,6 +14,13 @@
     <div class="form-group">
       <label for="product-stock">Stock</label>
       <input v-model="stock" type="text" class="form-control" id="product-stock">
+    </div>
+    <div class="form-group">
+      <label for="product-category">Category</label>
+      <select v-model="category" class="form-control" id="product-category">
+        <option>Men</option>
+        <option>Women</option>
+      </select>
     </div>
     <div class="form-group">
       <label for="product-image">Image</label>
@@ -36,7 +43,8 @@ export default {
       name: '',
       price: '',
       stock: '',
-      image_url: ''
+      image_url: '',
+      category: ''
     }
   },
   methods: {
@@ -46,6 +54,7 @@ export default {
         price: this.price,
         stock: this.stock,
         image_url: this.image_url,
+        category: this.category,
         id: this.$route.params.id
       })
         .then(({ data }) => {
@@ -67,6 +76,7 @@ export default {
         this.price = data.price
         this.stock = data.stock
         this.image_url = data.image_url
+        this.category = data.category
       })
       .catch(err => {
         console.log(err)

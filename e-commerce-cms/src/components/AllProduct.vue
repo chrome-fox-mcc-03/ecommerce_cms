@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div class="container pt-4">
   <Loading v-if="isLoading"/>
   <div class="row mt-5">
     <Product v-for="product in products" :key="product.id" :product="product"/>
