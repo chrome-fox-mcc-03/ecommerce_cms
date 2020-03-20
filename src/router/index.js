@@ -11,20 +11,16 @@ const routes = [
     component: () => import('../views/User.vue')
   },
   {
-    path: '/register',
-    name: 'Register',
-    component: () => import('../views/User.vue')
-  },
-  {
     path: '/login',
     name: 'Login',
-    component: () => import('../components/User.vue')
+    component: () => import('../components/Login.vue')
   },
   {
     path: '/dashboard',
     name: 'Dashboard',
     component: () => import('../views/Dashboard.vue')
   }
+
 ];
 
 const router = new VueRouter({
@@ -33,16 +29,16 @@ const router = new VueRouter({
   routes
 });
 
-router.beforeEach((to, from, next) => {
-  if (to.name === from.name && to.name === 'Register' && to.name === 'Login') {
-    next()
-  } else {
-    if (localStorage.access_token) {
-      next()
-    } else {
-      '/'
-    }
-  }
-})
+// router.beforeEach((to, from, next) => {
+//   if (to.name === from.name && to.name === 'Register' && to.name === 'Login') {
+//     next()
+//   } else {
+//     if (localStorage.access_token) {
+//       next()
+//     } else {
+//       '/'
+//     }
+//   }
+// })
 
 export default router;

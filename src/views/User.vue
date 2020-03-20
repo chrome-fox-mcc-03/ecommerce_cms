@@ -1,16 +1,15 @@
 <template>
-  <div>
-    <h1>Hello Ini register</h1>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque,
-      doloremque.
-    </p>
-  </div>
+  <Register />
 </template>
 
 <script>
+import Register from '@/components/Register';
+
 export default {
-  name: 'User'
+  name: 'User',
+  components: {
+    Register
+  }
 };
 </script>
 

@@ -4,8 +4,8 @@
       <v-layout align-center justify-center>
         <v-flex xs12 sm8 md4>
           <v-card class="elevation-12">
-            <v-toolbar color="warning" dark flat>
-              <v-toolbar-title>Register</v-toolbar-title>
+            <v-toolbar color="blue" dark flat>
+              <v-toolbar-title>Login</v-toolbar-title>
             </v-toolbar>
             <v-form>
               <v-card-text>
@@ -19,10 +19,10 @@
                 ></v-text-field>
               </v-card-text>
             </v-form>
-            <v-card-actions>
+            <v-card-actions class="white">
               <v-spacer></v-spacer>
-              <v-btn color="info">Register</v-btn>
-              <v-btn color="dark">Cancel</v-btn>
+              <v-btn color="blue">Login</v-btn>
+              <v-btn color="red">Cancel</v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -33,8 +33,12 @@
 
 <script>
 export default {
-  name: 'Form'
+  name: 'login'
 };
 </script>
 
-<style scoped></style>>
+<style scoped>
+.white * {
+  color: #fff;
+}
+</style>>
