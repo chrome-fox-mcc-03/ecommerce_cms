@@ -37,10 +37,13 @@ export default {
       this.$store.dispatch('deleteProd', this.item.id)
         .then(response => {
           this.$store.dispatch('getProducts')
+          this.$toasted.success('Product Deleted')
           this.$router.push('/dashboard')
         })
         .catch(err => {
-          console.log(err)
+          this.$toasted.error(err.response.data.message, {
+            position: 'bottom-center'
+          })
         })
         .finally(_ => {
           this.$store.commit('SET_LOADING', false)

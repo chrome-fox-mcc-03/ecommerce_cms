@@ -3,7 +3,8 @@ import Vuex from 'vuex'
 import axios from 'axios'
 
 Vue.use(Vuex)
-
+const baseUrl = 'http://54.169.90.72'
+// const baseUrl = 'http://localhost:3000'
 export default new Vuex.Store({
   state: {
     isLoading: false,
@@ -34,7 +35,7 @@ export default new Vuex.Store({
       commit('SET_LOADING', true)
       axios({
         method: 'get',
-        url: 'http://localhost:3000/products',
+        url: baseUrl + '/products',
         headers: {
           token: localStorage.token
         }
@@ -43,23 +44,25 @@ export default new Vuex.Store({
           commit('SET_PRODUCT', response.data.data)
         })
         .catch(err => {
-          console.log(err)
+          this.$toasted.error(err.response.data.message, {
+            position: 'bottom-center'
+          })
         })
         .finally(_ => {
           commit('SET_LOADING', false)
         })
     },
-    login (context, payload) {
+    login (_, payload) {
       return axios({
         method: 'POST',
-        url: 'http://localhost:3000/admin/login',
+        url: baseUrl + '/admin/login',
         data: payload
       })
     },
-    addProd (context, payload) {
+    addProd (_, payload) {
       return axios({
         method: 'POST',
-        url: 'http://localhost:3000/products',
+        url: baseUrl + '/products',
         headers: {
           token: localStorage.getItem('token')
         },
@@ -69,7 +72,7 @@ export default new Vuex.Store({
     deleteProd (_, payload) {
       return axios({
         method: 'DELETE',
-        url: `http://localhost:3000/products/${payload}`,
+        url: baseUrl + `/products/${payload}`,
         headers: {
           token: localStorage.token
         }
@@ -78,7 +81,7 @@ export default new Vuex.Store({
     detailProduct (_, payload) {
       return axios({
         method: 'GET',
-        url: `http://localhost:3000/products/${payload}`,
+        url: baseUrl + `/products/${payload}`,
         headers: {
           token: localStorage.token
         }
@@ -87,7 +90,7 @@ export default new Vuex.Store({
     editProduct (_, payload) {
       return axios({
         method: 'PUT',
-        url: `http://localhost:3000/products/${payload.id}`,
+        url: baseUrl + `/products/${payload.id}`,
         headers: {
           token: localStorage.getItem('token')
         },

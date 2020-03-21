@@ -42,12 +42,17 @@ export default {
       this.$store.dispatch('addProd', this.newProduct)
         .then(response => {
           this.$router.push('/dashboard')
+          this.$toasted.success(`Product ${response.data.data.name} has been added!`)
         })
         .catch(err => {
-          console.log(err)
+          err.response.data.errors.map(el => {
+            this.$toasted.error(el, {
+              position: 'bottom-center'
+            })
+          })
         })
         .finally(_ => {
-          this.$store.commit('SET_LOADING', true)
+          this.$store.commit('SET_LOADING', false)
         })
     }
   }

@@ -39,14 +39,16 @@ export default {
       this.$store.commit('SET_LOADING', true)
       this.$store.dispatch('login', this.dataLogin)
         .then(response => {
-          console.log(response.data)
           localStorage.setItem('token', response.data.token)
           this.$router.push('/dashboard')
           this.$store.commit('SET_LOGIN', true)
           this.$store.commit('SET_PROFILE', response.data.payload)
+          this.$toasted.success('Welcome Back, Admin!')
         })
         .catch(err => {
-          console.log(err)
+          this.$toasted.error(err.response.data.message, {
+            position: 'bottom-center'
+          })
         })
         .finally(_ => {
           this.$store.commit('SET_LOADING', false)

@@ -44,12 +44,17 @@ export default {
       this.$store.dispatch('editProduct', { id, data: this.newProduct })
         .then(response => {
           this.$router.push('/dashboard')
+          this.$toasted.success(`Success Edit ${response.data.data[1].name}`)
         })
         .catch(err => {
-          console.log(err)
+          err.response.data.errors.map(el => {
+            this.$toasted.error(el, {
+              position: 'bottom-center'
+            })
+          })
         })
         .finally(_ => {
-          this.$store.commit('SET_LOADING', true)
+          this.$store.commit('SET_LOADING', false)
         })
     }
   },
@@ -63,14 +68,15 @@ export default {
     this.$store.commit('SET_LOADING', true)
     this.$store.dispatch('detailProduct', id)
       .then(response => {
-        console.log(response)
         this.newProduct.name = response.data.data.name
         this.newProduct.image_url = response.data.data.image_url
         this.newProduct.price = response.data.data.price
         this.newProduct.stock = response.data.data.stock
       })
       .catch(err => {
-        console.log(err)
+        this.$toasted.error(err.response.data.message, {
+          position: 'bottom-center'
+        })
       })
       .finally(_ => {
         this.$store.commit('SET_LOADING', false)
