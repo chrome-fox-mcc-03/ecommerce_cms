@@ -5,6 +5,8 @@
     <div class="d-flex justify-content-center">
       <img class="img-fluid" src="../assets/logocms.png" alt="">
     </div>
+    <br>
+    <h3 v-if="$store.state.error" class="d-flex justify-content-center">Email or Password is Wrong</h3>
     <div class="loginRegister">
       <Login
       v-if="$store.state.formLogin"

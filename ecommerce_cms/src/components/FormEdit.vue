@@ -1,5 +1,7 @@
 <template>
   <div class="w-100 d-flex justify-content-around">
+    <loading :active.sync="$store.state.isLoading"
+      :is-full-page="true"></loading>
     <form>
       <div class="form-group">
         <label for="name">Name</label>
@@ -25,6 +27,8 @@
 </template>
 
 <script>
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/vue-loading.css'
 
 export default {
   props: ['id'],
@@ -38,6 +42,9 @@ export default {
         image_url: ''
       }
     }
+  },
+  components: {
+    Loading
   },
   methods: {
     editProduct () {

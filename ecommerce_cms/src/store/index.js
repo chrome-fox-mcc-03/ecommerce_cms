@@ -61,7 +61,7 @@ export default new Vuex.Store({
       const { name, email, password } = data
       axios({
         method: 'post',
-        url: 'http://localhost:3000/user/register',
+        url: 'https://agile-beyond-79709.herokuapp.com/user/register',
         data: {
           name,
           email,
@@ -76,7 +76,7 @@ export default new Vuex.Store({
           router.push('/dashboard')
         })
         .catch(err => {
-          console.log(err)
+          commit('SET_ERROR', err)
         })
         .finally(_ => {
           commit('SET_LOADING')
@@ -87,7 +87,7 @@ export default new Vuex.Store({
       const { email, password } = data
       axios({
         method: 'post',
-        url: 'http://localhost:3000/user/login',
+        url: 'https://agile-beyond-79709.herokuapp.com/user/login',
         data: {
           email,
           password
@@ -107,7 +107,7 @@ export default new Vuex.Store({
           }
         })
         .catch(err => {
-          console.log(err)
+          commit('SET_ERROR', err)
         })
         .finally(_ => {
           commit('SET_LOADING')
@@ -117,7 +117,7 @@ export default new Vuex.Store({
       commit('SET_LOADING')
       axios({
         method: 'get',
-        url: 'http://localhost:3000/product',
+        url: 'https://agile-beyond-79709.herokuapp.com/product',
         headers: {
           token: localStorage.token
         }
@@ -125,7 +125,7 @@ export default new Vuex.Store({
         .then(({ data }) => {
           commit('SET_PRODUCT', data)
         })
-        .catch(err => console.log(err))
+        .catch(err => commit('SET_ERROR', err))
         .finally(_ => {
           commit('SET_LOADING')
         })
@@ -134,7 +134,7 @@ export default new Vuex.Store({
       commit('SET_LOADING')
       axios({
         method: 'post',
-        url: 'http://localhost:3000/product',
+        url: 'https://agile-beyond-79709.herokuapp.com/product',
         headers: {
           token: localStorage.token
         },
@@ -145,8 +145,7 @@ export default new Vuex.Store({
           router.push(`/store/product/${data.id}`)
         })
         .catch(err => {
-          commit('SET_ERROR')
-          console.log(err)
+          commit('SET_ERROR', err)
         })
         .finally(_ => {
           commit('SET_LOADING')
@@ -156,7 +155,7 @@ export default new Vuex.Store({
       commit('SET_LOADING')
       axios({
         method: 'patch',
-        url: `http://localhost:3000/product/${data.id}`,
+        url: `https://agile-beyond-79709.herokuapp.com/product/${data.id}`,
         headers: {
           token: localStorage.token
         },
@@ -167,8 +166,7 @@ export default new Vuex.Store({
           router.push(`/store/product/${data.id}`)
         })
         .catch(err => {
-          commit('SET_ERROR')
-          console.log(err)
+          commit('SET_ERROR', err)
         })
         .finally(_ => {
           commit('SET_LOADING')
@@ -178,15 +176,14 @@ export default new Vuex.Store({
       commit('SET_LOADING')
       axios({
         method: 'delete',
-        url: `http://localhost:3000/product/${id}`,
+        url: `https://agile-beyond-79709.herokuapp.com/product/${id}`,
         headers: {
           token: localStorage.token
         }
       })
         .then(_ => router.push('/store/product'))
         .catch(err => {
-          commit('SET_ERROR')
-          console.log(err)
+          commit('SET_ERROR', err)
         })
         .finally(_ => commit('SET_LOADING'))
     }

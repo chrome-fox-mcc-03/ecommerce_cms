@@ -1,6 +1,6 @@
 <template>
   <div>
-      ini dashboard
+      <img class="rounded mx-auto d-block" style="height: 500px" src="../assets/underConstruction.jpg" alt="">
   </div>
 </template>
 

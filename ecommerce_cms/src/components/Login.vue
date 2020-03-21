@@ -1,5 +1,7 @@
 <template>
   <div class="container d-flex justify-content-center">
+    <loading :active.sync="$store.state.isLoading"
+      :is-full-page="true"></loading>
     <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-4 col-md-offset-3 col-sm-8 col-sm-offset-2">
       <div class="panel panel-info" >
       <div class="panel-heading">
@@ -11,7 +13,7 @@
             <div style="margin-bottom: 25px" class="input-group">
               <input
               v-model="user.email"
-              id="login-email" type="text" class="form-control" name="email" value="" placeholder="email">
+              id="login-email" type="email" class="form-control" name="email" value="" placeholder="email">
             </div>
             <div style="margin-bottom: 25px" class="input-group">
               <input
@@ -48,6 +50,8 @@
 </template>
 
 <script>
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/vue-loading.css'
 
 export default {
   name: 'Login',
@@ -59,6 +63,9 @@ export default {
       }
     }
   },
+  components: {
+    Loading
+  },
   methods: {
     changeForm () {
       this.$store.commit('CHANGE_FORM')
@@ -66,6 +73,9 @@ export default {
     login () {
       this.$store.dispatch('login', this.user)
     }
+  },
+  beforeMounted () {
+    this.$store.commit('SET_ERROR', '')
   }
 }
 </script>

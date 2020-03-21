@@ -1,5 +1,7 @@
 <template>
   <div class="w-100 d-flex justify-content-around">
+    <loading :active.sync="$store.state.isLoading"
+      :is-full-page="true"></loading>
     <form>
       <div class="form-group">
         <label for="name">Name</label>
@@ -33,13 +35,15 @@
     </form>
     <div class="item-align-center">
       <h1>Create Product</h1>
-      <img style="width: 180px" src="../assets/iconCreate.png" alt="">
+      <img style="width: 460px" src="../assets/logoEdit.png" alt="">
     </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/vue-loading.css'
 
 export default {
   data () {
@@ -52,6 +56,9 @@ export default {
         image_url: ''
       }
     }
+  },
+  components: {
+    Loading
   },
   methods: {
     createProduct () {
