@@ -28,7 +28,7 @@ const store = new Vuex.Store({
   actions: {
     Login (context, payload) {
       return axios({
-        url: 'http://localhost:3000/user/login',
+        url: 'https://afternoon-atoll-02314.herokuapp.com/user/login',
         method: 'POST',
         data: {
           Email: payload.Email,
@@ -38,7 +38,7 @@ const store = new Vuex.Store({
     },
     Register (context, payload) {
       return axios({
-        url: 'http://localhost:3000/user/register',
+        url: 'https://afternoon-atoll-02314.herokuapp.com/user/register',
         method: 'POST',
         data: {
           Email: payload.Email,
@@ -48,7 +48,7 @@ const store = new Vuex.Store({
     },
     FetchProducts ({ commit }) {
       axios({
-        url: 'http://localhost:3000/products',
+        url: 'https://afternoon-atoll-02314.herokuapp.com/products',
         method: 'GET',
         headers: {
           Access_Token: localStorage.getItem('Access_Token')
@@ -64,7 +64,7 @@ const store = new Vuex.Store({
     },
     AddItem (context, payload) {
       return axios({
-        url: 'http://localhost:3000/products/create',
+        url: 'https://afternoon-atoll-02314.herokuapp.com/products/create',
         method: 'POST',
         headers: {
           Access_Token: localStorage.getItem('Access_Token')
@@ -79,7 +79,7 @@ const store = new Vuex.Store({
     },
     UpdateItem (context, payload) {
       return axios({
-        url: `http://localhost:3000/products/update/${payload.id}`,
+        url: `https://afternoon-atoll-02314.herokuapp.com/products/update/${payload.id}`,
         method: 'PUT',
         headers: {
           Access_Token: localStorage.getItem('Access_Token')
@@ -94,7 +94,7 @@ const store = new Vuex.Store({
     },
     DeleteItem (context, payload) {
       return axios({
-        url: `http://localhost:3000/products/delete/${payload}`,
+        url: `https://afternoon-atoll-02314.herokuapp.com/products/delete/${payload}`,
         method: 'DELETE',
         headers: {
           Access_Token: localStorage.getItem('Access_Token')

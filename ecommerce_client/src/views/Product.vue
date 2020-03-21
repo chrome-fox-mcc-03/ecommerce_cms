@@ -31,7 +31,7 @@ export default {
 <style>
 #ProductCard {
     margin-left: 5%;
-    margin-right: 5%;
+    margin-right: 15%;
     padding: 2%;
     margin-bottom: 5%;
     background-color: teal;
@@ -42,5 +42,8 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    overflow: scroll;
 }
 </style>
