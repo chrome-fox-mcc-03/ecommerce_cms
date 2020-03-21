@@ -76,12 +76,9 @@ export default {
           }
         })
           .then(result => {
-            console.log(result.data.url)
             this.imgUrl = result.data.url
             this.$store.state.newProduct.img_url = result.data.url
           })
-          .catch(err => console.log(err))
-          .finally(_ => console.log('done'))
       }
       reader.readAsDataURL(file)
     }
