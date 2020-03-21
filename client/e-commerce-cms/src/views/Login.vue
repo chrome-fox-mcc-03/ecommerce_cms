@@ -42,7 +42,6 @@ export default {
             title: err.response.data.message
           }
           this.$store.dispatch('notification', condition)
-          console.log(err.response.data)
           this.$router.push({ path: 'login' })
         })
         .finally(_ => {
