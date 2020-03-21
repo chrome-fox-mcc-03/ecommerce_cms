@@ -15,6 +15,13 @@ export default {
   components: {
     Header,
     Login
+  },
+  beforeRouteEnter (to, from, next) {
+    if (localStorage.access_token) {
+      next('/dashboard')
+    } else {
+      next()
+    }
   }
 }
 </script>

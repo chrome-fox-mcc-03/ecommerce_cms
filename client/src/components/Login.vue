@@ -33,7 +33,7 @@
                       </div>
                       <div class="form-group">
                           <label for="description">Role</label>
-                          <input type="text" id="role" class="form-control" v-model="register.role" required style="text-align:center;">
+                          <input type="text" id="role" class="form-control" v-model="register.role" required style="text-align:center;" readonly>
                       </div>
                       <br><br>
                       <b-button class="mt-3 btn btn-primary" block type="submit" style="background-color:blue">Submit</b-button>
@@ -81,9 +81,10 @@ export default {
           this.register.email = ''
           this.register.password = ''
           this.$bvModal.hide('register')
+          this.$vToastify.success('Registration is successfully')
         })
         .catch(err => {
-          console.log(err, '>>>>>>>>>>>>>>>')
+          this.$vToastify.error(err.response.data.errObj[0])
         })
     },
     loginProcess () {
@@ -98,9 +99,10 @@ export default {
           localStorage.setItem('access_token', data.access_token)
           this.$store.commit('SET_IS_LOGIN', true)
           this.$router.push('/dashboard/products')
+          this.$vToastify.success(`Hello ${data.name}, Welcome To`)
         })
         .catch(err => {
-          console.log(err.response)
+          this.$vToastify.error(err.response.data.errObj[0])
         })
     }
   },

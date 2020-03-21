@@ -8,7 +8,8 @@ export default new Vuex.Store({
   state: {
     isLogin: false,
     product: {},
-    errorMessage: ''
+    errorMessage: '',
+    categories: []
   },
   mutations: {
     SET_IS_LOGIN (state, payload) {
@@ -19,6 +20,9 @@ export default new Vuex.Store({
     },
     SET_ERROR_MESSAGE (state, payload) {
       state.errorMessage = payload
+    },
+    SET_CATEGORIES (state, payload) {
+      state.categories = payload
     }
   },
   actions: {
@@ -67,8 +71,7 @@ export default new Vuex.Store({
           context.commit('SET_PRODUCT', data)
         })
         .catch(err => {
-          console.log(err)
-          context.commit('SET_ERROR_MESSAGE', err.response)
+          this.$vToastify.error(err.response.data.errObj[0])
         })
     },
     editProduct (context, payload) {
@@ -89,6 +92,18 @@ export default new Vuex.Store({
           access_token: localStorage.access_token
         }
       })
+    },
+    fetchCategories (context) {
+      axios({
+        url: 'http://localhost:3000/categories',
+        method: 'GET'
+      })
+        .then(({ data }) => {
+          context.commit('SET_CATEGORIES', data)
+        })
+        .catch(err => {
+          this.$vToastify.error(err.response.data.message)
+        })
     }
   },
   modules: {

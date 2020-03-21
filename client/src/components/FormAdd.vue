@@ -15,7 +15,10 @@
             <label for="description">Description</label>
             <input type="text" class="form-control" v-model="description">
             <label for="category">Category ID</label>
-            <input type="number" class="form-control" v-model="CategoryId">
+            <!-- <input type="number" class="form-control" v-model="CategoryId"> -->
+            <select name="status" v-model="CategoryId" class="form-control">
+                <option v-for="category in categories" v-bind:key="category.id" v-bind:value="category.id">{{category.name}}</option>
+            </select>
             <label for="price">Price</label>
             <input type="number" class="form-control" v-model="price">
             <label for="stock">Stock</label>
@@ -83,12 +86,19 @@ export default {
       this.$store.dispatch('addProduct', payload)
         .then(({ data }) => {
           this.$router.push('/dashboard/products')
+          this.$vToastify.success(`${data.name} with id ${data.id} is successfully added`)
         })
         .catch(err => {
-          console.log(err.response)
+          this.$vToastify.error(err.response.data.errObj[0])
         })
     }
+  },
+  computed: {
+    categories () {
+      return this.$store.state.categories
+    }
   }
+
 }
 </script>
 

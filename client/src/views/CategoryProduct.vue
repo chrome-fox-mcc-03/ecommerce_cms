@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Header></Header>
     <Loading v-if="loading"></Loading>
     <div v-else class="board">
       <table class="table table-hover">
@@ -15,7 +16,7 @@
             <th scope="col" class="text-center action">Action</th>
           </tr>
         </thead>
-        <tbody class="product-product">
+        <tbody>
           <tr class="product" v-for="product in products" :key="product.id">
             <th class="text-center"> {{product.id}} </th>
             <td class="text-center">
@@ -40,12 +41,15 @@
 
 <script>
 import Loading from '../components/Loading.vue'
+import Header from '../components/Header.vue'
 
 export default {
   name: 'Products',
   components: {
-    Loading
+    Loading,
+    Header
   },
+  // props: ['choiceCategroy'],
   data () {
     return {
       products: [],
@@ -60,7 +64,13 @@ export default {
     fetchproducts () {
       this.$store.dispatch('fetchProducts')
         .then(({ data }) => {
-          this.products = data
+          const productSelection = []
+          data.forEach(productEachCategory => {
+            if (productEachCategory.CategoryId === +this.$route.params.categoryId) {
+              productSelection.push(productEachCategory)
+            }
+          })
+          this.products = productSelection
         })
         .catch(err => {
           console.log(err.response)
@@ -85,7 +95,7 @@ export default {
       setTimeout(() => {
         this.loading = false
         this.fetchproducts()
-      }, 3000)
+      }, 1000)
     }
   }
 }

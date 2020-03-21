@@ -5,18 +5,25 @@
       <div class="side-bar">
         <div class="navigation-product">
           <h5>product</h5>
-          <ul>
+          <ul class="product-list">
             <li @click="moveProduct">Products</li>
+              <ul>
+                <li @click="moveSweater(1)">Sweater</li>
+                <li @click="moveSweater(2)">Polo</li>
+                <li @click="moveSweater(3)">Jas</li>
+                <li @click="moveSweater(4)">Shirt</li>
+              </ul>
+            <br>
             <li @click="moveAddProduct">Add Product</li>
           </ul>
         </div>
-        <div class="navigation-chart">
+        <!-- <div class="navigation-chart">
           <h5>Chart</h5>
           <ul>
             <li>Price</li>
             <li>Stock</li>
           </ul>
-        </div>
+        </div> -->
       </div>
       <div class="content-route">
         <router-view></router-view>
@@ -39,6 +46,20 @@ export default {
     },
     moveAddProduct () {
       this.$router.push('/dashboard/addproduct')
+    },
+    moveSweater (categoryId) {
+      this.$router.push(`/categories/${categoryId}`)
+    }
+  },
+  created () {
+    // this.startLoad()
+    this.$store.dispatch('fetchCategories')
+  },
+  beforeRouteEnter (to, from, next) {
+    if (!localStorage.access_token) {
+      next('/')
+    } else {
+      next()
     }
   }
 }
@@ -75,5 +96,10 @@ export default {
   li {
     cursor: pointer;
     color: white;
+  }
+
+  .product-list {
+    list-style: none;
+    padding-left: 10px !important;
   }
 </style>

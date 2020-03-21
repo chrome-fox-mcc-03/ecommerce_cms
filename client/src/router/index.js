@@ -5,6 +5,7 @@ import Dashboard from '../views/Dashboard.vue'
 import Product from '../components/Products.vue'
 import FormAdd from '../components/FormAdd.vue'
 import FormEdit from '../components/FormEdit.vue'
+import CategoryProduct from '../views/CategoryProduct.vue'
 
 Vue.use(VueRouter)
 
@@ -24,6 +25,11 @@ const routes = [
         component: Product
       },
       {
+        path: 'products/:categoryId',
+        name: 'CategoryProduct',
+        component: CategoryProduct
+      },
+      {
         path: 'addproduct',
         name: 'AddProduct',
         component: FormAdd
@@ -34,6 +40,11 @@ const routes = [
         component: FormEdit
       }
     ]
+  },
+  {
+    path: '/categories/:categoryId',
+    name: 'CategoryProduct',
+    component: CategoryProduct
   }
 ]
 

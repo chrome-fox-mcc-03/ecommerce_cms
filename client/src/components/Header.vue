@@ -4,13 +4,18 @@
       <a class="title">Sweat<span>Al</span>er<span>t</span>.Inc</a>
     </div>
     <div class="left-nav-land">
-      <button
-        v-if="isLogin === false"
-        >Login</button>
-      <a
-        v-else
+      <!-- <button
+        v-if="!isLogin"
+        >Login</button> -->
+      <div v-if="isLogin" class="nav-dashboard-new">
+        <h7
+          class="dash-new"
+          @click="moveDashboard"
+          >Dashboard</h7>
+        <a
         @click="logoutProcess"
         ><i class="fas fa-sign-out-alt"></i></a>
+      </div>
     </div>
   </nav>
 </template>
@@ -18,16 +23,20 @@
 <script>
 export default {
   name: 'Header',
+  data () {
+    return {
+      isLogin: localStorage.access_token || null
+    }
+  },
   methods: {
     logoutProcess () {
       localStorage.clear()
       this.$store.commit('SET_IS_LOGIN', false)
       this.$router.push('/')
-    }
-  },
-  computed: {
-    isLogin () {
-      return this.$store.state.isLogin
+      this.$vToastify.success('Logout successfully')
+    },
+    moveDashboard () {
+      this.$router.push('/dashboard/products')
     }
   }
 
@@ -76,7 +85,31 @@ export default {
   border-radius: 10px;
 }
 
+#navbar-land .left-nav-land {
+  width: 83%;
+}
+
 #navbar-land .left-nav-land a {
   color: white;
+}
+
+.nav-dashboard-new {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 20px;
+  align-items: center;
+}
+
+.dash-new {
+  font-size: 18px;
+  margin-top: 8px;
+  color: white;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  cursor: pointer;
+}
+
+.dash-new:active {
+  color: aqua;
 }
 </style>
