@@ -3,7 +3,7 @@
     <div class="container-form">
           <div class="card card-editProduct">
             <div class="edit-image">
-             <img :src="image_url" alt="">
+            <img :src="image_url" alt="">
             </div>
             <div class="edit-form">
             <form v-on:submit.prevent="editProduct()">

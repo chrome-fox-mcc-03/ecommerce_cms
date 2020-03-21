@@ -65,10 +65,13 @@ export default new Vuex.Store({
         })
     },
     addProduct ({ commit }, payload) {
-      commit('SET_ISLOADING', true)
-      if (payload.category !== 'Lokal' || payload.category !== 'Import') {
+      if (payload.category !== 'Lokal' && payload.category !== 'Import') {
         payload.category = 'Other'
       }
+      if (payload.stock < 0) {
+        payload.stock = 0
+      }
+      commit('SET_ISLOADING', true)
       return axios({
         method: 'post',
         url: 'https://enigmatic-tundra-28075.herokuapp.com/products',
@@ -112,10 +115,13 @@ export default new Vuex.Store({
         })
     },
     editProduct ({ commit }, payload) {
-      commit('SET_LOADING', true)
-      if (payload.category !== 'Lokal' || payload.category !== 'Import') {
+      if (payload.category !== 'Lokal' && payload.category !== 'Import') {
         payload.category = 'Other'
       }
+      if (payload.stock < 0) {
+        payload.stock = 0
+      }
+      commit('SET_LOADING', true)
       const { id, name, imageUrl, price, stock, category, description } = payload
       return axios({
         method: 'put',
