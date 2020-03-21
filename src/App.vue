@@ -14,7 +14,7 @@
         >
           <v-list dense nav class="py-0">
             <v-list-item two-line :class="miniVariant && 'px-0'">
-              <v-list-item-avatar>
+              <v-list-item-avatar v-if="!isLogin">
                 <img src="https://randomuser.me/api/portraits/women/29.jpg" />
               </v-list-item-avatar>
 
