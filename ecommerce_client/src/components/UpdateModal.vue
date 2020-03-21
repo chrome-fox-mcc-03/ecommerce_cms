@@ -26,7 +26,6 @@ export default {
   methods: {
     Update () {
       const payload = this.Product
-      console.log(payload, 'This is Pyaload')
       this.$store.dispatch('UpdateItem', payload)
         .then((result) => {
           this.$toasted.show('Update Successful')
@@ -39,7 +38,6 @@ export default {
         })
     },
     DeleteThis () {
-      console.log(this.Product.id)
       const id = this.Product.id
       this.$Progress.start()
       this.$store.dispatch('DeleteItem', id)
