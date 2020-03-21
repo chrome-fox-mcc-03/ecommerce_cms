@@ -59,12 +59,14 @@ export default {
 <style>
   .navbar {
     width:100% !important;
+    overflow: hidden;
     margin:0px auto;
     left:0;
     right:0;
     padding:0;
     position: fixed;
     color: yellow;
+    z-index: 1000;
   }
 
   #nav-collapse b-navbar-nav b-nav-item router-link:visited {
