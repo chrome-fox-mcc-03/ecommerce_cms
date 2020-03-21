@@ -116,7 +116,12 @@ export default {
         this.product.image_url = response.image_url
       })
       .catch(err => {
-        console.log(err)
+        UIkit.notification({
+          message: `${err.response}`,
+          status: 'danger',
+          pos: 'top-right',
+          timeout: 500
+        })
       })
       .finally(_ => {
         this.isLoading = false
