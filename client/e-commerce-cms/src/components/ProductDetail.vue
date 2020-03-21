@@ -4,7 +4,8 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel"> {{ productDetail.name }} </h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button id="close-sign" type="button" class="close" @click="clearProductDetail" data-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times"></i>
           </button>
         </div>
         <div class="modal-body">
@@ -19,7 +20,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button id="modal-btn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button id="modal-btn" @click="clearProductDetail" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
@@ -35,11 +36,26 @@ export default {
       console.log(this.$store.state.productDetail)
       return this.$store.state.productDetail
     }
+  },
+  methods: {
+    clearProductDetail () {
+      const value = {
+        id: null,
+        name: '',
+        image_url: '',
+        price: null,
+        stock: null
+      }
+      this.$store.commit('SET_PRODUCTDETAIL', value)
+    }
   }
 }
 
 </script>
 <style>
+#close-sign{
+  color: #eeeeee;
+}
 #modal-body-container{
   width: 100%;
   height: 100%

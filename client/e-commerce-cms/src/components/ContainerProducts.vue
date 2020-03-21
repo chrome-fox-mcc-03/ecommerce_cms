@@ -61,6 +61,14 @@ export default {
         })
     },
     detailProduct (product) {
+      const value = {
+        id: null,
+        name: '',
+        image_url: '',
+        price: null,
+        stock: null
+      }
+      this.$store.commit('SET_PRODUCTDETAIL', value)
       console.log(product)
       this.$store.dispatch('detailProduct', product)
     }

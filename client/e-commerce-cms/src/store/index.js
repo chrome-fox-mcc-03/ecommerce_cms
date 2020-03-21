@@ -55,7 +55,7 @@ export default new Vuex.Store({
       context.commit('SET_ISLOADING', true)
       return axios({
         method: 'POST',
-        url: 'http://localhost:3000/register',
+        url: 'https://intense-chamber-47439.herokuapp.com/register',
         data: payload
       })
     },
@@ -65,7 +65,7 @@ export default new Vuex.Store({
       context.commit('SET_ISLOADING', true)
       return axios({
         method: 'POST',
-        url: 'http://localhost:3000/login',
+        url: 'https://intense-chamber-47439.herokuapp.com/login',
         data: {
           email,
           password
@@ -77,7 +77,7 @@ export default new Vuex.Store({
       context.commit('SET_ISLOADING', true)
       axios({
         method: 'GET',
-        url: 'http://localhost:3000/products',
+        url: 'https://intense-chamber-47439.herokuapp.com/products',
         headers: {
           token
         }
@@ -97,7 +97,7 @@ export default new Vuex.Store({
       context.commit('SET_ISLOADING', true)
       return axios({
         method: 'POST',
-        url: 'http://localhost:3000/products',
+        url: 'https://intense-chamber-47439.herokuapp.com/products',
         headers: {
           token
         },
@@ -110,7 +110,7 @@ export default new Vuex.Store({
       context.commit('SET_ISLOADING', true)
       axios({
         method: 'GET',
-        url: `http://localhost:3000/products/${id}`,
+        url: `https://intense-chamber-47439.herokuapp.com/products/${id}`,
         headers: {
           token
         }
@@ -143,7 +143,7 @@ export default new Vuex.Store({
       context.commit('SET_ISLOADING', true)
       return axios({
         method: 'PUT',
-        url: `http://localhost:3000/products/${id}`,
+        url: `https://intense-chamber-47439.herokuapp.com/products/${id}`,
         headers: {
           token
         },
@@ -156,7 +156,7 @@ export default new Vuex.Store({
       context.commit('SET_ISLOADING', true)
       return axios({
         method: 'DELETE',
-        url: `http://localhost:3000/products/${id}`,
+        url: `https://intense-chamber-47439.herokuapp.com/products/${id}`,
         headers: {
           token
         }
@@ -169,7 +169,7 @@ export default new Vuex.Store({
       context.commit('SET_ISLOADING', true)
       axios({
         method: 'GET',
-        url: `http://localhost:3000/products/${id}`,
+        url: `https://intense-chamber-47439.herokuapp.com/products/${id}`,
         headers: {
           token
         }

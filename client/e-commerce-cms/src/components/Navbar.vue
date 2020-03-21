@@ -26,13 +26,13 @@ export default {
     logout: function () {
       localStorage.clear()
       this.$store.commit('SET_LOGIN', false)
-      this.$router.push({ path: 'login' })
       console.log('LOGOUT SUCCESS')
       const condition = {
         icon: 'success',
         title: 'Logout Succesfull'
       }
       this.$store.dispatch('notification', condition)
+      this.$router.push({ path: 'login' })
     }
   },
   computed: {
