@@ -21,7 +21,7 @@ export default new Vuex.Store({
       const { email, password } = payload
       return axios({
         method: 'POST',
-        url: 'http://localhost:3000/login',
+        url: 'https://evening-mesa-91440.herokuapp.com/login',
         data: {
           email,
           password
@@ -33,7 +33,7 @@ export default new Vuex.Store({
       const token = localStorage.getItem('token')
       axios({
         method: 'GET',
-        url: 'http://localhost:3000/product',
+        url: 'https://evening-mesa-91440.herokuapp.com/product',
         headers: {
           token
         }
@@ -53,7 +53,7 @@ export default new Vuex.Store({
       const { name, image, price, stock } = payload
       return axios({
         method: 'POST',
-        url: 'http://localhost:3000/product',
+        url: 'https://evening-mesa-91440.herokuapp.com/product',
         data: {
           name,
           image_url: image,
@@ -69,7 +69,7 @@ export default new Vuex.Store({
       commit('SET_ISLOADING', true)
       return axios({
         method: 'GET',
-        url: `http://localhost:3000/product/${payload}`,
+        url: `https://evening-mesa-91440.herokuapp.com/product/${payload}`,
         headers: {
           token: localStorage.getItem('token')
         }
@@ -81,7 +81,7 @@ export default new Vuex.Store({
       console.log(id)
       return axios({
         method: 'PUT',
-        url: `http://localhost:3000/product/${id}`,
+        url: `https://evening-mesa-91440.herokuapp.com/product/${id}`,
         data: {
           name,
           image_url: image,
@@ -97,7 +97,7 @@ export default new Vuex.Store({
       commit('SET_ISLOADING', true)
       return axios({
         method: 'DELETE',
-        url: `http://localhost:3000/product/${payload}`,
+        url: `https://evening-mesa-91440.herokuapp.com/product/${payload}`,
         headers: {
           token: localStorage.getItem('token')
         }
