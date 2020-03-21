@@ -26,22 +26,13 @@ export default new Vuex.Store({
   actions: {
     getProducts (context) {
       context.commit('SET_ISLOADING', true)
-      axios({
+      return axios({
         method: 'GET',
         url: 'http://localhost:3000/products',
         headers: {
           token: localStorage.getItem('token')
         }
       })
-        .then(response => {
-          context.commit('SET_PRODUCTS', [...response.data.response])
-        })
-        .catch(err => {
-          console.log(err.response)
-        })
-        .finally(_ => {
-          context.commit('SET_ISLOADING', false)
-        })
     },
     getProductData (_, id) {
       return axios({
@@ -50,13 +41,6 @@ export default new Vuex.Store({
         headers: {
           token: localStorage.getItem('token')
         }
-      })
-    },
-    login (_, payload) {
-      return axios({
-        method: 'POST',
-        url: 'http://localhost:3000/login',
-        data: payload
       })
     },
     addProduct (_, payload) {
@@ -90,6 +74,17 @@ export default new Vuex.Store({
           id
         }
       })
+    },
+    login (_, payload) {
+      return axios({
+        method: 'POST',
+        url: 'http://localhost:3000/login',
+        data: payload
+      })
+    },
+    logout (context) {
+      context.commit('SET_ISLOGIN', false)
+      localStorage.clear()
     }
   }
 })

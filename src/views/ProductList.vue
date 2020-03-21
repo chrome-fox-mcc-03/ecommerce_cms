@@ -1,48 +1,55 @@
 <template>
-  <div class="product-list">
-    <div class="card-container">
-    <table class="uk-table uk-table-hover uk-table-middle uk-table-divider">
-      <thead>
-        <tr>
-          <th class="uk-table-shrink">Image</th>
-          <th class="uk-table-shrink">Title</th>
-          <th class="">Description</th>
-          <th class="">Price</th>
-          <th class="">Stock</th>
-          <th class=" ">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <product-card v-for="(product, index) in products" :key="index" :product="product" :id="product.id"></product-card>
-      </tbody>
-    </table>
-  </div>
+  <div class="product-list uk-child-width-expand@s" uk-grid>
+    <pic-loading v-if="isLoading"></pic-loading>
+    <product-card v-else v-for="(product) in products" :key="product.id" :product="product" @fetchProducts="fetchProducts" ></product-card>
   </div>
 </template>
 
 <script>
 import ProductCard from '../components/ProductCard.vue'
+import PicLoading from '../components/LoadingPic'
 export default {
   name: 'UserProducts',
   data () {
     return {
+      products: [],
+      isLoading: false
     }
   },
   components: {
-    ProductCard
+    ProductCard,
+    PicLoading
   },
   methods: {
-  },
-  computed: {
-    products () {
-      return this.$store.state.products
+    fetchProducts () {
+      this.$store.dispatch('getProducts')
+        .then(response => {
+          this.products = [...response.data.response]
+        })
+        .catch(err => {
+          console.log(err.response)
+        })
+        .finally(_ => {
+          this.isLoading = false
+        })
     }
   },
+  computed: {},
   created () {
-    this.$store.dispatch('getProducts')
+    this.isLoading = true
+    this.fetchProducts()
   }
 }
+
 </script>
 
 <style scoped>
+.product-list{
+  width: auto;
+  height: auto;
+  margin-left: 5px;
+  margin-top: 5px;
+  flex-direction: row;
+  background-image: url('../assets/product_bg.png');
+}
 </style>
