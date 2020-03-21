@@ -22,7 +22,7 @@ export default new Vuex.Store({
       commit('SET_ISLOADING', true)
       return axios({
         method: 'post',
-        url: 'http://localhost:3000/users/register',
+        url: 'https://enigmatic-tundra-28075.herokuapp.com/users/register',
         headers: {
           token: localStorage.getItem('token')
         },
@@ -38,7 +38,7 @@ export default new Vuex.Store({
       commit('SET_ISLOADING', true)
       return axios({
         method: 'post',
-        url: 'http://localhost:3000/users/login',
+        url: 'https://enigmatic-tundra-28075.herokuapp.com/users/login',
         data: {
           email: payload.email,
           password: payload.password
@@ -49,7 +49,7 @@ export default new Vuex.Store({
       commit('SET_ISLOADING', true)
       axios({
         method: 'get',
-        url: 'http://localhost:3000/products'
+        url: 'https://enigmatic-tundra-28075.herokuapp.com/products'
       })
         .then(response => {
           const {
@@ -72,7 +72,7 @@ export default new Vuex.Store({
       }
       return axios({
         method: 'post',
-        url: 'http://localhost:3000/products',
+        url: 'https://enigmatic-tundra-28075.herokuapp.com/products',
         headers: {
           token: localStorage.getItem('token')
         },
@@ -90,14 +90,14 @@ export default new Vuex.Store({
       commit('SET_ISLOADING', true)
       return axios({
         method: 'get',
-        url: `http://localhost:3000/products/${payload}`
+        url: `https://enigmatic-tundra-28075.herokuapp.com/products/${payload}`
       })
     },
     getByCategory ({ commit, dispatch }, payload) {
       commit('SET_ISLOADING', true)
       axios({
         method: 'get',
-        url: `http://localhost:3000/products/category/${payload}`
+        url: `https://enigmatic-tundra-28075.herokuapp.com/products/category/${payload}`
       })
         .then(response => {
           const {
@@ -124,7 +124,7 @@ export default new Vuex.Store({
       console.log(payload)
       return axios({
         method: 'put',
-        url: `http://localhost:3000/products/${id}`,
+        url: `https://enigmatic-tundra-28075.herokuapp.com/products/${id}`,
         headers: {
           token: localStorage.getItem('token')
         },
@@ -137,7 +137,7 @@ export default new Vuex.Store({
       commit('SET_ISLOADING', true)
       return axios({
         method: 'delete',
-        url: `http://localhost:3000/products/${payload}`,
+        url: `https://enigmatic-tundra-28075.herokuapp.com/products/${payload}`,
         headers: {
           token: localStorage.getItem('token')
         }
