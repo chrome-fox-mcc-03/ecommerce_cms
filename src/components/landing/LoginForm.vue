@@ -28,9 +28,7 @@
                     role="button"><i class="fab fa-facebook-f"></i>&nbsp; Login with Facebook</a>
                   <hr>
                 </form>
-                <div class="text-center"><a class="small" href="forgot-password.html">Forgot
-                    Password?</a></div>
-                <div class="text-center"><a class="small" href="register.html">Create an
+                <div class="text-center"><a class="small" href="#">Create an
                     Account!</a></div>
               </div>
             </div>

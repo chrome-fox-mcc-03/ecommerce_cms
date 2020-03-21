@@ -7,7 +7,7 @@
           data-toggle="tab" href="#tab-1">Products</a></li>
       <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab"
           href="#tab-2">Categories</a></li>
-      <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-3">Tab 3</a>
+      <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-3">Orders</a>
       </li>
     </ul>
     <div class="tab-content">
@@ -18,7 +18,7 @@
         <category-tab />
       </div>
       <div class="tab-pane" role="tabpanel" id="tab-3">
-        <p>Content for tab 3.</p>
+        <p>Next week...</p>
       </div>
     </div>
   </div>
