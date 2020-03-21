@@ -12,7 +12,7 @@
     <div class="product-info">
       <div class="info-section">
         <label>Price</label>
-        <span>{{item.price}}</span>
+        <span>Rp. {{getPrice}}</span>
       </div>
       <div class="info-section">
         <label>Stock</label>
@@ -55,6 +55,21 @@ export default {
         params: { id: this.item.id }
       })
     }
+  },
+  computed: {
+    getPrice () {
+      var str = this.item.price.toString().split('.')
+      if (str[0].length >= 5) {
+        str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, '$1,')
+      }
+      if (str[1] && str[1].length >= 5) {
+        str[1] = str[1].replace(/(\d{3})/g, '$1 ')
+      }
+      return str.join('.')
+    }
+  },
+  created () {
+    console.log(this.getPrice)
   }
 }
 </script>
