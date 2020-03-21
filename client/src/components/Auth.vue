@@ -21,7 +21,7 @@
                     </div>
                       <input
                       class="form-control"
-                      placeholder="******"
+                      placeholder="Password"
                       type="password"
                       v-model="password"
                       required>
@@ -78,7 +78,7 @@ export default {
         password: this.password
       }
       if (this.action === 'Register') {
-        data.role = 'customer'
+        data.role = 'admin'
         this.register(data)
           .then(({ data }) => {
             localStorage.setItem('token', data.token)
