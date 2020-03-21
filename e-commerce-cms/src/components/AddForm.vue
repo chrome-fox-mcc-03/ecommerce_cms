@@ -46,6 +46,7 @@ export default {
   },
   methods: {
     addProduct: function () {
+      this.$store.commit('SET_ISLOADING', true)
       this.$store.dispatch('addProduct', {
         name: this.name,
         price: this.price,

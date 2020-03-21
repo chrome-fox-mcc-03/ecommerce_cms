@@ -52,6 +52,7 @@ export default {
   },
   methods: {
     updateProduct: function () {
+      this.$store.commit('SET_ISLOADING', true)
       this.$store.dispatch('updateProduct', {
         name: this.name,
         price: this.price,
@@ -78,6 +79,7 @@ export default {
     }
   },
   created () {
+    this.$store.commit('SET_ISLOADING', true)
     this.$store.dispatch('getProductById', this.$route.params.id)
       .then(({ data }) => {
         this.name = data.name

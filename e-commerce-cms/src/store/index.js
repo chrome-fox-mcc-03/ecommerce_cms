@@ -49,7 +49,6 @@ export default new Vuex.Store({
         })
     },
     addProduct (context, payload) {
-      context.commit('SET_ISLOADING', true)
       return axios({
         method: 'post',
         url: 'https://polar-badlands-09758.herokuapp.com/products',
@@ -76,7 +75,6 @@ export default new Vuex.Store({
       })
     },
     updateProduct (context, payload) {
-      context.commit('SET_ISLOADING', true)
       return axios({
         method: 'put',
         url: `https://polar-badlands-09758.herokuapp.com/products/${payload.id}`,

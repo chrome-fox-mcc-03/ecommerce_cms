@@ -34,13 +34,18 @@ export default {
   },
   methods: {
     signIn: function () {
+      this.$store.commit('SET_ISLOADING', true)
       this.$store.dispatch('signIn', { email: this.email, password: this.password })
         .then(({ data }) => {
+          this.$vToastify.success('Successfully Signed In', 'Hello, Admin!')
           localStorage.setItem('token', data.token)
           this.$router.push('/dashboard')
         })
         .catch(err => {
-          this.$vToastify.error(err.response.data.message, 'Login Error')
+          this.$vToastify.error(err.response.data, 'Login Error')
+        })
+        .finally(_ => {
+          this.$store.commit('SET_ISLOADING', false)
         })
     }
   },

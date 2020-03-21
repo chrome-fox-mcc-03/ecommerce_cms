@@ -51,9 +51,11 @@ export default {
 .fa-venus {
   color: rgb(233, 111, 182)
 }
-.shoes-img {
-  object-fit: cover;
-  width: 10rem;
-  height: 10rem;
+@media (min-width: 763px) {
+  .shoes-img {
+    object-fit: cover;
+    width: 10rem;
+    height: 10rem;
+  }
 }
 </style>
