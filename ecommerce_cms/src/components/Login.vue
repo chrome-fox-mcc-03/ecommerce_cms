@@ -9,25 +9,34 @@
         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
           <form id="loginform" class="form-horizontal" role="form">
             <div style="margin-bottom: 25px" class="input-group">
-              <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username or email">
+              <input
+              v-model="user.email"
+              id="login-email" type="text" class="form-control" name="email" value="" placeholder="email">
             </div>
             <div style="margin-bottom: 25px" class="input-group">
-              <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
+              <input
+              v-model="user.password"
+              id="login-password" type="password" class="form-control" name="password" placeholder="password">
             </div>
             <div style="margin-top:10px;" class="form-group">
               <!-- Button -->
               <div class="col-sm-12 controls">
-                <router-link id="btn-login" to="#" class="btn btn-success">Login</router-link>
-                <router-link id="btn-glogin" to="#" class="btn btn-warning" style="margin-left:10px">Google Login</router-link>
+                <button
+                @click.prevent="login"
+                id="btn-login" class="btn btn-secondary">Login</button>
+                <button
+                id="btn-glogin" class="btn btn-dark" style="margin-left:10px">Google Login</button>
               </div>
             </div>
             <div class="form-group">
               <div class="col-md-12 control">
                 <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
                   Don't have an account?
-                  <router-link to="#" @Click="changeForm()">
+                  <a href="#"
+                  @click="changeForm"
+                  >
                     Register Here
-                  </router-link>
+                  </a>
                 </div>
               </div>
             </div>
@@ -39,15 +48,24 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
 
 export default {
   name: 'Login',
-  props: {
-    msg: String
+  data () {
+    return {
+      user: {
+        email: '',
+        password: ''
+      }
+    }
   },
   methods: {
-    ...mapMutations(['changeForm'])
+    changeForm () {
+      this.$store.commit('CHANGE_FORM')
+    },
+    login () {
+      this.$store.dispatch('login', this.user)
+    }
   }
 }
 </script>

@@ -9,27 +9,34 @@
         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
           <form id="loginform" class="form-horizontal" role="form">
             <div style="margin-bottom: 25px" class="input-group">
-              <input id="login-email" type="text" class="form-control" name="email" value="" placeholder="email">
+              <input
+              v-model="user.email"
+              id="login-email" type="text" class="form-control" name="email" value="" placeholder="email">
             </div>
             <div style="margin-bottom: 25px" class="input-group">
-              <input id="login-name" type="text" class="form-control" name="name" value="" placeholder="name">
+              <input
+              v-model="user.name"
+              id="login-name" type="text" class="form-control" name="name" value="" placeholder="name">
             </div>
             <div style="margin-bottom: 25px" class="input-group">
-              <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
+              <input
+              v-model="user.password"
+              id="login-password" type="password" class="form-control" name="password" placeholder="password">
             </div>
             <div style="margin-top:10px;" class="form-group">
                 <!-- Button -->
                 <div class="col-sm-12 controls">
-                    <router-link id="btn-login" to="#" class="btn btn-success">Register</router-link>
+                    <button id="btn-login" @click="register" class="btn btn-secondary">Register</button>
                 </div>
             </div>
             <div class="form-group">
               <div class="col-md-12 control">
                 <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
                     have an account?
-                    <router-link to="#" @Click="$store.commit('changeForm')">
+                    <a href="#"
+                    @click="changeForm">
                         Login Here
-                    </router-link>
+                    </a>
                 </div>
               </div>
             </div>
@@ -42,10 +49,28 @@
 
 <script>
 export default {
-
+  data () {
+    return {
+      user: {
+        name: '',
+        email: '',
+        password: ''
+      }
+    }
+  },
+  methods: {
+    changeForm () {
+      this.$store.commit('CHANGE_FORM')
+    },
+    register () {
+      this.$store.dispatch('register', this.user)
+    }
+  }
 }
 </script>
 
-<style>
-
+<style scoped>
+.panel-title {
+  font-weight: bolder;
+}
 </style>
