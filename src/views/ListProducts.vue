@@ -52,16 +52,22 @@ export default {
     padding: 2vh;
   }
 
+  .dashboard {
+    width: 100% !important;
+    margin: 2vh;
+    padding: 2vh;
+  }
+
   h2 {
     text-align: center;
   }
   .row {
     /* width: 65% !important; */
     width: 100% !important;
-    margin:0 auto;
-    /* left:25%;
+    margin:2vh auto;
+    /* left:25%; 
     right:0; */
-    /* display: flex; */
+    display: flex;
     padding:2vh;
     justify-content: center;
 

@@ -11,13 +11,20 @@ const routes = [
   {
     path: '/',
     name: 'LandingPage',
-    component: LandingPage
+    component: LandingPage,
+    children: [
+      {
+        path: '/register',
+        name: 'RegisterForm',
+        component: RegisterForm
+      }
+    ]
   },
-  {
-    path: '/register',
-    name: 'RegisterForm',
-    component: RegisterForm
-  },
+  // {
+  //   path: '/register',
+  //   name: 'RegisterForm',
+  //   component: RegisterForm
+  // },
   {
     path: '/home',
     name: 'Home',
@@ -28,20 +35,30 @@ const routes = [
     path: '/products',
     name: 'ListProducts',
     component: ListProducts,
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: '/addProductForm',
+        component: AddProductForm
+      },
+      {
+        path: '/editProductForm',
+        component: EditProductForm
+      }
+    ]
   },
-  {
-    path: '/products/addProductForm',
-    name: 'AddProductForm',
-    component: AddProductForm,
-    meta: { requiresAuth: true }
-  },
-  {
-    path: '/products/editProductForm',
-    name: 'EditProductForm',
-    component: EditProductForm,
-    meta: { requiresAuth: true }
-  },
+  // {
+  //   path: '/products/addProductForm',
+  //   name: 'AddProductForm',
+  //   component: AddProductForm,
+  //   meta: { requiresAuth: true }
+  // },
+  // {
+  //   path: '/products/editProductForm',
+  //   name: 'EditProductForm',
+  //   component: EditProductForm,
+  //   meta: { requiresAuth: true }
+  // },
   {
     path: '/about',
     name: 'About',

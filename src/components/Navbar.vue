@@ -59,7 +59,7 @@ export default {
 <style>
   .navbar {
     width:100% !important;
-    overflow: hidden;
+    /* overflow: hidden; */
     margin:0px auto;
     left:0;
     right:0;
