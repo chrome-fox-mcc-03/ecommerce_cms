@@ -32,8 +32,6 @@ export default {
   name: 'ProductDetail',
   computed: {
     productDetail () {
-      console.log('ini dari modal')
-      console.log(this.$store.state.productDetail)
       return this.$store.state.productDetail
     }
   },

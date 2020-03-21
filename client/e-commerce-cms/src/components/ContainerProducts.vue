@@ -35,7 +35,6 @@ export default {
   },
   methods: {
     updateProduct (id) {
-      console.log('<<<<<<>>>>>> MADSSOOOK')
       this.$store.dispatch('productUpdate', id)
       this.$route.params.id = id
       this.$router.push({ name: 'UpdateProduct' })
@@ -43,8 +42,6 @@ export default {
     deleteProduct (id) {
       this.$store.dispatch('deleteProduct', id)
         .then(result => {
-          console.log('---DELETED---')
-          console.log(result.data)
           const condition = {
             icon: 'success',
             title: `Succesfully Delete ${result.data.name}`
@@ -54,7 +51,11 @@ export default {
           this.$router.push({ name: 'Dashboard' })
         })
         .catch(err => {
-          console.log(err)
+          const condition = {
+            icon: 'error',
+            title: `Error ${err.response.data.message}`
+          }
+          this.$store.dispatch('notification', condition)
         })
         .finally(_ => {
           this.$store.commit('SET_ISLOADING', false)
@@ -69,7 +70,6 @@ export default {
         stock: null
       }
       this.$store.commit('SET_PRODUCTDETAIL', value)
-      console.log(product)
       this.$store.dispatch('detailProduct', product)
     }
   },

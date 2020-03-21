@@ -26,7 +26,6 @@ export default {
     logout: function () {
       localStorage.clear()
       this.$store.commit('SET_LOGIN', false)
-      console.log('LOGOUT SUCCESS')
       const condition = {
         icon: 'success',
         title: 'Logout Succesfull'
