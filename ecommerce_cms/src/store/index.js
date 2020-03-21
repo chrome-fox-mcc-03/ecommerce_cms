@@ -24,7 +24,7 @@ export default new Vuex.Store({
       const password = payload.password
       return axios({
         method: 'POST',
-        url: 'http://localhost:3000/admin/register',
+        url: 'https://peaceful-fortress-31291.herokuapp.com/admin/register',
         data: {
           email,
           password
@@ -37,7 +37,7 @@ export default new Vuex.Store({
       const password = payload.password
       return axios({
         method: 'POST',
-        url: 'http://localhost:3000/admin/login',
+        url: 'https://peaceful-fortress-31291.herokuapp.com/admin/login',
         data: {
           email,
           password
@@ -55,7 +55,7 @@ export default new Vuex.Store({
     fetchData (context, payload) {
       axios({
         method: 'GET',
-        url: 'http://localhost:3000/product',
+        url: 'https://peaceful-fortress-31291.herokuapp.com/product',
         headers: {
           token: localStorage.getItem('token')
         }
@@ -71,7 +71,7 @@ export default new Vuex.Store({
     addProduct (context, payload) {
       return axios({
         method: 'POST',
-        url: 'http://localhost:3000/product',
+        url: 'https://peaceful-fortress-31291.herokuapp.com/product',
         headers: {
           token: localStorage.getItem('token')
         },
@@ -86,7 +86,7 @@ export default new Vuex.Store({
     getProduct (context, id) {
       return axios({
         method: 'GET',
-        url: `http://localhost:3000/product/${id}`,
+        url: `https://peaceful-fortress-31291.herokuapp.com/product/${id}`,
         headers: {
           token: localStorage.getItem('token')
         }
@@ -95,7 +95,7 @@ export default new Vuex.Store({
     updateProduct (context, payload) {
       return axios({
         method: 'PUT',
-        url: `http://localhost:3000/product/${payload.id}`,
+        url: `https://peaceful-fortress-31291.herokuapp.com/product/${payload.id}`,
         headers: {
           token: localStorage.getItem('token')
         },
@@ -110,7 +110,7 @@ export default new Vuex.Store({
     deleteProduct (context, id) {
       return axios({
         method: 'DELETE',
-        url: `http://localhost:3000/product/${id}`,
+        url: `https://peaceful-fortress-31291.herokuapp.com/product/${id}`,
         headers: {
           token: localStorage.getItem('token')
         }
