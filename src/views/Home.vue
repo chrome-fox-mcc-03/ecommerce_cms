@@ -2,8 +2,8 @@
   <div class="row">
     <div class="col-lg-3">
      <div class="nav flex-column nav-pills" aria-orientation="vertical">
-      <a class="nav-link active" role="tab">Product</a>
-      <a class="nav-link" role="tab">Category</a>
+      <router-link tag="a" to="/dashboard/product" :class="[currentPage.includes('product') ? 'active' : '', 'nav-link']" role="tab">Product</router-link>
+      <router-link tag="a" to="/dashboard/category" :class="[currentPage.includes('category') ? 'active' : '', 'nav-link']" role="tab">Category</router-link>
     </div>
     </div>
     <div class="col-lg-9">
@@ -15,6 +15,11 @@
 <script>
 // @ is an alias to /src
 export default {
-  name: 'Home'
+  name: 'Home',
+  computed: {
+    currentPage () {
+      return this.$route.path
+    }
+  }
 }
 </script>

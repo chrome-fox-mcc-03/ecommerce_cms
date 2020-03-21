@@ -5,6 +5,10 @@ import Login from '../views/Login.vue'
 import store from '../store/index'
 import ProductList from '../views/ProductList'
 import AddProduct from '../views/AddProduct'
+import CategoryList from '../views/CategoryList'
+import AddCategory from '../views/AddCategory'
+import EditCategory from '../views/EditCategory'
+import EditProduct from '../views/EditProduct'
 
 Vue.use(VueRouter)
 function isAuthenticated (to, from, next) {
@@ -40,6 +44,26 @@ const routes = [
         path: 'addproduct',
         name: 'AddProduct',
         component: AddProduct
+      },
+      {
+        path: 'editproduct/:id',
+        name: 'EditProduct',
+        component: EditProduct
+      },
+      {
+        path: 'category',
+        name: 'CategoryList',
+        component: CategoryList
+      },
+      {
+        path: 'addcategory',
+        name: 'AddCategory',
+        component: AddCategory
+      },
+      {
+        path: 'editcategory/:id',
+        name: 'EditCategory',
+        component: EditCategory
       }
     ]
   },
