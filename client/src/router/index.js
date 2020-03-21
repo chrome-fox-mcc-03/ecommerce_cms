@@ -53,9 +53,7 @@ router.beforeEach((to, from, next) => {
   } else {
     store.commit('SET_ISMESSAGE')
     localStorage.clear()
-    next({
-      name: 'LoginAdmin'
-    })
+    next()
   }
 })
 

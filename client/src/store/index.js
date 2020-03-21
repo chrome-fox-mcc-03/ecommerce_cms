@@ -55,7 +55,7 @@ export default new Vuex.Store({
       commit('SET_LOADING')
       axios({
         method: 'get',
-        url: 'https://shrouded-meadow-59142.herokuapp.com/admin/product',
+        url: 'http://localhost:3000/admin/product',
         headers: {
           token: localStorage.getItem('token')
         }
@@ -79,7 +79,7 @@ export default new Vuex.Store({
       commit('SET_LOADING')
       axios({
         method: 'post',
-        url: 'https://shrouded-meadow-59142.herokuapp.com/admin/login',
+        url: 'http://localhost:3000/admin/login',
         data: {
           email, password
         }
@@ -110,7 +110,7 @@ export default new Vuex.Store({
       commit('SET_LOADING')
       axios({
         method: 'post',
-        url: 'https://shrouded-meadow-59142.herokuapp.com/admin/product',
+        url: 'http://localhost:3000/admin/product',
         data: {
           name, image_url: payload.image_url, price, stock, TypeId
         },
@@ -145,7 +145,7 @@ export default new Vuex.Store({
       commit('SET_LOADING')
       axios({
         method: 'put',
-        url: `https://shrouded-meadow-59142.herokuapp.com/admin/product/${id}`,
+        url: `http://localhost:3000/admin/product/${id}`,
         headers: {
           token: localStorage.getItem('token')
         },
@@ -177,7 +177,7 @@ export default new Vuex.Store({
       commit('SET_EDIT_ID', payload)
       axios({
         method: 'get',
-        url: `https://shrouded-meadow-59142.herokuapp.com/admin/product/${payload}`,
+        url: `http://localhost:3000/admin/product/${payload}`,
         headers: {
           token: localStorage.getItem('token')
         }
@@ -202,7 +202,7 @@ export default new Vuex.Store({
       commit('SET_LOADING')
       axios({
         method: 'delete',
-        url: `https://shrouded-meadow-59142.herokuapp.com/admin/product/${state.deleteId}`,
+        url: `http://localhost:3000/admin/product/${state.deleteId}`,
         headers: {
           token: localStorage.getItem('token')
         }
