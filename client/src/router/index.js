@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Product from '../views/Product.vue'
+import Cloudinary from '../views/Cloudinary.vue'
 import store from '../store/index.js'
 
 Vue.use(VueRouter)
@@ -48,6 +49,11 @@ const routes = [
     meta: {
       requiresAuth: true
     }
+  },
+  {
+    path: '/cloudinary',
+    name: 'Cloudinary',
+    component: Cloudinary
   }
 ]
 
