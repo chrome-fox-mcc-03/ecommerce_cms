@@ -60,13 +60,13 @@ export default new Vuex.Store({
           token: localStorage.getItem('token')
         }
       })
-      .then(({ data }) => {
-        console.log(data[0].id)
-        context.commit('SET_PRODUCT', data)
-      })
-      .catch(err => {
-        console.log(er)
-      })
+        .then(({ data }) => {
+          console.log(data[0].id)
+          context.commit('SET_PRODUCT', data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     },
     addProduct (context, payload) {
       return axios({
@@ -80,6 +80,39 @@ export default new Vuex.Store({
           price: payload.price,
           stock: payload.stock,
           image: payload.image
+        }
+      })
+    },
+    getProduct (context, id) {
+      return axios({
+        method: 'GET',
+        url: `http://localhost:3000/product/${id}`,
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      })
+    },
+    updateProduct (context, payload) {
+      return axios({
+        method: 'PUT',
+        url: `http://localhost:3000/product/${payload.id}`,
+        headers: {
+          token: localStorage.getItem('token')
+        },
+        data: {
+          name: payload.name,
+          price: payload.price,
+          stock: payload.stock,
+          image: payload.image
+        }
+      })
+    },
+    deleteProduct (context, id) {
+      return axios({
+        method: 'DELETE',
+        url: `http://localhost:3000/product/${id}`,
+        headers: {
+          token: localStorage.getItem('token')
         }
       })
     }

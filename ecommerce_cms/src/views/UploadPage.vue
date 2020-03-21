@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div id="upload-page">
+    <div id="upload">
     <h1>Upload Product</h1>
-    <div class="container d-flex align-items-center">
       <form @submit.prevent="upload">
         <div class="form-group">
           <label for="product-name">Product Name</label>
@@ -81,4 +81,26 @@ export default {
 </script>
 
 <style>
+#upload-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('../assets/track.jpg');
+}
+
+#upload {
+  color: white;
+  opacity: .7;
+  border: 1px solid gray;
+  padding: 50px;
+  border-radius: 20px;
+  background-color: #3d3d3d;
+  text-align: center;
+}
+
+#button {
+  text-align: center;
+}
 </style>

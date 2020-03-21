@@ -1,33 +1,39 @@
 <template>
-  <div>
-    <h1>login page</h1>
-    <div class="container d-flex justify content-between align-items-center">
-      <form id="LoginForm" @submit.prevent="login">
+  <div id="login-page">
+    <div id="login">
+      <h1>LOGIN</h1>
+      <form id="form-login" @submit.prevent="login">
         <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
           <input
             v-model="email"
             type="email"
             class="form-control"
-            id="exampleInputEmail1"
+            id="email-login"
             aria-describedby="emailHelp"
-            placeholder="Enter email"
+            placeholder="Input your email here"
+            required
           />
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
           <input
             v-model="password"
             type="password"
             class="form-control"
-            id="exampleInputPassword1"
+            id="password-login"
             placeholder="Password"
+            required
           />
         </div>
-        <p> Need account? <router-link id="register-btn" to="/register">Register</router-link></p>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <p>
+          Need account?
+          <router-link id="register-btn" to="/register">Register</router-link>
+        </p>
+        <div id="button">
+          <input type="submit" class="btn btn-primary" value="Submit" />
+        </div>
       </form>
     </div>
+    <div id="quotes"></div>
   </div>
 </template>
 
@@ -46,8 +52,9 @@ export default {
         email: this.email,
         password: this.password
       }
-      this.$store.dispatch('login', loginData)
-        .then((result) => {
+      this.$store
+        .dispatch('login', loginData)
+        .then(result => {
           // state notification harus diubah
           // cara ngubah state pake mutation
           // commit
@@ -74,5 +81,32 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+#login-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('../assets/steel.jpg');
+}
+
+#login {
+  border: 1px solid gray;
+  padding: 50px;
+  border-radius: 20px;
+  background-color: rgb(34, 34, 34);
+  text-align: center;
+  box-shadow: 0 0 20px black;
+  color: rgb(255, 251, 251);
+  opacity: .8;
+}
+
+#login p {
+  margin-top: 20px;
+}
+
+#button {
+  text-align: center;
+}
 </style>

@@ -56,7 +56,7 @@ const routes = [
         component: UploadPage
       },
       {
-        path: 'edit',
+        path: 'edit/:id',
         name: 'updatePage',
         component: UpdatePage
       }
