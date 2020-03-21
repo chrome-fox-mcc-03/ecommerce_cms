@@ -5,7 +5,7 @@
     </div>
     <div data-v-15938c3a="" class="right menu" v-if="page !== 'LoginAdmin'">
       <router-link
-        to="/admin/login"
+        to="/login"
         style="margin: 2vh 1vw;"
       >
         <sui-popup
