@@ -42,12 +42,22 @@ export default {
         })
         .catch(err => {
           console.log(err)
-          UIkit.notification({
-            message: 'Product not found! Please refresh page',
-            status: 'danger',
-            pos: 'bottom-center',
-            timeout: 1500
-          })
+          if (err.response.status === 403) {
+            const errors = err.response.data.message
+            UIkit.notification({
+              message: `${errors}`,
+              status: 'danger',
+              pos: 'top-right',
+              timeout: 1500
+            })
+          } else {
+            UIkit.notification({
+              message: 'Product not found! Please refresh page',
+              status: 'danger',
+              pos: 'bottom-center',
+              timeout: 1500
+            })
+          }
         })
     },
     picLoaded () {

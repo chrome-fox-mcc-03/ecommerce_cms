@@ -82,15 +82,25 @@ export default {
           })
         })
         .catch(err => {
-          const errors = err.response.data.message
-          errors.forEach(element => {
+          if (err.response.status === 403) {
+            const errors = err.response.data.message
             UIkit.notification({
-              message: `${element}`,
+              message: `${errors}`,
               status: 'danger',
               pos: 'top-right',
               timeout: 1500
             })
-          })
+          } else {
+            const errors = err.response.data.message
+            errors.forEach(element => {
+              UIkit.notification({
+                message: `${element}`,
+                status: 'danger',
+                pos: 'top-right',
+                timeout: 1500
+              })
+            })
+          }
         })
     }
   },

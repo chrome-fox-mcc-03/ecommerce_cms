@@ -73,13 +73,11 @@ export default {
         })
         .catch(err => {
           const errors = err.response.data.message
-          errors.forEach(element => {
-            UIkit.notification({
-              message: `${element}`,
-              status: 'danger',
-              pos: 'top-right',
-              timeout: 1500
-            })
+          UIkit.notification({
+            message: `${errors}`,
+            status: 'danger',
+            pos: 'top-right',
+            timeout: 1500
           })
         })
     }

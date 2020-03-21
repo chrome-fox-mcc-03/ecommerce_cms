@@ -1,13 +1,13 @@
 <template>
   <div class="product-list uk-child-width-expand@s" uk-grid>
-    <pic-loading v-if="isLoading"></pic-loading>
+    <loading v-if="isLoading"></loading>
     <product-card v-else v-for="(product) in products" :key="product.id" :product="product" @fetchProducts="fetchProducts" ></product-card>
   </div>
 </template>
 
 <script>
 import ProductCard from '../components/ProductCard.vue'
-import PicLoading from '../components/LoadingPic'
+import Loading from '../components/Loading.vue'
 export default {
   name: 'UserProducts',
   data () {
@@ -19,7 +19,7 @@ export default {
   },
   components: {
     ProductCard,
-    PicLoading
+    Loading
   },
   methods: {
     fetchProducts () {

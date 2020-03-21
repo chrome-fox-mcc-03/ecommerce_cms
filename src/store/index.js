@@ -23,12 +23,13 @@ export default new Vuex.Store({
     }
   },
   getters: {},
+  // https://ecommerce-cms-h8.herokuapp.com/products
   actions: {
     getProducts (context) {
       context.commit('SET_ISLOADING', true)
       return axios({
         method: 'GET',
-        url: 'https://ecommerce-cms-h8.herokuapp.com/products',
+        url: 'http://localhost:3000/products',
         headers: {
           token: localStorage.getItem('token')
         }
@@ -37,7 +38,7 @@ export default new Vuex.Store({
     getProductData (_, id) {
       return axios({
         method: 'GET',
-        url: `https://ecommerce-cms-h8.herokuapp.com/products/${id}`,
+        url: `http://localhost:3000/products/${id}`,
         headers: {
           token: localStorage.getItem('token')
         }
@@ -46,7 +47,7 @@ export default new Vuex.Store({
     addProduct (_, payload) {
       return axios({
         method: 'POST',
-        url: 'https://ecommerce-cms-h8.herokuapp.com/products',
+        url: 'http://localhost:3000/products',
         headers: {
           token: localStorage.getItem('token')
         },
@@ -56,7 +57,7 @@ export default new Vuex.Store({
     editProduct (_, payload) {
       return axios({
         method: 'PUT',
-        url: `https://ecommerce-cms-h8.herokuapp.com/products/${payload.id}`,
+        url: `http://localhost:3000/products/${payload.id}`,
         headers: {
           token: localStorage.getItem('token')
         },
@@ -66,7 +67,7 @@ export default new Vuex.Store({
     deleteProduct (context, id) {
       return axios({
         method: 'DELETE',
-        url: `https://ecommerce-cms-h8.herokuapp.com/products/${id}`,
+        url: `http://localhost:3000/products/${id}`,
         headers: {
           token: localStorage.getItem('token')
         },
@@ -78,7 +79,7 @@ export default new Vuex.Store({
     login (_, payload) {
       return axios({
         method: 'POST',
-        url: 'https://ecommerce-cms-h8.herokuapp.com/login',
+        url: 'http://localhost:3000/login',
         data: payload
       })
     },
