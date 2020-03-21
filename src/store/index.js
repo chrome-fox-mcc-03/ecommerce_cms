@@ -3,8 +3,8 @@ import Vuex from 'vuex'
 import axios from 'axios'
 
 Vue.use(Vuex)
-const URL = 'http://localhost:3000'
-// const URL = 'https://maxhamz-ecommerce-cms.herokuapp.com'
+// const URL = 'http://localhost:3000'
+const URL = 'https://maxhamz-ecommerce-cms.herokuapp.com'
 let data
 export default new Vuex.Store({
   state: {
@@ -134,7 +134,7 @@ export default new Vuex.Store({
       context.commit('SET_LOADING', true)
       axios({
         method: 'GET',
-        url: `http://localhost:3000/products/${id}`,
+        url: `${URL}/products/${id}`,
         headers: {
           token
         }
