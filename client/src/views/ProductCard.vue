@@ -1,16 +1,18 @@
 <template>
   <div class='col-md-3'>
-      <div class='card mb-3 p-3' style='width: 18rem;'>
+      <div class='card mb-3 p-3'>
         <img class='card-img-top' :src='imgUrl' alt='Card image cap'>
         <div class='card-body'>
-          <h5 class='card-title'>{{data.name}}</h5>
-          <p class='card-text'>{{data.description}}</p>
-          <p class='card-text'>Price: Rp. {{data.price}}</p>
-          <p class='card-text'>Stock: {{data.stock}} pc(s)</p>
-          <div class="row">
-            <router-link :to='`/product/${data.id}`' :data="data" class='btn btn-primary'>Update Data</router-link>
-            <button @click='confirmDelete(data.id)' class='btn btn-danger'>Delete Data</button>
-          </div>
+			<div class="card-content">
+				<h5 class='card-title'>{{data.name}}</h5>
+				<p class='card-text'>{{data.description}}</p>
+				<p class='card-text'>Price: Rp. {{data.price}}</p>
+				<p class='card-text'>Stock: {{data.stock}} pc(s)</p>
+			</div>
+			<div class="btn-action">
+				<router-link :to='`/product/${data.id}`' :data="data" class='btn btn-primary'>Update</router-link>
+				<button @click='confirmDelete(data.id)' class='btn btn-danger'>Delete</button>
+			</div>
         </div>
       </div>
     </div>
@@ -18,7 +20,6 @@
 
 <script>
 import Swal from 'sweetalert2'
-import axios from 'axios'
 
 const swalWithBootstrapButtons = Swal.mixin({
 	customClass: {
@@ -65,12 +66,15 @@ export default {
 			})
 				.then((result) => {
 					if (result.value) {
-						this.deleteProduct(id)
+						const obj = {
+							id
+						}
+						this.$store.dispatch('deleteProduct', obj)
 							.then((result) => {
-								this.$emit('fetchProduct')
+								this.$store.dispatch('getProducts')
 								Toast.fire({
 									icon: 'success',
-									title: 'Data deleted'
+									title: 'Data deleted!'
 								})
 							}).catch((err) => {
 								console.log(err.response)
@@ -81,21 +85,22 @@ export default {
 							})
 					}
 				})
-		}, //
-		deleteProduct (id) {
-			return axios({
-				method: 'delete',
-				url: 'http://localhost:3000/product/' + id,
-				headers: {
-					token: localStorage.getItem('token')
-				}
-			})
 		}
 	}
 }
 </script>
 
 <style>
+.card {
+	height: 500px;
+	background-color: whitesmoke;
+}
+
+.card-content {
+	height: 200px;
+	overflow-y: auto;
+}
+
 .card-img-top {
     width: 100%;
     height: 200px;

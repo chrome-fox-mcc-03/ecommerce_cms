@@ -45,7 +45,10 @@ const routes = [
 	{
 		path: '/product',
 		name: 'ProductList',
-		component: ProductList
+		component: ProductList,
+		meta: {
+			requiresAuth: true
+		}
 	},
 	{
 		path: '/product/:id',
@@ -75,7 +78,7 @@ router.beforeEach((to, from, next) => {
 				title: 'Please login first!'
 			})
 			next({
-				path: '/product'
+				path: '/'
 			})
 		}
 	} else {

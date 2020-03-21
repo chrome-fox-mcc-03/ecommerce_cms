@@ -22,7 +22,19 @@
 </template>
 
 <script>
-import axios from 'axios'
+import Swal from 'sweetalert2'
+
+const Toast = Swal.mixin({
+	toast: true,
+	position: 'bottom-start',
+	showConfirmButton: false,
+	timer: 3000,
+	timerProgressBar: true,
+	onOpen: (toast) => {
+		toast.addEventListener('mouseenter', Swal.stopTimer)
+		toast.addEventListener('mouseleave', Swal.resumeTimer)
+	}
+})
 
 export default {
 	data () {
@@ -37,34 +49,27 @@ export default {
 	},
 	methods: {
 		editProduct () {
-			axios({
-				url: 'http://localhost:3000/product/' + this.id,
-				method: 'put',
-				headers: {
-					token: localStorage.getItem('token')
-				},
-				data: {
-					name: this.name,
-					img_url: this.img_url,
-					description: this.description,
-					price: this.price,
-					stock: this.stock
-				}
-			})
+			const obj = {
+				id: this.id,
+				name: this.name,
+				img_url: this.img_url,
+				description: this.description,
+				price: this.price,
+				stock: this.stock
+			}
+			this.$store.dispatch('editProduct', obj)
 				.then((result) => {
 					this.$router.push({ name: 'ProductList' })
+					Toast.fire({
+						icon: 'success',
+						title: 'Data updated!'
+					})
 				}).catch((err) => {
 					console.log(err.response)
 				})
 		},
 		getProduct () {
-			axios({
-				url: 'http://localhost:3000/product/' + this.id,
-				method: 'get',
-				headers: {
-					token: localStorage.getItem('token')
-				}
-			})
+			this.$store.dispatch('getProduct', { id: this.id })
 				.then((result) => {
 					const fixReasult = result.data.data
 					this.name = fixReasult.name
@@ -74,6 +79,10 @@ export default {
 					this.price = fixReasult.price
 				}).catch((err) => {
 					console.log(err.response)
+					Toast.fire({
+						icon: 'error',
+						title: err.response.data.message
+					})
 				})
 		}
 	},

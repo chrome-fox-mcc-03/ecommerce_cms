@@ -1,8 +1,9 @@
 <template>
-  <div class='row'>
+  <div class='row mt-3'>
 	<div class='col-md-3'>
-      <div class='card mb-3 p-3' style='width: 18rem;'>
+      <div class='card mb-3 p-3 form-add-product'>
 		<h2>Add Product</h2>
+		<br>
         <form @submit.prevent='addProduct'>
             <div class="form-group">
                 <!-- <label for="name">Product name</label> -->
@@ -28,12 +29,11 @@
         </form>
       </div>
     </div>
-    <product-card v-for='product in products' :key="product.id" :data='product' @fetchProduct='getProducts'></product-card>
+    <product-card v-for='product in products' :key="product.id" :data='product'></product-card>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
 import ProductCard from './ProductCard'
 import Swal from 'sweetalert2'
 
@@ -52,7 +52,6 @@ const Toast = Swal.mixin({
 export default {
 	data () {
 		return {
-			products: [],
 			name: '',
 			img_url: '',
 			description: '',
@@ -60,50 +59,31 @@ export default {
 			stock: 0
 		}
 	},
+	computed: {
+		products () {
+			return this.$store.state.products
+		}
+	},
 	components: {
 		ProductCard
 	},
 	methods: {
-		getProducts () {
-			axios({
-				url: 'http://localhost:3000/product',
-				method: 'get',
-				headers: {
-					token: localStorage.getItem('token')
-				}
-			})
-				.then(({ data }) => {
-					this.products = data.data
-				}).catch((err) => {
-					console.log(err.response)
-					Toast.fire({
-						icon: 'error',
-						title: err.response.data.message
-					})
-				})
-		},
 		addProduct () {
-			axios({
-				url: 'http://localhost:3000/product',
-				method: 'post',
-				headers: {
-					token: localStorage.getItem('token')
-				},
-				data: {
-					name: this.name,
-					description: this.description,
-					img_url: this.img_url,
-					price: this.price,
-					stock: this.stock
-				}
-			})
+			const obj = {
+				name: this.name,
+				description: this.description,
+				img_url: this.img_url,
+				price: this.price,
+				stock: this.stock
+			}
+			this.$store.dispatch('addProduct', obj)
 				.then((result) => {
 					this.name = ''
 					this.description = ''
 					this.img_url = ''
 					this.price = ''
 					this.stock = 0
-					this.getProducts()
+					this.$store.dispatch('getProducts')
 					Toast.fire({
 						icon: 'success',
 						title: 'Data added!'
@@ -118,12 +98,22 @@ export default {
 		}
 	},
 	created () {
-		this.getProducts()
-		console.log(this.products)
+		this.$store.dispatch('getProducts')
+			.then((result) => {
+
+			}).catch((err) => {
+				console.log(err.response)
+				Toast.fire({
+					icon: 'error',
+					title: err.response.data.message
+				})
+			})
 	}
 }
 </script>
 
 <style>
-
+.form-add-product {
+	height: 500px;
+}
 </style>

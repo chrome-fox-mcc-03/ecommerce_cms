@@ -12,6 +12,11 @@ import Navbar from './components/Navbar'
 export default {
 	components: {
 		Navbar
+	},
+	created () {
+		if (localStorage.getItem('token')) {
+			this.$store.commit('SET_ISLOGIN', true)
+		}
 	}
 }
 </script>
@@ -23,6 +28,15 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  /* height: 100%; */
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.container {
+  padding-top: 60px !important;
 }
 
 #nav {
