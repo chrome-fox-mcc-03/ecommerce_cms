@@ -8,7 +8,7 @@
             <div class="navbar-nav">
                 <router-link class="nav-item nav-link" to="/dashboard/">All Products<span class="sr-only">(current)</span></router-link>
                 <router-link class="nav-item nav-link" to="/dashboard/add">Add New Product<span class="sr-only">(current)</span></router-link>
-                <a class="nav-item nav-link" @click="signOut">Logout<span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" @click="signOut">Sign Out<span class="sr-only">(current)</span></a>
             </div>
         </div>
     </nav>
