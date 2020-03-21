@@ -43,7 +43,7 @@ export default new Vuex.Store({
       commit('SET_LOADING', true)
       axios({
         method: 'get',
-        url: 'http://localhost:3000/products',
+        url: 'https://pure-basin-34507.herokuapp.com/products',
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -63,7 +63,7 @@ export default new Vuex.Store({
       commit('SET_LOADING', true)
       axios({
         method: 'get',
-        url: 'http://localhost:3000/admin/users',
+        url: 'https://pure-basin-34507.herokuapp.com/admin/users',
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -83,7 +83,7 @@ export default new Vuex.Store({
       commit('SET_LOADING', true)
       axios({
         method: 'post',
-        url: 'http://localhost:3000/admin/login',
+        url: 'https://pure-basin-34507.herokuapp.com/admin/login',
         data: payload
       })
         .then(({ data }) => {
@@ -108,7 +108,7 @@ export default new Vuex.Store({
       commit('SET_LOADING', true)
       axios({
         method: 'post',
-        url: 'http://localhost:3000/products',
+        url: 'https://pure-basin-34507.herokuapp.com/products',
         headers: {
           access_token: localStorage.getItem('access_token')
         },
@@ -133,7 +133,7 @@ export default new Vuex.Store({
       const id = payload
       axios({
         method: 'get',
-        url: `http://localhost:3000/products/${id}`,
+        url: `https://pure-basin-34507.herokuapp.com/products/${id}`,
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -154,7 +154,7 @@ export default new Vuex.Store({
       const id = payload.id
       axios({
         method: 'put',
-        url: `http://localhost:3000/products/${id}`,
+        url: `https://pure-basin-34507.herokuapp.com/products/${id}`,
         headers: {
           access_token: localStorage.getItem('access_token')
         },
@@ -182,7 +182,7 @@ export default new Vuex.Store({
       const id = payload
       axios({
         method: 'delete',
-        url: `http://localhost:3000/products/${id}`,
+        url: `https://pure-basin-34507.herokuapp.com/products/${id}`,
         headers: {
           access_token: localStorage.getItem('access_token')
         }
