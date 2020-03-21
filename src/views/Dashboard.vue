@@ -30,10 +30,10 @@ export default {
   },
   methods: {
     logout () {
-      localStorage.removeItem('token')
-      this.$router.push({
-        name: 'Login'
-      })
+      localStorage.clear()
+      this.$store.commit('SET_LOGIN', false)
+      this.$router.push('/login')
+      this.$toasted.success('Thanks for coming Admin!!')
     }
   },
   mounted () {
