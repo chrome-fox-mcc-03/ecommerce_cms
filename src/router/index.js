@@ -6,25 +6,26 @@ import ListProducts from '../views/ListProducts.vue'
 import Home from '../views/Home.vue'
 import AddProductForm from '../components/AddProductForm.vue'
 import EditProductForm from '../components/EditProductForm.vue'
+import Dashboard from '../components/Dashboard.vue'
 Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
     name: 'LandingPage',
-    component: LandingPage,
-    children: [
-      {
-        path: '/register',
-        name: 'RegisterForm',
-        component: RegisterForm
-      }
-    ]
+    component: LandingPage
+    // children: [
+    //   {
+    //     path: '/register',
+    //     name: 'RegisterForm',
+    //     component: RegisterForm
+    //   }
+    // ]
   },
-  // {
-  //   path: '/register',
-  //   name: 'RegisterForm',
-  //   component: RegisterForm
-  // },
+  {
+    path: '/register',
+    name: 'RegisterForm',
+    component: RegisterForm
+  },
   {
     path: '/home',
     name: 'Home',
@@ -38,12 +39,19 @@ const routes = [
     meta: { requiresAuth: true },
     children: [
       {
+        path: '',
+        component: Dashboard,
+        name: 'Dashboard'
+      },
+      {
         path: '/addProductForm',
-        component: AddProductForm
+        component: AddProductForm,
+        name: 'AddProductForm'
       },
       {
         path: '/editProductForm',
-        component: EditProductForm
+        component: EditProductForm,
+        name: 'EditProductForm'
       }
     ]
   },

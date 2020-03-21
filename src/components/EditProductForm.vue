@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar></Navbar>
+    <!-- <Navbar></Navbar> -->
     <h1>THIS IS EDIT FORM</h1>
     <!-- <p>{{ productInfo()  }}</p> -->
     <b-form class="forms" @submit.prevent="editProduct" @reset="onReset">
@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar.vue'
+// import Navbar from '../components/Navbar.vue'
 // const URL = 'http://localhost:3000'
 export default {
   name: 'AddProductForm',
@@ -89,7 +89,7 @@ export default {
     }
   },
   components: {
-    Navbar
+    // Navbar
   },
   methods: {
 
@@ -120,7 +120,7 @@ export default {
           this.$toasted.success((this.product.data[0].name + 'HAS BEEN EDITED'), {
             position: 'bottom-center'
           })
-          this.$router.push({ name: 'ListProducts' })
+          this.$router.push({ path: '/products' })
         })
         .catch(err => {
           console.log('ERROR CATCHED:')

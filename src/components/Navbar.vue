@@ -14,7 +14,7 @@
             <router-link to="/products">List Products</router-link>
           </b-nav-item>
           <b-nav-item>
-            <router-link to="/products/addProductForm">Add New Product</router-link>
+            <router-link to="/addProductForm">Add New Product</router-link>
           </b-nav-item>
         </b-navbar-nav>
 

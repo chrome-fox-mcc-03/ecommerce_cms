@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar></Navbar>
+    <!-- <Navbar></Navbar> -->
     <h2>ADD NEW PRODUCT</h2>
     <b-form class="forms" @submit.prevent="addNewProduct" @reset="onReset">
       <b-form-group
@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar.vue'
+// import Navbar from '../components/Navbar.vue'
 // const URL = 'http://localhost:3000'
 export default {
   name: 'AddProductForm',
@@ -88,7 +88,7 @@ export default {
     }
   },
   components: {
-    Navbar
+    // Navbar
   },
   methods: {
     // addNewProduct() { axios({}) }

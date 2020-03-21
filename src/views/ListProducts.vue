@@ -1,7 +1,7 @@
 <template>
   <div class="showpage">
     <Navbar></Navbar>
-    <div v-if="!isLoading" class="dashboard">
+    <!-- <div v-if="!isLoading" class="dashboard">
       <h2>LIST PRODUCTS</h2>
       <div class="row">
         <Card
@@ -13,18 +13,15 @@
     </div>
     <div v-else>
         <Loading></Loading>
-    </div>
+    </div> -->
+    <router-view/>
   </div>
 </template>
 <script>
 import Navbar from '../components/Navbar'
-import Card from '../components/Card'
-import Loading from '../components/Loading'
 export default {
   name: 'ListProducts',
   components: {
-    Card,
-    Loading,
     Navbar
   },
   data () {
@@ -32,15 +29,8 @@ export default {
   },
   methods: {},
   computed: {
-    products () {
-      return this.$store.state.products
-    },
-    isLoading () {
-      return this.$store.state.isLoading
-    }
   },
   created () {
-    this.$store.dispatch('getProducts')
   }
 }
 </script>
@@ -65,7 +55,7 @@ export default {
     /* width: 65% !important; */
     width: 100% !important;
     margin:2vh auto;
-    /* left:25%; 
+    /* left:25%;
     right:0; */
     display: flex;
     padding:2vh;

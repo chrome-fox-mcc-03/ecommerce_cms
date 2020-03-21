@@ -60,7 +60,7 @@ export default {
           console.log('LOGIN SUCCESS')
           // console.log(response)
           localStorage.setItem('token', response.data.token)
-          this.$router.push({ name: 'ListProducts' })
+          this.$router.push({ path: '/products' })
           this.$store.commit('SET_LOGIN', true)
         })
         .catch(err => {
