@@ -17,11 +17,11 @@
           </div>
           <div class="modaltag">
             <p>Price :</p>
-            <at-input :min="0" v-model="price" placeholder="Please input Price"></at-input>
+            <at-input type='number' v-model="price" placeholder="Please input Price"></at-input>
           </div>
           <div class="modaltag">
             <p>Stock :</p>
-            <at-input :min="0" v-model="stock" placeholder="Please input Stock input"></at-input>
+            <at-input :min="0" type='number' v-model="stock" placeholder="Please input Stock input"></at-input>
           </div>
           <div class="modaltag">
             <p>Url Image : </p>
@@ -57,17 +57,13 @@ export default {
       this.start()
       this.$store.dispatch('addProduct', payload)
         .then(data => {
-          console.log(data.data)
           this.finish()
           this.open3('add success')
           this.closeModal2()
         })
-        .catch(err => {
+        .catch(error => {
           this.error()
-          this.open4(err.response.data.message)
-        })
-        .finally(_ => {
-          console.log('asdsad')
+          this.open4(error.response.data.message)
         })
     },
     start () {

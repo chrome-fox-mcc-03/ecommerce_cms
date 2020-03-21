@@ -55,6 +55,13 @@ const routes = [
         next()
       }
     }
+  },
+  {
+    path: '/',
+    name: 'blank',
+    beforeEnter: (to, from, next) => {
+      router.push('/login')
+    }
   }
 ]
 

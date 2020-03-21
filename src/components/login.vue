@@ -39,10 +39,9 @@ export default {
           localStorage.setItem('token', data.data.token)
           this.$router.push('/admin/product')
         })
-        .catch(err => {
+        .catch(error => {
           this.error()
-          this.open4('error faild')
-          console.log(err)
+          this.open4(error.response.data.message)
         })
     },
     start () {

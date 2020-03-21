@@ -150,15 +150,16 @@ export default {
         .then(data => {
           this.finish()
           this.closeModal2()
+          this.open3(data.data.message)
           this.fecthData()
         })
-        .catch(err => {
+        .catch(error => {
           this.error()
-          console.log(err.response)
+          this.open4(error.response.data.message)
         })
     },
     open3 (message) {
-      this.$Notify({
+      this.$Notify.success({
         message,
         duration: 2000
       })

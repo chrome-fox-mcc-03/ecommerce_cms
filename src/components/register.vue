@@ -1,7 +1,7 @@
 <template>
   <div class="register">
     <at-card style="width: 300px;" :bordered="false">
-      <h3 slot="title">Register</h3>
+      <h3 slot="title">Add new Admin</h3>
       <div>
         <form>
           <div class="input">
@@ -35,11 +35,12 @@ export default {
       this.$store.dispatch('register', payload)
         .then(data => {
           this.finish()
+          this.open3('Register success')
           this.$router.push('/admin/product')
         })
-        .catch(err => {
-          console.log(err)
+        .catch(error => {
           this.error()
+          this.open4(error.response.data.message)
         })
     },
     start () {
@@ -51,10 +52,9 @@ export default {
     error () {
       this.$Loading.error()
     },
-    open3 () {
-      this.$Notify({
-        title: 'Here is Title',
-        message: 'Here is Content~~~',
+    open3 (message) {
+      this.$Notify.success({
+        message,
         duration: 2000
       })
     },
