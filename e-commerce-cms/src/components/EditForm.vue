@@ -61,12 +61,10 @@ export default {
         id: this.$route.params.id
       })
         .then(({ data }) => {
-          console.log('updated successfully', data)
           this.$vToastify.success(data.name, 'Successfully edited')
           this.$router.push('/dashboard')
         })
         .catch(err => {
-          console.log(err)
           for (let i = 0; i < err.response.data.message.length; i++) {
             this.$vToastify.error(err.response.data.message[i], 'Oops')
           }
@@ -89,7 +87,7 @@ export default {
         this.category = data.category
       })
       .catch(err => {
-        console.log(err)
+        this.$vToastify.error(err.response.data.message, 'Oops')
       })
       .finally(_ => {
         this.$store.commit('SET_ISLOADING', false)

@@ -36,12 +36,10 @@ export default {
     signIn: function () {
       this.$store.dispatch('signIn', { email: this.email, password: this.password })
         .then(({ data }) => {
-          console.log('hore masuk', data)
           localStorage.setItem('token', data.token)
           this.$router.push('/dashboard')
         })
         .catch(err => {
-          console.log(err.response.data)
           this.$vToastify.error(err.response.data.message, 'Login Error')
         })
     }

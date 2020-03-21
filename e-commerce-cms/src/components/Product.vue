@@ -33,12 +33,11 @@ export default {
     deleteProduct: function (id) {
       this.$store.dispatch('deleteProduct', id)
         .then(({ data }) => {
-          console.log(data)
           this.$vToastify.success(`Successfully deleted ${data.name}`)
           this.$store.dispatch('fetchProducts')
         })
         .catch(err => {
-          console.log(err)
+          this.$vToastify.error(err.response.data, 'Oops')
         })
     }
   }

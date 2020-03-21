@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 
 Vue.use(Vuex)
+const baseURL = 'https://polar-badlands-09758.herokuapp.com'
 
 export default new Vuex.Store({
   state: {
@@ -21,7 +22,7 @@ export default new Vuex.Store({
     signIn (context, payload) {
       return axios({
         method: 'post',
-        url: 'http://localhost:3000/signin/admin',
+        url: `${baseURL}/signin/admin`,
         data: {
           email: payload.email,
           password: payload.password
@@ -32,17 +33,16 @@ export default new Vuex.Store({
       context.commit('SET_ISLOADING', true)
       axios({
         method: 'get',
-        url: 'http://localhost:3000/products',
+        url: `${baseURL}/products`,
         headers: {
           token: localStorage.getItem('token')
         }
       })
         .then(({ data }) => {
-          console.log('Fetched!', data)
           context.commit('SET_PRODUCTS', data)
         })
         .catch(err => {
-          console.log(err)
+          this.$vToastify.error(err.response.data, 'Error Fetching Data')
         })
         .finally(_ => {
           context.commit('SET_ISLOADING', false)
@@ -52,7 +52,7 @@ export default new Vuex.Store({
       context.commit('SET_ISLOADING', true)
       return axios({
         method: 'post',
-        url: 'http://localhost:3000/products',
+        url: 'https://polar-badlands-09758.herokuapp.com/products',
         headers: {
           token: localStorage.getItem('token')
         },
@@ -69,7 +69,7 @@ export default new Vuex.Store({
       context.commit('SET_ISLOADING', true)
       return axios({
         method: 'get',
-        url: `http://localhost:3000/products/${id}`,
+        url: `https://polar-badlands-09758.herokuapp.com/products/${id}`,
         headers: {
           token: localStorage.getItem('token')
         }
@@ -79,7 +79,7 @@ export default new Vuex.Store({
       context.commit('SET_ISLOADING', true)
       return axios({
         method: 'put',
-        url: `http://localhost:3000/products/${payload.id}`,
+        url: `https://polar-badlands-09758.herokuapp.com/products/${payload.id}`,
         headers: {
           token: localStorage.getItem('token')
         },
@@ -95,7 +95,7 @@ export default new Vuex.Store({
     deleteProduct (context, id) {
       return axios({
         method: 'delete',
-        url: `http://localhost:3000/products/${id}`,
+        url: `https://polar-badlands-09758.herokuapp.com/products/${id}`,
         headers: {
           token: localStorage.getItem('token')
         }

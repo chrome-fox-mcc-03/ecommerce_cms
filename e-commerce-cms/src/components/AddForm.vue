@@ -46,7 +46,6 @@ export default {
   },
   methods: {
     addProduct: function () {
-      console.log('addddd!!!')
       this.$store.dispatch('addProduct', {
         name: this.name,
         price: this.price,
@@ -55,12 +54,10 @@ export default {
         category: this.category
       })
         .then(({ data }) => {
-          console.log(data)
           this.$vToastify.success(data.name, 'Successfully added')
           this.$router.push('/dashboard')
         })
         .catch(err => {
-          console.log(err.response.data)
           for (let i = 0; i < err.response.data.message.length; i++) {
             this.$vToastify.error(err.response.data.message[i], 'Oops')
           }
