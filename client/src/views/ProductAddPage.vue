@@ -1,26 +1,30 @@
 <template>
 <div class="container">
-  <div class="box mt-5">
-  <label>Add Product</label>
+  <div class="box mt-5 ml-5">
+  <h1>Add Product Form</h1>
     <form>
       <div class="form-row">
+        <label class="ml-3 mb-4">Name Product</label>
         <div class="form-group text-align-center col-md-12">
-          <input type="text" class="form-control" placeholder="Name" v-model="name">
+          <input type="text" class="form-control" placeholder="Input Name Product ..." v-model="name">
         </div>
       </div>
       <div class="form-row">
+        <label class="ml-3 mb-4">Image-Url</label>
         <div class="form-group text-align-center col-md-12">
-          <input type="text" class="form-control" placeholder="Image" v-model="image">
+          <input type="text" class="form-control" placeholder="Input Image Url ..." v-model="image">
         </div>
       </div>
       <div class="form-row">
+        <label class="ml-3 mb-4">Price</label>
         <div class="form-group text-align-center col-md-12">
-          <input type="text" class="form-control" placeholder="Price" v-model="price">
+          <input type="text" class="form-control" placeholder="Input Price ..." v-model="price">
         </div>
       </div>
       <div class="form-row">
+        <label class="ml-3 mb-4">Stock</label>
         <div class="form-group text-align-center col-md-12">
-          <input type="text" class="form-control" placeholder="Stock" v-model="stock">
+          <input type="text" class="form-control" placeholder="Input Stock ..." v-model="stock">
         </div>
       </div>
       <button type="submit" class="btn btn-primary" @click.prevent="addProduct">Add Product</button>
@@ -77,11 +81,15 @@ export default {
 <style scoped>
   .box {
     width: 80%;
-    height: 100vh;
   }
   .form-control {
     border-top: white;
     border-right: white;
     border-left: white;
+  }
+  .form-control:focus {
+    outline: none;
+    border: none;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 3px 0px rgba(255, 0, 0, 0.322);
   }
 </style>
