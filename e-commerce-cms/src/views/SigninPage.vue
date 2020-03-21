@@ -2,8 +2,11 @@
   <div class="signin-page">
     <Loading v-if="isLoading" />
     <form @submit.prevent="signIn">
-    <h2>Sign In As Admin</h2>
-    <div class="form-group mt-5">
+      <div class="d-flex flex-column align-items-center">
+        <img src="../../public/Shoesify-Logo.svg" style="width: 50px" class="mb-3" alt="Logo">
+        <h2>Sign In As Admin</h2>
+      </div>
+    <div class="form-group mt-3">
       <label for="exampleInputEmail1">Email address</label>
       <input v-model="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="admin@gmail.com">
     </div>
@@ -53,7 +56,7 @@ export default {
 
 <style>
 .signin-page {
-  background-color: rgb(54, 54, 54);
+  background: linear-gradient(180deg, rgba(100,100,100,1) 0%, rgba(43,43,43,1) 100%);
   color: white;
   height: 100vh;
   display: flex;
