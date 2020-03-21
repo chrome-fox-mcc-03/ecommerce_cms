@@ -73,7 +73,7 @@ export default {
           this.products = productSelection
         })
         .catch(err => {
-          console.log(err.response)
+          this.$vToastify.error('error', err)
         })
     },
     showFormEditProduct (productId) {

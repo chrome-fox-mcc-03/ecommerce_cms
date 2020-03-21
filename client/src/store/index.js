@@ -28,21 +28,21 @@ export default new Vuex.Store({
   actions: {
     registerOn (context, payload) {
       return axios({
-        url: 'http://localhost:3000/register',
+        url: 'https://morning-chamber-86086.herokuapp.com/register',
         method: 'POST',
         data: payload
       })
     },
     loginOn (context, payload) {
       return axios({
-        url: 'http://localhost:3000/login',
+        url: 'https://morning-chamber-86086.herokuapp.com/login',
         method: 'POST',
         data: payload
       })
     },
     fetchProducts (context, payload) {
       return axios({
-        url: 'http://localhost:3000/products',
+        url: 'https://morning-chamber-86086.herokuapp.com/products',
         method: 'GET',
         headers: {
           access_token: localStorage.access_token
@@ -51,7 +51,7 @@ export default new Vuex.Store({
     },
     addProduct (context, payload) {
       return axios({
-        url: 'http://localhost:3000/products',
+        url: 'https://morning-chamber-86086.herokuapp.com/products',
         method: 'POST',
         data: payload,
         headers: {
@@ -61,7 +61,7 @@ export default new Vuex.Store({
     },
     fetchOneProduct (context, productId) {
       axios({
-        url: 'http://localhost:3000/products/' + productId,
+        url: 'https://morning-chamber-86086.herokuapp.com/products/' + productId,
         method: 'GET',
         headers: {
           access_token: localStorage.access_token
@@ -76,7 +76,7 @@ export default new Vuex.Store({
     },
     editProduct (context, payload) {
       return axios({
-        url: 'http://localhost:3000/products/' + payload.productId,
+        url: 'https://morning-chamber-86086.herokuapp.com/products/' + payload.productId,
         method: 'PUT',
         data: payload.payload,
         headers: {
@@ -86,7 +86,7 @@ export default new Vuex.Store({
     },
     deleteProduct (context, productId) {
       return axios({
-        url: 'http://localhost:3000/products/' + productId,
+        url: 'https://morning-chamber-86086.herokuapp.com/products/' + productId,
         method: 'DELETE',
         headers: {
           access_token: localStorage.access_token
@@ -95,7 +95,7 @@ export default new Vuex.Store({
     },
     fetchCategories (context) {
       axios({
-        url: 'http://localhost:3000/categories',
+        url: 'https://morning-chamber-86086.herokuapp.com/categories',
         method: 'GET'
       })
         .then(({ data }) => {
