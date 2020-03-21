@@ -13,7 +13,8 @@ export default {
   data () {
     return {
       products: [],
-      isLoading: false
+      isLoading: false,
+      errMessage: ''
     }
   },
   components: {
@@ -27,7 +28,7 @@ export default {
           this.products = [...response.data.response]
         })
         .catch(err => {
-          console.log(err.response)
+          this.errMessage = err.response
         })
         .finally(_ => {
           this.isLoading = false
