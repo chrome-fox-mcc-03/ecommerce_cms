@@ -25,7 +25,8 @@ import { BTable } from 'bootstrap-vue'
 export default {
   data () {
     return {
-      fields: ['id', 'name', 'price', 'stock', 'actions']
+      fields: ['id', 'name', 'price', 'stock', 'actions'],
+      errorMsg: ''
     }
   },
   computed: {
@@ -68,7 +69,7 @@ export default {
         })
       })
       .catch(err => {
-        console.log(err)
+        this.errorMsg = err.response.data
       })
       .finally(_ => {
         setTimeout(() => {
