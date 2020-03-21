@@ -25,7 +25,32 @@ const routes = [
         }
       },
       {
-        path: 'item-create',
+        path: ':itemId',
+        name: 'ItemDetails',
+        component: () => {
+          return import('../components/ItemDetail')
+        },
+        props: true,
+        children: [
+          {
+            path: 'edit',
+            name: 'ItemEdit',
+            component: () => {
+              return import('../components/ItemEdit')
+            }
+          },
+          {
+            path: 'delete',
+            name: 'ItemDelete',
+            props: true,
+            component: () => {
+              return import('../components/Confirmation')
+            }
+          }
+        ]
+      },
+      {
+        path: 'addItem',
         name: 'ItemCreate',
         component: () => {
           return import('../components/ItemCreate')

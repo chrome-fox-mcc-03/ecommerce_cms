@@ -9,7 +9,9 @@ export default new Vuex.Store({
   state: {
     isLoading: false,
     items: [],
-    categories: []
+    item: {},
+    categories: [],
+    filterId: null
   },
   mutations: {
     LOADING (state) {
@@ -20,6 +22,12 @@ export default new Vuex.Store({
     },
     ITEMS (state, payload) {
       state.items = payload.items
+    },
+    ITEM (state, payload) {
+      state.item = payload.item
+    },
+    SET_FILTERID (state, payload) {
+      state.filterId = payload
     },
     SUCCESS (state, payload) {
       M.toast({
@@ -40,7 +48,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    login ({ commit }, payload) {
+    login (_, payload) {
       return Axios({
         url: '/loginAdmin',
         method: 'POST',
@@ -57,10 +65,22 @@ export default new Vuex.Store({
         method: 'GET'
       })
         .then(({ data }) => {
-          console.log(data)
           commit('ITEMS', data)
         })
         .catch(err => commit('ERROR', `Something went wrong... ${err}`))
+        .finally(() => commit('LOADING'))
+    },
+    fetchOneItem ({ commit }, payload) {
+      commit('LOADING')
+      const { itemId } = payload
+      Axios({
+        url: `/items/${itemId}`,
+        method: 'GET'
+      })
+        .then(({ data }) => {
+          commit('ITEM', data)
+        })
+        .catch(err => commit('ERROR', err))
         .finally(() => commit('LOADING'))
     },
     fetchCategories ({ commit }) {
@@ -69,7 +89,6 @@ export default new Vuex.Store({
         method: 'GET'
       })
         .then(({ data }) => {
-          console.log(data)
           commit('CATEGORIES', { categories: data.categories })
         })
         .catch(err => commit('ERROR', `Something went wrong... ${err}`))
@@ -83,13 +102,31 @@ export default new Vuex.Store({
         headers: { token },
         data: { name, imageUrl, price, stock, CategoryId }
       })
+    },
+    editItem (_, payload) {
+      const { id, name, imageUrl, price, stock, CategoryId } = payload
+      const token = localStorage.getItem('token')
+      return Axios({
+        url: `/items/${id}/update`,
+        method: 'PUT',
+        headers: { token },
+        data: { name, imageUrl, price, stock, CategoryId }
+      })
+    },
+    deleteItem (_, payload) {
+      const { itemId } = payload
+      const token = localStorage.getItem('token')
+      return Axios({
+        url: `/items/${itemId}/delete`,
+        method: 'DELETE',
+        headers: { token }
+      })
     }
   },
   getters: {
-    getItemsByCategory: (state) => (CategoryId) => {
-      console.log(CategoryId, 'dari getters')
-      if (!CategoryId) return state.items
-      else return state.items.filter(item => item.CategoryId === CategoryId)
+    getItemsByCategory: (state) => {
+      if (!state.filterId) return state.items
+      else return state.items.filter(item => item.CategoryId === state.filterId)
     }
   }
 })

@@ -1,6 +1,6 @@
 <template>
   <div id="item-card" class="col s3">
-    <div class="card z-depth-2 hoverable">
+    <div class="card medium z-depth-2 hoverable">
       <div class="card-image">
         <img :src="item.imageUrl">
       </div>

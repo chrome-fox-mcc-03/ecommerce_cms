@@ -6,7 +6,7 @@
         v-for="item in items"
         :key="item.id"
         :item="item"
-        @click.native="$router.push('/admin')"
+        @click.native="$router.push(`/admin/${item.id}`)"
       />
     </div>
   </div>
@@ -21,8 +21,7 @@ export default {
   },
   computed: {
     items () {
-      console.log(this.$store.getters.getItemsByCategory(), 'dari computed')
-      return this.$store.getters.getItemsByCategory()
+      return this.$store.getters.getItemsByCategory
     }
   },
   created () {

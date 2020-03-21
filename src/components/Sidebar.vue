@@ -16,12 +16,13 @@
             <a class="collapsible-header">Categories<i class="material-icons right">arrow_drop_down</i></a>
             <div class="collapsible-body">
               <ul class="brown lighten-4">
-                <li><router-link to="/admin" @click="filterItem()">All Items</router-link></li>
+                <li @click="filterItem(null)"><router-link to="/admin">All Items</router-link></li>
                 <li
                   v-for="category in categories"
                   :key="category.id"
+                  @click="filterItem(category.id)"
                 >
-                  <router-link to="/admin" @click="filterItem(category.id)">{{ category.name }}</router-link>
+                  <router-link to="/admin">{{ category.name }}</router-link>
                 </li>
                 <li><div class="divider"></div></li>
               </ul>
@@ -45,7 +46,7 @@ export default {
   },
   methods: {
     filterItem (CategoryId) {
-      this.$store.getters.getItemsByCategory(CategoryId)
+      this.$store.commit('SET_FILTERID', CategoryId)
     }
   },
   mounted () {

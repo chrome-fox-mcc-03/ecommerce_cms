@@ -1,14 +1,15 @@
 <template>
-  <div id="create-item" class="row">
-    <div class="col s10 offset-s1">
+  <transition name="slide">
+  <div id="edit-item" class="row">
+    <div class="col s12">
       <div class="card z-depth-3 brown lighten-4">
         <div class="card-content">
-          <span class="card-title">Add Item</span>
-          <form id="create-item-form" @submit.prevent="createItem">
+          <span class="card-title">Edit Item</span>
+          <form id="create-item-form" @submit.prevent="editItem">
             <div class="row">
               <div class="input-field col s12">
                 <input v-model="form.name" id="name" type="text" class="validate" required>
-                <label for="name">Item name</label>
+                <label for="name" class="active">Item name</label>
               </div>
             </div>
 
@@ -26,7 +27,7 @@
             <div class="row">
               <div class="input-field col s12">
                 <input v-model="form.imageUrl" id="imgaeUrl" type="url" class="validate">
-                <label for="name">Image url</label>
+                <label for="name" class="active">Image url</label>
               </div>
             </div>
 
@@ -45,7 +46,7 @@
 
             <div class="row">
               <div class="col s12 center">
-                <button type="submit" class="waves-effect waves-light btn-large">Add New Item</button>
+                <button type="submit" class="waves-effect waves-light btn-large">Edit Item</button>
               </div>
             </div>
           </form>
@@ -53,67 +54,46 @@
       </div>
     </div>
   </div>
+  </transition>
 </template>
 
 <script>
 import M from 'materialize-css'
 export default {
-  name: 'ItemCreate',
+  name: 'ItemEdit',
+  props: {
+    item: Object
+  },
   data () {
     return {
       form: {
-        name: '',
-        price: 0,
-        stock: 0,
-        imageUrl: '',
-        CategoryId: ''
+        id: this.item.id,
+        name: this.item.name,
+        imageUrl: this.item.imageUrl,
+        price: this.item.price,
+        stock: this.item.stock,
+        CategoryId: this.item.Category.id
       },
       categories: ['rice', 'noodle and pasta', 'meat', 'pastry', 'beverage']
     }
   },
-  // computed: {
-  //   categories () {
-  //     console.log(this.$store.state.categories, 'dari item create')
-  //     return this.$store.state.categories
-  //   }
-  // },
   methods: {
-    createItem () {
+    editItem () {
       this.$store.commit('LOADING')
-      this.$store.dispatch('createItems', this.form)
+      this.$store.dispatch('editItem', this.form)
         .then(({ data }) => {
-          this.emptyForm()
+          this.$store.dispatch('fetchOneItem', { itemId: this.item.id })
+          this.$router.push(`/admin/${this.item.id}`)
           this.$store.commit('SUCCESS', data.message)
         })
         .catch(err => this.$store.commit('ERROR', err))
         .finally(() => this.$store.commit('LOADING'))
-    },
-    emptyForm () {
-      this.form.name = ''
-      this.form.imageUrl = ''
-      this.form.stock = ''
-      this.form.price = ''
-      this.form.CategoryId = ''
     }
-    // fetchCategories () {
-    //   Axios({
-    //     url: '/categories',
-    //     method: 'GET'
-    //   })
-    //     .then(({ data }) => {
-    //       console.log(data, 'dari fetch item create')
-    //       this.categories = data.categories
-    //     })
-    //     .catch(err => this.$store.commit('ERROR', err))
-    // }
   },
-  beforeCreate () {
+  created () {
     M.AutoInit()
     const elems = document.querySelectorAll('select')
     M.FormSelect.init(elems)
-    M.updateTextFields()
-    // this.$store.dispatch('fetchCategories')
-    // this.fetchCategories()
   }
 }
 </script>
