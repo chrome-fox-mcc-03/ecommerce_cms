@@ -54,8 +54,7 @@
                           <v-textarea v-model="editedItem.description" label="Product Description" rows="2"  hide-details no-resize></v-textarea>
                         </v-col>
                         <v-col cols="12">
-                          <!-- <v-text-field v-model="editedItem.imageUrl" label="Image"></v-text-field> -->
-
+                          <v-text-field v-model="editedItem.imageUrl" label="Image"></v-text-field>
                         </v-col>
                         <v-col cols="12">
                           <v-checkbox v-model="editedItem.isActive" :label="`Product is active?`"></v-checkbox>
