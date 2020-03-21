@@ -70,7 +70,6 @@ export default {
     },
   },
   created() {
-    console.log(this.category);
   },
 };
 </script>
