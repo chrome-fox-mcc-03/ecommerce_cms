@@ -16,7 +16,7 @@ import Vuetify, {
   VIcon,
   VTextarea,
   VCheckbox,
-  VApp
+  VOverlay
 } from 'vuetify/lib'
 
 Vue.use(Vuetify, {
@@ -37,7 +37,7 @@ Vue.use(Vuetify, {
     VIcon,
     VTextarea,
     VCheckbox,
-    VApp
+    VOverlay
   }
 })
 

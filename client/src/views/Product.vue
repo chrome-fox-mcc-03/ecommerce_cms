@@ -1,121 +1,124 @@
 <template>
-  <div class="d-flex flex-column pt-3 pb-2 mb-3 border-bottom">
-    <div>
-      <v-app>
-        <v-data-table
+    <div data-app>
+      <loading-overlay v-if="isLoading"></loading-overlay>
+      <v-data-table
         :headers="headers"
         :items="products"
         :search="search"
         sort-by="name"
         class="elevation-1"
-        >
-          <template v-slot:top>
-            <v-toolbar flat color="white">
-              <v-toolbar-title>Products</v-toolbar-title>
-              <v-divider
-                class="mx-4"
-                inset
-                vertical
-              ></v-divider>
-              <v-spacer></v-spacer>
-              <v-text-field
-                v-model="search"
-                append-icon="mdi-magnify"
-                label="Search"
-                single-line
-                hide-details
-              ></v-text-field>
-              <v-spacer></v-spacer>
-              <v-dialog v-model="dialog" max-width="70vw">
-                <template v-slot:activator="{ on }">
-                  <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
-                </template>
-                <v-card>
-                  <v-card-title>
-                    <span class="headline">{{ formTitle }}</span>
-                  </v-card-title>
+      >
+        <template v-slot:top>
+          <v-toolbar flat color="white">
+            <v-toolbar-title>Products</v-toolbar-title>
+            <v-divider
+              class="mx-4"
+              inset
+              vertical
+            ></v-divider>
+            <v-spacer></v-spacer>
+            <v-text-field
+              v-model="search"
+              append-icon="mdi-magnify"
+              label="Search"
+              single-line
+              hide-details
+            ></v-text-field>
+            <v-spacer></v-spacer>
+            <v-dialog v-model="dialog" max-width="70vw">
+              <template v-slot:activator="{ on }">
+                <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <span class="headline">{{ formTitle }}</span>
+                </v-card-title>
 
-                  <v-card-text>
-                    <v-container>
-                      <v-row>
-                        <v-col sm="12" md="4">
-                          <v-text-field v-model="editedItem.name" label="Product Name"></v-text-field>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col sm="12" md="4">
+                        <v-text-field v-model="editedItem.name" label="Product Name"></v-text-field>
+                      </v-col>
+                      <v-col sm="12" md="4">
+                        <v-text-field v-model="editedItem.stock" label="Stock Qty."></v-text-field>
+                      </v-col>
+                      <v-col sm="12" md="4">
+                        <v-text-field v-model="editedItem.price" label="Price"></v-text-field>
+                      </v-col>
+                      <v-col sm="12" md="8">
+                        <v-textarea v-model="editedItem.description" label="Product Description"></v-textarea>
+                      </v-col>
+                      <v-col sm="12" md="4">
+                        <v-col sm="12">
+                          <v-text-field v-model="editedItem.imageUrl" label="Image"></v-text-field>
                         </v-col>
-                        <v-col sm="12" md="4">
-                          <v-text-field v-model="editedItem.stock" label="Stock Qty."></v-text-field>
+                        <v-col sm="12">
+                          <v-checkbox v-model="editedItem.isActive" :label="`Product is active?`"></v-checkbox>
                         </v-col>
-                        <v-col sm="12" md="4">
-                          <v-text-field v-model="editedItem.price" label="Price"></v-text-field>
-                        </v-col>
-                        <v-col sm="12" md="8">
-                          <v-textarea v-model="editedItem.description" label="Product Description"></v-textarea>
-                        </v-col>
-                        <v-col sm="12" md="4">
-                          <v-col sm="12">
-                            <v-text-field v-model="editedItem.imageUrl" label="Image"></v-text-field>
-                          </v-col>
-                          <v-col sm="12">
-                            <v-checkbox v-model="editedItem.isActive" :label="`Product is active?`"></v-checkbox>
-                          </v-col>
-                        </v-col>
-                      </v-row>
-                    </v-container>
-                  </v-card-text>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
 
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-                    <v-btn color="blue darken-1" text @click="save">Save</v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
-            </v-toolbar>
-          </template>
-          <template v-slot:item.price="{ item }">
-            <span>{{getFormattedNumber(item.price)}}</span>
-          </template>
-          <template v-slot:item.stock="{ item }">
-            <span>{{getFormattedNumber(item.stock)}}</span>
-          </template>
-          <template v-slot:item.isActive="{ item }">
-            <span>{{item.isActive ? 'Active' : 'Inactive'}}</span>
-          </template>
-          <template v-slot:item.actions="{ item }">
-            <v-icon
-              small
-              class="mr-2"
-              @click="editItem(item)"
-            >
-              mdi-pencil
-            </v-icon>
-            <v-icon
-              small
-              @click="confirmDelete(item)"
-            >
-              mdi-delete
-            </v-icon>
-          </template>
-        </v-data-table>
-        <v-dialog v-model="delDialog" persistent max-width="290">
-            <v-card>
-              <v-card-title class="headline">Are you sure?</v-card-title>
-              <v-card-text>You won't be able to revert this!</v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="green darken-1" text @click="deleteItem(false)">Cancel</v-btn>
-                <v-btn color="green darken-1" text @click="deleteItem(true)">OK</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-      </v-app>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
+                  <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-toolbar>
+        </template>
+        <template v-slot:item.price="{ item }">
+          <span>{{getFormattedNumber(item.price)}}</span>
+        </template>
+        <template v-slot:item.stock="{ item }">
+          <span>{{getFormattedNumber(item.stock)}}</span>
+        </template>
+        <template v-slot:item.isActive="{ item }">
+          <span>{{item.isActive ? 'Active' : 'Inactive'}}</span>
+        </template>
+        <template v-slot:item.actions="{ item }">
+          <v-icon
+            small
+            class="mr-2"
+            @click="editItem(item)"
+          >
+            mdi-pencil
+          </v-icon>
+          <v-icon
+            small
+            @click="confirmDelete(item)"
+          >
+            mdi-delete
+          </v-icon>
+        </template>
+      </v-data-table>
+      <v-dialog v-model="delDialog" persistent max-width="290">
+        <v-card>
+          <v-card-title class="headline">Are you sure?</v-card-title>
+          <v-card-text>You won't be able to revert this!</v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="green darken-1" text @click="deleteItem(false)">Cancel</v-btn>
+            <v-btn color="green darken-1" text @click="deleteItem(true)">OK</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </div>
-  </div>
 </template>
 
 <script>
+import LoadingOverlay from '../components/LoadingOverlay'
 import Axios from 'axios'
 export default {
+  components: {
+    LoadingOverlay
+  },
   data: () => ({
+    absolute: true,
+    isLoading: false,
     search: '',
     dialog: false,
     delDialog: false,
@@ -166,6 +169,7 @@ export default {
   },
   methods: {
     initialize () {
+      this.isLoading = true
       Axios({
         method: 'GET',
         url: 'http://localhost:3000/products'
@@ -177,9 +181,11 @@ export default {
           })
         })
         .catch(err => {
+          this.$store.commit('SET_ERROROBJ', err.response.data)
           console.log('something is error', err)
         })
         .finally(() => {
+          this.isLoading = false
         })
     },
     editItem (item) {
@@ -190,6 +196,7 @@ export default {
     deleteItem (confirm) {
       this.delDialog = false
       if (confirm) {
+        this.isLoading = true
         const token = localStorage.getItem('token')
         const { id } = this.delObj.item
 
@@ -206,7 +213,7 @@ export default {
             this.$store.commit('SET_ERROROBJ', err.response.data)
           })
           .finally(() => {
-
+            this.isLoading = false
           })
       } else {
         this.delObj = {
@@ -223,6 +230,7 @@ export default {
       }, 300)
     },
     save () {
+      this.isLoading = true
       if (this.editedIndex > -1) {
         const token = localStorage.getItem('token')
         const { id, name, description, stock, price, imageUrl, isActive } = this.editedItem
@@ -248,7 +256,7 @@ export default {
             this.$store.commit('SET_ERROROBJ', err.response.data)
           })
           .finally(() => {
-
+            this.isLoading = false
           })
       } else {
         const token = localStorage.getItem('token')
@@ -277,7 +285,7 @@ export default {
             this.$store.commit('SET_ERROROBJ', err.response.data)
           })
           .finally(() => {
-
+            this.isLoading = false
           })
       }
       this.close()
