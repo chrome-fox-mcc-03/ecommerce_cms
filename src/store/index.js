@@ -43,21 +43,17 @@ export default new Vuex.Store({
       commit('SET_LOADING', true)
       axios({
         method: 'get',
-        url: 'https://pure-basin-34507.herokuapp.com/products',
+        url: 'https://still-plains-85177.herokuapp.com/products',
         headers: {
           token: localStorage.getItem('token')
         }
       })
         .then(({ data }) => {
           commit('SET_PRODUCTS', data.data)
-
-          // commit('SET_PRODUCTS', [...data.data])
         })
         .catch((err) => {
           commit('SET_ERROR', true)
           commit('SET_ERRORS', err.response.data.errors)
-          // console.log(err.response.data)
-          // commit('SET_ERRORS', [...err.response.data.errors])
         })
         .finally((_) => {
           commit('SET_LOADING', false)
@@ -67,19 +63,17 @@ export default new Vuex.Store({
       commit('SET_LOADING', true)
       axios({
         method: 'get',
-        url: 'https://pure-basin-34507.herokuapp.com/admin/users',
+        url: 'https://still-plains-85177.herokuapp.com/admin/users',
         headers: {
           token: localStorage.getItem('token')
         }
       })
         .then(({ data }) => {
           commit('SET_USERS', data.data)
-          // commit('SET_USERS', [...data.data])
         })
         .catch((err) => {
           commit('SET_ERROR', true)
           commit('SET_ERRORS', err.response.data.errors)
-          // commit('SET_ERRORS', [...err.response.data.errors])
         })
         .finally((_) => {
           commit('SET_LOADING', false)
@@ -89,7 +83,7 @@ export default new Vuex.Store({
       commit('SET_LOADING', true)
       axios({
         method: 'post',
-        url: 'https://pure-basin-34507.herokuapp.com/admin/login',
+        url: 'https://still-plains-85177.herokuapp.com/admin/login',
         data: payload
       })
         .then(({ data }) => {
@@ -105,7 +99,6 @@ export default new Vuex.Store({
         .catch((err) => {
           commit('SET_ERROR', true)
           commit('SET_ERRORS', err.response.data.errors)
-          // commit('SET_ERRORS', [...err.response.data.errors])
         })
         .finally((_) => {
           commit('SET_LOADING', false)
@@ -115,7 +108,7 @@ export default new Vuex.Store({
       commit('SET_LOADING', true)
       axios({
         method: 'post',
-        url: 'https://pure-basin-34507.herokuapp.com/products',
+        url: 'https://still-plains-85177.herokuapp.com/products',
         headers: {
           token: localStorage.getItem('token')
         },
@@ -130,7 +123,6 @@ export default new Vuex.Store({
         .catch((err) => {
           commit('SET_ERROR', true)
           commit('SET_ERRORS', err.response.data.errors)
-          // commit('SET_ERRORS', [...err.response.data.errors])
         })
         .finally((_) => {
           commit('SET_LOADING', false)
@@ -141,7 +133,7 @@ export default new Vuex.Store({
       const id = payload
       axios({
         method: 'get',
-        url: `https://pure-basin-34507.herokuapp.com/products/${id}`,
+        url: `https://still-plains-85177.herokuapp.com/products/${id}`,
         headers: {
           token: localStorage.getItem('token')
         }
@@ -152,7 +144,6 @@ export default new Vuex.Store({
         .catch((err) => {
           commit('SET_ERROR', true)
           commit('SET_ERRORS', err.response.data.errors)
-          // commit('SET_ERRORS', [...err.response.data.errors])
         })
         .finally((_) => {
           commit('SET_LOADING', false)
@@ -163,7 +154,7 @@ export default new Vuex.Store({
       const id = payload.id
       axios({
         method: 'put',
-        url: `https://pure-basin-34507.herokuapp.com/products/${id}`,
+        url: `https://still-plains-85177.herokuapp.com/products/${id}`,
         headers: {
           token: localStorage.getItem('token')
         },
@@ -181,8 +172,6 @@ export default new Vuex.Store({
         .catch((err) => {
           commit('SET_ERROR', true)
           commit('SET_ERRORS', err.response.data.errors)
-          // console.log(err.response.data)
-          // commit('SET_ERRORS', [...err.response.data.errors])
         })
         .finally((_) => {
           commit('SET_LOADING', false)
@@ -193,7 +182,7 @@ export default new Vuex.Store({
       const id = payload
       axios({
         method: 'delete',
-        url: `https://pure-basin-34507.herokuapp.com/products/${id}`,
+        url: `https://still-plains-85177.herokuapp.com/products/${id}`,
         headers: {
           token: localStorage.getItem('token')
         }
@@ -205,7 +194,6 @@ export default new Vuex.Store({
         .catch((err) => {
           commit('SET_ERROR', true)
           commit('SET_ERRORS', err.response.data.errors)
-          // commit('SET_ERRORS', [...err.response.data.errors])
         })
         .finally((_) => {
           commit('SET_LOADING', false)
