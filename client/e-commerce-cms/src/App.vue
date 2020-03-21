@@ -46,19 +46,25 @@ export default {
   color: #2c3e50;
   height: 100vh;
   width: 100vw;
+  background: rgb(255,255,255);
+  background: linear-gradient(rgba(255,255,255,1) 0%, rgba(213,199,199,1) 59%, rgba(184,184,193,1) 87%, rgba(155,155,166,1) 100%);
 }
 
 #router-item{
   height: 90vh;
   width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: #393e46;
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #f8b500;
 }
 </style>

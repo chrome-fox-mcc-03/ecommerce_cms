@@ -8,11 +8,18 @@
           </button>
         </div>
         <div class="modal-body">
-          <p aria-hidden="true">Price: Rp {{ productDetail.price }}</p>
-          <p aria-hidden="true">Stock: {{ productDetail.stock }}</p>
+          <div id="modal-body-container" class="d-flex flex-row justify-content-center align-items-center">
+            <div id="image-container" class="d-flex justify-content-center align-items-center">
+              <img id="image" :src="productDetail.image_url" :alt="productDetail.name">
+            </div>
+            <div id="info-container" class="d-flex justify-content-center align-items-center flex-column">
+              <p aria-hidden="true">Price: Rp {{ productDetail.price }}</p>
+              <p aria-hidden="true">Stock: {{ productDetail.stock }}</p>
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button id="modal-btn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
@@ -32,6 +39,40 @@ export default {
 }
 
 </script>
-
 <style>
+#modal-body-container{
+  width: 100%;
+  height: 100%
+}
+#image-container{
+  width: 60%;
+  height: 100%;
+}
+#info-container{
+  height: 100%;
+  width: 40%;
+}
+#image{
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  border: 2px solid #272e4f;
+}
+.modal-body{
+  padding: 0px;
+  height: auto;
+  width: auto;
+  background-color: #eeeeee;
+  font-weight: bold;
+}
+#modal-btn{
+  background-color: #393e46;
+}
+#modal-btn:hover{
+  color: #f8b500;
+}
+.modal-header, .modal-footer{
+  background-color: #2c365d;
+  color: #f2f2f0;
+}
 </style>

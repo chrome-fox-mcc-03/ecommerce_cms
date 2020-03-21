@@ -1,11 +1,11 @@
 <template>
   <div id="containerRegister">
-    <h1>Register</h1>
     <form @submit.prevent="register" id="registerForm">
+      <h1>Register</h1>
       <input v-model="userReg.name" placeholder="name" type="text" class="form-input">
       <input v-model="userReg.email" placeholder="email" type="text" class="form-input">
       <input v-model="userReg.password" placeholder="password" type="text" class="form-input">
-      <input type="submit" class="form-input">
+      <input type="submit" class="form-submit" value="Register">
     </form>
   </div>
 </template>
@@ -59,6 +59,8 @@ export default {
   align-items: center;
 }
 #registerForm{
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;

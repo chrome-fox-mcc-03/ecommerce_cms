@@ -1,19 +1,21 @@
 <template>
   <div id="cont3">
-    <h1>Product List</h1>
-    <div id="product" v-for="product in products" :key="product.id">
-      <div id="product-content">
-        {{ product.name }}
-      </div>
-      <div id="options">
-        <div id="product-option">
-          <a class="option-button" @click="deleteProduct(product.id)" >delete</a>
-          <a class="option-button" @click="updateProduct(product.id)">edit</a>
+    <h1 style="padding-top: 10px">Product List</h1>
+    <div id="container-list-product">
+      <div id="product" v-for="product in products" :key="product.id">
+        <div id="product-content">
+          {{ product.name }}
         </div>
-        <div id="detail-button">
-          <a @click="detailProduct(product)" type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
-            Detail
-          </a>
+        <div id="options">
+          <div id="product-option">
+            <a class="option-button" @click="deleteProduct(product.id)" >Delete</a>
+            <a class="option-button" @click="updateProduct(product.id)">Edit</a>
+          </div>
+          <div id="detail-button">
+            <a @click="detailProduct(product)" type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
+              Detail
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -70,6 +72,9 @@ export default {
 </script>
 
 <style>
+h1{
+  color: #272e4f;
+}
 #cont3{
   width: 100%;
   height: 100%;
@@ -77,14 +82,16 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: scroll;
 }
 #options{
-  width: 20%;
+  width: 30%;
   height: 100%;
-  border-left: 1px solid black;
+  border-left: 1px solid #929aab;
   display: flex;
   flex-direction: row;
+}
+#options:hover{
+  border-left: 1px solid #f8b500;
 }
 #detail-button{
   width: 50%;
@@ -92,6 +99,9 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+#detail-button a:hover{
+  font-weight: bold;
 }
 #product{
   width: 80%;
@@ -101,7 +111,23 @@ export default {
   justify-content: center;
   align-items: center;
   border: 1px solid black;
-  margin: 20px;
+  margin: 10px;
+  background-color: #2c365d;
+  color: #f2f2f0;
+  border-radius: 5px;
+}
+#product:hover{
+  background-color: #272e4f;
+  color: #f8b500;
+}
+#container-list-product{
+  width: 100%;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
 }
 #product-option{
   width: 50%;
@@ -109,9 +135,14 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 5px;
+  margin: 0px 10px;
+}
+#product-option a:hover{
+  font-weight: bold;
 }
 #product-content{
-  width: 80%;
+  width: 70%;
 }
 .option-button:hover{
   cursor: pointer;

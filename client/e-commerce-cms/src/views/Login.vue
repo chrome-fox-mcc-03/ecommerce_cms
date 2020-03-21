@@ -1,12 +1,12 @@
 <template>
   <div id="container-login">
-    <h1>Login</h1>
     <form id="loginForm" @submit.prevent="login">
-      <input v-model="email" class="form-login" type="text" placeholder="Email" />
-      <input v-model="password" class="form-login" type="text" placeholder="Password" />
-      <input type="submit" value="submit" />
+      <h1>Login</h1>
+      <input v-model="email" class="form-input" type="text" placeholder="Email" />
+      <input v-model="password" class="form-input" type="text" placeholder="Password" />
+      <input type="submit" class="form-submit" value="Login" />
+      <router-link to="/register">Doesn't have an account? Register Here</router-link>
     </form>
-    <router-link to="/register">Doesn't have an account? Register Here</router-link>
   </div>
 </template>
 
@@ -56,14 +56,16 @@ export default {
 
 <style>
 #container-login{
-  width: 100vw;
-  height: 50vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 #loginForm{
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;

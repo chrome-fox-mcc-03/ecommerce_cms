@@ -1,12 +1,12 @@
 <template>
   <div id="containerAdd">
-    <h1>Add Product</h1>
     <form @submit.prevent="add" id="addForm">
-      <input v-model="product.name" class="form-input" type="text" placeholder="Name">
+      <h1 class="form-title">Add Product</h1>
+      <input v-model="product.name" class="form-input" type="text" placeholder="Name" autofocus>
       <input v-model="product.image_url" class="form-input" type="text" placeholder="Image Url">
       <input v-model="product.price" class="form-input" type="number" placeholder="Price">
       <input v-model="product.stock" class="form-input" type="number" placeholder="Stock">
-      <input class="form-input" type="submit" value="Add Product">
+      <input class="form-submit" type="submit" value="Add Product">
     </form>
   </div>
 </template>
@@ -52,6 +52,9 @@ export default {
 </script>
 
 <style>
+.form-title{
+  padding-bottom: 5%;
+}
 #containerAdd{
   display: flex;
   width: 100%;
@@ -65,8 +68,30 @@ export default {
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  height: 100%;
 }
 .form-input{
-  margin: 5px
+  margin: 5px;
+  width: 60%;
+  height: 10%;
+  border: none;
+  background-color: transparent;
+  border-bottom: 2px #f8b500 solid;
+  font-size: 1 rem;
+  color: #393e46;
+  font-weight: bold;
+  padding: 5px;
+}
+.form-submit{
+  margin: 1rem;
+  height: 3rem;
+  width: 10rem;
+  border-radius: 5px;
+  background-color: #393e46;
+  color: #929aab;
+}
+.form-submit:hover{
+  color: #f8b500;
 }
 </style>

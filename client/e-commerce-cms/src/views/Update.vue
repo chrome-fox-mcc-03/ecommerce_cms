@@ -1,12 +1,12 @@
 <template>
   <div id="containerUpdate">
-    <h1>Update Product</h1>
     <form @submit.prevent="update" action="" id="updateForm">
-      <input v-model="productDetail.name" class="form-input" type="text">
+      <h1>Update Product</h1>
+      <input v-model="productDetail.name" class="form-input" type="text" autofocus>
       <input v-model="productDetail.image_url"  class="form-input" type="text">
       <input v-model="productDetail.price"  class="form-input" type="number">
       <input v-model="productDetail.stock"  class="form-input" type="number">
-      <input class="form-input" type="submit" value="Update Product">
+      <input class="form-submit" type="submit" value="Update Product">
     </form>
   </div>
 </template>
@@ -75,8 +75,7 @@ export default {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-}
-.form-input{
-  margin: 5px
+  height: 100%;
+  width: 100%;
 }
 </style>
