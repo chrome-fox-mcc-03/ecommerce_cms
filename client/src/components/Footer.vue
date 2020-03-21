@@ -16,7 +16,7 @@ export default {
    left: 0;
    bottom: 0;
    width: 100vw;
-   height: 10vh;
+   height: 8vh;
    color: white;
    display: flex;
    flex-direction: row;

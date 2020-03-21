@@ -13,7 +13,10 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     products: [],
-    loginStatus: false
+    loginStatus: false,
+    loading: false,
+    errors: false,
+    success: false
   },
   mutations: {
     SET_PRODUCTS (state, payload) {
@@ -24,11 +27,28 @@ export default new Vuex.Store({
         state.loginStatus = true
       } else {
         state.loginStatus = false
+        localStorage.clear()
       }
+    },
+    SET_LOADING (state, payload) {
+      state.loading = payload
+    },
+    SET_ERRORS (state, payload) {
+      state.errors = payload.status
+      setTimeout(() => {
+        state.errors = false
+      }, 1500)
+    },
+    SET_SUCCESS (state, payload) {
+      state.success = payload
+      setTimeout(() => {
+        state.success = false
+      }, 1500)
     }
   },
   actions: {
     onLogin ({ dispatch, commit }, { email, password }) {
+      commit('SET_LOADING', true)
       axios({
         method: 'POST',
         url: 'http://localhost:3000/login',
@@ -40,13 +60,22 @@ export default new Vuex.Store({
         .then((response) => {
           localStorage.setItem('access_token', response.data.access_token)
           commit('SET_LOGIN_STATUS')
+          commit('SET_SUCCESS', true)
+          commit('SET_ERRORS', { status: false })
+          dispatch('onFetchProduct')
           router.push('/dashboard')
         })
         .catch((err) => {
           console.log(err)
+          commit('SET_SUCCESS', false)
+          commit('SET_ERRORS', { status: true, data: err })
+        })
+        .finally(_ => {
+          commit('SET_LOADING', false)
         })
     },
     onRegister ({ dispatch, commit }, { email, password }) {
+      commit('SET_LOADING', true)
       axios({
         method: 'POST',
         url: 'http://localhost:3000/register',
@@ -60,10 +89,14 @@ export default new Vuex.Store({
           router.push('/')
         })
         .catch((err) => {
-          console.log(err)
+          commit('SET_ERRORS', { status: true, data: err })
+        })
+        .finally(_ => {
+          commit('SET_LOADING', false)
         })
     },
     onAddProduct ({ dispatch, commit }, { name, imageUrl, price, stock }) {
+      commit('SET_LOADING', true)
       axios({
         method: 'POST',
         url: 'http://localhost:3000/product',
@@ -80,7 +113,10 @@ export default new Vuex.Store({
         .then((response) => {
           router.push('/dashboard/products')
         }).catch((err) => {
-          console.log(err)
+          commit('SET_ERRORS', { status: true, data: err })
+        })
+        .finally(_ => {
+          commit('SET_LOADING', false)
         })
     },
     onFetchProduct ({ dispatch, commit }) {
@@ -94,7 +130,7 @@ export default new Vuex.Store({
         .then(({ data }) => {
           commit('SET_PRODUCTS', data.result)
         }).catch((err) => {
-          console.log(err)
+          commit('SET_ERRORS', { status: true, data: err })
         })
     },
     onEditProduct ({ dispatch, commit }, { id, name, imageUrl, price, stock }) {
@@ -114,7 +150,7 @@ export default new Vuex.Store({
         .then((response) => {
           dispatch('onFetchProduct')
         }).catch((err) => {
-          console.log(err)
+          commit('SET_ERRORS', { status: true, data: err })
         })
     },
     onDeleteProduct ({ dispatch, commit }, { id }) {
@@ -128,7 +164,7 @@ export default new Vuex.Store({
         .then((response) => {
           dispatch('onFetchProduct')
         }).catch((err) => {
-          console.log(err)
+          commit('SET_ERRORS', { status: true, data: err })
         })
     },
     onLogoutProcess ({ dispatch, commit }) {

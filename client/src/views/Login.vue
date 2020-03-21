@@ -1,5 +1,5 @@
 <template>
-    <div class="login-form">
+    <div class="login-form" v-if="!loading">
         <form @submit.prevent="loginProcess" class="container border border-dark mt-3 rounded pb-4 pt-2 px-4 w-25 shadow">
             <div class="container form-group d-flex flex-column">
                 <h1>Login</h1>
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 export default {
   name: 'Login',
   data () {
@@ -30,6 +30,9 @@ export default {
       email: '',
       password: ''
     }
+  },
+  computed: {
+    ...mapState(['loading'])
   },
   methods: {
     ...mapActions(['onLogin']),
@@ -49,5 +52,7 @@ export default {
 </script>
 
 <style>
-
+.login-form {
+  margin-top: 5em;
+}
 </style>

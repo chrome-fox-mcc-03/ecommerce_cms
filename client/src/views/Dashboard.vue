@@ -1,8 +1,6 @@
 <template>
   <div class="d-flex flex-row justify-content-around align-items-start">
-      <div class="sidebar bg-dark navbar-dark">
-          <Sidebar />
-      </div>
+      <Sidebar />
       <router-view />
   </div>
 </template>

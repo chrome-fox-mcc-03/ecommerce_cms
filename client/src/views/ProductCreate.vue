@@ -8,6 +8,8 @@
         pt-3
         pb-3
         pl-4
+        mt-3
+        w-50
         overflow-auto">
       <form @submit.prevent="addProductProcess" class="container border border-dark mt-3 rounded pb-4 pt-2 px-4 w-50 shadow">
         <div class="container form-group d-flex flex-column ">
@@ -20,7 +22,7 @@
             <input v-model="imageUrl" type="imageUrl" placeholder="Enter image url" name="imageUrl" required>
             <label for="price"><b>Price</b></label>
             <input v-model="price" type="price" placeholder="Enter price" name="price" required>
-            <label for="stock"><b>stock</b></label>
+            <label for="stock"><b>Stock</b></label>
             <input v-model="stock" type="stock" placeholder="Enter stock" name="stock" required>
             <hr>
             <div class="d-flex flex-row align-items-center justify-content-center">

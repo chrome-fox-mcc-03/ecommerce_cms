@@ -93,7 +93,7 @@ export default {
 .image:hover {
   -ms-transform: scale(1.5); /* IE 9 */
   -webkit-transform: scale(1.5); /* Safari 3-8 */
-  transform: scale(1.5);
+  transform: scale(1.2);
 }
 
 .card {

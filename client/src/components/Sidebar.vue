@@ -1,19 +1,24 @@
 <template>
   <div class="sidebar-sticky
-          w-100
           pt-5
-          bg-secondary
-          navbar-dark d-flex
+          mt-5
+          d-flex
           flex-column
           justify-content-start
           align-items-center
+          border
+          rounded
+          bg-dark
           shadow">
+    <div class="mb-2">
+      <h4 class="text-white">Admin Features</h4>
+    </div>
     <ul class="navbar-nav">
       <li class="nav-item">
-        <router-link to="/dashboard/products" class="btn btn-primary text-white">Show Product</router-link>
+        <router-link to="/dashboard/products" class="btn btn-primary text-white"><i class="fas fa-list"> Show Product</i></router-link>
       </li>
       <li class="nav-item">
-         <router-link to="/dashboard/addProduct" class="btn btn-primary text-white mt-3">Add Product</router-link>
+         <router-link to="/dashboard/addProduct" class="btn btn-primary text-white mt-3"><i class="fas fa-plus-square"> Add Product</i></router-link>
       </li>
     </ul>
   </div>
@@ -27,7 +32,8 @@ export default {
 
 <style>
 .sidebar-sticky {
-  height: 90vh;
+  height: 50vh;
   width: 15vw;
+  margin-left: 15em;
 }
 </style>

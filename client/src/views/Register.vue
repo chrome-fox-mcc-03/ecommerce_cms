@@ -1,5 +1,5 @@
 <template>
-    <div class="register-form">
+    <div class="register-form" v-if="!loading">
         <form @submit.prevent="registerProcess" class="container border border-dark mt-3 rounded pb-4 pt-2 px-4 w-25 shadow">
             <div class="container form-group d-flex flex-column ">
                 <h1>Register</h1>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 export default {
   name: 'Register',
   data () {
@@ -31,6 +31,9 @@ export default {
       email: '',
       password: ''
     }
+  },
+  computed: {
+    ...mapState(['loading'])
   },
   methods: {
     ...mapActions(['onRegister']),
@@ -43,5 +46,7 @@ export default {
 </script>
 
 <style>
-
+.register-form {
+  margin-top: 5em;
+}
 </style>

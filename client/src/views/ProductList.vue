@@ -8,6 +8,7 @@
       pt-3
       pb-3
       pl-4
+      mt-5
       overflow-auto">
     <ProductCard
       v-for="product in products"
