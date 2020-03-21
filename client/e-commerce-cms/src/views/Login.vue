@@ -3,7 +3,7 @@
     <form id="loginForm" @submit.prevent="login">
       <h1>Login</h1>
       <input v-model="email" class="form-input" type="text" placeholder="Email" />
-      <input v-model="password" class="form-input" type="text" placeholder="Password" />
+      <input v-model="password" class="form-input" type="password" placeholder="Password" />
       <input type="submit" class="form-submit" value="Login" />
       <router-link to="/register">Doesn't have an account? Register Here</router-link>
     </form>
