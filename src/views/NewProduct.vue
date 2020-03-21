@@ -67,7 +67,6 @@ export default {
       // https://api.cloudinary.com/v1_1/dsgjtva0h/image/upload?file=asd&upload_preset=khmjrywl
       var reader = new FileReader()
       reader.onloadend = () => {
-        console.log('loading')
         axios({
           url: 'https://api.cloudinary.com/v1_1/dsgjtva0h/image/upload',
           method: 'POST',
