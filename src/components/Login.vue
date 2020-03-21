@@ -9,13 +9,14 @@
           <v-form class="px-5 py-4">
             <v-card-text>
               <v-text-field
+                v-model="input.email"
                 label="Email"
                 name="email"
                 prepend-icon="mdi-account"
                 type="email"
               ></v-text-field>
               <v-text-field
-                id="password"
+                v-model="input.password"
                 label="Password"
                 name="password"
                 type="password"
@@ -36,7 +37,15 @@
 
 <script>
 export default {
-  name: 'login'
+  name: 'Login',
+  data() {
+    return {
+      input: {
+        email: '',
+        password: ''
+      }
+    };
+  }
 };
 </script>
 
