@@ -49,11 +49,15 @@ export default new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          commit('SET_PRODUCTS', [...data.data])
+          commit('SET_PRODUCTS', data.data)
+
+          // commit('SET_PRODUCTS', [...data.data])
         })
         .catch((err) => {
           commit('SET_ERROR', true)
-          commit('SET_ERRORS', [...err.response.data.errors])
+          commit('SET_ERRORS', err.response.data.errors)
+          // console.log(err.response.data)
+          // commit('SET_ERRORS', [...err.response.data.errors])
         })
         .finally((_) => {
           commit('SET_LOADING', false)
@@ -69,11 +73,13 @@ export default new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          commit('SET_USERS', [...data.data])
+          commit('SET_USERS', data.data)
+          // commit('SET_USERS', [...data.data])
         })
         .catch((err) => {
           commit('SET_ERROR', true)
-          commit('SET_ERRORS', [...err.response.data.errors])
+          commit('SET_ERRORS', err.response.data.errors)
+          // commit('SET_ERRORS', [...err.response.data.errors])
         })
         .finally((_) => {
           commit('SET_LOADING', false)
@@ -98,7 +104,8 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           commit('SET_ERROR', true)
-          commit('SET_ERRORS', [...err.response.data.errors])
+          commit('SET_ERRORS', err.response.data.errors)
+          // commit('SET_ERRORS', [...err.response.data.errors])
         })
         .finally((_) => {
           commit('SET_LOADING', false)
@@ -122,7 +129,8 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           commit('SET_ERROR', true)
-          commit('SET_ERRORS', [...err.response.data.errors])
+          commit('SET_ERRORS', err.response.data.errors)
+          // commit('SET_ERRORS', [...err.response.data.errors])
         })
         .finally((_) => {
           commit('SET_LOADING', false)
@@ -143,7 +151,8 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           commit('SET_ERROR', true)
-          commit('SET_ERRORS', [...err.response.data.errors])
+          commit('SET_ERRORS', err.response.data.errors)
+          // commit('SET_ERRORS', [...err.response.data.errors])
         })
         .finally((_) => {
           commit('SET_LOADING', false)
@@ -171,7 +180,9 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           commit('SET_ERROR', true)
-          commit('SET_ERRORS', [...err.response.data.errors])
+          commit('SET_ERRORS', err.response.data.errors)
+          // console.log(err.response.data)
+          // commit('SET_ERRORS', [...err.response.data.errors])
         })
         .finally((_) => {
           commit('SET_LOADING', false)
@@ -193,7 +204,8 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           commit('SET_ERROR', true)
-          commit('SET_ERRORS', [...err.response.data.errors])
+          commit('SET_ERRORS', err.response.data.errors)
+          // commit('SET_ERRORS', [...err.response.data.errors])
         })
         .finally((_) => {
           commit('SET_LOADING', false)
