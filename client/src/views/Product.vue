@@ -186,7 +186,6 @@ export default {
         })
         .catch(err => {
           this.$store.commit('SET_ERROROBJ', err.response.data)
-          console.log('something is error', err)
         })
         .finally(() => {
           this.isLoading = false

@@ -14,7 +14,23 @@
 
 <script>
 export default {
+  data () {
+    return {
+      file: null,
+      fileSelected: 0
+    }
+  },
   methods: {
+    fileChangeHandler: function (event) {
+      console.log('fileHandler', event.target.files)
+      this.file = event.target.files[0]
+      this.fileSelected = event.target.files.length
+    },
+    prepareFormData: function () {
+      this.formData = new FormData()
+      this.formData.append('tags', 'h8-ecommerce')
+      this.formData.append('file', this.fileContents)
+    }
     // openUploadWidget () {
     //   const myWidget = cloudinary.createUploadWidget({
     //     cloudName: 'my_cloud_name',

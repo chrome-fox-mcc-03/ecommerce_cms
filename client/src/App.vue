@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <loading-overlay v-if="isLoading"></loading-overlay>
     <top-navbar v-if="isLogin"></top-navbar>
     <side-navbar v-if="isLogin"></side-navbar>
     <div class="container-fluid">
@@ -17,15 +18,17 @@
 <script>
 import TopNavbar from './components/TopNavbar'
 import SideNavbar from './components/SideNavbar'
+import LoadingOverlay from './components/LoadingOverlay'
 import { mapState } from 'vuex'
 
 export default {
   components: {
     TopNavbar,
-    SideNavbar
+    SideNavbar,
+    LoadingOverlay
   },
   computed: {
-    ...mapState(['errorObj', 'successObj', 'isLogin'])
+    ...mapState(['errorObj', 'successObj', 'isLogin', 'isLoading'])
   },
   watch: {
     successObj () {

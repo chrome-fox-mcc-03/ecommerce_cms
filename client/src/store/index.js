@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Axios from 'axios'
+import router from '../router/index'
 
 Vue.use(Vuex)
 
@@ -15,8 +16,8 @@ export default new Vuex.Store({
     SET_ISLOGIN (state, payload) {
       state.isLogin = payload
     },
-    TOGGLE_ISLOADING (state, _) {
-      state.isLoading = !state.isLoading
+    SET_ISLOADING (state, payload) {
+      state.isLoading = payload
     },
     SET_ERROROBJ (state, payload) {
       state.errorObj = payload
@@ -32,7 +33,7 @@ export default new Vuex.Store({
       if (token) context.commit('SET_ISLOGIN', true)
     },
     login (context, payload) {
-      context.commit('TOGGLE_ISLOADING')
+      context.commit('SET_ISLOADING', true)
       const { email, password } = payload
 
       Axios({
@@ -52,13 +53,14 @@ export default new Vuex.Store({
           context.commit('SET_ISLOGIN', true)
 
           context.commit('SET_SUCCESSOBJ', { message: 'You successfully logged in!' })
+
+          router.push('dashboard')
         })
         .catch(err => {
-          console.log('[ERROR] Authentication fail!')
           context.commit('SET_ERROROBJ', err.response.data)
         })
         .finally(() => {
-          context.commit('TOGGLE_ISLOADING')
+          context.commit('SET_ISLOADING', false)
         })
     },
     logout (context, _) {
@@ -66,10 +68,13 @@ export default new Vuex.Store({
       context.commit('SET_ISLOGIN', false)
     },
     register (context, payload) {
+      context.commit('SET_ISLOADING', true)
+
       const { name, email, password } = payload
 
       Axios({
         method: 'POST',
+        // url: 'http://54.169.136.72/admin/register',
         url: 'http://localhost:3000/admin/register',
         data: {
           name,
@@ -86,12 +91,14 @@ export default new Vuex.Store({
           context.commit('SET_ISLOGIN', true)
 
           context.commit('SET_SUCCESSOBJ', { message: 'You successfully logged in!' })
+
+          router.push('dashboard')
         })
         .catch(err => {
           context.commit('SET_ERROROBJ', err.response.data)
         })
         .finally(() => {
-          this.isLoading = false
+          context.commit('SET_ISLOADING', false)
         })
     }
   },
