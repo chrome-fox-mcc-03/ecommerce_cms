@@ -24,8 +24,8 @@
                 <button
                 @click.prevent="login"
                 id="btn-login" class="btn btn-secondary">Login</button>
-                <button
-                id="btn-glogin" class="btn btn-dark" style="margin-left:10px">Google Login</button>
+                <!-- <button
+                id="btn-glogin" class="btn btn-dark" style="margin-left:10px">Google Login</button> -->
               </div>
             </div>
             <div class="form-group">
