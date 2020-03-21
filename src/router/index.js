@@ -8,6 +8,7 @@ import AddProductForm from '../components/AddProductForm.vue'
 import EditProductForm from '../components/EditProductForm.vue'
 import Dashboard from '../components/Dashboard.vue'
 Vue.use(VueRouter)
+console.log("TEST FOR ROUTER/INDEX.JS")
 const routes = [
   {
     path: '/',
