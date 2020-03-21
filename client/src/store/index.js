@@ -12,7 +12,14 @@ export default new Vuex.Store({
     message: {
       isMessage: false
     },
-    active: 'List'
+    active: 'List',
+    open: {
+      edit: false,
+      delete: false
+    },
+    editId: 0,
+    deleteId: 0,
+    oneProduct: {}
   },
   mutations: {
     SET_PRODUCTS (state, payload) {
@@ -29,6 +36,18 @@ export default new Vuex.Store({
     },
     SET_ACTIVE (state, payload) {
       state.active = payload
+    },
+    SET_OPEN (state, payload) {
+      payload === 'edit' ? state.open.edit = !state.open.edit : state.open.delete = !state.open.delete
+    },
+    SET_EDIT_ID (state, payload) {
+      state.editId = payload
+    },
+    SET_DELETE_ID (state, payload) {
+      state.deleteId = payload
+    },
+    SET_ONE_PRODUCT (state, payload) {
+      state.oneProduct = payload
     }
   },
   actions: {
@@ -36,7 +55,7 @@ export default new Vuex.Store({
       commit('SET_LOADING')
       axios({
         method: 'get',
-        url: 'http://localhost:3000/admin/product',
+        url: 'https://shrouded-meadow-59142.herokuapp.com/admin/product',
         headers: {
           token: localStorage.getItem('token')
         }
@@ -60,7 +79,7 @@ export default new Vuex.Store({
       commit('SET_LOADING')
       axios({
         method: 'post',
-        url: 'http://localhost:3000/admin/login',
+        url: 'https://shrouded-meadow-59142.herokuapp.com/admin/login',
         data: {
           email, password
         }
@@ -73,7 +92,7 @@ export default new Vuex.Store({
             message
           })
           localStorage.setItem('token', token)
-          router.push({ path: '/admin' })
+          router.push({ path: '/' })
         })
         .catch(err => {
           commit('SET_MESSAGE', {
@@ -91,7 +110,7 @@ export default new Vuex.Store({
       commit('SET_LOADING')
       axios({
         method: 'post',
-        url: 'http://localhost:3000/admin/product',
+        url: 'https://shrouded-meadow-59142.herokuapp.com/admin/product',
         data: {
           name, image_url: payload.image_url, price, stock, TypeId
         },
@@ -107,7 +126,94 @@ export default new Vuex.Store({
           })
           dispatch('fetchProducts')
           commit('SET_ACTIVE', 'List')
-          router.push({ path: '/admin' })
+          router.push({ path: '/' })
+        })
+        .catch(err => {
+          commit('SET_MESSAGE', {
+            isMessage: true,
+            title: 'ERROR!',
+            message: err.response.data.message
+          })
+        })
+        .finally(_ => {
+          commit('SET_LOADING')
+        })
+    },
+    editProduct ({ commit, state, dispatch }, payload) {
+      const { name, price, stock, TypeId } = payload
+      const id = state.editId
+      commit('SET_LOADING')
+      axios({
+        method: 'put',
+        url: `https://shrouded-meadow-59142.herokuapp.com/admin/product/${id}`,
+        headers: {
+          token: localStorage.getItem('token')
+        },
+        data: {
+          name, image_url: payload.image_url, price, stock, TypeId
+        }
+      })
+        .then(({ data }) => {
+          commit('SET_MESSAGE', {
+            isMessage: true,
+            title: 'SUCCESS!',
+            message: data.message
+          })
+          dispatch('fetchProducts')
+        })
+        .catch(err => {
+          commit('SET_MESSAGE', {
+            isMessage: true,
+            title: 'ERROR!',
+            message: err.response.data.message
+          })
+        })
+        .finally(_ => {
+          commit('SET_LOADING')
+        })
+    },
+    findOneProduct ({ commit }, payload) {
+      commit('SET_LOADING')
+      commit('SET_EDIT_ID', payload)
+      axios({
+        method: 'get',
+        url: `https://shrouded-meadow-59142.herokuapp.com/admin/product/${payload}`,
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      })
+        .then(({ data }) => {
+          const { name, price, stock, TypeId } = data.data
+          commit('SET_ONE_PRODUCT', { name, image_url: data.data.image_url, price, stock, TypeId })
+          commit('SET_OPEN', 'edit')
+        })
+        .catch(err => {
+          commit('SET_MESSAGE', {
+            isMessage: true,
+            title: 'ERROR!',
+            message: err.response.data.message
+          })
+        })
+        .finally(_ => {
+          commit('SET_LOADING')
+        })
+    },
+    deleteProduct ({ commit, state, dispatch }) {
+      commit('SET_LOADING')
+      axios({
+        method: 'delete',
+        url: `https://shrouded-meadow-59142.herokuapp.com/admin/product/${state.deleteId}`,
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      })
+        .then(({ data }) => {
+          commit('SET_MESSAGE', {
+            isMessage: true,
+            title: 'SUCCESS!',
+            message: data.message
+          })
+          dispatch('fetchProducts')
         })
         .catch(err => {
           commit('SET_MESSAGE', {

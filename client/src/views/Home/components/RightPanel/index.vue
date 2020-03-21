@@ -1,5 +1,5 @@
 <template>
-  <sui-grid-column stretched :width="12">
+  <sui-grid-column stretched :width="13">
     <sui-segment>
       <router-view />
     </sui-segment>

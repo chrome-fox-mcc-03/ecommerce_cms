@@ -13,10 +13,6 @@ import Loading from '../../components/Loading.vue'
 
 export default {
   name: 'Home',
-  data () {
-    return {
-    }
-  },
   components: {
     LeftPanel,
     RightPanel,

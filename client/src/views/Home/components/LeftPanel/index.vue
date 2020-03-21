@@ -1,5 +1,5 @@
 <template>
-  <sui-grid-column :width="4">
+  <sui-grid-column :width="3">
     <sui-menu fluid vertical tabular>
       <a
         v-for="item in items"

@@ -1,18 +1,19 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '@/store'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/admin',
+    path: '/',
     name: 'HomeAdmin',
     component: () => import('../views/Home'),
     children: [
       {
         path: '',
         name: 'ListProduct',
-        component: () => import('../views/Home/components/RightPanel/components/TableList.vue')
+        component: () => import('../views/Home/components/RightPanel/components/TableList')
       },
       {
         path: 'create',
@@ -25,7 +26,7 @@ const routes = [
     }
   },
   {
-    path: '/admin/login',
+    path: '/login',
     name: 'LoginAdmin',
     component: () => import('../views/Login'),
     meta: {
@@ -50,13 +51,9 @@ router.beforeEach((to, from, next) => {
       })
     }
   } else {
-    if (localStorage.getItem('token')) {
-      next({
-        name: 'HomeAdmin'
-      })
-    } else {
-      next()
-    }
+    store.commit('SET_ISMESSAGE')
+    localStorage.clear()
+    next()
   }
 })
 
