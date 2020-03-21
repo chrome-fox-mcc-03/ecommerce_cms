@@ -4,7 +4,7 @@
       <div class="header-dashboard">
         <Category-button />
       </div>
-      <h2>List Products</h2>
+      <h2>Other</h2>
       <Loading v-if="isLoading" />
         <div class="container list-products">
         <card-product v-for="(product) in products" :key="product.id" :product="product" />
@@ -17,6 +17,7 @@ import Loading from '../components/Loading'
 import CardProduct from '../components/CardProduct'
 import CategoryButton from '../components/CategoryButton'
 export default {
+  name: 'OtherProduct',
   components: {
     CardProduct,
     Loading,
@@ -31,7 +32,7 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('getProducts')
+    this.$store.dispatch('getByCategory', 'Other')
   }
 }
 </script>

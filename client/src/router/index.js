@@ -3,48 +3,74 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Login from '../views/Login.vue'
-import Register from '../views/Register.vue'
+import AddAdmin from '../views/AddAdmin.vue'
 import ListProducts from '../views/ListProducts'
+import ImportProduct from '../views/ImportProduct'
+import LokalProduct from '../views/LokalProduct'
+import OtherProduct from '../views/OtherProduct'
 import AddProduct from '../views/AddProduct'
+import EditProduct from '../components/EditProduct.vue'
+import DetailProduct from '../components/DetailProduct.vue'
 
 Vue.use(VueRouter)
 
 const routes = [{
   path: '/',
   name: 'Home',
-  component: Home
+  component: Home,
+  redirect: '/products'
 }, {
   path: '/login',
   name: 'Login',
   component: Login
 }, {
-  path: '/register',
-  name: 'Register',
-  component: Register
-}, {
-  path: '/dashboard',
-  name: 'Dashboard',
+  path: '/addadmin',
+  name: 'AddAdmin',
+  component: AddAdmin,
+  meta: {
+    requiresAuth: true
+  }
+},
+{
+  path: '/products',
   component: Dashboard,
-  redirect: '/products',
   meta: {
     requiresAuth: true
   },
-  children: []
-}, {
-  path: '/products',
-  name: 'ListProducts',
-  component: ListProducts,
-  meta: {
-    requiresAuth: true
-  }
-}, {
-  path: '/products/add',
-  name: 'AddProducts',
-  component: AddProduct,
-  meta: {
-    requiresAuth: true
-  }
+  children: [
+    {
+      path: '',
+      name: 'ListProducts',
+      component: ListProducts
+    },
+    {
+      path: 'edit/:id',
+      name: 'EditProduct',
+      component: EditProduct
+    }, {
+      path: 'add',
+      name: 'AddProduct',
+      component: AddProduct
+    }, {
+      path: 'detail/:id',
+      name: 'DetailProduct',
+      component: DetailProduct
+    }, {
+      path: 'lokal',
+      name: 'LokalProduct',
+      component: LokalProduct
+    }, {
+      path: 'import',
+      name: 'ImportProduct',
+      component: ImportProduct
+    }, {
+      path: 'other',
+      name: 'OtherProduct',
+      component: OtherProduct
+    }
+  ]
 }
+
 ]
 
 const router = new VueRouter({

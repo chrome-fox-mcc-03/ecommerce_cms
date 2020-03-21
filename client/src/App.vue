@@ -19,8 +19,8 @@
   justify-content: center;
 }
 .card-logreg {
-  height: 50vh;
-  width: 30vw;
+  height: 40vh;
+  width: 20vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,7 +32,7 @@
   margin: 10px;
 }
 
-.list-products{
+.list-products {
   width: 100vw;
   display: flex;
   justify-content: flex-start;
@@ -40,7 +40,7 @@
 }
 
 .card-addProduct {
-  height: 40vh;
+  height: 45vh;
   width: 20vw;
   display: flex;
   flex-direction: column;
@@ -48,7 +48,7 @@
   align-items: center;
 }
 
-.card-product{
+.card-product {
   margin: 10px;
   height: auto;
   width: 15vw;
@@ -59,20 +59,24 @@
   /* text-align: start; */
 }
 
-.card-image{
+.card-image {
   height: 100%;
 }
 
-.content{
+.content {
   height: 40%;
 }
 
-.navbar-dashboard{
+.navbar-dashboard {
   padding: 10px 15px;
-    background-color:cadetblue;
+  background-color: brown;
 }
 
-.body-dashboard{
+.dashboard-text{
+  color: azure;
+}
+
+.body-dashboard {
   height: 100vh;
 }
 
@@ -81,7 +85,6 @@
     height: 50vh;
     width: 70vw;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
   }

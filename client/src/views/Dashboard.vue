@@ -1,10 +1,10 @@
 <template>
-    <div>
+        <div class="layout-dashboard">
         <div class="navbar-dashboard">
         <Navbar/>
         </div>
-        <div class="body-dashboard">
-        <h2>ini dashboard</h2>
+        <div class="container">
+        <router-view></router-view>
         </div>
     </div>
 </template>
@@ -16,3 +16,6 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+</style>
