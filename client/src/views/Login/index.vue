@@ -43,11 +43,13 @@
         </div>
       </form>
     </div>
+    <Loading />
   </div>
 </template>
 
 <script>
 import Message from '@/components/Message.vue'
+import Loading from '../../components/Loading.vue'
 
 export default {
   name: 'FormLogin',
@@ -66,7 +68,8 @@ export default {
     }
   },
   components: {
-    Message
+    Message,
+    Loading
   }
 }
 </script>
