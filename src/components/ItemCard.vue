@@ -2,12 +2,13 @@
   <div id="item-card" class="col s3">
     <div class="card z-depth-2 hoverable">
       <div class="card-image">
-        <img src="https://cdn.akurat.co/images/uploads/images/akurat_20181029123557_B6tXpj.jpg">
+        <img :src="item.imageUrl">
       </div>
       <div class="card-content">
-        <span class="card-title">Card Title</span>
-        <p>I am a very simple card. I am good at containing small bits of information.
-        I am convenient because I require little markup to use effectively.</p>
+        <span class="card-title">{{ item.name }}</span>
+        <h5>Rp {{ price }}</h5>
+        <h6>Stock: {{ item.stock }}</h6>
+        <p>{{ item.Category.name }}</p>
       </div>
     </div>
   </div>
@@ -15,7 +16,15 @@
 
 <script>
 export default {
-
+  name: 'ItemCard',
+  props: {
+    item: Object
+  },
+  computed: {
+    price () {
+      return this.item.price.toLocaleString('id')
+    }
+  }
 }
 </script>
 

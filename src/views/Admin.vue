@@ -2,17 +2,8 @@
   <div class="admin">
     <Navbar />
     <Sidebar />
-
     <div id="content" class="container">
-      <div class="row">
-        <div class="col s12">
-          <h3 class="brown-text text-darken-2">Item List</h3>
-          <ItemCard
-            v-for="(item, i) in 12" :key="i"
-            @click.native="itemDetails(i)"
-          />
-        </div>
-      </div>
+      <router-view/>
     </div>
   </div>
 </template>
@@ -21,12 +12,13 @@
 import M from 'materialize-css'
 import Navbar from '../components/Navbar'
 import Sidebar from '../components/Sidebar'
-import ItemCard from '../components/ItemCard'
+// import Items from '../components/Items'
+
 export default {
   components: {
     Navbar,
-    Sidebar,
-    ItemCard
+    Sidebar
+    // Items
   },
   methods: {
     itemDetails (id) {

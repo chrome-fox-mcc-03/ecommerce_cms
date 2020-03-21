@@ -10,10 +10,26 @@
         </div>
       </li>
       <li><div class="divider"></div></li>
-      <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-      <li><a href="#!">Second Link</a></li>
-      <li><a class="subheader">Subheader</a></li>
-      <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+      <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+          <li class=" brown lighten-4">
+            <a class="collapsible-header">Categories<i class="material-icons right">arrow_drop_down</i></a>
+            <div class="collapsible-body">
+              <ul class="brown lighten-4">
+                <li><router-link to="/admin" @click="filterItem()">All Items</router-link></li>
+                <li
+                  v-for="category in categories"
+                  :key="category.id"
+                >
+                  <router-link to="/admin" @click="filterItem(category.id)">{{ category.name }}</router-link>
+                </li>
+                <li><div class="divider"></div></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </li>
+      <li><router-link :to="{ name: 'ItemCreate' }">Add Item</router-link></li>
     </ul>
   </div>
 </template>
@@ -21,8 +37,20 @@
 <script>
 import M from 'materialize-css'
 export default {
+  name: 'Sidebar',
+  computed: {
+    categories () {
+      return this.$store.state.categories
+    }
+  },
+  methods: {
+    filterItem (CategoryId) {
+      this.$store.getters.getItemsByCategory(CategoryId)
+    }
+  },
   mounted () {
     M.AutoInit()
+    this.$store.dispatch('fetchCategories')
   }
 }
 </script>

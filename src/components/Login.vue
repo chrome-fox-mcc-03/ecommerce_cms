@@ -48,7 +48,7 @@ export default {
 
   methods: {
     login () {
-      this.$store.commit('SET_LOADING')
+      this.$store.commit('LOADING')
       const payload = {
         email: this.email,
         password: this.password
@@ -63,10 +63,9 @@ export default {
         .catch(err => {
           this.email = ''
           this.password = ''
-          const { errors } = err.response.data
-          this.$store.commit('ERROR', `${errors}`)
+          this.$store.commit('ERROR', err)
         })
-        .finally(() => this.$store.commit('SET_LOADING'))
+        .finally(() => this.$store.commit('LOADING'))
     }
   }
 }

@@ -13,13 +13,25 @@ const routes = [
   },
   {
     path: '/admin',
-    name: 'Admin',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: function () {
       return import(/* webpackChunkName: "about" */ '../views/Admin.vue')
     },
+    children: [
+      {
+        path: '',
+        name: 'Items',
+        component: () => {
+          return import('../components/Items')
+        }
+      },
+      {
+        path: 'item-create',
+        name: 'ItemCreate',
+        component: () => {
+          return import('../components/ItemCreate')
+        }
+      }
+    ],
     beforeEnter: (to, from, next) => {
       if (!localStorage.getItem('token')) {
         M.toast({
