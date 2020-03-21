@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # client
 
 ## Project setup
@@ -24,3 +25,6 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### SEE SERVER FOR FURTHER README
+=======
+# ecommerce_CMS
+>>>>>>> 6174b2a63948e2504af8942e36ed9191cc068202
