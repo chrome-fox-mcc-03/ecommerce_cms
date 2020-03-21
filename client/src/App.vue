@@ -18,7 +18,7 @@
 
 <script>
 import Navbar from './components/Navbar'
-import { mapState, mapActions, mapMutations } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   name: 'App',
@@ -41,6 +41,7 @@ export default {
     } else {
       this.$store.commit('SET_LOGOUT')
     }
+    this.SHOW_ERROR("")
   }
 }
 </script>

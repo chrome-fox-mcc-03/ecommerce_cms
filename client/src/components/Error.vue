@@ -1,7 +1,7 @@
 <template>
   <div class="container alert alert-danger alt-auth" role="alert" v-if="error">
     <i class="fa fa-warning"></i>
-    {{error}}
+    {{String(error)}}
   </div>
 </template>
 

@@ -4,7 +4,7 @@
           <b-button v-b-modal.modal-prevent-closing class="btn-add">Add New Product</b-button>
     </div>
       <b-modal id="modal-prevent-closing" ref="modal" title="Add New Product" @ok="handleOk">
-        <div class="container alert alert-warning" role="alert" v-if="error">{{error}}</div>
+        <Error></Error>
         <b-form ref="form" @submit.prevent="handleSubmit">
           <b-form-group id="input-group-1" label="Product Name:" label-for="input-1">
             <b-form-input
@@ -38,6 +38,7 @@
 
 <script>
 import { mapActions, mapMutations } from 'vuex'
+import Error from './Error'
 
 export default {
   name: 'AddProduct',
@@ -49,13 +50,12 @@ export default {
         price: '',
         stock: ''
       },
-      modalShow: false,
-      error: ''
+      modalShow: false
     }
   },
   methods: {
     ...mapActions(['addProduct', 'fetchProduct']),
-    ...mapMutations(['SET_LOADING']),
+    ...mapMutations(['SET_LOADING', 'SHOW_ERROR']),
     handleOk (bvModalEvt) {
       this.SET_LOADING(true)
       bvModalEvt.preventDefault()
@@ -66,14 +66,14 @@ export default {
       this.addProduct(payload)
         .then(() => {
           this.fetchProduct()
-          this.error = ''
+          this.SHOW_ERROR("")
           this.$nextTick(() => {
             this.$bvModal.hide('modal-prevent-closing')
           })
           this.SET_LOADING(false)
         })
         .catch(err => {
-          this.error = String(err.response.data.error)
+          this.SHOW_ERROR(err.response.data.error)
           this.SET_LOADING(false)
         })
     }

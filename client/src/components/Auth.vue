@@ -78,7 +78,7 @@ export default {
         password: this.password
       }
       if (this.action === 'Register') {
-        data.role = 'admin'
+        data.role = 'customer'
         this.register(data)
           .then(({ data }) => {
             localStorage.setItem('token', data.token)
