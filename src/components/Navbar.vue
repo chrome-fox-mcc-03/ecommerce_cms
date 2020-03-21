@@ -1,22 +1,22 @@
 <template>
-  <div v-if="render" class="navbar navbar-expand bg-dark row">
+  <div v-if="render" class="navbar bg-light row position-fixed vw-100 m-0">
     <div class="col-md-2 text-white d-flex">
-      <router-link class="nav-link" to="/">brand</router-link>
+      <router-link class="nav-link" to="/"><i class="fa fa-magic fa-lg"></i></router-link>
       <div v-if="(isLogin || hasToken)" class="mx-2 nav-item active">
-        <router-link class="nav-link" to="/dashboard">Dashboard</router-link>
+        <router-link class="nav-link btn btn-light" to="/dashboard">Dashboard</router-link>
       </div>
     </div>
     <div class="col-md-6 text-white d-flex justify-content-start">
     </div>
     <div class="col-md-4 text-white  d-flex justify-content-center">
       <div v-if="!(isLogin || hasToken)" class="mx-2 nav-item active">
-        <router-link class="nav-link" to="/login">Login</router-link>
+        <router-link class="nav-link btn btn-light" to="/login">Login</router-link>
       </div>
       <div v-if="!(isLogin || hasToken)" class="mx-2 nav-item">
-        <router-link class="nav-link" to="/register">Register</router-link>
+        <router-link class="nav-link btn btn-light" to="/register">Register</router-link>
       </div>
       <div v-if="(isLogin || hasToken)" class="mx-2 nav-item">
-        <a href="/logout" class="nav-link" @click.prevent="logout">Logout</a>
+        <a href="/logout" class="nav-link btn btn-light" @click.prevent="logout">Logout</a>
       </div>
     </div>
   </div>
@@ -55,11 +55,9 @@ export default {
   },
   mounted () {
     const storage = JSON.parse(localStorage.getItem(this.appName))
-    // console.log(this.appName, storage, 'navbar')
     if (storage) {
       const { token } = storage
       if (token) {
-        console.log('tokennya ada')
         this.render = false
         this.loginToken({ token })
           .then(result => {
@@ -75,7 +73,6 @@ export default {
           })
       }
     }
-    // console.log('navbar created')
   }
 }
 </script>

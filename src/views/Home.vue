@@ -16,6 +16,9 @@ export default {
     ...mapState({
       vuex: 'testVuex'
     })
+  },
+  created () {
+    this.$router.push({ name: 'Dashboard' })
   }
 }
 </script>

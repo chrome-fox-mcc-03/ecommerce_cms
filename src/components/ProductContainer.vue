@@ -1,19 +1,33 @@
 <template>
   <div>
     <loading v-if="pageLoading"></loading>
-    <div v-else-if="!pageLoading && products.length === 0">/DASHBOARD/PRODUCTS ISEMPTY</div>
+    <div v-else-if="!pageLoading && products.length === 0">PRODUCTS DASHBOARD IS EMPTY</div>
     <div v-else-if="!pageLoading && products.length > 0">
-      <product-card v-for="(item, i) in products" :key="i" :item="item"></product-card>
+      <b-table striped hover :items="$store.getters.productsTable" :fields="fields">
+        <template v-slot:cell(actions)="items">
+          <div class="btn btn-info mx-1" @click="showEdit(items.item.id)">
+            Edit {{ items.item.ID }}
+          </div>
+          <div class="btn btn-info mx-1" @click="confirmDel(items.item.id)">
+            Delete
+          </div>
+        </template>
+      </b-table>
     </div>
   </div>
 </template>
 
 <script>
-import ProductCard from '../components/ProductCard'
 import Loading from './Loading'
 import { mapState, mapActions, mapMutations } from 'vuex'
+import { BTable } from 'bootstrap-vue'
 
 export default {
+  data () {
+    return {
+      fields: ['id', 'name', 'price', 'stock', 'actions']
+    }
+  },
   computed: {
     ...mapState({
       pageLoading: state => state._pageLoading,
@@ -21,10 +35,17 @@ export default {
     })
   },
   components: {
-    ProductCard,
-    Loading
+    Loading,
+    BTable
   },
   methods: {
+    showEdit (id) {
+      this.$router.push({ path: `/dashboard/edit/${id}` })
+    },
+    confirmDel (id) {
+      this.$router.push({ path: `/dashboard/delete/${id}` })
+    },
+    confirmDialog () {},
     ...mapMutations({
       startLoading: 'startLoading',
       stopLoading: 'stopLoading',
@@ -36,20 +57,18 @@ export default {
     })
   },
   mounted () {
-    // console.log(this.products, 'container created')
     // store fetch
     this.startLoading()
     this.emptyProducts()
     this.fetch()
       .then(result => {
-        console.log(result.data.products)
         const items = result.data.products
         items.forEach(item => {
-          this.appendProduct(item)
+          this.appendProduct({ id: item.id, name: item.name, price: item.price, stock: item.stock, image_url: item.image_url })
         })
       })
       .catch(err => {
-        console.log(err.response.data)
+        console.log(err)
       })
       .finally(_ => {
         setTimeout(() => {

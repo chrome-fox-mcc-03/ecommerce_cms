@@ -11,6 +11,10 @@ const store = new Vuex.Store({
       color: '',
       msg: ''
     },
+    dashboardAlert: {
+      msg: 'test',
+      show: false
+    },
     testVuex: 'Vuex Store Online',
     appName: 'cms_client',
     serverURL: 'http://localhost:3000',
@@ -30,11 +34,23 @@ const store = new Vuex.Store({
   getters: {
     isLogin: state => {
       return state._isLogin
+    },
+    productsTable: state => {
+      const table = []
+      state.products.forEach(item => {
+        table.push(item)
+      })
+      return table
+    },
+    isAlert: state => {
+      return state.dashboardAlert.show
+    },
+    alertMsg: state => {
+      return state.dashboardAlert.msg
     }
   },
   mutations: {
     userLogin (state, { payload }) {
-      console.log(payload, 'userlogin')
       state.dbCred.id = payload.id
       state.dbCred.email = payload.email
       state.dbCred.token = payload.token
@@ -61,27 +77,47 @@ const store = new Vuex.Store({
     },
     appendProduct (state, payload) {
       state.products.push(payload)
+    },
+    emptyNotification (state) {
+      state.notification.msg = ''
+    },
+    showNotification (state, message) {
+      state.notification.msg = message
+      state.notification.color = 'text-info'
+    },
+    showError (state, message) {
+      state.notification.msg = message
+      state.notification.color = 'text-danger'
+    },
+    showSuccess (state, message) {
+      state.notification.msg = message
+      state.notification.color = 'text-success'
+    },
+    showAlert (state, message) {
+      state.dashboardAlert.show = true
+      state.dashboardAlert.msg = message
+    },
+    hideAlert (state) {
+      state.dashboardAlert.show = false
     }
   },
   actions: {
     login (context, payload) {
-      // console.log(payload)
-      // console.log(payload, 'login')
       context.commit('startLoading')
+      context.commit('emptyNotification')
       axios({
         url: `${context.state.serverURL}/login`,
         method: 'POST',
         data: payload
       })
         .then(result => {
-          // console.log(result.data)
           context.commit({
             type: 'userLogin',
             payload: { id: result.data.id, email: result.data.email, token: result.data.access_token }
           })
         })
         .catch(err => {
-          console.log(err.response.data)
+          context.commit('showError', err.response.data.error)
         })
         .finally(_ => {
           setTimeout(() => {
@@ -90,7 +126,6 @@ const store = new Vuex.Store({
         })
     },
     loginToken (context, payload) {
-      // console.log(payload, 'loginToken')
       // get id and email from token here
       context.commit('startLoading')
       return axios({
@@ -105,22 +140,21 @@ const store = new Vuex.Store({
       })
     },
     register (context, payload) {
-      console.log(payload, 'register')
       context.commit('startLoading')
+      context.commit('emptyNotification')
       axios({
         url: `${context.state.serverURL}/register`,
         method: 'POST',
         data: payload
       })
         .then(result => {
-          console.log(result.data)
           context.commit({
             type: 'userLogin',
             payload: { id: result.data.id, email: result.data.email, token: result.data.access_token }
           })
         })
         .catch(err => {
-          console.log(err.response.data)
+          context.commit('showError', err.response.data.error)
         })
         .finally(_ => {
           setTimeout(() => {
@@ -130,7 +164,6 @@ const store = new Vuex.Store({
     },
     fetchProduct (context, payload) {
       context.commit('startLoading')
-      console.log(context.state.dbCred, 'fetchProduct')
       return axios({
         url: `${context.state.serverURL}/product`,
         method: 'GET',
@@ -140,8 +173,8 @@ const store = new Vuex.Store({
       })
     },
     createNew (context, payload) {
-      console.log(payload, 'createNew')
       context.commit('startLoading')
+      context.commit('emptyNotification')
       axios({
         url: `${context.state.serverURL}/product`,
         method: 'POST',
@@ -151,12 +184,54 @@ const store = new Vuex.Store({
         data: payload
       })
         .then(result => {
-          console.log(result.data, 'created item')
           context.commit('appendProduct', result.data)
           router.push({ name: 'ProductContainer' })
         })
         .catch(err => {
-          console.log(err.response.data)
+          context.commit('showError', err.response.data.errors[0])
+        })
+        .finally(_ => {
+          context.commit('stopLoading')
+        })
+    },
+    editProduct (context, payload) {
+      context.commit('startLoading')
+      context.commit('emptyNotification')
+      axios({
+        url: `${context.state.serverURL}/product/${payload.id}`,
+        method: 'PUT',
+        headers: {
+          access_token: context.state.dbCred.token
+        },
+        data: payload.item
+      })
+        .then(result => {
+          context.commit('appendProduct', result.data)
+          router.push({ name: 'ProductContainer' })
+        })
+        .catch(err => {
+          context.commit('showError', err.response.data.errors[0])
+        })
+        .finally(_ => {
+          context.commit('stopLoading')
+        })
+    },
+    deleteProduct (context, payload) {
+      context.commit('startLoading')
+      context.commit('emptyNotification')
+      axios({
+        url: `${context.state.serverURL}/product/${payload.id}`,
+        method: 'DELETE',
+        headers: {
+          access_token: context.state.dbCred.token
+        }
+      })
+        .then(_ => {
+          context.commit('showAlert', 'Item deleted')
+          router.push({ name: 'ProductContainer' })
+        })
+        .catch(err => {
+          context.commit('showError', err.response.data)
         })
         .finally(_ => {
           context.commit('stopLoading')

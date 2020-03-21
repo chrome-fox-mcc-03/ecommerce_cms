@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import CreateItem from '../components/CreateItem.vue'
+import EditItem from '../components/EditItem.vue'
+import DeleteItem from '../components/DeleteItem.vue'
 import ProductContainer from '../components/ProductContainer'
 
 Vue.use(VueRouter)
@@ -32,6 +34,16 @@ const routes = [
         path: 'products',
         component: ProductContainer,
         name: 'ProductContainer'
+      },
+      {
+        path: 'edit/:id',
+        component: EditItem,
+        name: 'EditItem'
+      },
+      {
+        path: 'delete/:id',
+        component: DeleteItem,
+        name: 'DeleteItem'
       }
     ]
   },
@@ -50,14 +62,6 @@ const routes = [
     meta: {
       requiresAnon: true
     }
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   }
 ]
 
@@ -68,10 +72,9 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  document.title = 'CMS 01'
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    console.log('logout/dashboard : ngecek credential')
     const storage = JSON.parse(localStorage.getItem('cms_client'))
-    // console.log(storage)
     if (storage) {
       const { token } = storage
       if (token) {
@@ -87,7 +90,6 @@ router.beforeEach((to, from, next) => {
       })
     }
   } else if (to.matched.some(record => record.meta.requiresAnon)) {
-    console.log('login/register: cek if already login')
     if (localStorage.getItem('cms_client')) {
       const { token } = JSON.parse(localStorage.getItem('cms_client'))
       if (token) {

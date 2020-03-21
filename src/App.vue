@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
+  <div id="app vh-100 vw-100 m-0 p-0">
     <Navbar></Navbar>
-    <div class="container-fluid">
+    <div class="container-fluid vh-100 vw-100 bg-dark">
       <router-view/>
     </div>
   </div>
