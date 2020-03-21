@@ -11,21 +11,15 @@ const routes = [
     component: () => import('../views/User.vue')
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: () => import('../components/Login.vue')
+    path: '/products',
+    name: 'Products',
+    component: () => import('../views/Products.vue')
   },
   {
-    path: '/dashboard',
-    name: 'Dashboard',
-    component: () => import('../views/Dashboard.vue')
-  },
-  {
-    path: '/productcard',
-    name: 'ProductCard',
-    component: () => import('../components/ProductCard.vue')
+    path: '/createProduct',
+    name: 'CreateProduct',
+    component: () => import('../views/CreateProduct.vue')
   }
-
 ];
 
 const router = new VueRouter({

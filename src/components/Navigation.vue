@@ -1,37 +1,12 @@
 <template>
-  <v-container>
-    <v-row justify="space-around">
-      <v-col cols="12">
-        <v-select v-model="color" :items="colors" label="Color"></v-select>
-      </v-col>
-
-      <v-switch v-model="drawer" class="ma-2" label="v-model"></v-switch>
-
-      <v-switch
-        v-model="miniVariant"
-        class="ma-2"
-        label="Mini variant"
-      ></v-switch>
-
-      <v-switch
-        v-model="expandOnHover"
-        class="ma-2"
-        label="Expand on hover"
-      ></v-switch>
-
-      <v-switch v-model="background" class="ma-2" label="Background"></v-switch>
-
-      <v-switch v-model="right" class="ma-2" label="Right"></v-switch>
-    </v-row>
-
-    <v-card height="400" class="overflow-hidden">
+  <div>
+    <v-card height="100vh" class="overflow-hidden">
       <v-navigation-drawer
         v-model="drawer"
         :color="color"
         :expand-on-hover="expandOnHover"
         :mini-variant="miniVariant"
-        :right="right"
-        :src="bg"
+        :left="left"
         absolute
         dark
       >
@@ -42,8 +17,8 @@
             </v-list-item-avatar>
 
             <v-list-item-content>
-              <v-list-item-title>Application</v-list-item-title>
-              <v-list-item-subtitle>Subtext</v-list-item-subtitle>
+              <v-list-item-title>ECOMMERCE</v-list-item-title>
+              <v-list-item-subtitle>CMS</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
 
@@ -60,11 +35,18 @@
           </v-list-item>
         </v-list>
       </v-navigation-drawer>
+      <v-content>
+        <v-container>
+          <h2>ini content</h2>
+        </v-container>
+      </v-content>
     </v-card>
-  </v-container>
+    <Footer />
+  </div>
 </template>
 
 <script>
+import Footer from './Footer';
 export default {
   name: 'Navigation',
   data() {
@@ -75,20 +57,15 @@ export default {
         { title: 'Photos', icon: 'mdi-image' },
         { title: 'About', icon: 'mdi-help-box' }
       ],
-      color: 'primary',
-      colors: ['primary', 'blue', 'success', 'red', 'teal'],
-      right: true,
-      miniVariant: false,
-      expandOnHover: false,
+      color: 'blue',
+      left: false,
+      miniVariant: true,
+      expandOnHover: true,
       background: false
     };
   },
-  computed: {
-    bg() {
-      return this.background
-        ? 'https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg'
-        : undefined;
-    }
+  components: {
+    Footer
   }
 };
 </script>
