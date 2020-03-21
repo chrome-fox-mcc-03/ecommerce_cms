@@ -1,7 +1,7 @@
 <template>
   <div class="navbar navbar-expand bg-dark navbar-dark">
     <div class="container d-flex justify-content-between">
-      <a href="/" class="navbar-brand">Company Name</a>
+      <a href="/" class="navbar-brand">IndoApril</a>
       <ul class="navbar-nav">
         <li class="nav-item">
             <router-link to="/register" class="nav-link">Register</router-link>

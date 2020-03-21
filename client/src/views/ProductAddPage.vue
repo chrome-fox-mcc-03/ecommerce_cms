@@ -1,28 +1,31 @@
 <template>
 <div class="container">
-  <form class="mt-5">
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label>Name</label>
-        <input type="text" class="form-control" placeholder="Name" v-model="name">
+  <div class="box mt-5">
+  <label>Add Product</label>
+    <form>
+      <div class="form-row">
+        <div class="form-group text-align-center col-md-12">
+          <input type="text" class="form-control" placeholder="Name" v-model="name">
+        </div>
       </div>
-      <div class="form-group col-md-6">
-        <label>Image</label>
-        <input type="text" class="form-control" placeholder="Image" v-model="image">
+      <div class="form-row">
+        <div class="form-group text-align-center col-md-12">
+          <input type="text" class="form-control" placeholder="Image" v-model="image">
+        </div>
       </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label>Price</label>
-        <input type="text" class="form-control" placeholder="Price" v-model="price">
+      <div class="form-row">
+        <div class="form-group text-align-center col-md-12">
+          <input type="text" class="form-control" placeholder="Price" v-model="price">
+        </div>
       </div>
-      <div class="form-group col-md-6">
-        <label>Stock</label>
-        <input type="text" class="form-control" placeholder="Stock" v-model="stock">
+      <div class="form-row">
+        <div class="form-group text-align-center col-md-12">
+          <input type="text" class="form-control" placeholder="Stock" v-model="stock">
+        </div>
       </div>
-    </div>
-    <button type="submit" class="btn btn-primary" @click.prevent="addProduct">Add Product</button>
-  </form>
+      <button type="submit" class="btn btn-primary" @click.prevent="addProduct">Add Product</button>
+    </form>
+  </div>
 </div>
 </template>
 
@@ -70,3 +73,15 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .box {
+    width: 80%;
+    height: 100vh;
+  }
+  .form-control {
+    border-top: white;
+    border-right: white;
+    border-left: white;
+  }
+</style>

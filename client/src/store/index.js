@@ -69,7 +69,10 @@ export default new Vuex.Store({
       commit('SET_ISLOADING', true)
       return axios({
         method: 'GET',
-        url: `http://localhost:3000/product/${payload}`
+        url: `http://localhost:3000/product/${payload}`,
+        headers: {
+          token: localStorage.getItem('token')
+        }
       })
     },
     editProduct ({ commit }, payload) {

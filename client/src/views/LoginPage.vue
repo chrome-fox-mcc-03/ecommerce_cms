@@ -51,7 +51,7 @@ export default {
             text: 'Login Success!'
           })
           localStorage.setItem('token', result.data.token)
-          this.$router.push('/dashboard')
+          this.$router.push('/product')
         }).catch((err) => {
           this.$notify({
             group: 'foo',
