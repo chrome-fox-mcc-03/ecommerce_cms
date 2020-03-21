@@ -35,30 +35,34 @@
                 </v-card-title>
 
                 <v-card-text>
-                  <v-container>
-                    <v-row>
-                      <v-col sm="12" md="4">
-                        <v-text-field v-model="editedItem.name" label="Product Name"></v-text-field>
-                      </v-col>
-                      <v-col sm="12" md="4">
-                        <v-text-field v-model="editedItem.stock" label="Stock Qty."></v-text-field>
-                      </v-col>
-                      <v-col sm="12" md="4">
-                        <v-text-field v-model="editedItem.price" label="Price"></v-text-field>
-                      </v-col>
-                      <v-col sm="12" md="8">
-                        <v-textarea v-model="editedItem.description" label="Product Description"></v-textarea>
-                      </v-col>
-                      <v-col sm="12" md="4">
-                        <v-col sm="12">
-                          <v-text-field v-model="editedItem.imageUrl" label="Image"></v-text-field>
+                  <v-row>
+                    <v-col cols="4">
+                    <v-img :src="editedItem.imageUrl" contain></v-img>
+                    </v-col>
+                    <v-col cols="8">
+                      <v-row>
+                        <v-col cols="12">
+                          <v-text-field v-model="editedItem.name" label="Product Name"></v-text-field>
                         </v-col>
-                        <v-col sm="12">
+                        <v-col cols="12" lg="6">
+                          <v-text-field v-model="editedItem.stock" label="Stock Qty."></v-text-field>
+                        </v-col>
+                        <v-col cols="12" lg="6">
+                          <v-text-field v-model="editedItem.price" label="Price"></v-text-field>
+                        </v-col>
+                        <v-col cols="12">
+                          <v-textarea v-model="editedItem.description" label="Product Description" rows="2"  hide-details no-resize></v-textarea>
+                        </v-col>
+                        <v-col cols="12">
+                          <!-- <v-text-field v-model="editedItem.imageUrl" label="Image"></v-text-field> -->
+
+                        </v-col>
+                        <v-col cols="12">
                           <v-checkbox v-model="editedItem.isActive" :label="`Product is active?`"></v-checkbox>
                         </v-col>
-                      </v-col>
-                    </v-row>
-                  </v-container>
+                      </v-row>
+                    </v-col>
+                  </v-row>
                 </v-card-text>
 
                 <v-card-actions>
@@ -303,7 +307,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 tbody tr:nth-of-type(even) {
   background-color: rgba(236, 237, 237);
 }

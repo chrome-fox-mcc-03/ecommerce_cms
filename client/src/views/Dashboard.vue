@@ -4,6 +4,11 @@
     <h1 class="h2">Dashboard</h1>
   </div>
   <button class="btn btn-primary" @click="openUploadWidget">upload</button>
+  <form>
+    <input type="file" accept="image/png, image/jpeg" id="image-upload"
+      @change="fileChangeHandler($event)">
+    <button type="submit" :disabled="filesSelected < 1">Upload</button>
+  </form>
 </div>
 </template>
 
