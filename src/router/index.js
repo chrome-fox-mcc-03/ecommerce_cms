@@ -17,7 +17,7 @@ const routes = [
     name: 'Home',
     component: Home,
     beforeEnter: (to, from, next) => {
-      const token = localStorage.getItem('access_token')
+      const token = localStorage.getItem('token')
       if (token) {
         next()
       } else {
@@ -30,7 +30,7 @@ const routes = [
     name: 'Login',
     component: Login,
     beforeEnter: (to, from, next) => {
-      const token = localStorage.getItem('access_token')
+      const token = localStorage.getItem('token')
       if (!token) {
         next()
       } else {
@@ -43,7 +43,7 @@ const routes = [
     name: 'ListUser',
     component: ListUser,
     beforeEnter: (to, from, next) => {
-      const token = localStorage.getItem('access_token')
+      const token = localStorage.getItem('token')
       if (token) {
         next()
       } else {
@@ -56,7 +56,7 @@ const routes = [
     name: 'ListProduct',
     component: ListProduct,
     beforeEnter: (to, from, next) => {
-      const token = localStorage.getItem('access_token')
+      const token = localStorage.getItem('token')
       if (token) {
         next()
       } else {
@@ -69,7 +69,7 @@ const routes = [
     name: 'Dashboard',
     component: Dashboard,
     beforeEnter: (to, from, next) => {
-      const token = localStorage.getItem('access_token')
+      const token = localStorage.getItem('token')
       if (token) {
         next()
       } else {
@@ -82,7 +82,7 @@ const routes = [
     name: 'CreateProduct',
     component: CreateProduct,
     beforeEnter: (to, from, next) => {
-      const token = localStorage.getItem('access_token')
+      const token = localStorage.getItem('token')
       if (token) {
         next()
       } else {
@@ -102,7 +102,7 @@ const routes = [
       }
     ],
     beforeEnter: (to, from, next) => {
-      const token = localStorage.getItem('access_token')
+      const token = localStorage.getItem('token')
       if (token) {
         next()
       } else {

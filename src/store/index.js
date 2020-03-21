@@ -45,7 +45,7 @@ export default new Vuex.Store({
         method: 'get',
         url: 'https://pure-basin-34507.herokuapp.com/products',
         headers: {
-          access_token: localStorage.getItem('access_token')
+          token: localStorage.getItem('token')
         }
       })
         .then(({ data }) => {
@@ -65,7 +65,7 @@ export default new Vuex.Store({
         method: 'get',
         url: 'https://pure-basin-34507.herokuapp.com/admin/users',
         headers: {
-          access_token: localStorage.getItem('access_token')
+          token: localStorage.getItem('token')
         }
       })
         .then(({ data }) => {
@@ -89,8 +89,8 @@ export default new Vuex.Store({
         .then(({ data }) => {
           commit('SET_ERROR', false)
           commit('SET_ERRORS', [])
-          const access_token = data.access_token
-          localStorage.setItem('access_token', access_token)
+          const token = data.token
+          localStorage.setItem('token', token)
           router.push('/dashboard')
           commit('SET_LOGIN', true)
           dispatch('getProducts')
@@ -110,7 +110,7 @@ export default new Vuex.Store({
         method: 'post',
         url: 'https://pure-basin-34507.herokuapp.com/products',
         headers: {
-          access_token: localStorage.getItem('access_token')
+          token: localStorage.getItem('token')
         },
         data: payload
       })
@@ -135,7 +135,7 @@ export default new Vuex.Store({
         method: 'get',
         url: `https://pure-basin-34507.herokuapp.com/products/${id}`,
         headers: {
-          access_token: localStorage.getItem('access_token')
+          token: localStorage.getItem('token')
         }
       })
         .then(({ data }) => {
@@ -156,7 +156,7 @@ export default new Vuex.Store({
         method: 'put',
         url: `https://pure-basin-34507.herokuapp.com/products/${id}`,
         headers: {
-          access_token: localStorage.getItem('access_token')
+          token: localStorage.getItem('token')
         },
         data: {
           name: payload.name,
@@ -184,7 +184,7 @@ export default new Vuex.Store({
         method: 'delete',
         url: `https://pure-basin-34507.herokuapp.com/products/${id}`,
         headers: {
-          access_token: localStorage.getItem('access_token')
+          token: localStorage.getItem('token')
         }
       })
         .then(({ data }) => {

@@ -46,7 +46,7 @@ export default {
     }
   },
   created () {
-    const token = localStorage.getItem('access_token')
+    const token = localStorage.getItem('token')
     if (!token) {
       this.$router.push('/login')
       this.$store.commit('SET_LOGIN', false)
