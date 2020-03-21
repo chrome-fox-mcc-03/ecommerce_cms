@@ -44,7 +44,7 @@ export default {
       this.$store.dispatch('editProduct', { id, data: this.newProduct })
         .then(response => {
           this.$router.push('/dashboard')
-          this.$toasted.success(`Success Edit ${response.data.data[1].name}`)
+          this.$toasted.success(`Success Edit ${response.data.data[1][0].name}`)
         })
         .catch(err => {
           err.response.data.errors.map(el => {

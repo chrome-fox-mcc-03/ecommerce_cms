@@ -67,9 +67,6 @@ export default {
       }
       return str.join('.')
     }
-  },
-  created () {
-    console.log(this.getPrice)
   }
 }
 </script>
