@@ -99,7 +99,7 @@ export default new Vuex.Store({
       commit('CHANGE_NOWLOADING')
       commit('CHANGE_USERDATA', payload)
       axios({
-        url: 'http://localhost:3000/login',
+        url: 'https://ancient-crag-74194.herokuapp.com/login',
         method: 'POST',
         data: {
           email: state.userData.email,
@@ -133,7 +133,7 @@ export default new Vuex.Store({
       commit('CHANGE_NOWLOADING')
       commit('CHANGE_USERDATA', payload)
       axios({
-        url: 'http://localhost:3000/register',
+        url: 'https://ancient-crag-74194.herokuapp.com/register',
         method: 'POST',
         data: payload
       })
@@ -162,7 +162,7 @@ export default new Vuex.Store({
       commit('CHANGE_NOWLOADING')
       const token = localStorage.getItem('token')
       axios({
-        url: `http://localhost:3000/product/${payload.store_id}`,
+        url: `https://ancient-crag-74194.herokuapp.com/product/${payload.store_id}`,
         method: 'POST',
         headers: {
           token
@@ -192,7 +192,7 @@ export default new Vuex.Store({
       const storeId = localStorage.getItem('store_id')
       const token = localStorage.getItem('token')
       axios({
-        url: `http://localhost:3000/product/${storeId}`,
+        url: `https://ancient-crag-74194.herokuapp.com/product/${storeId}`,
         method: 'GET',
         headers: {
           token
@@ -214,7 +214,7 @@ export default new Vuex.Store({
     getProduct ({ commit }, payload) {
       commit('CHANGE_NOWLOADING')
       axios({
-        url: `http://localhost:3000/product/detail/${payload}`,
+        url: `https://ancient-crag-74194.herokuapp.com/product/detail/${payload}`,
         method: 'GET',
         headers: {
           token: localStorage.getItem('token')
@@ -236,7 +236,7 @@ export default new Vuex.Store({
     editProduct ({ commit, state }) {
       commit('CHANGE_NOWLOADING')
       axios({
-        url: `http://localhost:3000/product/${state.selectedProduct.id}`,
+        url: `https://ancient-crag-74194.herokuapp.com/product/${state.selectedProduct.id}`,
         method: 'PUT',
         headers: {
           token: localStorage.getItem('token')
@@ -264,7 +264,7 @@ export default new Vuex.Store({
     deleteProduct ({ commit }, payload) {
       commit('CHANGE_NOWLOADING')
       axios({
-        url: `http://localhost:3000/product/${payload}`,
+        url: `https://ancient-crag-74194.herokuapp.com/product/${payload}`,
         method: 'DELETE',
         headers: {
           token: localStorage.getItem('token')
@@ -292,7 +292,7 @@ export default new Vuex.Store({
       const storeId = localStorage.getItem('store_id')
       const token = localStorage.getItem('token')
       axios({
-        url: `http://localhost:3000/product/${storeId}/category`,
+        url: `https://ancient-crag-74194.herokuapp.com/product/${storeId}/category`,
         method: 'GET',
         headers: {
           token
@@ -313,7 +313,7 @@ export default new Vuex.Store({
     fetchStoreList ({ commit }, payload) {
       if (payload) {
         axios({
-          url: `http://localhost:3000/store/${payload}`,
+          url: `https://ancient-crag-74194.herokuapp.com/store/${payload}`,
           method: 'GET'
         })
           .then(result => {
@@ -331,7 +331,7 @@ export default new Vuex.Store({
       commit('CHANGE_NOWLOADING')
       const idToken = payload.getAuthResponse().id_token
       axios({
-        url: 'http://localhost:3000/oAuth',
+        url: 'https://ancient-crag-74194.herokuapp.com/oAuth',
         method: 'POST',
         headers: {
           user_token: idToken
