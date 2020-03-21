@@ -42,7 +42,6 @@ export default {
   },
   methods: {
     deleteToast (id) {
-      console.log(id)
       this.$toasted.error('Are You Sure delete this Product?', {
         action: [
           {
@@ -89,7 +88,7 @@ export default {
         this.description = data.description
       })
       .catch(err => {
-        console.log(err)
+        this.$toasted.error(err.response.data.errors[0])
       })
       .finally(_ => {
         this.$store.commit('SET_ISLOADING', false)

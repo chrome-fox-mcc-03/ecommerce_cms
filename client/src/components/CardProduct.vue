@@ -49,7 +49,6 @@ export default {
           this.$toasted.success('Success Delete Product')
         })
         .catch(err => {
-          console.log(err.response.data.errors)
           this.$store.commit('SET_ISLOADING', false)
           this.$toasted.error(err.response.data.errors[0])
         })

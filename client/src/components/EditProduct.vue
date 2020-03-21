@@ -93,7 +93,6 @@ export default {
           const errors = error.response.data.errors
           for (let i = 0; i < errors.length; i++) {
             this.$toasted.error(errors[i])
-            console.log(errors)
           }
         })
         .finally(_ => {
@@ -113,7 +112,7 @@ export default {
         this.description = data.description
       })
       .catch(err => {
-        console.log(err)
+        this.$toasted.error(err.response.data.errors[0])
       })
       .finally(_ => {
         this.$store.commit('SET_ISLOADING', false)

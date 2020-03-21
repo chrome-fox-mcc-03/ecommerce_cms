@@ -98,7 +98,6 @@ export default {
         })
         .finally(_ => {
           this.$store.commit('SET_ISLOADING', false)
-          console.log(payload, 'finalyyyyyy')
         })
     }
   },

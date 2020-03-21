@@ -58,8 +58,7 @@ export default new Vuex.Store({
           commit('SET_PRODUCTS', [...data])
         })
         .catch(err => {
-          console.log(err)
-          this.$toasted.info('tes yaa')
+          this.$toasted.error(err.response.data.errors[0])
         })
         .finally(_ => {
           commit('SET_ISLOADING', false)
@@ -106,8 +105,7 @@ export default new Vuex.Store({
           commit('SET_PRODUCTS', [...data])
         })
         .catch(err => {
-          console.log(err)
-          this.$toasted.error('tes yaa')
+          this.$toasted.error(err.response.data.errors[0])
         })
         .finally(_ => {
           commit('SET_ISLOADING', false)
@@ -115,13 +113,10 @@ export default new Vuex.Store({
     },
     editProduct ({ commit }, payload) {
       commit('SET_LOADING', true)
-      console.log(payload)
       if (payload.category !== 'Lokal' || payload.category !== 'Import') {
         payload.category = 'Other'
       }
-      if (payload.stock < 1 || typeof payload.stock !== 'number') payload.stock = 0
       const { id, name, imageUrl, price, stock, category, description } = payload
-      console.log(payload)
       return axios({
         method: 'put',
         url: `https://enigmatic-tundra-28075.herokuapp.com/products/${id}`,
