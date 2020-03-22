@@ -58,8 +58,7 @@ const store = new Vuex.Store({
           commit('SET_PRODUCTS', result.data)
         })
         .catch(err => {
-          this.$toasted.show('failed to get products')
-          console.log(err)
+          this.$toasted.show(err)
         })
     },
     AddItem (context, payload) {

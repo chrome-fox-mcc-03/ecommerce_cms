@@ -25,7 +25,6 @@ export default {
     }
   },
   beforeCreate () {
-    this.$store.dispatch('FetchProducts')
   },
   created () {
     const Role = localStorage.getItem('Role')
@@ -38,8 +37,13 @@ export default {
       } else {
       }
     } else {
-      this.$router.push('home')
     }
+  },
+  mounted () {
+    this.$store.dispatch('FetchProducts')
+  },
+  updated () {
+    this.$store.dispatch('FetchProducts')
   }
 }
 </script>

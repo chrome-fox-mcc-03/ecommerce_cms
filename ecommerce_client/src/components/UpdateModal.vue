@@ -28,11 +28,12 @@ export default {
       const payload = this.Product
       this.$store.dispatch('UpdateItem', payload)
         .then((result) => {
+          this.$store.dispatch('FetchProducts')
           this.$toasted.show('Update Successful')
           this.$bvModal.hide(`Modal${this.Product.id}`)
         })
         .catch((err) => {
-          console.log(err)
+          this.$toasted.error(err)
           this.$Progress.finish()
           this.$toasted.error('Update Failed')
         })
@@ -48,7 +49,7 @@ export default {
           this.$toasted.show('Delete Successful')
         })
         .catch((err) => {
-          console.log(err)
+          this.$toasted.error(err)
           this.$store.dispatch('FetchProducts')
           this.$Progress.finish()
           this.$toasted.show('Delete Failed')

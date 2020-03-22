@@ -58,6 +58,13 @@ export default {
     this.$store.dispatch('FetchProducts')
   },
   created () {
+    this.$store.dispatch('FetchProducts')
+  },
+  mounted () {
+    this.$store.dispatch('FetchProducts')
+  },
+  updated () {
+    this.$store.dispatch('FetchProducts')
   }
 }
 </script>
