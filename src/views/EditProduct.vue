@@ -15,13 +15,22 @@
             </div>
           </div>
           <div class="form-row pb-3">
-            <div class="col-4 d-flex justify-content-end flex-column">
+            <div class="form-row img-row pb-3 pt-3">
+            <div class="col-4 d-flex">
+              <img :src="dataProduct.img_url" alt="" style="width: 12rem;">
+            </div>
+            <div class="custom-file col-4">
+              <small>Image url (paste the img link here)</small>
+              <input type="text" class="form-control pt-4 pb-4" v-model="imgUrlShow">
+            </div>
+            <div class="col-4 d-flex align-items-end justify-content-end flex-column">
               <small>Category:</small>
               <input class="pl-2" type="text" list="cats" v-model="dataProduct.category" placeholder="Type to add new category"/>
               <datalist id="cats">
                 <option v-for="(category, i) in categoryList.data" :key="i" :value="category" ></option>
               </datalist>
             </div>
+          </div>
           </div>
           <div class="form-group">
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Description" v-model="dataProduct.description"></textarea>
@@ -62,6 +71,26 @@ export default {
     },
     categoryList () {
       return this.$store.state.categoryList
+    },
+    imgUrlShow: {
+      get: function () {
+        const placeholderImg = 'https://2x5ito1uusjd19czwpsrbt7c-wpengine.netdna-ssl.com/wp-content/themes/total-child-theme/assets/images/common/image-placeholder.png'
+        if (this.imgUrl === placeholderImg) {
+          return 'Default Picture'
+        } else {
+          return this.imgUrl
+        }
+      },
+      set: function (newValue) {
+        const placeholderImg = 'https://2x5ito1uusjd19czwpsrbt7c-wpengine.netdna-ssl.com/wp-content/themes/total-child-theme/assets/images/common/image-placeholder.png'
+        if (!newValue) {
+          this.$store.state.selectedProduct.img_url = placeholderImg
+          this.imgUrl = placeholderImg
+        } else {
+          this.$store.state.selectedProduct.img_url = newValue
+          this.imgUrl = newValue
+        }
+      }
     }
   },
   created () {

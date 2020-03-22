@@ -6,12 +6,18 @@
           <div class="form-group">
             <input type="text" class="form-control pt-4 pb-4" placeholder="Name" v-model="newProduct.name">
           </div>
-          <div class="form-row">
-            <div class="col">
-              <input type="number" class="form-control pt-4 pb-4" placeholder="Price"  v-model="price">
+          <div class="form-row d-flex">
+            <div class="d-flex flex-column col-6">
+              <small class="ml-1">Price</small>
+              <div class="col p-1">
+                <input type="number" class="form-control pt-4 pb-4" placeholder="Price"  v-model="price">
+              </div>
             </div>
-            <div class="col">
+            <div class="d-flex flex-column col-6">
+              <small class="ml-1">Stocks</small>
+              <div class="col p-1">
               <input type="number" class="form-control pt-4 pb-4" placeholder="Stock"  v-model="stock">
+              </div>
             </div>
           </div>
           <div class="form-row img-row pb-3 pt-3">
@@ -19,8 +25,8 @@
               <img :src="imgUrl" alt="" style="width: 12rem;">
             </div>
             <div class="custom-file col-4">
-              <input type="file" class="custom-file-input" id="customFile" @change="localUrl" accept="image/*">
-              <label class="custom-file-label" for="customFile">Choose file</label>
+              <small>Image url (paste the img link here)</small>
+              <input type="text" class="form-control pt-4 pb-4" v-model="imgUrlShow">
             </div>
             <div class="col-4 d-flex align-items-end justify-content-end flex-column">
               <small>Category:</small>
@@ -48,9 +54,7 @@
 </template>
 
 <script>
-import axios from 'axios'
 import LoadingNow from '../components/LoadingNow'
-// import { CldContext, CldImage, CldVideo, CldTransformation, CldPoster } from 'cloudinary-vue'
 export default {
   data () {
     return {
@@ -60,28 +64,28 @@ export default {
   methods: {
     addProduct () {
       this.$store.dispatch('createProduct', this.newProduct)
-    },
-    localUrl (e) {
-      const files = e.target.files || e.dataTransfer.files
-      const file = files[0]
-      // https://api.cloudinary.com/v1_1/dsgjtva0h/image/upload?file=asd&upload_preset=khmjrywl
-      var reader = new FileReader()
-      reader.onloadend = () => {
-        axios({
-          url: 'https://api.cloudinary.com/v1_1/dsgjtva0h/image/upload',
-          method: 'POST',
-          params: {
-            file: reader.result,
-            upload_preset: 'bsxlq7xo'
-          }
-        })
-          .then(result => {
-            this.imgUrl = result.data.url
-            this.$store.state.newProduct.img_url = result.data.url
-          })
-      }
-      reader.readAsDataURL(file)
     }
+    // localUrl (e) {
+    //   const files = e.target.files || e.dataTransfer.files
+    //   const file = files[0]
+    //   // https://api.cloudinary.com/v1_1/dsgjtva0h/image/upload?file=asd&upload_preset=khmjrywl
+    //   var reader = new FileReader()
+    //   reader.onloadend = () => {
+    //     axios({
+    //       url: 'https://api.cloudinary.com/v1_1/dsgjtva0h/image/upload',
+    //       method: 'POST',
+    //       params: {
+    //         file: reader.result,
+    //         upload_preset: 'bsxlq7xo'
+    //       }
+    //     })
+    //       .then(result => {
+    //         this.imgUrl = result.data.url
+    //         this.$store.state.newProduct.img_url = result.data.url
+    //       })
+    //   }
+    //   reader.readAsDataURL(file)
+    // }
   },
   created () {
     this.newProduct.store_id = +localStorage.getItem('store_id')
@@ -112,6 +116,26 @@ export default {
     },
     categoryList () {
       return this.$store.state.categoryList
+    },
+    imgUrlShow: {
+      get: function () {
+        const placeholderImg = 'https://2x5ito1uusjd19czwpsrbt7c-wpengine.netdna-ssl.com/wp-content/themes/total-child-theme/assets/images/common/image-placeholder.png'
+        if (this.imgUrl === placeholderImg) {
+          return 'Default Picture'
+        } else {
+          return this.imgUrl
+        }
+      },
+      set: function (newValue) {
+        const placeholderImg = 'https://2x5ito1uusjd19czwpsrbt7c-wpengine.netdna-ssl.com/wp-content/themes/total-child-theme/assets/images/common/image-placeholder.png'
+        if (!newValue) {
+          this.$store.state.newProduct.img_url = placeholderImg
+          this.imgUrl = placeholderImg
+        } else {
+          this.$store.state.newProduct.img_url = newValue
+          this.imgUrl = newValue
+        }
+      }
     }
   },
   components: {
@@ -122,6 +146,6 @@ export default {
 
 <style>
 .img-row {
-  height: 12rem !important;
+  min-height: 12rem !important;
 }
 </style>

@@ -17,19 +17,10 @@
       </div>
       <div class="d-flex align-items-center">
         <button type="submit" class="btn btn-primary pt-3 pb-3 pr-4 pl-4 ">Log In</button>
-        <g-signin-button
-          class="ml-3 d-flex align-items-center"
-          style="cursor: pointer"
-          :params="googleSignInParams"
-          @success="onSignInSuccess"
-          @error="onSignInError">
-          <img class="shadow g-signin-button mr-1" src="https://banner2.cleanpng.com/20180324/sbe/kisspng-google-logo-g-suite-google-5ab6f1f0dbc9b7.1299911115219389289003.jpg" alt="" srcset="">
-          Google Sign In
-        </g-signin-button>
-      </div>
-      <router-link to="/register">
-          <button class='btn btn-link p-0 mt-3'>Sign Up Here</button>
+        <router-link to="/register">
+          <button class='btn btn-link p-0 ml-3'>Sign Up Here</button>
         </router-link>
+      </div>
     </form>
   </div>
   <footer>SHOPPINGKUY &copy; Adam Primarizki</footer>
