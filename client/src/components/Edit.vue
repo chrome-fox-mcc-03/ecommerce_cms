@@ -81,9 +81,6 @@ export default {
   },
   computed: {
     ...mapState(['item', 'id'])
-  },
-  created () {
-    this.SHOW_ERROR('')
   }
 }
 </script>
