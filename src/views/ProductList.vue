@@ -12,6 +12,7 @@
           <tr>
             <th scope="col">No</th>
             <th scope="col">Name</th>
+            <th scope="col">Image</th>
             <th scope="col">Price</th>
             <th scope="col">Stock</th>
             <th scope="col">Category</th>
@@ -22,6 +23,7 @@
           <tr v-for="(product, index) in $store.state.products" :key="product.id">
             <td>{{ index + 1 }}</td>
             <td>{{ product.name }}</td>
+            <td><img height="100" width="100" :src="product.img_url"></td>
             <td>{{ product.price }}</td>
             <td>{{ product.stock }}</td>
             <td>{{ product.CategoryId }}</td>

@@ -29,8 +29,7 @@ export default {
       .then(category => {
         this.name = category.name
       })
-      .catch(err => {
-        console.log(err)
+      .catch(_ => {
       })
   },
   methods: {

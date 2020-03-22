@@ -55,8 +55,7 @@ export default {
         this.stock = product.stock
         this.CategoryId = product.CategoryId
       })
-      .catch(err => {
-        console.log(err)
+      .catch(_ => {
       })
   },
   methods: {

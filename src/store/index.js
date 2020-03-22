@@ -3,7 +3,8 @@ import Vuex from 'vuex'
 import axios from 'axios'
 
 const client = axios.create({
-  baseURL: 'http://localhost:3000'
+  baseURL: 'https://pacific-harbor-70520.herokuapp.com',
+  // baseURL: 'http://localhost:3000'
 })
 
 Vue.use(Vuex)
@@ -63,9 +64,7 @@ const store = new Vuex.Store({
     EDIT_PRODUCT (state, product) {
       state.products = [...state.products.filter(el => {
         return el.id !== product.id
-      },
-      product
-      )]
+      }), product]
     },
     DELETE_PRODUCT (state, id) {
       state.products = [...state.products.filter(el => {
@@ -78,7 +77,6 @@ const store = new Vuex.Store({
       return new Promise((resolve, reject) => {
         client.post('/login', data)
           .then(({ data }) => {
-            console.log(data)
             localStorage.setItem('access_token', data.access_token)
             commit('LOGIN', data)
             resolve('/')
@@ -101,11 +99,9 @@ const store = new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          console.log(data)
           commit('SET_PRODUCTS', data.products)
         })
-        .catch(err => {
-          console.log(err)
+        .catch(_ => {
         })
     },
     getCategories ({ commit, state }) {
@@ -117,8 +113,7 @@ const store = new Vuex.Store({
         .then(({ data }) => {
           commit('SET_CATEGORIES', data.categories)
         })
-        .catch(err => {
-          console.log(err)
+        .catch(_ => {
         })
     },
     addCategories ({ commit, state }, name) {
@@ -131,11 +126,9 @@ const store = new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          console.log(data)
           commit('ADD_CATEGORIES', data.category)
         })
-        .catch(err => {
-          console.log(err)
+        .catch(_ => {
         })
     },
     getCategory ({ state }, id) {
@@ -150,7 +143,6 @@ const store = new Vuex.Store({
           })
           .catch(err => {
             reject(err)
-            console.log(err)
           })
       })
     },
@@ -162,10 +154,8 @@ const store = new Vuex.Store({
       })
         .then(({ data }) => {
           commit('EDIT_CATEGORIES', data.category)
-          console.log(data)
         })
-        .catch(err => {
-          console.log(err)
+        .catch(_ => {
         })
     },
     deleteCategory ({ commit, state }, id) {
@@ -176,10 +166,8 @@ const store = new Vuex.Store({
       })
         .then(({ data }) => {
           commit('DELETE_CATEGORIES', id)
-          console.log(data)
         })
-        .catch(err => {
-          console.log(err)
+        .catch(_ => {
         })
     },
     addProduct ({ commit, state }, data) {
@@ -189,11 +177,9 @@ const store = new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          console.log(data)
           commit('ADD_PRODUCT', data.product)
         })
-        .catch(err => {
-          console.log(err)
+        .catch(_ => {
         })
     },
     getProduct ({ state }, id) {
@@ -208,12 +194,10 @@ const store = new Vuex.Store({
           })
           .catch(err => {
             reject(err)
-            console.log(err)
           })
       })
     },
     editProduct ({ commit, state }, data) {
-      console.log(data.id)
       client.put(`/products/${data.id}`, data.formData, {
         headers: {
           access_token: state.access_token
@@ -221,10 +205,8 @@ const store = new Vuex.Store({
       })
         .then(({ data }) => {
           commit('EDIT_PRODUCT', data.product)
-          console.log(data)
         })
-        .catch(err => {
-          console.log(err)
+        .catch(_ => {
         })
     },
     deleteProduct ({ commit, state }, id) {
@@ -235,10 +217,8 @@ const store = new Vuex.Store({
       })
         .then(({ data }) => {
           commit('DELETE_PRODUCT', id)
-          console.log(data)
         })
-        .catch(err => {
-          console.log(err)
+        .catch(_ => {
         })
     }
   },

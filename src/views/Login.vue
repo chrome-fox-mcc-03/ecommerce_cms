@@ -41,8 +41,7 @@ export default {
         .then(result => {
           this.$router.push(result)
         })
-        .catch(err => {
-          console.log(err)
+        .catch(_ => {
         })
     }
   }
