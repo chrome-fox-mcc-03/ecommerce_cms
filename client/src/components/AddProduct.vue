@@ -80,6 +80,9 @@ export default {
           this.SET_LOADING(false)
         })
     }
+  },
+  created () {
+    this.SHOW_ERROR('')
   }
 }
 

@@ -34,25 +34,13 @@
           </article>
         </div>
 
-        <div class="col-md-12 center"
-             v-if="loading === true">
-            <lottie-player
-                src="https://assets2.lottiefiles.com/datafiles/DsjK4Q0K3WGTIVf/data.json"
-                background="transparent"
-                speed="0.6"
-                style="width: 300px; height: 200px;"
-                loop autoplay>
-            </lottie-player>
-            <p class="font-weight-light mt-0 h4">Loading....</p>
-        </div>
-
     </div>
   </div>
 </template>
 
 <script>
 
-import { mapState, mapActions, mapMutations } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 
 export default {
   name: 'Auth',
@@ -64,9 +52,6 @@ export default {
   },
   props: {
     action: String
-  },
-  computed: {
-    ...mapState(['loading'])
   },
   methods: {
     ...mapMutations(['SET_LOADING', 'SET_ISLOGIN', 'SHOW_ERROR']),

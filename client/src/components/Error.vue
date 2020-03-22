@@ -14,20 +14,19 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Error',
   data () {
     return {
-      dismissCountDown: 3
+      dismissCountDown: 5
     }
   },
   computed: {
     ...mapState(['error'])
   },
   methods: {
-    ...mapMutations(['SHOW_ERROR']),
     countDownChanged (dismissCountDown) {
       this.dismissCountDown = dismissCountDown
     }

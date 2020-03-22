@@ -30,16 +30,16 @@ export default {
     Navbar
   },
   computed: {
-    ...mapState(['loading'])
+    ...mapState(['loading','products'])
   },
   methods: {
-    ...mapMutations(['SHOW_ERROR', 'SET_ISLOGIN', 'SET_LOGOUT']),
+    ...mapMutations(['SET_ISLOGIN', 'SET_LOGOUT']),
     ...mapActions(['fetchProduct'])
   },
   created () {
     if (localStorage.token) {
       this.SET_ISLOGIN()
-      if (this.$store.state.products.length === 0) {
+      if (this.products.length === 0) {
         this.fetchProduct()
       }
     } else {
