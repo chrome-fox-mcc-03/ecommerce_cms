@@ -31,16 +31,19 @@ import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'Navbar',
   methods: {
-    ...mapMutations(['SET_LOGOUT']),
+    ...mapMutations(['SET_LOGOUT', 'SHOW_ERROR']),
     logout () {
       this.SET_LOGOUT()
       this.$router.push('/')
+      this.SHOW_ERROR('')
     },
     login () {
       this.$router.push('login')
+      this.SHOW_ERROR('')
     },
     register () {
       this.$router.push('register')
+      this.SHOW_ERROR('')
     }
   },
   computed: {

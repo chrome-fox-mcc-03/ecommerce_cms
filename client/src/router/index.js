@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../store/index'
 import Home from '../views/Home.vue'
 import Edit from '../components/Edit.vue'
 import Products from '../views/Products.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -11,8 +13,10 @@ const routes = [
     name: 'Products',
     component: Products,
     beforeEnter: (to, from, next) => {
-      if (!localStorage.token) next('/login')
-      else {
+      if (!localStorage.token) {
+        next('/login')
+        store.commit('SHOW_ERROR', 'Please login to access all books')
+      } else {
         next()
       }
     }
@@ -43,8 +47,9 @@ const routes = [
     name: 'Edit',
     component: Edit,
     beforeEnter: (to, from, next) => {
-      if (!localStorage.token) next('/login')
-      else {
+      if (!localStorage.token) {
+        next('/login')
+      } else {
         next()
       }
     }

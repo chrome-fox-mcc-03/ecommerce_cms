@@ -1,17 +1,36 @@
 <template>
-  <div class="container alert alert-danger alt-auth" role="alert" v-if="error">
-    <i class="fa fa-warning"></i>
-    {{String(error)}}
+  <div class="row" role="alert" v-if="error">
+    <div class="col-md-12">
+      <b-alert
+        :show="dismissCountDown"
+        dismissible
+        fade
+        variant="danger"
+        @dismiss-count-down="countDownChanged"
+        >{{String(error)}}
+      </b-alert>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'Error',
+  data () {
+    return {
+      dismissCountDown: 3
+    }
+  },
   computed: {
     ...mapState(['error'])
+  },
+  methods: {
+    ...mapMutations(['SHOW_ERROR']),
+    countDownChanged (dismissCountDown) {
+      this.dismissCountDown = dismissCountDown
+    }
   }
 }
 </script>

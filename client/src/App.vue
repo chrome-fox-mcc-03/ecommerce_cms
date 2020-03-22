@@ -18,7 +18,7 @@
 
 <script>
 import Navbar from './components/Navbar'
-import { mapState } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 
 export default {
   name: 'App',
@@ -32,16 +32,19 @@ export default {
   computed: {
     ...mapState(['loading'])
   },
+  methods: {
+    ...mapMutations(['SHOW_ERROR', 'SET_ISLOGIN', 'SET_LOGOUT']),
+    ...mapActions(['fetchProduct'])
+  },
   created () {
     if (localStorage.token) {
-      this.$store.commit('SET_ISLOGIN')
+      this.SET_ISLOGIN()
       if (this.$store.state.products.length === 0) {
-        this.$store.dispatch('fetchProduct')
+        this.fetchProduct()
       }
     } else {
-      this.$store.commit('SET_LOGOUT')
+      this.SET_LOGOUT()
     }
-    this.SHOW_ERROR("")
   }
 }
 </script>

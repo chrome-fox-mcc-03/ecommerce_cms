@@ -10,7 +10,8 @@ export default new Vuex.Store({
     products: [],
     error: '',
     loading: false,
-    item: {}
+    item: {},
+    id: ''
   },
   mutations: {
     SET_ISLOGIN (state) {
@@ -31,6 +32,9 @@ export default new Vuex.Store({
     },
     SET_ITEM (state, data) {
       state.item = data
+    },
+    SET_ID (state, number) {
+      state.id = number
     }
   },
   actions: {
@@ -87,6 +91,7 @@ export default new Vuex.Store({
         }
       })
         .then(({ data }) => {
+          context.commit('SET_ID', payload)
           context.commit('SET_ITEM', data.product)
           context.commit('SET_LOADING', false)
         })

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="col-md-4 float-right">
-          <b-button v-b-modal.modal-prevent-closing class="btn-add">Add New Product</b-button>
+    <div class="col-md-4 float-right mb-2">
+          <b-button v-b-modal.modal-prevent-closing variant="info">Add New Product</b-button>
     </div>
       <b-modal id="modal-prevent-closing" ref="modal" title="Add New Product" @ok="handleOk">
         <Error></Error>
@@ -25,11 +25,11 @@
           </b-form-group>
 
           <b-form-group id="input-group-3" label="Price:" label-for="input-3">
-            <b-form-input id="input-2" v-model="form.price" required placeholder="Enter price"></b-form-input>
+            <b-form-input id="input-3" v-model="form.price" required placeholder="Enter price"></b-form-input>
           </b-form-group>
 
           <b-form-group id="input-group-4" label="Stock:" label-for="input-4">
-            <b-form-input id="input-2" v-model="form.stock" required placeholder="Enter stock"></b-form-input>
+            <b-form-input id="input-4" v-model="form.stock" required placeholder="Enter stock" type="number"></b-form-input>
           </b-form-group>
         </b-form>
       </b-modal>
@@ -42,6 +42,9 @@ import Error from './Error'
 
 export default {
   name: 'AddProduct',
+  components: {
+    Error
+  },
   data () {
     return {
       form: {
@@ -66,7 +69,7 @@ export default {
       this.addProduct(payload)
         .then(() => {
           this.fetchProduct()
-          this.SHOW_ERROR("")
+          this.SHOW_ERROR('')
           this.$nextTick(() => {
             this.$bvModal.hide('modal-prevent-closing')
           })

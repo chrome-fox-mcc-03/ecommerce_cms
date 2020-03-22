@@ -9,7 +9,7 @@
       :current-page="currentPage"
     >
       <!-- A virtual column -->
-      <template v-slot:cell(index)="data">{{ data.index + 1 }}</template>
+      <template v-slot:cell(index)="data">{{ data.item.id }}</template>
 
       <!-- A virtual composite column -->
       <template v-slot:cell(image_url)="data" align-v="center">
@@ -22,11 +22,11 @@
           v-b-modal.modal-edit
           @click="updateProduct(data.value)"
           size="sm"
-          variant="success"
-          class="btn-table"
+          variant="dark"
         >
           Edit
         </b-button>
+        <hr>
         <b-button
           v-b-modal.modal-1
           size="sm"
@@ -41,13 +41,15 @@
         <i>{{ data.value }}</i>
       </template>
     </b-table>
-    <b-pagination
+     <b-pagination
       v-model="currentPage"
       :total-rows="rows"
       :per-page="perPage"
-      aria-controls="my-table"
+      size="lg"
+      align="center"
     ></b-pagination>
     <b-modal id="modal-1" title="Delete this product?" @ok="handleDelete">
+      <Error></Error>
       <p class="my-4">This product will be deleted</p>
     </b-modal>
   </div>
@@ -55,9 +57,13 @@
 
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex'
+import Error from './Error'
 
 export default {
   name: 'ProductsTable',
+  components: {
+    Error
+  },
   data () {
     return {
       perPage: 5,
@@ -112,6 +118,7 @@ export default {
   },
   created () {
     this.fetchProduct()
+    this.SHOW_ERROR('')
   }
 }
 </script>

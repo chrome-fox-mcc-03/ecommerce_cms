@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="row">
-    <Error></Error>
     <div class="col-md-4"></div>
     <div class="col-md-4">
+      <Error></Error>
       <h1>Edit Book</h1>
         <b-form @submit="onSubmit">
         <b-form-group id="input-group-1" label="Product Name:" label-for="input-1">
@@ -32,7 +32,9 @@
         <b-form-group id="input-group-4" label="Stock:" label-for="input-4">
           <b-form-input id="input-4" v-model="item.stock" required placeholder="Enter stock" type="number"></b-form-input>
         </b-form-group>
-          <b-button type="submit" variant="secondary">Submit</b-button>
+
+          <b-button type="submit" variant="secondary mr-2">Submit</b-button>
+          <b-button type="submit" variant="primary" @click="back">Back</b-button>
         </b-form>
     </div>
     <div class="col-md-4"></div>
@@ -59,25 +61,26 @@ export default {
     },
     formSubmit () {
       const payload = {
-        id: this.item.id,
+        id: this.id,
         data: this.item
       }
       this.editProduct(payload)
         .then(() => {
           this.fetchProduct()
           this.SET_LOADING(false)
-          this.$nextTick(() => {
-            this.$bvModal.hide('modal-edit')
-          })
+          this.$router.go(-1) // go back by one record
         })
         .catch(err => {
           this.SHOW_ERROR(err.response.data.error)
           this.SET_LOADING(false)
         })
+    },
+    back () {
+      this.$router.push('/products')
     }
   },
   computed: {
-    ...mapState(['item'])
+    ...mapState(['item', 'id'])
   }
 }
 </script>
