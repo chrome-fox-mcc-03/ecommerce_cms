@@ -26,7 +26,7 @@
             <td><img height="100" width="100" :src="product.img_url"></td>
             <td>{{ product.price }}</td>
             <td>{{ product.stock }}</td>
-            <td>{{ product.CategoryId }}</td>
+            <td>{{ product.Category.name }}</td>
             <td>
               <button class="btn btn-primary" @click="editProduct(product.id)">Edit</button> |
               <button class="btn btn-danger" @click="deleteProduct(product.id)">Delete</button>

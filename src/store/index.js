@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 
 const client = axios.create({
-  baseURL: 'https://pacific-harbor-70520.herokuapp.com',
+  baseURL: 'https://pacific-harbor-70520.herokuapp.com'
   // baseURL: 'http://localhost:3000'
 })
 
