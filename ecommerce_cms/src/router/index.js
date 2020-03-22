@@ -29,16 +29,13 @@ const routes = [
   },
   {
     path: '/store',
-    name: 'Store',
     component: Store,
     children: [
       {
-        name: 'Home',
         path: '',
         component: Home
       },
       {
-        name: 'Product',
         path: 'product',
         component: Product,
         children: [

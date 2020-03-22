@@ -28,7 +28,7 @@
             <div style="margin-top:10px;" class="form-group">
                 <!-- Button -->
                 <div class="col-sm-12 controls">
-                    <button id="btn-login" @click.prevent="register" class="btn btn-secondary">Register</button>
+                    <button id="btn-register" @click.prevent="register" class="btn btn-secondary">Register</button>
                 </div>
             </div>
             <div class="form-group">
