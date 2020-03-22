@@ -1,7 +1,7 @@
 <template>
   <div class="navbar navbar-expand navbar-dark bg-primary">
     <div class="container d-flex justify-content-between">
-      <router-link to="/dashboard" class="navbar-brand text-custom">Ecommerce Admin</router-link>
+      <router-link to="/dashboard" class="navbar-brand text-custom">AleshaScarf</router-link>
       <ul class="navbar-nav">
         <li class="nav-item">
           <router-link v-if="!$store.getters.isLogin" to="/login" class="nav-link">Login</router-link>
@@ -23,8 +23,7 @@ export default {
         .then(result => {
           this.$router.push(result)
         })
-        .catch(err => {
-          console.log(err)
+        .catch(_ => {
         })
     }
   }
