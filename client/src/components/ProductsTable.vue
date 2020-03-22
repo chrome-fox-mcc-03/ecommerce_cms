@@ -19,6 +19,7 @@
       <!-- A virtual composite column -->
       <template v-slot:cell(id)="data">
         <b-button
+          v-bind:class="turnDisabled()"
           v-b-modal.modal-edit
           @click="updateProduct(data.value)"
           size="sm"
@@ -28,6 +29,7 @@
         </b-button>
         <hr>
         <b-button
+          :class="turnDisabled()"
           v-b-modal.modal-1
           size="sm"
           variant="danger"
@@ -68,6 +70,7 @@ export default {
     return {
       perPage: 5,
       currentPage: 1,
+      role: '',
       fields: [
         'index',
         { key: 'image_url', label: 'Image' },
@@ -83,6 +86,11 @@ export default {
   methods: {
     ...mapMutations(['SET_LOADING', 'SET_ISLOGIN', 'SHOW_ERROR']),
     ...mapActions(['deleteProduct', 'fetchProduct', 'findOne']),
+    turnDisabled () {
+      if (this.role === 'customer') {
+        return 'disabled'
+      }
+    },
     selectDelete (id) {
       this.deleteId = id
     },
@@ -119,6 +127,7 @@ export default {
   created () {
     this.fetchProduct()
     this.SHOW_ERROR('')
+    this.role = localStorage.getItem('role')
   }
 }
 </script>

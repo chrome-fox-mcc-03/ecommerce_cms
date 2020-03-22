@@ -33,11 +33,10 @@ export default {
     ...mapState(['loading', 'products'])
   },
   methods: {
-    ...mapMutations(['SHOW_ERROR', 'SET_ISLOGIN', 'SET_LOGOUT']),
+    ...mapMutations(['SET_ISLOGIN', 'SET_LOGOUT']),
     ...mapActions(['fetchProduct'])
   },
   created () {
-    this.SHOW_ERROR('')
     if (localStorage.token) {
       this.SET_ISLOGIN()
       if (this.products.length === 0) {

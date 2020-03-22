@@ -78,6 +78,7 @@ export default {
       } else if (this.action === 'Login') {
         this.login(data)
           .then(({ data }) => {
+            localStorage.setItem('role', data.role)
             localStorage.setItem('token', data.token)
             this.SET_ISLOGIN(true)
             this.$router.push('/products')
