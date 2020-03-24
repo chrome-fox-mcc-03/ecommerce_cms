@@ -1,0 +1,25 @@
+<template>
+  <div class="col-md-3">
+    <div class="card mb-3 shadow-sm text-center">
+      <div class="p-3">
+        <img class="img-fluid" :src="data.imageUrl ? data.imageUrl : image" alt="">
+      </div>
+      <div class="card-body">
+        <span class="text-capitalize">{{data.name}}</span>
+        <div class="mt-3" v-if="!data.id">
+          <button class="btn btn-secondary btn-sm" @click="goToDetailPokemon">View Detail</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style>
+
+</style>
