@@ -26,7 +26,7 @@
         </b-form-group>
 
         <b-form-group id="input-group-3" label="Price:" label-for="input-3">
-          <b-form-input id="input-3" v-model="item.price" required placeholder="Enter price"></b-form-input>
+          <b-form-input id="input-3" v-model="item.price" required placeholder="Enter price" type="number"></b-form-input>
         </b-form-group>
 
         <b-form-group id="input-group-4" label="Stock:" label-for="input-4">

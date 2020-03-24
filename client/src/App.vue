@@ -2,14 +2,15 @@
   <div id="app">
     <Navbar></Navbar>
     <router-view/>
-    <div class="col-md-12 center"
+    <div class="container"
           v-if="loading === true">
         <lottie-player
-            src="https://assets2.lottiefiles.com/datafiles/DsjK4Q0K3WGTIVf/data.json"
-            background="transparent"
-            speed="0.6"
-            style="width: 300px; height: 200px;"
-            loop autoplay>
+        src="https://assets2.lottiefiles.com/datafiles/DsjK4Q0K3WGTIVf/data.json"
+        background="transparent"
+        speed="0.6"
+        style="width: 300px; height: 200px;"
+        loop autoplay
+        class="mx-auto">
         </lottie-player>
         <p class="font-weight-light mt-0 h4">Loading....</p>
     </div>

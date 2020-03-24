@@ -9,17 +9,17 @@
       :current-page="currentPage"
     >
       <!-- A virtual column -->
-      <template v-slot:cell(index)="data">{{ data.item.id }}</template>
+      <template v-slot:cell(index)="data">{{ data.index + 1 }}</template>
 
       <!-- A virtual composite column -->
       <template v-slot:cell(image_url)="data" align-v="center">
-        <b-img :src="data.value" alt="Right image" thumbnail fluid width="100px"></b-img>
+        <b-img :src="data.value" alt="Right image" thumbnail fluid width="100px"  @error="imageLoadError"></b-img>
       </template>
 
       <!-- A virtual composite column -->
       <template v-slot:cell(id)="data">
         <b-button
-          v-bind:class="turnDisabled()"
+          v-if="role === 'admin'"
           v-b-modal.modal-edit
           @click="updateProduct(data.value)"
           size="sm"
@@ -29,7 +29,7 @@
         </b-button>
         <hr>
         <b-button
-          :class="turnDisabled()"
+          v-if="role === 'admin'"
           v-b-modal.modal-1
           size="sm"
           variant="danger"
@@ -86,11 +86,6 @@ export default {
   methods: {
     ...mapMutations(['SET_LOADING', 'SET_ISLOGIN', 'SHOW_ERROR']),
     ...mapActions(['deleteProduct', 'fetchProduct', 'findOne']),
-    turnDisabled () {
-      if (this.role === 'customer') {
-        return 'disabled'
-      }
-    },
     selectDelete (id) {
       this.deleteId = id
     },
@@ -116,6 +111,9 @@ export default {
     updateProduct (id) {
       this.findOne(id)
       this.$router.push(`/edit/${id}`)
+    },
+    imageLoadError (event) {
+      event.target.src = 'https://img.icons8.com/carbon-copy/2x/book.png'
     }
   },
   computed: {

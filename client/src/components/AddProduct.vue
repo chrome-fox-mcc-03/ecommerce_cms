@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="col-md-4 float-right mb-2">
+    <div class="col-md-4 float-right mb-2" v-if="role === 'admin'">
           <b-button v-b-modal.modal-prevent-closing variant="info">Add New Product</b-button>
     </div>
       <b-modal id="modal-prevent-closing" ref="modal" title="Add New Product" @ok="handleOk">
@@ -25,7 +25,7 @@
           </b-form-group>
 
           <b-form-group id="input-group-3" label="Price:" label-for="input-3">
-            <b-form-input id="input-3" v-model="form.price" required placeholder="Enter price"></b-form-input>
+            <b-form-input id="input-3" v-model="form.price" required placeholder="Enter price" type="number"></b-form-input>
           </b-form-group>
 
           <b-form-group id="input-group-4" label="Stock:" label-for="input-4">
@@ -51,7 +51,8 @@ export default {
         name: '',
         image_url: '',
         price: '',
-        stock: ''
+        stock: '',
+        role: ''
       },
       modalShow: false
     }
@@ -60,7 +61,6 @@ export default {
     ...mapActions(['addProduct', 'fetchProduct']),
     ...mapMutations(['SET_LOADING', 'SHOW_ERROR']),
     handleOk (bvModalEvt) {
-      this.SET_LOADING(true)
       bvModalEvt.preventDefault()
       this.handleSubmit()
     },
@@ -73,16 +73,15 @@ export default {
           this.$nextTick(() => {
             this.$bvModal.hide('modal-prevent-closing')
           })
-          this.SET_LOADING(false)
         })
         .catch(err => {
           this.SHOW_ERROR(err.response.data.error)
-          this.SET_LOADING(false)
         })
     }
   },
   created () {
     this.SHOW_ERROR('')
+    this.role = localStorage.getItem('role')
   }
 }
 
