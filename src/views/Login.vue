@@ -50,10 +50,26 @@ export default {
       this.$store.dispatch('login', data)
         .then(result => {
           this.isLoading = false
+          const status = {
+            title: 'Success Login!',
+            body: 'Successfully logged in.',
+            type: 'success',
+            canTimeout: true,
+            duration: 2000
+          }
+          this.$vToastify.success(status)
           this.$router.push(result)
         })
-        .catch(_ => {
+        .catch(err => {
           this.isLoading = false
+          const status = {
+            title: 'Failed!',
+            body: err.response.data.error,
+            type: 'error',
+            canTimeout: true,
+            duration: 2000
+          }
+          this.$vToastify.error(status)
         })
     }
   }

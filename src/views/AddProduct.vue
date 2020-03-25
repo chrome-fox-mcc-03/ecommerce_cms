@@ -73,10 +73,26 @@ export default {
       this.$store.dispatch('addProduct', formData)
         .then(path => {
           this.isLoading = false
+          const status = {
+            title: 'Product Created!',
+            body: 'Product successfully created.',
+            type: 'success',
+            canTimeout: true,
+            duration: 2000
+          }
+          this.$vToastify.success(status)
           this.$router.push(path)
         })
-        .catch(_ => {
+        .catch(err => {
           this.isLoading = false
+          const status = {
+            title: 'Failed!',
+            body: err.response.data.errors[0],
+            type: 'error',
+            canTimeout: true,
+            duration: 2000
+          }
+          this.$vToastify.error(status)
         })
     }
   }
