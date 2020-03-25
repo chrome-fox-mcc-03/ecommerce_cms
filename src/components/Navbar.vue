@@ -1,5 +1,5 @@
 <template>
-  <div v-if="render" class="navbar bg-light row position-fixed vw-100 m-0">
+  <div v-if="render" class="navbar bg-light row position-fixed vw-100 m-0" style="z-index:1400">
     <div class="col-md-2 text-white d-flex">
       <router-link class="nav-link" to="/"><i class="fa fa-magic fa-lg"></i></router-link>
       <div v-if="(isLogin || hasToken)" class="mx-2 nav-item active">

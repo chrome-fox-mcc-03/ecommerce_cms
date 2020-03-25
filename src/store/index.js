@@ -17,7 +17,8 @@ const store = new Vuex.Store({
     },
     testVuex: 'Vuex Store Online',
     appName: 'cms_client',
-    serverURL: 'https://tranquil-lowlands-54278.herokuapp.com',
+    // serverURL: 'https://tranquil-lowlands-54278.herokuapp.com',
+    serverURL: 'http://localhost:3000',
     _isLogin: false,
     _pageLoading: true,
     inputCred: {

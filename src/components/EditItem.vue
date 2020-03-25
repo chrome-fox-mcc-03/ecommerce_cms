@@ -1,6 +1,7 @@
 <template>
   <div class="container d-flex justify-content-center align-items-center">
-    <form class="mt-4">
+    <loading v-if="$store.state._pageLoading"></loading>
+    <form v-else class="mt-4">
       <h4 class="title">Edit Product {{ $route.params.id }}</h4>
       <div class="form-group">
         Name
@@ -30,6 +31,7 @@
 </template>
 
 <script>
+import Loading from './Loading'
 export default {
   data () {
     return {
@@ -71,6 +73,9 @@ export default {
   },
   mounted () {
     this.getEditedDetails()
+  },
+  components: {
+    Loading
   }
 }
 </script>
