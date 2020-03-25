@@ -12,16 +12,24 @@
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     </div>
+    <loading :active.sync="isLoading"
+        :can-cancel="true"
+        :is-full-page="true"></loading>
   </div>
 </template>
 
 <script>
+import Loading from 'vue-loading-overlay'
 export default {
   name: 'EditCategory',
+  components: {
+    Loading
+  },
   data () {
     return {
       name: '',
-      id: this.$route.params.id
+      id: this.$route.params.id,
+      isLoading: false
     }
   },
   created () {
@@ -34,12 +42,19 @@ export default {
   },
   methods: {
     submitEditCategory () {
+      this.isLoading = true
       const data = {
         id: this.id,
         name: this.name
       }
       this.$store.dispatch('editCategories', data)
-      this.$router.push('/dashboard/category')
+        .then(result => {
+          this.isLoading = false
+          this.$router.push(result)
+        })
+        .catch(_ => {
+          this.isLoading = false
+        })
     }
   }
 }

@@ -27,12 +27,24 @@
         </tbody>
       </table>
     </div>
+    <loading :active.sync="isLoading"
+        :can-cancel="true"
+        :is-full-page="true"></loading>
   </div>
 </template>
 
 <script>
+import Loading from 'vue-loading-overlay'
 export default {
   name: 'CategoryList',
+  components: {
+    Loading
+  },
+  data () {
+    return {
+      isLoading: false
+    }
+  },
   created () {
     this.$store.dispatch('getCategories')
   },
@@ -44,7 +56,14 @@ export default {
       this.$router.push(`/dashboard/editcategory/${id}`)
     },
     deleteCategory (id) {
+      this.isLoading = true
       this.$store.dispatch('deleteCategory', id)
+        .then(result => {
+          this.isLoading = false
+        })
+        .catch(_ => {
+          this.isLoading = false
+        })
     }
   }
 }

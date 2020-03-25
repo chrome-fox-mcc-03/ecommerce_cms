@@ -35,12 +35,24 @@
         </tbody>
       </table>
     </div>
+    <loading :active.sync="isLoading"
+        :can-cancel="true"
+        :is-full-page="true"></loading>
   </div>
 </template>
 
 <script>
+import Loading from 'vue-loading-overlay'
 export default {
   name: 'ProductList',
+  components: {
+    Loading
+  },
+  data () {
+    return {
+      isLoading: false
+    }
+  },
   created () {
     this.$store.dispatch('getProducts')
   },
@@ -52,7 +64,14 @@ export default {
       this.$router.push(`/dashboard/editproduct/${id}`)
     },
     deleteProduct (id) {
+      this.isLoading = true
       this.$store.dispatch('deleteProduct', id)
+        .then(result => {
+          this.isLoading = false
+        })
+        .catch(_ => {
+          this.isLoading = false
+        })
     }
   }
 }

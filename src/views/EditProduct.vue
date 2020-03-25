@@ -30,12 +30,19 @@
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
+    <loading :active.sync="isLoading"
+        :can-cancel="true"
+        :is-full-page="true"></loading>
   </div>
 </template>
 
 <script>
+import Loading from 'vue-loading-overlay'
 export default {
   name: 'EditProduct',
+  components: {
+    Loading
+  },
   data () {
     return {
       name: null,
@@ -43,7 +50,8 @@ export default {
       price: null,
       stock: null,
       CategoryId: 0,
-      id: this.$route.params.id
+      id: this.$route.params.id,
+      isLoading: false
     }
   },
   created () {
@@ -74,8 +82,15 @@ export default {
         formData,
         id: this.id
       }
+      this.isLoading = true
       this.$store.dispatch('editProduct', data)
-      this.$router.push('/dashboard/product')
+        .then(result => {
+          this.isLoading = false
+          this.$router.push(result)
+        })
+        .catch(_ => {
+          this.isLoading = false
+        })
     }
   }
 }

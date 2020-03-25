@@ -18,16 +18,24 @@
       </div>
       <div class="col"></div>
     </div>
+    <loading :active.sync="isLoading"
+        :can-cancel="true"
+        :is-full-page="true"></loading>
   </div>
 </template>
 
 <script>
+import Loading from 'vue-loading-overlay'
 export default {
   name: 'Login',
+  components: {
+    Loading
+  },
   data () {
     return {
       email: '',
-      password: ''
+      password: '',
+      isLoading: false
     }
   },
   methods: {
@@ -37,11 +45,15 @@ export default {
         password: this.password
       }
 
+      this.isLoading = true
+
       this.$store.dispatch('login', data)
         .then(result => {
+          this.isLoading = false
           this.$router.push(result)
         })
         .catch(_ => {
+          this.isLoading = false
         })
     }
   }

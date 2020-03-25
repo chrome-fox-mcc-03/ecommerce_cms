@@ -3,8 +3,8 @@ import Vuex from 'vuex'
 import axios from 'axios'
 
 const client = axios.create({
-  baseURL: 'https://pacific-harbor-70520.herokuapp.com'
-  // baseURL: 'http://localhost:3000'
+  // baseURL: 'https://pacific-harbor-70520.herokuapp.com'
+  baseURL: 'http://localhost:3000'
 })
 
 Vue.use(Vuex)
@@ -117,19 +117,23 @@ const store = new Vuex.Store({
         })
     },
     addCategories ({ commit, state }, name) {
-      const data = {
-        name
-      }
-      client.post('/categories', data, {
-        headers: {
-          access_token: state.access_token
+      return new Promise((resolve, reject) => {
+        const data = {
+          name
         }
+        client.post('/categories', data, {
+          headers: {
+            access_token: state.access_token
+          }
+        })
+          .then(({ data }) => {
+            commit('ADD_CATEGORIES', data.category)
+            resolve('/dashboard/category')
+          })
+          .catch(err => {
+            reject(err)
+          })
       })
-        .then(({ data }) => {
-          commit('ADD_CATEGORIES', data.category)
-        })
-        .catch(_ => {
-        })
     },
     getCategory ({ state }, id) {
       return new Promise((resolve, reject) => {
@@ -147,40 +151,52 @@ const store = new Vuex.Store({
       })
     },
     editCategories ({ commit, state }, data) {
-      client.put(`/categories/${data.id}`, data, {
-        headers: {
-          access_token: state.access_token
-        }
+      return new Promise((resolve, reject) => {
+        client.put(`/categories/${data.id}`, data, {
+          headers: {
+            access_token: state.access_token
+          }
+        })
+          .then(({ data }) => {
+            commit('EDIT_CATEGORIES', data.category)
+            resolve('/dashboard/category')
+          })
+          .catch(err => {
+            reject(err)
+          })
       })
-        .then(({ data }) => {
-          commit('EDIT_CATEGORIES', data.category)
-        })
-        .catch(_ => {
-        })
     },
     deleteCategory ({ commit, state }, id) {
-      client.delete(`/categories/${id}`, {
-        headers: {
-          access_token: state.access_token
-        }
+      return new Promise((resolve, reject) => {
+        client.delete(`/categories/${id}`, {
+          headers: {
+            access_token: state.access_token
+          }
+        })
+          .then(({ data }) => {
+            commit('DELETE_CATEGORIES', id)
+            resolve(data)
+          })
+          .catch(err => {
+            reject(err)
+          })
       })
-        .then(({ data }) => {
-          commit('DELETE_CATEGORIES', id)
-        })
-        .catch(_ => {
-        })
     },
     addProduct ({ commit, state }, data) {
-      client.post('/products', data, {
-        headers: {
-          access_token: state.access_token
-        }
+      return new Promise((resolve, reject) => {
+        client.post('/products', data, {
+          headers: {
+            access_token: state.access_token
+          }
+        })
+          .then(({ data }) => {
+            commit('ADD_PRODUCT', data.product)
+            resolve('/dashboard/product')
+          })
+          .catch(err => {
+            reject(err)
+          })
       })
-        .then(({ data }) => {
-          commit('ADD_PRODUCT', data.product)
-        })
-        .catch(_ => {
-        })
     },
     getProduct ({ state }, id) {
       return new Promise((resolve, reject) => {
@@ -198,28 +214,36 @@ const store = new Vuex.Store({
       })
     },
     editProduct ({ commit, state }, data) {
-      client.put(`/products/${data.id}`, data.formData, {
-        headers: {
-          access_token: state.access_token
-        }
+      return new Promise((resolve, reject) => {
+        client.put(`/products/${data.id}`, data.formData, {
+          headers: {
+            access_token: state.access_token
+          }
+        })
+          .then(({ data }) => {
+            commit('EDIT_PRODUCT', data.product)
+            resolve('/dashboard/product')
+          })
+          .catch(err => {
+            reject(err)
+          })
       })
-        .then(({ data }) => {
-          commit('EDIT_PRODUCT', data.product)
-        })
-        .catch(_ => {
-        })
     },
     deleteProduct ({ commit, state }, id) {
-      client.delete(`/products/${id}`, {
-        headers: {
-          access_token: state.access_token
-        }
+      return new Promise((resolve, reject) => {
+        client.delete(`/products/${id}`, {
+          headers: {
+            access_token: state.access_token
+          }
+        })
+          .then(({ data }) => {
+            commit('DELETE_PRODUCT', id)
+            resolve(data)
+          })
+          .catch(err => {
+            reject(err)
+          })
       })
-        .then(({ data }) => {
-          commit('DELETE_PRODUCT', id)
-        })
-        .catch(_ => {
-        })
     }
   },
   getters: {

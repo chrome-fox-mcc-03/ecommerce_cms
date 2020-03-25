@@ -30,19 +30,28 @@
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     </div>
+    <loading :active.sync="isLoading"
+        :can-cancel="true"
+        :is-full-page="true"></loading>
   </div>
 </template>
 
 <script>
+import Loading from 'vue-loading-overlay'
+
 export default {
   name: 'AddProduct',
+  components: {
+    Loading
+  },
   data () {
     return {
       name: '',
       image: '',
       price: 0,
       stock: 0,
-      CategoryId: 0
+      CategoryId: 0,
+      isLoading: false
     }
   },
   created () {
@@ -54,6 +63,7 @@ export default {
       this.image = file
     },
     submitProduct () {
+      this.isLoading = true
       const formData = new FormData()
       formData.append('image', this.image)
       formData.append('name', this.name)
@@ -61,7 +71,13 @@ export default {
       formData.append('stock', this.stock)
       formData.append('CategoryId', this.CategoryId)
       this.$store.dispatch('addProduct', formData)
-      this.$router.push('/dashboard/product')
+        .then(path => {
+          this.isLoading = false
+          this.$router.push(path)
+        })
+        .catch(_ => {
+          this.isLoading = false
+        })
     }
   }
 }

@@ -12,21 +12,36 @@
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     </div>
+     <loading :active.sync="isLoading"
+        :can-cancel="true"
+        :is-full-page="true"></loading>
   </div>
 </template>
 
 <script>
+import Loading from 'vue-loading-overlay'
 export default {
   name: 'AddCategory',
+  components: {
+    Loading
+  },
   data () {
     return {
-      name
+      name: '',
+      isLoading: false
     }
   },
   methods: {
     submitCategory () {
+      this.isLoading = true
       this.$store.dispatch('addCategories', this.name)
-      this.$router.push('category')
+        .then(result => {
+          this.isLoading = false
+          this.$router.push(result)
+        })
+        .catch(_ => {
+          this.isLoading = false
+        })
     }
   }
 }
