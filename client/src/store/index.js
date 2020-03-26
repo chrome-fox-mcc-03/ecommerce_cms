@@ -5,6 +5,8 @@ import router from '@/router'
 
 Vue.use(Vuex)
 
+const url = 'https://shrouded-meadow-59142.herokuapp.com'
+
 export default new Vuex.Store({
   state: {
     isLoading: false,
@@ -55,7 +57,7 @@ export default new Vuex.Store({
       commit('SET_LOADING')
       axios({
         method: 'get',
-        url: 'http://localhost:3000/admin/product',
+        url: `${url}/product`,
         headers: {
           token: localStorage.getItem('token')
         }
@@ -79,7 +81,7 @@ export default new Vuex.Store({
       commit('SET_LOADING')
       axios({
         method: 'post',
-        url: 'http://localhost:3000/admin/login',
+        url: `${url}/login`,
         data: {
           email, password
         }
@@ -110,7 +112,7 @@ export default new Vuex.Store({
       commit('SET_LOADING')
       axios({
         method: 'post',
-        url: 'http://localhost:3000/admin/product',
+        url: `${url}/product`,
         data: {
           name, image_url: payload.image_url, price, stock, TypeId
         },
@@ -145,7 +147,7 @@ export default new Vuex.Store({
       commit('SET_LOADING')
       axios({
         method: 'put',
-        url: `http://localhost:3000/admin/product/${id}`,
+        url: `${url}/product/${id}`,
         headers: {
           token: localStorage.getItem('token')
         },
@@ -177,7 +179,7 @@ export default new Vuex.Store({
       commit('SET_EDIT_ID', payload)
       axios({
         method: 'get',
-        url: `http://localhost:3000/admin/product/${payload}`,
+        url: `${url}/product/${payload}`,
         headers: {
           token: localStorage.getItem('token')
         }
@@ -202,7 +204,7 @@ export default new Vuex.Store({
       commit('SET_LOADING')
       axios({
         method: 'delete',
-        url: `http://localhost:3000/admin/product/${state.deleteId}`,
+        url: `${url}/product/${state.deleteId}`,
         headers: {
           token: localStorage.getItem('token')
         }
