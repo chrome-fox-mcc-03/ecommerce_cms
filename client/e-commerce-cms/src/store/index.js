@@ -46,6 +46,13 @@ export default new Vuex.Store({
       state.productDetail.price = value.price
       state.productDetail.stock = value.stock
     },
+    RESET_PRODUCTDETAIL (state, value) {
+      state.productDetail.id = null
+      state.productDetail.name = ''
+      state.productDetail.image_url = ''
+      state.productDetail.price = null
+      state.productDetail.stock = null
+    },
     SET_ISLOADING (state, value) {
       state.isLoading = value
     }
@@ -86,6 +93,11 @@ export default new Vuex.Store({
           context.commit('SET_POKEMONS', result.data)
         })
         .catch(err => {
+          const condition = {
+            icon: 'error',
+            title: err.response.data.message
+          }
+          context.dispatch('notification', condition)
           console.log(err)
         })
         .finally(_ => {

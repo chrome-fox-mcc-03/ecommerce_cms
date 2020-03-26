@@ -36,8 +36,7 @@ export default {
   methods: {
     updateProduct (id) {
       this.$store.dispatch('productUpdate', id)
-      this.$route.params.id = id
-      this.$router.push({ name: 'UpdateProduct' })
+      this.$router.push({ name: 'UpdateProduct', params: { id: id } })
     },
     deleteProduct (id) {
       this.$store.dispatch('deleteProduct', id)
@@ -62,14 +61,7 @@ export default {
         })
     },
     detailProduct (product) {
-      const value = {
-        id: null,
-        name: '',
-        image_url: '',
-        price: null,
-        stock: null
-      }
-      this.$store.commit('SET_PRODUCTDETAIL', value)
+      this.$store.commit('RESET_PRODUCTDETAIL')
       this.$store.dispatch('detailProduct', product)
     }
   },
