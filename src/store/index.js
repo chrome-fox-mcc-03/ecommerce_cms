@@ -17,8 +17,8 @@ const store = new Vuex.Store({
     },
     testVuex: 'Vuex Store Online',
     appName: 'cms_client',
-    // serverURL: 'https://tranquil-lowlands-54278.herokuapp.com',
-    serverURL: 'http://localhost:3000',
+    serverURL: 'https://tranquil-lowlands-54278.herokuapp.com',
+    // serverURL: 'http://localhost:3000',
     _isLogin: false,
     _pageLoading: true,
     inputCred: {
@@ -56,16 +56,13 @@ const store = new Vuex.Store({
       state.dbCred.email = payload.email
       state.dbCred.token = payload.token
       state._isLogin = true
-      localStorage.setItem(state.appName, JSON.stringify({ token: payload.token }))
       router.push({ name: 'Dashboard' })
     },
     userLogout (state, payload) {
       state.dbCred.id = ''
       state.dbCred.email = ''
       state.dbCred.token = ''
-      localStorage.removeItem(state.appName)
       state._isLogin = false
-      router.push({ name: 'Login' })
     },
     startLoading (state, payload) {
       state._pageLoading = true
@@ -116,6 +113,7 @@ const store = new Vuex.Store({
             type: 'userLogin',
             payload: { id: result.data.id, email: result.data.email, token: result.data.access_token }
           })
+          localStorage.setItem(context.state.appName, JSON.stringify({ token: result.data.access_token }))
         })
         .catch(err => {
           context.commit('showError', err.response.data.error)
@@ -139,6 +137,8 @@ const store = new Vuex.Store({
       context.commit({
         type: 'userLogout'
       })
+      localStorage.removeItem(context.state.appName)
+      router.push({ name: 'Login' })
     },
     register (context, payload) {
       context.commit('startLoading')
@@ -153,6 +153,7 @@ const store = new Vuex.Store({
             type: 'userLogin',
             payload: { id: result.data.id, email: result.data.email, token: result.data.access_token }
           })
+          localStorage.setItem(context.state.appName, JSON.stringify({ token: result.data.access_token }))
         })
         .catch(err => {
           context.commit('showError', err.response.data.error)

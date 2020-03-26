@@ -28,7 +28,8 @@ export default {
   data () {
     return {
       render: true,
-      hasToken: false
+      hasToken: false,
+      error: ''
     }
   },
   computed: {
@@ -65,7 +66,8 @@ export default {
             this.hasToken = true
           })
           .catch(err => {
-            console.log(err.response.data)
+            // console.log(err.response.data)
+            this.error = err.response.data.error
           })
           .finally(_ => {
             this.stopLoading()
