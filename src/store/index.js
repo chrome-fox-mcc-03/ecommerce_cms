@@ -56,7 +56,6 @@ const store = new Vuex.Store({
       state.dbCred.email = payload.email
       state.dbCred.token = payload.token
       state._isLogin = true
-      router.push({ name: 'Dashboard' })
     },
     userLogout (state, payload) {
       state.dbCred.id = ''
@@ -114,6 +113,7 @@ const store = new Vuex.Store({
             payload: { id: result.data.id, email: result.data.email, token: result.data.access_token }
           })
           localStorage.setItem(context.state.appName, JSON.stringify({ token: result.data.access_token }))
+          router.push({ name: 'Dashboard' })
         })
         .catch(err => {
           context.commit('showError', err.response.data.error)
@@ -154,6 +154,7 @@ const store = new Vuex.Store({
             payload: { id: result.data.id, email: result.data.email, token: result.data.access_token }
           })
           localStorage.setItem(context.state.appName, JSON.stringify({ token: result.data.access_token }))
+          router.push({ name: 'Dashboard' })
         })
         .catch(err => {
           context.commit('showError', err.response.data.error)
