@@ -33,7 +33,6 @@
         </div>
       </form>
     </div>
-    <div id="quotes"></div>
   </div>
 </template>
 
