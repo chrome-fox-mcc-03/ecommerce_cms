@@ -7,6 +7,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    isUploading: false,
     isLogin: false,
     isLoading: false,
     products: [],
@@ -16,6 +17,9 @@ export default new Vuex.Store({
     errors: []
   },
   mutations: {
+    SET_UPLOADING (state, payload) {
+      state.isUploading = payload
+    },
     SET_LOGIN (state, payload) {
       state.isLogin = payload
     },
@@ -105,7 +109,7 @@ export default new Vuex.Store({
         })
     },
     createProduct ({ dispatch, commit }, payload) {
-      commit('SET_LOADING', true)
+      commit('SET_UPLOADING', true)
       axios({
         method: 'post',
         url: 'https://still-plains-85177.herokuapp.com/products',
@@ -125,7 +129,7 @@ export default new Vuex.Store({
           commit('SET_ERRORS', err.response.data.errors)
         })
         .finally((_) => {
-          commit('SET_LOADING', false)
+          commit('SET_UPLOADING', false)
         })
     },
     getDetailProduct ({ commit }, payload) {
