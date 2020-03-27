@@ -154,23 +154,20 @@ export default new Vuex.Store({
         })
     },
     editProduct ({ dispatch, commit }, payload) {
-      commit('SET_LOADING', true)
+      commit('SET_UPLOADING', true)
       const id = payload.id
+      const formData = payload.formData
       axios({
         method: 'put',
         url: `https://still-plains-85177.herokuapp.com/products/${id}`,
         headers: {
           token: localStorage.getItem('token')
         },
-        data: {
-          name: payload.name,
-          image_url: payload.image_url,
-          price: payload.price,
-          stock: payload.stock
-        }
+        data: formData
       })
         .then(({ data }) => {
           dispatch('getProducts')
+          dispatch('getDetailProduct', id)
           router.push(`/products/${id}`)
         })
         .catch((err) => {
@@ -178,7 +175,7 @@ export default new Vuex.Store({
           commit('SET_ERRORS', err.response.data.errors)
         })
         .finally((_) => {
-          commit('SET_LOADING', false)
+          commit('SET_UPLOADING', false)
         })
     },
     deleteProduct ({ dispatch, commit }, payload) {
