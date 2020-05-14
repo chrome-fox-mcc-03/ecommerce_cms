@@ -12,7 +12,7 @@
           <div class="field">
             <div
               class="ui left icon input"
-              placeholder="E-mail address"
+              placeholder="admin@mail.com"
             >
               <input
                 type="email"
@@ -26,7 +26,7 @@
           <div class="field">
             <div
               class="ui left icon input"
-              placeholder="Password"
+              placeholder="12345"
             >
               <input
                 type="password"
