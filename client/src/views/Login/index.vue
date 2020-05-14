@@ -17,7 +17,7 @@
               <input
                 type="email"
                 v-model="email"
-                placeholder="E-mail address"
+                placeholder="admin@mail.com"
                 required
               />
               <i class="user icon"></i>
@@ -31,7 +31,7 @@
               <input
                 type="password"
                 v-model="password"
-                placeholder="Password"
+                placeholder="12345"
                 required
               >
               <i class="lock icon"></i>
